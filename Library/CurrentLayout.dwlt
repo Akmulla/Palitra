@@ -20,7 +20,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 7}
-  m_MinSize: {x: 950, y: 300}
+  m_MinSize: {x: 950, y: 542}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -438,10 +438,10 @@ MonoBehaviour:
   m_LastProjectPath: D:\UnityProjects\Palitra\Palitra_Source\Palitra
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 240}
+    scrollPos: {x: 0, y: 252}
     m_SelectedIDs: a8260000
     m_LastClickedID: 9896
-    m_ExpandedIDs: 00000000d224000044250000fe250000a82600001c28000050280000502900006a29000096290000ce2900007e2b0000802b0000822b0000842b0000862b0000ffffff7f
+    m_ExpandedIDs: 00000000d224000044250000fe250000a8260000262700001c28000050280000502900006a29000096290000ce2900007e2b0000802b0000822b0000842b0000862b0000ffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -470,7 +470,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 4}
     m_SelectedIDs: b82b0000
     m_LastClickedID: 11192
-    m_ExpandedIDs: 00000000d2240000fe250000a82600001c28000050280000502900006a29000096290000ce2900007e2b0000802b0000822b0000842b0000862b0000
+    m_ExpandedIDs: 00000000d224000044250000fe250000a82600001c28000050280000502900006a29000096290000ce2900007e2b0000802b0000822b0000842b0000862b0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -554,20 +554,20 @@ MonoBehaviour:
     height: 476
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 8c290000
-    m_LastClickedID: 0
-    m_ExpandedIDs: c262feff9865feff2c66feff307ffeff3889feffd29dfeff70a6feff62a8feff48c6feff20cdfeff9adcfeffaadcfeff82e3feff4aeffeff22f6feffe61bffffda24ffffea24ffffc22bffff7e40ffff4655ffffac58ffffb0baffffcebbffffe8c4ffff3cdaffff80e1ffff1ce2ffff30e7ffff2cfcffff000000009235000010360000bc480000e0580000
+    m_SelectedIDs: f4530000
+    m_LastClickedID: 21492
+    m_ExpandedIDs: 728effff0e8fffff8692ffff18a4ffff26a6ffffd2bdfffff4beffff4ec6ffffe2f0ffff06f2ffff0cfbffff2cfcffff000000009e2b0000ba2b0000be2b00000c2c0000102c0000d02c0000002d00004c2d0000142e0000422e0000922e000098370000ac3a00000e4100002441000038440000c44d0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: blocks
-      m_OriginalName: blocks
+      m_Name: BG Camera
+      m_OriginalName: BG Camera
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: -87968
+      m_UserData: 21922
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
       m_OriginalEventType: 0
@@ -582,7 +582,7 @@ MonoBehaviour:
     m_SearchString: 
     m_ColumnWidths: []
   m_ExpandedScenes:
-  - Preload
+  - New Main
   m_CurrenRootInstanceID: 0
   m_Locked: 0
   m_CurrentSortingName: TransformSorting
@@ -613,14 +613,14 @@ MonoBehaviour:
     width: 535
     height: 476
   m_SceneLighting: 1
-  lastFramingTime: 1810.3284330875024
+  lastFramingTime: 617.0630684472792
   m_2DMode: 1
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0, y: 3.78, z: 0.4336835}
+    m_Target: {x: -0.14719784, y: 2.9862366, z: -15.46875}
     speed: 2
-    m_Value: {x: 0, y: 3.78, z: 0.4336835}
+    m_Value: {x: -0.14719784, y: 2.9862366, z: -15.46875}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -647,14 +647,14 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 29.549582
+    m_Target: 8.572511
     speed: 2
-    m_Value: 29.549582
+    m_Value: 8.572511
   m_Ortho:
     m_Target: 1
     speed: 2
     m_Value: 1
-  m_LastSceneViewRotation: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
+  m_LastSceneViewRotation: {x: -0.0713134, y: 0.093524136, z: 0.006716357, w: 0.99303705}
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
