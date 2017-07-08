@@ -98,22 +98,41 @@ public class Multiple_BlockManager : MonoBehaviour
         }
         block_mas = GetComponentsInChildren<Multiple_Block>();
         SetColors();
-        for (int i = 0; i < block_count; i++)
-        {
-            block_mas[i].InitBlock(block_count,new_colors[i]);
-        }
+        //for (int i = 0; i < block_count; i++)
+        //{
+        //    block_mas[i].InitBlock(block_count,new_colors[i]);
+        //}
     }
+
     void SetColors()
     {
         Color[] colors = SkinManager.skin_manager.GetCurrentSkin().colors;
-        
-        Texture2D[] texture = TextureHandler.CreateTexture(colors, block_count, out new_colors);
+        Color[] new_colors;
+        //Texture2D[] texture = TextureHandler.CreateTexture(colors, block_count, out new_colors);
+        float full_length = Mathf.Abs(Edges.center_x - line.left.GetComponent<Renderer>().bounds.size.x);
+        float visible_lenght = Mathf.Abs(Edges.center_x - Edges.leftEdge);
+
+        float unused_part = 1.0f - (full_length - visible_lenght) / full_length;
+        //print(unused_part);
+        Texture2D[] texture = TextureHandler.CreateTexture(colors, block_count, unused_part, out new_colors);
         for (int i = 0; i < block_count; i++)
         {
-            block_mas[i].SetColor(new_colors[i]);
+            //block_mas[i].SetColor(new_colors[i]);
+            block_mas[i].InitBlock(block_count,new_colors[i]);
         }
         line.SetTexture(texture);
     }
+    //void SetColors()
+    //{
+    //    Color[] colors = SkinManager.skin_manager.GetCurrentSkin().colors;
+        
+    //    Texture2D[] texture = TextureHandler.CreateTexture(colors, block_count, out new_colors);
+    //    for (int i = 0; i < block_count; i++)
+    //    {
+    //        block_mas[i].SetColor(new_colors[i]);
+    //    }
+    //    line.SetTexture(texture);
+    //}
 
     void SetHp()
     {

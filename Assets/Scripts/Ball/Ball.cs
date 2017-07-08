@@ -37,9 +37,9 @@ public class Ball : MonoBehaviour
 
     public Color GetColor()
     {
-        Color color=Color.black;
-
-        return color;
+        //Color color=Color.black;
+        //return color;
+        return ball_color;
     }
 
     public void Stop()
