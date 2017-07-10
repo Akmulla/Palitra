@@ -52,9 +52,6 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Advertisements">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
@@ -69,9 +66,6 @@
     </Reference>
     <Reference Include="UnityEngine.HoloLens">
       <HintPath>Library\UnityAssemblies\UnityEngine.HoloLens.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Purchasing">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Purchasing.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.VR">
       <HintPath>Library\UnityAssemblies\UnityEngine.VR.dll</HintPath>
@@ -110,6 +104,7 @@
     <Compile Include="Assets\Scripts\Lines\Order\Line_Order.cs" />
     <Compile Include="Assets\Scripts\Lines\SpriteStretch.cs" />
     <Compile Include="Assets\Scripts\Lines\Switch\Line_Switch.cs" />
+    <Compile Include="Assets\Scripts\Lines\TextureHandler.cs" />
     <Compile Include="Assets\Scripts\MeshData.cs" />
     <Compile Include="Assets\Scripts\MeshResize.cs" />
     <Compile Include="Assets\Scripts\SkinManager.cs" />
@@ -125,7 +120,6 @@
     <Compile Include="Assets\Scripts\System\SaveLoad\GlobalScore.cs" />
     <Compile Include="Assets\Scripts\System\SaveLoad\LvlData.cs" />
     <Compile Include="Assets\Scripts\System\SaveLoad\SkinData.cs" />
-    <Compile Include="Assets\Scripts\System\TextureHandler.cs" />
     <Compile Include="Assets\Scripts\UI\Button_SkinMenu.cs" />
     <Compile Include="Assets\Scripts\UI\Button_Start.cs" />
     <Compile Include="Assets\Scripts\UI\Button_ToMainMenu.cs" />

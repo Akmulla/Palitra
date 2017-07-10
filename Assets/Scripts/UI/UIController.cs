@@ -18,6 +18,8 @@ public class UIController : MonoBehaviour
     public GameObject triangle_fon;
     public GameObject triangle;
 
+    public Text pause_text;
+
     void Awake ()
     {
         is_paused = false;
@@ -67,6 +69,7 @@ public class UIController : MonoBehaviour
                 round.SetActive(false);
                 triangle.SetActive(false);
                 triangle_fon.SetActive(false);
+                pause_text.text = "Pause";
                 current_lvl.text = GameController.game_controller.GetCurrentLvl().ToString();
                 break;
 
@@ -78,6 +81,7 @@ public class UIController : MonoBehaviour
                 round.SetActive(false);
                 triangle.SetActive(false);
                 triangle_fon.SetActive(false);
+                pause_text.text = "Game Over";
                 break;
         }
     }
