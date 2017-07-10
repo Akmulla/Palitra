@@ -51,7 +51,7 @@ public abstract class TextureHandler
         {
             for (int y=0;y<text.height;y++)
             {
-                if ((x < grey_left) || (x > grey_right))
+                if ((x <= grey_left) || (x >= grey_right))
                 {
                     text.SetPixel(x, y, Color.green);
                 }
@@ -66,7 +66,7 @@ public abstract class TextureHandler
         //for (int x=)
         int h = 0;
         int xx=0;
-        for (int x=grey_left;x<=grey_right;x++)
+        for (int x=grey_left+1;x<=grey_right-1;x++)
         {
             xx++;
             if (xx>block_size)
