@@ -8,6 +8,7 @@ public class BlockManager_Order : MonoBehaviour
     public Transform block_holder;
     public Transform arrow;
 
+    [SerializeField]
     Block_Order[] block_mas;
     Line_Order line;
     float block_size;
@@ -15,8 +16,6 @@ public class BlockManager_Order : MonoBehaviour
     //int active_block_count;
     int current_block;
     
-    
-
     void Awake()
     {
         
@@ -91,15 +90,14 @@ public class BlockManager_Order : MonoBehaviour
         for (int i = 0; i < block_count; i++)
         {
             spawn_position = new Vector3(Edges.leftEdge + block_size / 2.0f + block_size * i, transform.position.y);
-            obj = (GameObject)Instantiate(block, spawn_position, Quaternion.identity);
+            //obj = (GameObject)Instantiate(block, spawn_position, Quaternion.identity);
+            obj = block_mas[i].gameObject;
+            obj.transform.position = spawn_position;
             obj.transform.localScale = new Vector3(block_size, obj.transform.localScale.y, 1.0f);
-            //Color color = SkinManager.skin_manager.GetCurrentSkin().colors
-            //[Random.Range(0, SkinManager.skin_manager.GetCurrentSkin().colors.Length)];
-            //obj.GetComponent<Block_Order>().SetColor(color);
             obj.transform.SetParent(block_holder);
         }
         
-        block_mas = GetComponentsInChildren<Block_Order>();
+        //block_mas = GetComponentsInChildren<Block_Order>();
         //SetRandomColors();
         SetColors();
         arrow.gameObject.SetActive(true);

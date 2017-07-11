@@ -8,6 +8,7 @@ public class Multiple_BlockManager : MonoBehaviour
     public int block_count;
     public GameObject block;
     public Transform block_holder;
+    [SerializeField]
     Multiple_Block[] block_mas;
     Line_Multiple line;
     float block_size;
@@ -84,24 +85,14 @@ public class Multiple_BlockManager : MonoBehaviour
         for (int i = 0; i < block_count; i++)
         {
             spawn_position = new Vector3(Edges.leftEdge + block_size / 2.0f + block_size * i, transform.position.y);
-            obj = (GameObject)Instantiate(block, spawn_position, Quaternion.identity);
+            //obj = (GameObject)Instantiate(block, spawn_position, Quaternion.identity);
+            obj = block_mas[i].gameObject;
+            obj.transform.position = spawn_position;
             obj.transform.localScale = new Vector3(block_size + 0.1f, obj.transform.localScale.y, 1.0f);
-
-
-            //Color color = SkinManager.skin_manager.GetCurrentSkin().colors
-            //[Random.Range(0, SkinManager.skin_manager.GetCurrentSkin().colors.Length)];
-
-            //obj.GetComponent<Multiple_Block>().SetColor(color);
-            //obj.GetComponent<Multiple_Block>().block_count=block_count;
-            //obj.GetComponent<Multiple_Block>().InitBlock(block_count,color);
             obj.transform.SetParent(block_holder);
         }
         block_mas = GetComponentsInChildren<Multiple_Block>();
         SetColors();
-        //for (int i = 0; i < block_count; i++)
-        //{
-        //    block_mas[i].InitBlock(block_count,new_colors[i]);
-        //}
     }
 
     void SetColors()
