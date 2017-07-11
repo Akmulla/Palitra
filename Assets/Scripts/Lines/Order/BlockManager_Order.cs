@@ -95,6 +95,7 @@ public class BlockManager_Order : MonoBehaviour
             obj.transform.position = spawn_position;
             obj.transform.localScale = new Vector3(block_size, obj.transform.localScale.y, 1.0f);
             obj.transform.SetParent(block_holder);
+            obj.SetActive(true);
         }
         
         //block_mas = GetComponentsInChildren<Block_Order>();

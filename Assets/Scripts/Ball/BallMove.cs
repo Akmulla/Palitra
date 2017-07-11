@@ -66,17 +66,10 @@ public class BallMove : MonoBehaviour
         if (current_state != State.normal)
             return;
         Speed += acceleration;
-        //print(Speed);
     }
 
     public void SlowDown(float deceleration)
     {
-        //if (slowed)
-        //{
-        //    StopCoroutine(coroutine);
-        //    resuming = false;
-        //    //Speed = saved_speed;
-        //}
         if (current_state!=State.normal)
         {
             StopAllCoroutines();
@@ -89,9 +82,6 @@ public class BallMove : MonoBehaviour
             saved_speed = Speed;
             Speed = deceleration;
         }
-        
-        
-        
     }
 
 	public State CheckState()

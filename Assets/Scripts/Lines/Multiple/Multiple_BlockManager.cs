@@ -90,8 +90,9 @@ public class Multiple_BlockManager : MonoBehaviour
             obj.transform.position = spawn_position;
             obj.transform.localScale = new Vector3(block_size + 0.1f, obj.transform.localScale.y, 1.0f);
             obj.transform.SetParent(block_holder);
+            obj.SetActive(true);
         }
-        block_mas = GetComponentsInChildren<Multiple_Block>();
+        //block_mas = GetComponentsInChildren<Multiple_Block>();
         SetColors();
     }
 
