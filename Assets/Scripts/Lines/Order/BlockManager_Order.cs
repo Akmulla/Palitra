@@ -63,7 +63,8 @@ public class BlockManager_Order : MonoBehaviour
 
                     return;
                 }
-                arrow.position = block_mas[current_block].GetPosition();
+                arrow.position = block_mas[current_block].GetPosition() + 
+                    new Vector3(0.0f, line.GetHeight(), 0.0f);
             }
             else
             {
@@ -73,7 +74,8 @@ public class BlockManager_Order : MonoBehaviour
                     item.Enable();
                 }
                 current_block = 0;
-                arrow.position = block_mas[0].GetPosition();
+                arrow.position = block_mas[0].GetPosition() + 
+                    new Vector3(0.0f, line.GetHeight(), 0.0f);
             }
         }
     }
@@ -102,8 +104,9 @@ public class BlockManager_Order : MonoBehaviour
         SetColors();
         arrow.gameObject.SetActive(true);
         if (block_mas != null)
-            arrow.position = block_mas[0].GetPosition();
-        arrow.position = block_mas[0].GetPosition();
+            arrow.position = block_mas[0].GetPosition() + 
+                new Vector3(0.0f, line.GetHeight(), 0.0f);
+        //arrow.position = block_mas[0].GetPosition();
 
     }
 
@@ -115,7 +118,9 @@ public class BlockManager_Order : MonoBehaviour
         float full_length =Mathf.Abs( Edges.center_x - line.left.GetComponent<Renderer>().bounds.size.x);
         float visible_lenght= Mathf.Abs(Edges.center_x - Edges.leftEdge);
 
-        float unused_part = 1.0f-(full_length - visible_lenght)/full_length;
+        //float unused_part = 1.0f-(full_length - visible_lenght)/full_length;
+        float unused_part = (full_length - visible_lenght) / full_length;
+        unused_part /= 2.0f;
         //print(unused_part);
         Texture2D[] texture = TextureHandler.CreateTexture(colors, block_count, unused_part, out new_colors);
         for (int i = 0; i < block_count; i++)
