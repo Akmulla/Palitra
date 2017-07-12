@@ -9,7 +9,7 @@ public class SpawnWaves : MonoBehaviour
 {
     public static SpawnWaves spawn;
     public float prev_edge = 0.0f;
-    float start_delay = 0.2f;
+    float start_delay = 2.0f;
 
     LineHandler[] line_handler;
 
@@ -157,8 +157,8 @@ public class SpawnWaves : MonoBehaviour
     IEnumerator Delay()
     {
         is_spawning = false;
-
-        yield return new WaitForSeconds(start_delay);
+        if (GameController.game_controller.GetCurrentLvl()!=0)
+            yield return new WaitForSeconds(start_delay);
         
         Dist = GameController.game_controller.GetLvlData().max_dist;
         edge = Edges.topEdge + offset;

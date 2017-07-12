@@ -29,6 +29,7 @@ public class GameController : MonoBehaviour
         //UIController.ui.UpdateUI();
     }
 
+
     public int GetCurrentLvl()
     {
         return lvl_number;

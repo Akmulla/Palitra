@@ -143,20 +143,21 @@ public class Ball : MonoBehaviour
                 BallMove.ball_move.IncreaseSpeed(GameController.game_controller.GetLvlData().accel);
                 lines_checked = 0;
             }
+            EventManager.TriggerEvent("LinePassed");
+            lines_checked++;
         }
         else
         {
-            if (shield)
-            {
-                shield = false;
-            }
-            else
+            //if (shield)
+            //{
+            //    shield = false;
+            //}
+            //else
             {
                 GameController.game_controller.GameOver();
             }
         }
-        EventManager.TriggerEvent("LinePassed");
-        lines_checked++;
+        
     }
 
     void ChangeLvl()

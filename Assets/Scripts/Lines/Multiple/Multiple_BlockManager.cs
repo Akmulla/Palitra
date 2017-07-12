@@ -17,13 +17,10 @@ public class Multiple_BlockManager : MonoBehaviour
     Color[] new_colors;
     //int current_block;
 
-
-
     void Start()
     {
         //window_size = Edges.rightEdge - Edges.leftEdge;
-        //block_size = window_size / (float)block_count;
-        
+        //block_size = window_size / (float)block_count;  
     }
 
     void OnEnable()
@@ -88,8 +85,8 @@ public class Multiple_BlockManager : MonoBehaviour
             //obj = (GameObject)Instantiate(block, spawn_position, Quaternion.identity);
             obj = block_mas[i].gameObject;
             obj.transform.position = spawn_position;
-            obj.transform.localScale = new Vector3(block_size + 0.1f, obj.transform.localScale.y, 1.0f);
-            obj.transform.SetParent(block_holder);
+            //obj.transform.localScale = new Vector3(block_size, obj.transform.localScale.y, 1.0f);
+            //obj.transform.SetParent(block_holder);
             obj.SetActive(true);
         }
         //block_mas = GetComponentsInChildren<Multiple_Block>();
@@ -118,86 +115,9 @@ public class Multiple_BlockManager : MonoBehaviour
         }
         line.SetTexture(texture);
     }
-    //void SetColors()
-    //{
-    //    Color[] colors = SkinManager.skin_manager.GetCurrentSkin().colors;
-        
-    //    Texture2D[] texture = TextureHandler.CreateTexture(colors, block_count, out new_colors);
-    //    for (int i = 0; i < block_count; i++)
-    //    {
-    //        block_mas[i].SetColor(new_colors[i]);
-    //    }
-    //    line.SetTexture(texture);
-    //}
 
     void SetHp()
     {
         
     }
-    //public IEnumerator SetRandomColors()
-    //{
-    //    //print("sfg");
-    //    while (block_mas == null)
-    //    yield return new WaitForEndOfFrame();
-
-
-    //    //создаем и заполняем массив цветов
-    //    int color_count = SkinManager.skin_manager.GetCurrentSkin().colors.Length > block_count ?
-    //        SkinManager.skin_manager.GetCurrentSkin().colors.Length : block_count;
-
-    //        Color[] colors = new Color[color_count];
-    //        for (int i = 0; i < color_count; i++)
-    //        {
-    //            if (i < 3)
-    //            {
-    //                colors[i] = SkinManager.skin_manager.GetCurrentSkin().colors[i];
-    //                //Debug.Log(colors[i]);
-    //            }
-    //            else
-    //            {
-    //                colors[i] = SkinManager.skin_manager.GetCurrentSkin().colors
-    //                    [Random.Range(0, SkinManager.skin_manager.GetCurrentSkin().colors.Length)];
-    //            }
-    //        }
-    //        //перемешиваем массив цветов
-    //        new System.Random().Shuffle(colors);
-    //        //присваеваем цвета блокам
-    //        for (int i = 0; i < block_count; i++)
-    //        {
-    //            block_mas[i].SetColor(colors[i]);
-    //        }
-        
-      
-    //}
-
-    //public void SetRandomColors()
-    //{
-    //    //print("sfg");
-    //    if (block_mas != null)
-    //    {
-    //        //создаем и заполняем массив цветов
-    //        Color[] colors = new Color[block_count];
-    //        for (int i = 0; i < block_count; i++)
-    //        {
-
-    //            if (i < 3)
-    //            {
-    //                colors[i] = SkinManager.skin_manager.GetCurrentSkin().colors[i];
-    //                Debug.Log(colors[i]);
-    //            }
-    //            else
-    //            {
-    //                colors[i] = SkinManager.skin_manager.GetCurrentSkin().colors
-    //                    [Random.Range(0, SkinManager.skin_manager.GetCurrentSkin().colors.Length)];
-    //            }
-    //        }
-    //        //перемешиваем массив цветов
-    //        new System.Random().Shuffle(colors);
-    //        //присваеваем цвета блокам
-    //        for (int i = 0; i < block_count; i++)
-    //        {
-    //            block_mas[i].SetColor(colors[i]);
-    //        }
-    //    }
-    //}
 }
