@@ -40,8 +40,8 @@ MonoBehaviour:
     y: 0
     width: 279
     height: 987
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 279, y: 71}
+  m_MaxSize: {x: 4004, y: 4021}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -93,10 +93,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 987
-  m_MinSize: {x: 887, y: 492}
-  m_MaxSize: {x: 18008, y: 14042}
+  m_MinSize: {x: 885, y: 492}
+  m_MaxSize: {x: 18006, y: 14042}
   vertical: 0
-  controlID: 117
+  controlID: 105
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -170,7 +170,7 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 1037
-  m_MinSize: {x: 950, y: 300}
+  m_MinSize: {x: 950, y: 542}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &8
 MonoBehaviour:
@@ -236,7 +236,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 118
+  controlID: 106
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -260,7 +260,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 221}
   m_MaxSize: {x: 8006, y: 4021}
   vertical: 0
-  controlID: 119
+  controlID: 107
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -279,8 +279,8 @@ MonoBehaviour:
     y: 0
     width: 448
     height: 639
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 204, y: 221}
+  m_MaxSize: {x: 4004, y: 4021}
   m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 19}
@@ -462,7 +462,7 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefabs/Lines/Multiple
+  - Assets/Data/LvlData
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\NaziBush\Documents\GitHub\Palitra
   m_IsLocked: 0
@@ -470,7 +470,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 05ca9a3b
     m_LastClickedID: 1000000005
-    m_ExpandedIDs: 00000000fa2400007825000040260000f4260000782700001628000080280000b428000052290000ca290000e4290000182a0000502a0000242c0000262c0000282c00002a2c00002c2c000000ca9a3bffffff7f
+    m_ExpandedIDs: 00000000fa2400007825000040260000f4260000782700001628000080280000b828000056290000ce290000e82900001c2a0000542a0000282c00002a2c00002c2c00002e2c0000302c000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -499,7 +499,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 4}
     m_SelectedIDs: b82b0000
     m_LastClickedID: 11192
-    m_ExpandedIDs: 00000000fa2400007825000040260000f4260000782700001628000080280000b428000052290000ca290000e4290000182a0000502a0000242c0000262c0000282c00002a2c00002c2c0000
+    m_ExpandedIDs: 00000000fa2400007825000040260000f4260000782700001628000080280000b828000056290000ce290000e82900001c2a0000542a0000282c00002a2c00002c2c00002e2c0000302c0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -583,9 +583,9 @@ MonoBehaviour:
     height: 618
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 0a2a0000
-    m_LastClickedID: 0
-    m_ExpandedIDs: 86eeffff60f8ffff66f8ffff68f8ffff90f8ffffb2f8ffffc0f8ffffe2f8ffff2afcffff00000000
+    m_SelectedIDs: 72edffff
+    m_LastClickedID: -4750
+    m_ExpandedIDs: 4af3ffff2ef4ffff2af9ffffdcf9ffff8efaffff42fbffff2afcffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -642,14 +642,14 @@ MonoBehaviour:
     width: 444
     height: 618
   m_SceneLighting: 1
-  lastFramingTime: 1308.5971484251913
+  lastFramingTime: 110.31808491060924
   m_2DMode: 1
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 357.75092, y: 596.3319, z: 0}
+    m_Target: {x: 0, y: 40.1, z: 0}
     speed: 2
-    m_Value: {x: 357.75092, y: 596.3319, z: 0}
+    m_Value: {x: 0, y: 40.1, z: 0}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -676,9 +676,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 1471.7727
+    m_Target: 7.7773414
     speed: 2
-    m_Value: 1471.7727
+    m_Value: 7.7773414
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -688,7 +688,7 @@ MonoBehaviour:
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
   m_LastLockedObject: {fileID: 0}
-  m_ViewIsLockedToObject: 0
+  m_ViewIsLockedToObject: 1
 --- !u!114 &20
 MonoBehaviour:
   m_ObjectHideFlags: 52
