@@ -15,7 +15,7 @@ public class Line_Multiple : Line
         line_spawn_number = SpawnWaves.spawn.GetLineSpawnedNumber();
         crossed = false;
         prev_edge = SpawnWaves.spawn.prev_edge;
-
+        finished = false;
         base.InitLine();
         //block_manager.InitBlocks();
     }
