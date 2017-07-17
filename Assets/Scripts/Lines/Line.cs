@@ -5,7 +5,7 @@ public abstract class Line : MonoBehaviour
 {
     protected float height;
     protected Transform tran;
-    protected bool active;
+    protected bool active=false;
     public GameObject left;
     public GameObject right;
     protected AnimationComponent anim;
@@ -43,9 +43,10 @@ public abstract class Line : MonoBehaviour
 
     public virtual void InitLine()
     {
-        active = true;
-        ChangeColor();
+        //active = true;
+       ChangeColor();
     }
+
 
     public void SetTexture(Texture2D[] texture)
     {
@@ -79,6 +80,12 @@ public abstract class Line : MonoBehaviour
     {
         active = false;
     }
+
+    public void Enable()
+    {
+        active = true;
+    }
+
 
     public bool CheckIfActive()
     {

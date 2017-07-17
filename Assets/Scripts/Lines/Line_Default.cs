@@ -47,9 +47,13 @@ public class Line_Default : Line
 
     public override void InitLine()
     {
+        //print("init");
         active = true;
         ChangeColor();
+
     }
+
+    
 
     protected override void CheckIfPassed()
     {

@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public enum GameState { MainMenu, SkinMenu,Game, Pause, GameOver };
+public enum GameState { MainMenu, SkinMenu,Game,Pause, GameOver };
 
 public class GameController : MonoBehaviour
 {
@@ -15,6 +15,10 @@ public class GameController : MonoBehaviour
     [SerializeField]
     Sector[] sectors;
     int lvl_number;
+    public GameObject pools_obj;
+    Pool[] pools;
+    public bool prepared = false;
+
 
     int lines_passed;
 
@@ -45,28 +49,61 @@ public class GameController : MonoBehaviour
         if ((game_state==GameState.MainMenu)||(game_state == GameState.GameOver))
         {
             lvl_number = 0;
-            InitLvl();
+            
             
             StartCoroutine(BeginGameCoroutine());
+            //InitLvl();
+            //StartCoroutine(InitLvlCor());
         }
     }
 
     IEnumerator BeginGameCoroutine()
     {
+        //prepare = false;
+       // StartCoroutine(InitLines());
         if (game_state == GameState.MainMenu)
         {
             EventManager.TriggerEvent("BeginGameAnimation");
             yield return new WaitForSeconds(3.0f);
         }
+       
         ChangeState(GameState.Game);
-        UIController.ui.UpdateUI();
+         UIController.ui.UpdateUI();
+        
         SoundManager.sound_manager.GameTheme();
+        //yield return StartCoroutine(UIController.ui.UpdateUICor());
+        yield return StartCoroutine(InitLvlCor());
+        //while (!coroutine_finished)
+        //{
+        //    yield return new WaitForEndOfFrame();
+        //}
         EventManager.TriggerEvent("BeginGame");
+    }
+
+    IEnumerator InitLines()
+    {
+        for (int i=0;i<pools.Length;i++)
+        {
+            for (int k=0;k<pools[i].size;k++)
+            {
+                pools[i].InitLine(k);
+                print("pool="+i+" line="+k);
+                yield return null;
+            }
+            //pools[i].InitLines();
+            
+            
+            yield return null;
+        }
+        //prepare = false;
+        yield return null;
     }
 
     void Awake()
     {
+
         Resources.UnloadUnusedAssets();
+        pools = pools_obj.GetComponents<Pool>();
         game_state = GameState.MainMenu;
         
         game_controller = this;
@@ -95,7 +132,7 @@ public class GameController : MonoBehaviour
         if (lines_passed >= GameController.game_controller.GetLvlData().lines_to_chng_lvl)
         {
             IncreaseLvl();
-            EventManager.TriggerEvent("ChangeLvl");
+            //EventManager.TriggerEvent("ChangeLvl");
         }
     }
 
@@ -104,12 +141,13 @@ public class GameController : MonoBehaviour
         lvl_number++;
         if (lvl_number < lvl_data.Length)
         {
-            //print("текущий уровень" + lvl_number);
-            InitLvl();
+            print("текущий уровень" + lvl_number);
+            //InitLvl();
+            StartCoroutine(InitLvlCor());
         }
         else
         {
-           // print("конец игры");
+            print("конец игры");
         }
     }
 
@@ -127,6 +165,24 @@ public class GameController : MonoBehaviour
         {
             sectors[i].InitSector(SkinManager.skin_manager.GetCurrentSkin().colors[i]);
         }
+
+
+    }
+
+    IEnumerator InitLvlCor()
+    {
+        System.GC.Collect();
+        lines_passed = 0;
+
+        if (lvl_number != 0)
+            yield return new WaitForSeconds(1.0f);
+        for (int i = 0; i < sectors.Length; i++)
+        {
+            sectors[i].InitSector(SkinManager.skin_manager.GetCurrentSkin().colors[i]);
+        }
+        yield return StartCoroutine(InitLines());
+
+        EventManager.TriggerEvent("ChangeLvl");
     }
 
     public void Pause()

@@ -33,7 +33,7 @@ public class Line_Switch : Line
         //saved_dist = SpawnWaves.spawn.dist;
         dist = GameController.game_controller.GetLvlData().switch_prop.dist;
         ChangeColor();
-        StartCoroutine(SwitchColor());
+       // StartCoroutine(SwitchColor());
     }
     protected override void CheckIfPassed()
     {
@@ -48,7 +48,7 @@ public class Line_Switch : Line
     }
     protected override void OnEnable()
     {
-        
+        StartCoroutine(SwitchColor());
     }
     IEnumerator SwitchColor()
     {

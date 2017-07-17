@@ -157,9 +157,11 @@ public class SpawnWaves : MonoBehaviour
     IEnumerator Delay()
     {
         is_spawning = false;
-        if (GameController.game_controller.GetCurrentLvl()!=0)
-            yield return new WaitForSeconds(start_delay);
-        
+        //if (GameController.game_controller.GetCurrentLvl()!=0)
+        //    yield return new WaitForSeconds(start_delay);
+
+        yield return new WaitForSeconds(0.1f);
+
         Dist = GameController.game_controller.GetLvlData().max_dist;
         edge = Edges.topEdge + offset;
         is_spawning = true;
@@ -181,8 +183,9 @@ public class SpawnWaves : MonoBehaviour
         lines_spawned++;
         
         GameObject line=line_handler[(int)current_line].pool.Activate(new Vector2(0.0f, edge), Quaternion.identity);
-        
-        line.GetComponent<Line>().InitLine();
+
+        //line.GetComponent<Line>().InitLine();
+        line.GetComponent<Line>().Enable();
         prev_edge = edge;
         edge += Dist;
     }
