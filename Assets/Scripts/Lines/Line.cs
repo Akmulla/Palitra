@@ -9,6 +9,7 @@ public abstract class Line : MonoBehaviour
     public GameObject left;
     public GameObject right;
     protected AnimationComponent anim;
+    MeshRenderer[] mesh_rend;
 
     protected virtual void Update()
     {
@@ -34,6 +35,7 @@ public abstract class Line : MonoBehaviour
 
     protected virtual void Awake()
     {
+        mesh_rend = GetComponentsInChildren<MeshRenderer>();
         anim = GetComponent<AnimationComponent>();
         tran = GetComponent<Transform>();
         height = left.GetComponent<Renderer>().bounds.extents.y;
@@ -55,10 +57,14 @@ public abstract class Line : MonoBehaviour
 
     public void SetTexture(Texture2D texture)
     {
-        left.GetComponent<MeshRenderer>().materials[1].mainTexture = texture;
-        right.GetComponent<MeshRenderer>().materials[1].mainTexture = texture;
-        left.GetComponent<MeshRenderer>().materials[0].mainTexture = texture;
-        right.GetComponent<MeshRenderer>().materials[0].mainTexture = texture;
+        //left.GetComponent<MeshRenderer>().materials[1].mainTexture = texture;
+        //right.GetComponent<MeshRenderer>().materials[1].mainTexture = texture;
+        //left.GetComponent<MeshRenderer>().materials[0].mainTexture = texture;
+        //right.GetComponent<MeshRenderer>().materials[0].mainTexture = texture;
+        mesh_rend[0].materials[0].mainTexture = texture;
+        mesh_rend[0].materials[1].mainTexture = texture;
+        mesh_rend[1].materials[0].mainTexture = texture;
+        mesh_rend[1].materials[1].mainTexture = texture;
     }
 
     protected virtual void OnEnable()

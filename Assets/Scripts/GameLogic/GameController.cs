@@ -46,6 +46,7 @@ public class GameController : MonoBehaviour
         {
             lvl_number = 0;
             InitLvl();
+            
             StartCoroutine(BeginGameCoroutine());
         }
     }
@@ -65,6 +66,7 @@ public class GameController : MonoBehaviour
 
     void Awake()
     {
+        Resources.UnloadUnusedAssets();
         game_state = GameState.MainMenu;
         
         game_controller = this;
@@ -102,12 +104,12 @@ public class GameController : MonoBehaviour
         lvl_number++;
         if (lvl_number < lvl_data.Length)
         {
-            print("текущий уровень" + lvl_number);
+            //print("текущий уровень" + lvl_number);
             InitLvl();
         }
         else
         {
-            print("конец игры");
+           // print("конец игры");
         }
     }
 
@@ -118,6 +120,7 @@ public class GameController : MonoBehaviour
 
     void InitLvl()
     {
+        System.GC.Collect();
         lines_passed = 0;
 
         for (int i = 0; i < sectors.Length; i++)

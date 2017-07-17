@@ -4,34 +4,38 @@ using UnityEngine;
 
 public abstract class TextureHandler 
 {
-    static int text_size = 2048;
+    static int text_size = 1024;
     static int half_size = text_size/2;
     static int height = 128;
 
+
+    public static void CreateTexture(Color color,Texture2D text)
+    {
+        //Texture2D texture = new Texture2D(text_size, height);
+        
+        Color[] col = new Color[text_size * height];
+        for (int i = 0; i < col.Length; i++)
+        {
+            col[i] = color;
+        }
+        text.SetPixels(col);
+        text.Apply();
+    }
+    ///
     public static Texture2D CreateTexture(Color color)
     {
         Texture2D texture = new Texture2D(text_size,height);
         Color[] col = new Color[text_size * height];
-
-       
-            // for (int i=0;i<texture[k].width;i++)
-            //{
-            //    for (int j=0;j<texture[k].height;j++)
-            //    {
-            //        //texture[k].SetPixel(i, j, color);
-            //    }
-            //}
-            for (int i=0;i<col.Length;i++)
-            {
-                col[i] = color;
-            }
-            texture.SetPixels(col);
-            texture.Apply();
-        
-                   
+        for (int i=0;i<col.Length;i++)
+        {
+            col[i] = color;
+        }
+        texture.SetPixels(col);
+        texture.Apply();
+                 
         return texture;
     }
-
+    ///
     public static Texture2D[] CreateTexture(Color[] colors, int block_count, float unused_part,
         out Color[] new_colors)
     {
