@@ -8,28 +8,29 @@ public abstract class TextureHandler
     static int half_size = text_size/2;
     static int height = 128;
 
-    public static Texture2D[] CreateTexture(Color color)
+    public static Texture2D CreateTexture(Color color)
     {
-        Texture2D[] texture = new Texture2D[2];
-        texture[0] = new Texture2D(half_size, height);
-        texture[1] = new Texture2D(half_size, height);
+        Texture2D texture = new Texture2D(text_size,height);
+        Color[] col = new Color[text_size * height];
 
-        for(int k=0;k<texture.Length;k++)
-        {
-             for (int i=0;i<texture[k].width;i++)
+       
+            // for (int i=0;i<texture[k].width;i++)
+            //{
+            //    for (int j=0;j<texture[k].height;j++)
+            //    {
+            //        //texture[k].SetPixel(i, j, color);
+            //    }
+            //}
+            for (int i=0;i<col.Length;i++)
             {
-                for (int j=0;j<texture[k].height;j++)
-                {
-                    texture[k].SetPixel(i, j, color);
-                }
+                col[i] = color;
             }
-            texture[k].Apply();
-        } 
+            texture.SetPixels(col);
+            texture.Apply();
+        
                    
         return texture;
     }
-
-    
 
     public static Texture2D[] CreateTexture(Color[] colors, int block_count, float unused_part,
         out Color[] new_colors)
@@ -41,7 +42,6 @@ public abstract class TextureHandler
 
         new_colors = CreateBlockColors(colors, block_count);
         
-
         Texture2D text = new Texture2D(text_size, height);
         int grey_left = (int)((float)text.width* unused_part);
         int grey_right = (int)((float)text.width * (1.0f-unused_part));
@@ -58,12 +58,7 @@ public abstract class TextureHandler
             }
         }
 
-
         int block_size = (grey_right - grey_left) / block_count;
-
-        //int h = 0;
-        //int[] mas=new int[block_count];
-        //for (int x=)
         int h = 0;
         int xx=0;
         for (int x=grey_left+1;x<=grey_right-1;x++)
@@ -97,14 +92,6 @@ public abstract class TextureHandler
             }
         }
 
-        //for (int x = 0; x < 64; x++)
-        //{
-        //    for (int y = 0; y < text.height; y++)
-        //    {
-        //        texture[1].SetPixel(64-x, y, text.GetPixel(x+64, y));
-        //    }
-        //}
-
         text.Apply();
         texture[0].Apply();
         texture[1].Apply();
@@ -113,7 +100,6 @@ public abstract class TextureHandler
         texture[0] = text;
         texture[1] = text;
         ////
-        //main_text = text;
         return texture;
     }
 
@@ -179,7 +165,7 @@ public abstract class TextureHandler
         Texture2D[] texture = new Texture2D[2];
         texture[0] = new Texture2D(half_size, height);
         texture[1] = new Texture2D(half_size, height);
-       Color[] new_colors = CreateBlockColors(colors, block_count);
+        Color[] new_colors = CreateBlockColors(colors, block_count);
 
         Texture2D text= new Texture2D(text_size, height);
         float block_size = text.width / (float)block_count;
@@ -209,14 +195,6 @@ public abstract class TextureHandler
                 texture[1].SetPixel(x, y, text.GetPixel(x + half_size, y));
             }
         }
-
-        //for (int x = 0; x < 64; x++)
-        //{
-        //    for (int y = 0; y < text.height; y++)
-        //    {
-        //        texture[1].SetPixel(64-x, y, text.GetPixel(x+64, y));
-        //    }
-        //}
 
         text.Apply();
         texture[0].Apply();

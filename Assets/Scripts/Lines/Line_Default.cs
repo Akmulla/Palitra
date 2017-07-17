@@ -31,7 +31,8 @@ public class Line_Default : Line
             new_color = avail_col[UnityEngine.Random.Range(0, avail_col.Length)];
             same_colors = 1;
         }
-        Texture2D[] texture = TextureHandler.CreateTexture(new_color);
+        // Texture2D[] texture = TextureHandler.CreateTexture(new_color);
+        Texture2D texture = TextureHandler.CreateTexture(new_color);
         SetTexture(texture);
         line_color = new_color;
         prev_color = line_color;

@@ -22,7 +22,8 @@ public class Line_Switch : Line
         
         Color new_color = colors[UnityEngine.Random.Range(0, colors.Count)];
         line_color = new_color;
-        Texture2D[] texture=TextureHandler.CreateTexture(new_color);
+        //Texture2D[] texture=TextureHandler.CreateTexture(new_color);
+        Texture2D texture = TextureHandler.CreateTexture(new_color);
         SetTexture(texture);
 
     }

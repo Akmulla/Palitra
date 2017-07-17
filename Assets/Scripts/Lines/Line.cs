@@ -53,6 +53,14 @@ public abstract class Line : MonoBehaviour
         right.GetComponent<MeshRenderer>().materials[0].mainTexture = texture[1];
     }
 
+    public void SetTexture(Texture2D texture)
+    {
+        left.GetComponent<MeshRenderer>().materials[1].mainTexture = texture;
+        right.GetComponent<MeshRenderer>().materials[1].mainTexture = texture;
+        left.GetComponent<MeshRenderer>().materials[0].mainTexture = texture;
+        right.GetComponent<MeshRenderer>().materials[0].mainTexture = texture;
+    }
+
     protected virtual void OnEnable()
     {
         
