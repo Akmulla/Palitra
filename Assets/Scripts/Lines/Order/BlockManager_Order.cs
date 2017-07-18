@@ -121,7 +121,7 @@ public class BlockManager_Order : MonoBehaviour
         float unused_part = (full_length - visible_lenght) / full_length;
         unused_part /= 2.0f;
         //print(unused_part);
-        Texture2D[] texture = TextureHandler.CreateTexture(colors, block_count, unused_part, out new_colors);
+        Texture2D texture = TextureHandler.CreateTexture(colors, block_count, unused_part, out new_colors);
         for (int i = 0; i < block_count; i++)
         {
             block_mas[i].SetColor(new_colors[i]);

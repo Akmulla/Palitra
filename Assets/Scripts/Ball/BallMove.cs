@@ -48,7 +48,7 @@ public class BallMove : MonoBehaviour
         }
         set
         {
-            print(value);
+            //print(value);
            // Debug.Break();
             if (current_state==State.normal)
                 speed = Mathf.Clamp (value, GameController.game_controller.GetLvlData ().min_speed, GameController.game_controller.GetLvlData ().max_speed);

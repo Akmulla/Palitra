@@ -64,19 +64,16 @@ public class GameController : MonoBehaviour
         if (game_state == GameState.MainMenu)
         {
             EventManager.TriggerEvent("BeginGameAnimation");
-            yield return new WaitForSeconds(3.0f);
+            //yield return new WaitForSeconds(3.0f);
         }
-       
+        yield return StartCoroutine(InitLvlCor());
         ChangeState(GameState.Game);
          UIController.ui.UpdateUI();
         
         SoundManager.sound_manager.GameTheme();
-        //yield return StartCoroutine(UIController.ui.UpdateUICor());
-        yield return StartCoroutine(InitLvlCor());
-        //while (!coroutine_finished)
-        //{
-        //    yield return new WaitForEndOfFrame();
-        //}
+        
+        //yield return StartCoroutine(InitLvlCor());
+      
         EventManager.TriggerEvent("BeginGame");
     }
 
@@ -101,7 +98,7 @@ public class GameController : MonoBehaviour
 
     void Awake()
     {
-
+        TextureHandler.InitSize();
         Resources.UnloadUnusedAssets();
         pools = pools_obj.GetComponents<Pool>();
         game_state = GameState.MainMenu;

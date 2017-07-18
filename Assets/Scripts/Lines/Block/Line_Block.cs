@@ -47,8 +47,10 @@ public class Line_Block : Line
     public override void ChangeColor()
     {
         Color[] colors = SkinManager.skin_manager.GetCurrentSkin().colors;
-        Texture2D[] texture = TextureHandler.CreateTexture(colors,block_count,out main_texture);
-        SetTexture(texture);
+        //Texture2D[] texture = TextureHandler.CreateTexture(colors,block_count,out main_texture);
+        Color[] col;
+        main_texture= TextureHandler.CreateTexture(colors, block_count,0.0f,out col);
+        SetTexture(main_texture);
     }
 
     protected override void Update()

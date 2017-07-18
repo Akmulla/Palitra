@@ -26,7 +26,7 @@ public class SpawnWaves : MonoBehaviour
     int lines_passed;
     int lines_spawned;
 
-    bool is_spawning;
+    bool is_spawning=false;
 
     float Dist
     {
@@ -73,8 +73,8 @@ public class SpawnWaves : MonoBehaviour
 
     void BeginGame()
     {
-        ChangeLvl();
-        StartCoroutine(Delay());
+        //ChangeLvl();
+        //StartCoroutine(Delay());
     }
 
     void EndGame()
@@ -156,6 +156,7 @@ public class SpawnWaves : MonoBehaviour
 
     IEnumerator Delay()
     {
+        //print("sdg");
         is_spawning = false;
         //if (GameController.game_controller.GetCurrentLvl()!=0)
         //    yield return new WaitForSeconds(start_delay);
@@ -169,7 +170,8 @@ public class SpawnWaves : MonoBehaviour
 
     void Update()
     {
-        if ((is_spawning)&&(Edges.topEdge >= edge-offset)&&(lines_spawned < GameController.game_controller.GetLvlData().lines_to_chng_lvl))
+        if ((is_spawning)&&(Edges.topEdge >= edge-offset)&&
+            (lines_spawned < GameController.game_controller.GetLvlData().lines_to_chng_lvl))
         {
             SpawnWave();
         }
@@ -188,6 +190,7 @@ public class SpawnWaves : MonoBehaviour
         line.GetComponent<Line>().Enable();
         prev_edge = edge;
         edge += Dist;
+
     }
 
     public int GetLinePassedNumber()
