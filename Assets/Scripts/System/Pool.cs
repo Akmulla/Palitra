@@ -18,23 +18,8 @@ public class Pool : MonoBehaviour
             stck[i].GetComponent<PoolRef>().SetPool(this);
             stck[i].SetActive(false);
         }
-        //InitLines();
     }
 
-    public void InitLines()
-    {
-        for (int i = 0; i < size; i++)
-        {
-            stck[i].GetComponent<Line>().InitLine();
-        }
-    }
-
-    public void InitLine(int k)
-    {
-        
-            stck[k].GetComponent<Line>().InitLine();
-        
-    }
     public GameObject Activate(Vector3 pos, Quaternion rot)
     {
         GameObject obj = Pop();

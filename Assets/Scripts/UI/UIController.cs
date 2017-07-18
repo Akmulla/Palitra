@@ -26,11 +26,6 @@ public class UIController : MonoBehaviour
         ui = this;
     }
 	
-    //public IEnumerator UpdateUICor()
-    //{
-    //    UpdateUI();
-    //    yield return new WaitForEndOfFrame();
-    //}
     public void UpdateUI()
     {
         switch(GameController.game_controller.GetState())

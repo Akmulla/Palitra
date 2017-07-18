@@ -19,13 +19,13 @@ public class MeshResize : MonoBehaviour
         mainCam = Camera.main;
         StartCoroutine("stretch");
     }
-//#if UNITY_EDITOR
-//    void Update()
-//    {
-//        mainCam = Camera.main;
-//        scale();
-//    }
-//#endif
+#if UNITY_EDITOR
+    void Update()
+    {
+        mainCam = Camera.main;
+        scale();
+    }
+#endif
     IEnumerator stretch()
     {
         yield return new WaitForEndOfFrame();

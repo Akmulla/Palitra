@@ -25,7 +25,7 @@ public class BlockManager_Order : MonoBehaviour
     void OnEnable()
     {
         //active_block_count = block_count;
-        EventManager.StartListening("BallColorChanged", ColorChanged);
+        //EventManager.StartListening("BallColorChanged", ColorChanged);
     }
     void OnDisable()
     {
@@ -80,7 +80,7 @@ public class BlockManager_Order : MonoBehaviour
     }
     public void InitBlocks()
     {
-        //EventManager.StartListening("BallColorChanged", ColorChanged);
+        EventManager.StartListening("BallColorChanged", ColorChanged);
         current_block = 0;
         window_size = Edges.rightEdge - Edges.leftEdge;
         block_size = window_size / (float)block_count;
