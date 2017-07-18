@@ -23,6 +23,14 @@ public class Multiple_BlockManager : MonoBehaviour
         //block_size = window_size / (float)block_count;  
     }
 
+    public void SetDefault()
+    {
+        for (int i = 0; i < block_count; i++)
+        {
+            //block_mas[i].SetColor(new_colors[i]);
+            block_mas[i].InitBlock(block_count, new_colors[i]);
+        }
+    }
     void OnEnable()
     {
         active_block_count = block_count;
@@ -35,25 +43,8 @@ public class Multiple_BlockManager : MonoBehaviour
     }
     void ColorChanged()
     {
-        //if (current_block<block_mas.Length)
-        //{
-        //    if (Ball.ball.GetColor() == block_mas[current_block].GetColor())
-        //    {
-        //        block_mas[current_block].Hit();
-        //        current_block++;
-        //        if (current_block >= block_mas.Length)
-        //        {
-        //            line.Disable();
-        //        }
-        //    }
-        //}
-
         foreach (Multiple_Block item in block_mas)
         {
-            //if ((line.GetTransform().position.y - line.GetHeight() - Ball.ball.GetPosition().y < SpawnWaves.spawn.dist)&&
-            //    (Ball.ball.GetColor() == item.GetColor()) && (item.active))
-            //if ((GameController.game_controller.GetLinesPassedNumber() == line.line_spawn_number - 1) &&
-            //    (Ball.ball.GetColor() == item.GetColor()) && (item.active))
             if ((Ball.ball.GetPosition().y> line.prev_edge) &&
                 (Ball.ball.GetColor() == item.GetColor()) && (item.active))
             {
@@ -63,8 +54,6 @@ public class Multiple_BlockManager : MonoBehaviour
                 }
                 if (active_block_count<=0)
                 {
-                    //EventManager.TriggerEvent("LinePassed");
-                    //line.Disable();
                     line.finished = true;
                     Ball.ball.LinePassed(Ball.ball.GetColor());
                     BallMove.ball_move.ResumeSpeed();
@@ -96,7 +85,7 @@ public class Multiple_BlockManager : MonoBehaviour
     void SetColors()
     {
         Color[] colors = SkinManager.skin_manager.GetCurrentSkin().colors;
-        Color[] new_colors=new Color[block_count];
+        //Color[] new_colors=new Color[block_count];
         //Texture2D[] texture = TextureHandler.CreateTexture(colors, block_count, out new_colors);
         float full_length = Mathf.Abs(Edges.center_x - 
             line.left.GetComponent<Renderer>().bounds.size.x);

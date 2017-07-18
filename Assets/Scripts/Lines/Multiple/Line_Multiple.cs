@@ -14,7 +14,7 @@ public class Line_Multiple : Line
         block_manager = GetComponent<Multiple_BlockManager>();
         line_spawn_number = SpawnWaves.spawn.GetLineSpawnedNumber();
         crossed = false;
-        prev_edge = SpawnWaves.spawn.prev_edge;
+        //prev_edge = SpawnWaves.spawn.prev_edge;
         finished = false;
         base.InitLine();
         //block_manager.InitBlocks();
@@ -61,5 +61,12 @@ public class Line_Multiple : Line
     public override void ChangeColor()
     {
         block_manager.InitBlocks();
+    }
+
+    public override void Enable()
+    {
+        base.Enable();
+        prev_edge = SpawnWaves.spawn.prev_edge;
+        block_manager.SetDefault();
     }
 }

@@ -17,9 +17,16 @@ public class Line_Order : Line
         line_spawn_number = SpawnWaves.spawn.GetLineSpawnedNumber();
         crossed = false;
         finished = false;
-        prev_edge = SpawnWaves.spawn.prev_edge;
+        //prev_edge = SpawnWaves.spawn.prev_edge;
     }
-
+    public override void Enable()
+    {
+        base.Enable();
+        prev_edge = SpawnWaves.spawn.prev_edge;
+        crossed = false;
+        finished = false;
+        block_manager.SetDefault();
+    }
     void Start()
     {
         

@@ -81,7 +81,7 @@ public abstract class Line : MonoBehaviour
         active = false;
     }
 
-    public void Enable()
+    public virtual void Enable()
     {
         active = true;
     }

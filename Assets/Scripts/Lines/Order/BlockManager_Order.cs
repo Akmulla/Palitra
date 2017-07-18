@@ -108,7 +108,12 @@ public class BlockManager_Order : MonoBehaviour
         //arrow.position = block_mas[0].GetPosition();
 
     }
-
+    public void SetDefault()
+    {
+        current_block = 0;
+        arrow.position = block_mas[0].GetPosition() +
+                new Vector3(0.0f, line.GetHeight(), 0.0f);
+    }
     void SetColors()
     {
         Color[] colors = SkinManager.skin_manager.GetCurrentSkin().colors;
