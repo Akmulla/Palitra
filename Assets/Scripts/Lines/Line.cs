@@ -5,10 +5,11 @@ public abstract class Line : MonoBehaviour
 {
     protected float height;
     protected Transform tran;
-    protected bool active;
+    protected bool active=false;
     public GameObject left;
     public GameObject right;
     protected AnimationComponent anim;
+    MeshRenderer[] mesh_rend;
 
     protected virtual void Update()
     {
@@ -34,6 +35,7 @@ public abstract class Line : MonoBehaviour
 
     protected virtual void Awake()
     {
+        mesh_rend = GetComponentsInChildren<MeshRenderer>();
         anim = GetComponent<AnimationComponent>();
         tran = GetComponent<Transform>();
         height = left.GetComponent<Renderer>().bounds.extents.y;
@@ -41,9 +43,10 @@ public abstract class Line : MonoBehaviour
 
     public virtual void InitLine()
     {
-        active = true;
-        ChangeColor();
+        //active = true;
+       ChangeColor();
     }
+
 
     public void SetTexture(Texture2D[] texture)
     {
@@ -51,6 +54,18 @@ public abstract class Line : MonoBehaviour
         right.GetComponent<MeshRenderer>().materials[1].mainTexture = texture[1];
         left.GetComponent<MeshRenderer>().materials[0].mainTexture = texture[0];
         right.GetComponent<MeshRenderer>().materials[0].mainTexture = texture[1];
+    }
+
+    public void SetTexture(Texture2D texture)
+    {
+        //left.GetComponent<MeshRenderer>().materials[1].mainTexture = texture;
+        //right.GetComponent<MeshRenderer>().materials[1].mainTexture = texture;
+        //left.GetComponent<MeshRenderer>().materials[0].mainTexture = texture;
+        //right.GetComponent<MeshRenderer>().materials[0].mainTexture = texture;
+        mesh_rend[0].materials[0].mainTexture = texture;
+        mesh_rend[0].materials[1].mainTexture = texture;
+        mesh_rend[1].materials[0].mainTexture = texture;
+        mesh_rend[1].materials[1].mainTexture = texture;
     }
 
     protected virtual void OnEnable()
@@ -65,6 +80,12 @@ public abstract class Line : MonoBehaviour
     {
         active = false;
     }
+
+    public void Enable()
+    {
+        active = true;
+    }
+
 
     public bool CheckIfActive()
     {

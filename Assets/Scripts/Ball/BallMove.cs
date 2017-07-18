@@ -48,6 +48,8 @@ public class BallMove : MonoBehaviour
         }
         set
         {
+            print(value);
+           // Debug.Break();
             if (current_state==State.normal)
                 speed = Mathf.Clamp (value, GameController.game_controller.GetLvlData ().min_speed, GameController.game_controller.GetLvlData ().max_speed);
             else
@@ -58,7 +60,7 @@ public class BallMove : MonoBehaviour
     {
         if ((!stop)&&(GameController.game_controller.GetState()==GameState.Game))
             tran.Translate(Vector2.up * speed * Time.deltaTime);
-        //print(speed);
+       // print(speed);
     }
 
     public void IncreaseSpeed(float acceleration)
@@ -70,6 +72,7 @@ public class BallMove : MonoBehaviour
 
     public void SlowDown(float deceleration)
     {
+        
         if (current_state!=State.normal)
         {
             StopAllCoroutines();

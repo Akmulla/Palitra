@@ -7,7 +7,13 @@ public class Line_Default : Line
     Color line_color;
     static Color prev_color=Color.black;
     static int same_colors = 1;
-    
+    //Texture2D texture;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        //texture = new Texture2D(2048, 128);
+    }
     public override void ChangeColor()
     {
         Color[] colors = SkinManager.skin_manager.GetCurrentSkin().colors;
@@ -31,7 +37,9 @@ public class Line_Default : Line
             new_color = avail_col[UnityEngine.Random.Range(0, avail_col.Length)];
             same_colors = 1;
         }
-        Texture2D[] texture = TextureHandler.CreateTexture(new_color);
+        // Texture2D[] texture = TextureHandler.CreateTexture(new_color);
+        Texture2D texture = TextureHandler.CreateTexture(new_color);
+        //TextureHandler.CreateTexture(new_color,texture);
         SetTexture(texture);
         line_color = new_color;
         prev_color = line_color;
@@ -39,9 +47,13 @@ public class Line_Default : Line
 
     public override void InitLine()
     {
+        //print("init");
         active = true;
         ChangeColor();
+
     }
+
+    
 
     protected override void CheckIfPassed()
     {
