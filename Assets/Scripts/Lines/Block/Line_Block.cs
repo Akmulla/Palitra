@@ -14,6 +14,7 @@ public class Line_Block : Line
     float x;
     Texture2D main_texture;
 
+
     public override void InitLine()
     {
         left_dir = UnityEngine.Random.value > 0.5f ? true : false;
@@ -49,7 +50,7 @@ public class Line_Block : Line
         Color[] colors = SkinManager.skin_manager.GetCurrentSkin().colors;
         //Texture2D[] texture = TextureHandler.CreateTexture(colors,block_count,out main_texture);
         Color[] col;
-        main_texture= TextureHandler.CreateTexture(colors, block_count,0.0f,out col);
+        main_texture= texture_handler.CreateTexture(colors, block_count,0.0f,out col);
         SetTexture(main_texture);
     }
 

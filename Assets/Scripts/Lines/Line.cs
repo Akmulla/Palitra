@@ -10,6 +10,7 @@ public abstract class Line : MonoBehaviour
     public GameObject right;
     protected AnimationComponent anim;
     MeshRenderer[] mesh_rend;
+    public TextureHandler texture_handler;
 
     protected virtual void Update()
     {
@@ -39,6 +40,7 @@ public abstract class Line : MonoBehaviour
         anim = GetComponent<AnimationComponent>();
         tran = GetComponent<Transform>();
         height = left.GetComponent<Renderer>().bounds.extents.y;
+        texture_handler=GetComponent<TextureHandler>();
     }
 
     public virtual void InitLine()

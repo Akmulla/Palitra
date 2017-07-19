@@ -7,6 +7,7 @@ public class Line_Default : Line
     Color line_color;
     static Color prev_color=Color.black;
     static int same_colors = 1;
+    
     //Texture2D texture;
 
     protected override void Awake()
@@ -38,7 +39,7 @@ public class Line_Default : Line
             same_colors = 1;
         }
         // Texture2D[] texture = TextureHandler.CreateTexture(new_color);
-        Texture2D texture = TextureHandler.CreateTexture(new_color);
+        Texture2D texture = texture_handler.CreateTexture(new_color);
         //TextureHandler.CreateTexture(new_color,texture);
         SetTexture(texture);
         line_color = new_color;

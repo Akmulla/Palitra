@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class Pool : MonoBehaviour
 {
@@ -29,12 +30,19 @@ public class Pool : MonoBehaviour
         }
     }
 
+    
+
     public void InitLine(int k)
     {
-        
-            stck[k].GetComponent<Line>().InitLine();
-        
+        stck[k].GetComponent<Line>().InitLine();
     }
+
+    public IEnumerator InitLineCor(int k)
+    {
+        stck[k].GetComponent<Line>().InitLine();
+        yield return null;
+    }
+
     public GameObject Activate(Vector3 pos, Quaternion rot)
     {
         GameObject obj = Pop();

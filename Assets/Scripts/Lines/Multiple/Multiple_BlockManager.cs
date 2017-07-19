@@ -94,7 +94,7 @@ public class Multiple_BlockManager : MonoBehaviour
         //float unused_part = 1.0f - (full_length - visible_lenght) / full_length;
         float unused_part = (full_length - visible_lenght) / full_length;
         unused_part /= 2.0f;
-        Texture2D texture = TextureHandler.CreateTexture(colors, block_count, 
+        Texture2D texture = line.texture_handler.CreateTexture(colors, block_count, 
             unused_part, out new_colors);
         //print(new_colors.Length);
         for (int i = 0; i < block_count; i++)

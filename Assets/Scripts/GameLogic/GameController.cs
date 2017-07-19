@@ -77,15 +77,32 @@ public class GameController : MonoBehaviour
         EventManager.TriggerEvent("BeginGame");
     }
 
+    IEnumerator InitLvlCor()
+    {
+        System.GC.Collect();
+        lines_passed = 0;
+
+        if (lvl_number != 0)
+            yield return new WaitForSeconds(1.0f);
+        for (int i = 0; i < sectors.Length; i++)
+        {
+            sectors[i].InitSector(SkinManager.skin_manager.GetCurrentSkin().colors[i]);
+        }
+        yield return StartCoroutine(InitLines());
+
+        EventManager.TriggerEvent("ChangeLvl");
+    }
+
     IEnumerator InitLines()
     {
         for (int i=0;i<pools.Length;i++)
         {
             for (int k=0;k<pools[i].size;k++)
             {
-                pools[i].InitLine(k);
-                print("pool="+i+" line="+k);
-                yield return null;
+                //pools[i].InitLine(k);
+                yield return StartCoroutine(pools[i].InitLineCor(k));
+                //print("pool="+i+" line="+k);
+                //yield return null;
             }
             //pools[i].InitLines();
             
@@ -98,13 +115,14 @@ public class GameController : MonoBehaviour
 
     void Awake()
     {
-        TextureHandler.InitSize();
+        //TextureHandler.InitSize();
         Resources.UnloadUnusedAssets();
         pools = pools_obj.GetComponents<Pool>();
         game_state = GameState.MainMenu;
         
         game_controller = this;
         saved_time_scale = Time.timeScale;
+        
         //EventManager.TriggerEvent("ChangeLvl");
     }
 
@@ -166,21 +184,6 @@ public class GameController : MonoBehaviour
 
     }
 
-    IEnumerator InitLvlCor()
-    {
-        System.GC.Collect();
-        lines_passed = 0;
-
-        if (lvl_number != 0)
-            yield return new WaitForSeconds(1.0f);
-        for (int i = 0; i < sectors.Length; i++)
-        {
-            sectors[i].InitSector(SkinManager.skin_manager.GetCurrentSkin().colors[i]);
-        }
-        yield return StartCoroutine(InitLines());
-
-        EventManager.TriggerEvent("ChangeLvl");
-    }
 
     public void Pause()
     {
