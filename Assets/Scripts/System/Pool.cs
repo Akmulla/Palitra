@@ -11,15 +11,28 @@ public class Pool : MonoBehaviour
 
     public void Awake() 
     {
+        //stck = new GameObject[size];
+        //tos = size;
+        //for (int i = 0 ; i < size ; i++)
+        //{
+        //    stck[i] = ((GameObject)Instantiate(obj, Vector2.zero, Quaternion.identity));
+        //    stck[i].GetComponent<PoolRef>().SetPool(this);
+        //    stck[i].SetActive(false);
+        //}
+
+        StartCoroutine(AwakeCor());
+    }
+    IEnumerator AwakeCor()
+    {
         stck = new GameObject[size];
         tos = size;
-        for (int i = 0 ; i < size ; i++)
+        for (int i = 0; i < size; i++)
         {
             stck[i] = ((GameObject)Instantiate(obj, Vector2.zero, Quaternion.identity));
             stck[i].GetComponent<PoolRef>().SetPool(this);
             stck[i].SetActive(false);
+            yield return null;
         }
-        //InitLines();
     }
 
     public void InitLines()

@@ -108,6 +108,7 @@
     <Compile Include="Assets\Scripts\Lines\TextureHandler.cs" />
     <Compile Include="Assets\Scripts\MeshData.cs" />
     <Compile Include="Assets\Scripts\MeshResize.cs" />
+    <Compile Include="Assets\Scripts\ParticleMove.cs" />
     <Compile Include="Assets\Scripts\SkinManager.cs" />
     <Compile Include="Assets\Scripts\SoundManager.cs" />
     <Compile Include="Assets\Scripts\System\AlphaRaycastFilter.cs" />

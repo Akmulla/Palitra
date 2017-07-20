@@ -9,17 +9,38 @@ public class Preload : MonoBehaviour
     AsyncOperation sceneLoadTask;
     public Image progressBar;
     float loadingProgress;
+    bool start = false;
 
-    void Start ()
+    IEnumerator Start ()
     {
-        sceneLoadTask=SceneManager.LoadSceneAsync("New Main");
+        
+        sceneLoadTask =SceneManager.LoadSceneAsync("New Main");
+        sceneLoadTask.allowSceneActivation = false;
         loadingProgress = 0.0f;
-        progressBar.fillAmount = loadingProgress;
+        //progressBar.fillAmount = loadingProgress;
+        while (!start)
+        {
+            yield return null;
+        }
+        sceneLoadTask.allowSceneActivation = true;
     }
 
     void Update()
     {
         loadingProgress = sceneLoadTask.progress;
         progressBar.fillAmount = loadingProgress;
+        if ((!start)&&(sceneLoadTask.progress>0.89f))
+        {
+            start = true;
+            
+            //StartCoroutine(Cor());
+        }
+            
+
+    }
+    IEnumerator Cor()
+    {
+        yield return new WaitForSeconds(0.5f);
+        sceneLoadTask.allowSceneActivation = true;
     }
 }

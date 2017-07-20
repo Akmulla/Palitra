@@ -36,6 +36,8 @@ public class TextureHandler : MonoBehaviour
     public Texture2D CreateTexture(Color[] colors, int block_count, float unused_part,
         out Color[] new_colors)
     {
+        if (block_count == 0)
+            block_count = 5;
         //Color[] col = new Color[text_size * height];
         new_colors = CreateBlockColors(colors, block_count);
         

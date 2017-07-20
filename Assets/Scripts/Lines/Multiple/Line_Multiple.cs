@@ -66,7 +66,10 @@ public class Line_Multiple : Line
     public override void Enable()
     {
         base.Enable();
+        finished = false;
         prev_edge = SpawnWaves.spawn.prev_edge;
+        line_spawn_number = SpawnWaves.spawn.GetLineSpawnedNumber();
+        crossed = false;
         block_manager.SetDefault();
     }
 }

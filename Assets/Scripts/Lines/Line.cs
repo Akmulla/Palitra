@@ -11,6 +11,7 @@ public abstract class Line : MonoBehaviour
     protected AnimationComponent anim;
     MeshRenderer[] mesh_rend;
     public TextureHandler texture_handler;
+    MeshResize[] mesh_resize;
 
     protected virtual void Update()
     {
@@ -41,11 +42,16 @@ public abstract class Line : MonoBehaviour
         tran = GetComponent<Transform>();
         height = left.GetComponent<Renderer>().bounds.extents.y;
         texture_handler=GetComponent<TextureHandler>();
+        mesh_resize = GetComponentsInChildren<MeshResize>();
     }
 
     public virtual void InitLine()
     {
         //active = true;
+        for (int i=0;i<mesh_resize.Length;i++)
+        {
+            mesh_resize[i].scale();
+        }
        ChangeColor();
     }
 

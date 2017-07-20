@@ -17,7 +17,7 @@ public class MeshResize : MonoBehaviour
         _thisTransform = transform;
         mesh = GetComponent<MeshFilter>().sharedMesh;
         mainCam = Camera.main;
-        StartCoroutine("stretch");
+        //StartCoroutine("stretch");
     }
 //#if UNITY_EDITOR
 //    void Update()
@@ -31,7 +31,7 @@ public class MeshResize : MonoBehaviour
         yield return new WaitForEndOfFrame();
         scale();
     }
-    void scale()
+    public void scale()
     {
         float worldScreenHeight = mainCam.orthographicSize * 2f;
         float worldScreenWidth = worldScreenHeight / Screen.height * Screen.width;
