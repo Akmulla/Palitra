@@ -68,9 +68,10 @@ public class TextureHandler : MonoBehaviour
             for (int x = 0; x < texture.width; x++)
             {
                 
-                if ((x <= grey_left) || (x >= grey_right))
+                if ((x < grey_left-1) || (x > grey_right+1))
                 {
-                    col[k] = Color.gray;
+                    //col[k] = Color.clear;
+                    col[k] = SkinManager.skin_manager.GetCurrentSkin().bg_color;
                 }
                 else
                 {
@@ -84,6 +85,12 @@ public class TextureHandler : MonoBehaviour
 
                     if (h < new_colors.Length)
                         col[k] = new_colors[h];
+                    //else
+                    //{
+                    //    if (k<col.Length)
+                    //    col[k] = new_colors[colors.Length - 1];
+                    //}
+                        
                 }
 
                 k++;

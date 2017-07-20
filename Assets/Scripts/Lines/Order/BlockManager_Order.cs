@@ -15,11 +15,12 @@ public class BlockManager_Order : MonoBehaviour
     float window_size;
     //int active_block_count;
     int current_block;
+    SpriteRenderer arrow_rend;
     
     void Awake()
     {
-        
         line = GetComponent<Line_Order>();
+        arrow_rend = arrow.gameObject.GetComponent<SpriteRenderer>();
     }
 
     void OnEnable()
@@ -76,6 +77,7 @@ public class BlockManager_Order : MonoBehaviour
                 arrow.position = block_mas[0].GetPosition() + 
                     new Vector3(0.0f, line.GetHeight(), 0.0f);
             }
+            arrow_rend.color = block_mas[current_block].GetColor();
         }
     }
     public void InitBlocks()
@@ -105,6 +107,7 @@ public class BlockManager_Order : MonoBehaviour
         if (block_mas != null)
             arrow.position = block_mas[0].GetPosition() + 
                 new Vector3(0.0f, line.GetHeight(), 0.0f);
+        arrow_rend.color = block_mas[0].GetColor();
         //arrow.position = block_mas[0].GetPosition();
 
     }
@@ -114,6 +117,7 @@ public class BlockManager_Order : MonoBehaviour
         arrow.gameObject.SetActive(true);
         arrow.position = block_mas[0].GetPosition() +
                 new Vector3(0.0f, line.GetHeight(), 0.0f);
+        arrow_rend.color = block_mas[0].GetColor();
     }
     void SetColors()
     {
