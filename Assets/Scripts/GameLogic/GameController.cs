@@ -60,20 +60,26 @@ public class GameController : MonoBehaviour
     IEnumerator BeginGameCoroutine()
     {
         //prepare = false;
-       // StartCoroutine(InitLines());
+        // StartCoroutine(InitLines());
+        float t1 = Time.time;
+        
         if (game_state == GameState.MainMenu)
         {
             EventManager.TriggerEvent("BeginGameAnimation");
             //yield return new WaitForSeconds(3.0f);
         }
         yield return StartCoroutine(InitLvlCor());
-        ChangeState(GameState.Game);
-         UIController.ui.UpdateUI();
         
         SoundManager.sound_manager.GameTheme();
-        
-        //yield return StartCoroutine(InitLvlCor());
-      
+
+        //float t2 = Time.time;
+        //if (t2-t1<3.0f)
+        //{
+        //    yield return new WaitForSeconds(3.0f - (t2 - t1));
+        //}
+        ChangeState(GameState.Game);
+
+        UIController.ui.UpdateUI();
         EventManager.TriggerEvent("BeginGame");
     }
 

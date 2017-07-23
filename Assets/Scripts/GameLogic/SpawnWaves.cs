@@ -160,8 +160,9 @@ public class SpawnWaves : MonoBehaviour
         is_spawning = false;
         //if (GameController.game_controller.GetCurrentLvl()!=0)
         //    yield return new WaitForSeconds(start_delay);
-
-        yield return new WaitForSeconds(0.1f);
+        while (GameController.game_controller.GetState() != GameState.Game)
+            yield return null;
+        yield return new WaitForSeconds(2.0f);
 
         Dist = GameController.game_controller.GetLvlData().max_dist;
         edge = Edges.topEdge + offset;

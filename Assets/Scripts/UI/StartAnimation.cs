@@ -11,6 +11,7 @@ public class StartAnimation : MonoBehaviour
     {
         anim=GetComponent<Animator>();
     }
+
     void OnEnable()
     {
         EventManager.StartListening("BeginGameAnimation", Animate);
