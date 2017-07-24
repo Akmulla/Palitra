@@ -64,8 +64,8 @@ public class ChangeToSkinColor : MonoBehaviour
         {
             ParticleSystem.ColorOverLifetimeModule part = GetComponent<ParticleSystem>().colorOverLifetime;
             part.color = apply_color;
-            // ParticleSystem.MainModule part = GetComponent<ParticleSystem>().main;
-            //part.startColor = apply_color;
+            ParticleSystem.MainModule part2 = GetComponent<ParticleSystem>().main;
+            part2.startColor = apply_color;
         }
     }
 }

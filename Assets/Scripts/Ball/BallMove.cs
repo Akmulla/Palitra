@@ -13,6 +13,10 @@ public class BallMove : MonoBehaviour
     private IEnumerator coroutine;
     bool stop = false;
 
+    Vector3 next_pos=Vector3.zero;
+
+    //Rigidbody2D rb;
+
     public void Stop()
     {
         stop = true;
@@ -20,11 +24,12 @@ public class BallMove : MonoBehaviour
     void Awake()
 	{
 		ball_move=this;
+       // rb = GetComponent<Rigidbody2D>();
 	}
     void Start()
     {
         tran = GetComponent<Transform>();
-        
+        //next_pos = tran.position;
     }
     void BeginGame()
     {
@@ -58,11 +63,14 @@ public class BallMove : MonoBehaviour
     }
     void Update()
     {
-        if ((!stop)&&(GameController.game_controller.GetState()==GameState.Game))
+        if ((!stop) && (GameController.game_controller.GetState() == GameState.Game))
             tran.Translate(Vector2.up * speed * Time.deltaTime);
-       // print(speed);
     }
 
+    void FixedUpdate()
+    {
+        //rb.velocity = next_pos;
+    }
     public void IncreaseSpeed(float acceleration)
     {
         if (current_state != State.normal)

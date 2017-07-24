@@ -11,18 +11,27 @@ public class Start2Animation : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    void Animate()
+    IEnumerator Animate()
     {
+        anim.SetBool("animate", false);
+        yield return new WaitForEndOfFrame();
         anim.SetBool("animate", true);
     }
 
     void Reset()
     {
         anim.SetBool("animate", false);
+        //anim.
     }
 
     void OnEnable()
     {
-        Animate();
+        
+        StartCoroutine(Animate());
+    }
+
+    void OnDisable()
+    {
+        Reset();
     }
 }
