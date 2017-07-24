@@ -63,7 +63,7 @@ public class Calc_Numbers : MonoBehaviour
 
     void Calculate(int number)
     {
-        if ((number<0)||(number>100))
+        if ((number<0)||(number>99))
         {
             print("нахуй иди блять с такими значениями");
             return;

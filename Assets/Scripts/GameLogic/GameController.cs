@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public enum GameState { MainMenu, SkinMenu,Game,Pause, GameOver };
+public enum GameState { MainMenu, SkinMenu, Prepare, Game,Pause, GameOver };
 
 public class GameController : MonoBehaviour
 {
@@ -61,9 +61,11 @@ public class GameController : MonoBehaviour
     {
         //prepare = false;
         // StartCoroutine(InitLines());
-        float t1 = Time.time;
-        
-        if (game_state == GameState.MainMenu)
+        // float t1 = Time.time;
+
+        ChangeState(GameState.Prepare);
+        UIController.ui.UpdateUI();
+        //if (game_state == GameState.MainMenu)
         {
             EventManager.TriggerEvent("BeginGameAnimation");
             //yield return new WaitForSeconds(3.0f);

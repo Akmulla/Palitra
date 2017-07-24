@@ -78,6 +78,7 @@
     <Compile Include="Assets\Scripts\Ball\Ball.cs" />
     <Compile Include="Assets\Scripts\Ball\BallMove.cs" />
     <Compile Include="Assets\Scripts\CameraSetDefault.cs" />
+    <Compile Include="Assets\Scripts\DestroyPrefab.cs" />
     <Compile Include="Assets\Scripts\GameLogic\GameController.cs" />
     <Compile Include="Assets\Scripts\GameLogic\Preload.cs" />
     <Compile Include="Assets\Scripts\GameLogic\SpawnWaves.cs" />

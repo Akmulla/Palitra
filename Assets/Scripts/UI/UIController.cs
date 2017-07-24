@@ -8,6 +8,7 @@ public class UIController : MonoBehaviour
     public static UIController ui;
     public Text current_lvl;
     static bool is_paused;
+    GraphicRaycaster raycaster;
     //static float saved_time_scale=1.0f;
 
     public GameObject pause_menu;
@@ -24,6 +25,7 @@ public class UIController : MonoBehaviour
     {
         is_paused = false;
         ui = this;
+        raycaster = GetComponent<GraphicRaycaster>();
     }
 	
     //public IEnumerator UpdateUICor()
@@ -36,6 +38,7 @@ public class UIController : MonoBehaviour
         switch(GameController.game_controller.GetState())
         {
             case GameState.MainMenu:
+                raycaster.enabled = true;
                 SkinManager.skin_manager.LoadSavedSkin();
                 Game_UI.SetActive(false);
                 skin_menu.SetActive(false);
@@ -57,6 +60,7 @@ public class UIController : MonoBehaviour
                 break;
 
             case GameState.Game:
+                raycaster.enabled = true;
                 Game_UI.SetActive(true);
                 skin_menu.SetActive(false);
                 start_menu.SetActive(false);
@@ -66,7 +70,11 @@ public class UIController : MonoBehaviour
                 triangle_fon.SetActive(false);
                 break;
 
+            case GameState.Prepare:
+                raycaster.enabled = false;
+                break;
             case GameState.Pause:
+                raycaster.enabled = true;
                 Game_UI.SetActive(true);
                 skin_menu.SetActive(false);
                 start_menu.SetActive(false);
@@ -79,6 +87,7 @@ public class UIController : MonoBehaviour
                 break;
 
             case GameState.GameOver:
+                raycaster.enabled = true;
                 Game_UI.SetActive(true);
                 skin_menu.SetActive(false);
                 start_menu.SetActive(false);
