@@ -14,8 +14,9 @@ public class BallMove : MonoBehaviour
     bool stop = false;
 
     Vector3 next_pos=Vector3.zero;
+    float pixel_size;
 
-    //Rigidbody2D rb;
+    Rigidbody2D rb;
 
     public void Stop()
     {
@@ -24,12 +25,14 @@ public class BallMove : MonoBehaviour
     void Awake()
 	{
 		ball_move=this;
-       // rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
 	}
     void Start()
     {
         tran = GetComponent<Transform>();
-        //next_pos = tran.position;
+        pixel_size = (Edges.topEdge-Edges.botEdge)/Screen.height;
+        //StartCoroutine(MoveCor());
+        next_pos = tran.position;
     }
     void BeginGame()
     {
@@ -64,12 +67,36 @@ public class BallMove : MonoBehaviour
     void Update()
     {
         if ((!stop) && (GameController.game_controller.GetState() == GameState.Game))
-            tran.Translate(Vector2.up * speed * Time.deltaTime);
+            rb.velocity = Vector2.up * speed;
+        else
+            rb.velocity = Vector2.zero;
+        //print(rb.velocity);
+        //if ((!stop) && (GameController.game_controller.GetState() == GameState.Game))
+        //    tran.Translate(Vector2.up * speed * Time.deltaTime);
+
+        //tran.position = next_pos;
+    }
+
+    IEnumerator MoveCor()
+    {
+        while(true)
+        {
+            //print(Time.time+" "+tran.position.y);
+            if ((!stop) && (GameController.game_controller.GetState() == GameState.Game))
+                //tran.position+=Vector3.up * pixel_size;
+                next_pos += Vector3.up * (pixel_size * 2);
+            yield return new WaitForSeconds(0.002f);
+        }
     }
 
     void FixedUpdate()
     {
+        
         //rb.velocity = next_pos;
+        //tran.position = next_pos;
+        //if ((!stop) && (GameController.game_controller.GetState() == GameState.Game))
+        //    next_pos += Vector3.up * (pixel_size * speed);
+
     }
     public void IncreaseSpeed(float acceleration)
     {

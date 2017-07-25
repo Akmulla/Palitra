@@ -15,7 +15,8 @@ public class TextureHandler : MonoBehaviour
         //text_size = Screen.width;
         //half_size = text_size / 2;
         half_size = text_size / 2;
-        texture = new Texture2D(text_size, height);
+        texture = new Texture2D(text_size, height,TextureFormat.ARGB32,true);
+        texture.filterMode = FilterMode.Point;
         col = new Color[text_size * height];
     }
 
