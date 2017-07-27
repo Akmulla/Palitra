@@ -28,13 +28,26 @@ public class SoundManager : MonoBehaviour
     [SerializeField]
     AudioClip setSkin_sound;
 
+    float saved_vol=1.0f;
 
     void Awake()
     {
+        
         sound_manager = this;
         source = GetComponent<AudioSource>();
+        if (source.volume > 0.0f)
+            saved_vol = source.volume;
     }
 
+    public void On()
+    {
+        source.volume = saved_vol;
+    }
+
+    public void Off()
+    {
+        source.volume = 0.0f;
+    }
     public void SingleSound(SoundSample sound)
     {
         switch (sound)
