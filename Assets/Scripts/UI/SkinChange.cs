@@ -13,6 +13,7 @@ public class SkinChange : MonoBehaviour
     public GameObject buy_button;
     public GameObject set_button;
     public Image BG;
+    public Animator money_anim;
     int skin_number;
 
     public void NextSkin()
@@ -65,6 +66,7 @@ public class SkinChange : MonoBehaviour
             }
             else
             {
+                money_anim.SetTrigger("animate");
                 SoundManager.sound_manager.SingleSound(SoundSample.Error);
             }
         }
