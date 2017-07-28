@@ -136,6 +136,7 @@
     <Compile Include="Assets\Scripts\System\SaveLoad\LvlData.cs" />
     <Compile Include="Assets\Scripts\System\SaveLoad\SkinData.cs" />
     <Compile Include="Assets\Scripts\UI\Button_SkinMenu.cs" />
+    <Compile Include="Assets\Scripts\UI\Button_Sound.cs" />
     <Compile Include="Assets\Scripts\UI\Button_Start.cs" />
     <Compile Include="Assets\Scripts\UI\Button_ToMainMenu.cs" />
     <Compile Include="Assets\Scripts\UI\ChangeToSkinColor.cs" />
