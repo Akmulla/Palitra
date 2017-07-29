@@ -19,7 +19,15 @@ public class UIController : MonoBehaviour
     public GameObject triangle_fon;
     public GameObject triangle;
 
-    public Text pause_text;
+
+
+    public GameObject gameover_text;
+    public GameObject pause_text;
+
+    public GameObject gameover_pic;
+    public GameObject pause_pic;
+
+    public GameObject gameui_bg;
 
     void Awake ()
     {
@@ -60,6 +68,7 @@ public class UIController : MonoBehaviour
                 break;
 
             case GameState.Game:
+                gameui_bg.SetActive(true);
                 raycaster.enabled = true;
                 Game_UI.SetActive(true);
                 skin_menu.SetActive(false);
@@ -74,6 +83,7 @@ public class UIController : MonoBehaviour
                 raycaster.enabled = false;
                 break;
             case GameState.Pause:
+                gameui_bg.SetActive(false);
                 raycaster.enabled = true;
                 Game_UI.SetActive(true);
                 skin_menu.SetActive(false);
@@ -82,11 +92,15 @@ public class UIController : MonoBehaviour
                 round.SetActive(false);
                 triangle.SetActive(false);
                 triangle_fon.SetActive(false);
-                pause_text.text = "Pause";
+                pause_text.SetActive(true);
+                gameover_text.SetActive(false);
+                pause_pic.SetActive(true);
+                gameover_pic.SetActive(false);
                 current_lvl.text = GameController.game_controller.GetCurrentLvl().ToString();
                 break;
 
             case GameState.GameOver:
+                gameui_bg.SetActive(false);
                 raycaster.enabled = true;
                 Game_UI.SetActive(true);
                 skin_menu.SetActive(false);
@@ -95,7 +109,10 @@ public class UIController : MonoBehaviour
                 round.SetActive(false);
                 triangle.SetActive(false);
                 triangle_fon.SetActive(false);
-                pause_text.text = "Game Over";
+                pause_text.SetActive(false);
+                gameover_text.SetActive(true);
+                pause_pic.SetActive(false);
+                gameover_pic.SetActive(true);
                 break;
         }
     }

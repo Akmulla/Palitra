@@ -9,6 +9,8 @@ public class BlockManager_Order : MonoBehaviour
     public Transform arrow;
 
     [SerializeField]
+    float offset_y=0.0f;
+    [SerializeField]
     Block_Order[] block_mas;
     Line_Order line;
     float block_size;
@@ -64,7 +66,7 @@ public class BlockManager_Order : MonoBehaviour
                     return;
                 }
                 arrow.position = block_mas[current_block].GetPosition() + 
-                    new Vector3(0.0f, line.GetHeight(), 0.0f);
+                    new Vector3(0.0f, line.GetHeight()+ offset_y, 0.0f);
             }
             else
             {
@@ -75,7 +77,7 @@ public class BlockManager_Order : MonoBehaviour
                 }
                 current_block = 0;
                 arrow.position = block_mas[0].GetPosition() + 
-                    new Vector3(0.0f, line.GetHeight(), 0.0f);
+                    new Vector3(0.0f, line.GetHeight() + offset_y, 0.0f);
             }
             arrow_rend.color = block_mas[current_block].GetColor();
         }
@@ -116,7 +118,7 @@ public class BlockManager_Order : MonoBehaviour
         current_block = 0;
         arrow.gameObject.SetActive(true);
         arrow.position = block_mas[0].GetPosition() +
-                new Vector3(0.0f, line.GetHeight(), 0.0f);
+                new Vector3(0.0f, line.GetHeight() + offset_y, 0.0f);
         arrow_rend.color = block_mas[0].GetColor();
     }
     void SetColors()

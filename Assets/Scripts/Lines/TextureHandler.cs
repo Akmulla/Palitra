@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class TextureHandler : MonoBehaviour
 {
-    int text_size = 1024;
+    int text_size = 2048;
     int half_size;
-    int height = 128;
+    int height = 2;
     Texture2D texture;
     Color[] col;
 
@@ -15,7 +15,7 @@ public class TextureHandler : MonoBehaviour
         //text_size = Screen.width;
         //half_size = text_size / 2;
         half_size = text_size / 2;
-        texture = new Texture2D(text_size, height,TextureFormat.ARGB32,true);
+        texture = new Texture2D(text_size, height,TextureFormat.ARGB32,false);
         texture.filterMode = FilterMode.Point;
         col = new Color[text_size * height];
     }
@@ -69,16 +69,25 @@ public class TextureHandler : MonoBehaviour
             for (int x = 0; x < texture.width; x++)
             {
                 
-                if ((x < grey_left-1) || (x > grey_right+1))
+                if ((x < grey_left) || (x > grey_right))
                 {
+                    if (x < grey_left)
+                    {
+                        col[k] = col[k] = new_colors[0];
+                    }
+
+                    if (x > grey_right)
+                    {
+                        col[k] = col[k] = new_colors[new_colors.Length-1];
+                    }
                     //col[k] = Color.clear;
-                    col[k] = SkinManager.skin_manager.GetCurrentSkin().bg_color;
+                    //col[k] = SkinManager.skin_manager.GetCurrentSkin().bg_color;
                 }
                 else
                 {
                     
                     xx++;
-                    if (xx > block_size)
+                    if (xx >= block_size)
                     {
                         xx = 0;
                         h++;
@@ -86,12 +95,11 @@ public class TextureHandler : MonoBehaviour
 
                     if (h < new_colors.Length)
                         col[k] = new_colors[h];
-                    //else
-                    //{
-                    //    if (k<col.Length)
-                    //    col[k] = new_colors[colors.Length - 1];
-                    //}
-                        
+                    else
+                    {
+                        col[k] = new_colors[new_colors.Length - 1];
+                    }
+
                 }
 
                 k++;
