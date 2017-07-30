@@ -16,7 +16,8 @@ public class BallMove : MonoBehaviour
     Vector3 next_pos=Vector3.zero;
     float pixel_size;
 
-    Rigidbody2D rb;
+    Rigidbody rb;
+    Vector3 movement = Vector3.zero;
 
     public void Stop()
     {
@@ -25,7 +26,7 @@ public class BallMove : MonoBehaviour
     void Awake()
 	{
 		ball_move=this;
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody>();
 	}
     void Start()
     {
@@ -67,9 +68,11 @@ public class BallMove : MonoBehaviour
     void Update()
     {
         if ((!stop) && (GameController.game_controller.GetState() == GameState.Game))
-            rb.velocity = Vector2.up * speed;
+            //rb.velocity = Vector2.up * speed;
+            movement = Vector3.up;
         else
-            rb.velocity = Vector2.zero;
+            movement = Vector3.zero;
+            //rb.velocity = Vector2.zero;
         //print(rb.velocity);
         //if ((!stop) && (GameController.game_controller.GetState() == GameState.Game))
         //    tran.Translate(Vector2.up * speed * Time.deltaTime);
@@ -91,8 +94,8 @@ public class BallMove : MonoBehaviour
 
     void FixedUpdate()
     {
-        
-        //rb.velocity = next_pos;
+        //print(tran.position.y);
+        rb.velocity = movement*speed;
         //tran.position = next_pos;
         //if ((!stop) && (GameController.game_controller.GetState() == GameState.Game))
         //    next_pos += Vector3.up * (pixel_size * speed);
