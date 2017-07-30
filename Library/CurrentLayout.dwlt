@@ -97,7 +97,7 @@ MonoBehaviour:
   m_MinSize: {x: 885, y: 492}
   m_MaxSize: {x: 18008, y: 14042}
   vertical: 0
-  controlID: 36
+  controlID: 126
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -237,7 +237,7 @@ MonoBehaviour:
   m_MinSize: {x: 404, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 37
+  controlID: 82
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -493,7 +493,7 @@ MonoBehaviour:
   m_LastProjectPath: D:\UnityProjects\Palitra\Palitra_Source\Palitra
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 339}
+    scrollPos: {x: 0, y: 459}
     m_SelectedIDs: d2260000
     m_LastClickedID: 9938
     m_ExpandedIDs: 00000000dc2400005e2500001a260000d22600003e270000d4270000342800006a28000004290000802900009a290000c4290000fe290000da2b0000dc2b0000de2b0000e02b0000e22b0000ffffff7f
@@ -609,9 +609,9 @@ MonoBehaviour:
     height: 476
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 42010000
-    m_LastClickedID: 0
-    m_ExpandedIDs: e05fffffba62ffff8a63ffff2864ffff28bfffff9cc2ffff30daffffe8ddffffacf4ffff82faffff50fbffff2cfcffff00000000
+    m_SelectedIDs: fa420000
+    m_LastClickedID: 17146
+    m_ExpandedIDs: 86c6ffffb6c7ffffa4ceffffc4ceffffe2cfffff52d4ffff1efaffff52fbffff2cfcffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -668,14 +668,14 @@ MonoBehaviour:
     width: 364
     height: 476
   m_SceneLighting: 1
-  lastFramingTime: 4929.37301003391
+  lastFramingTime: 585.2538003076492
   m_2DMode: 1
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0.6439927, y: 45.71768, z: 0.4375}
+    m_Target: {x: 0, y: 12.02, z: 1}
     speed: 2
-    m_Value: {x: 0.6439927, y: 45.71768, z: 0.4375}
+    m_Value: {x: 0, y: 12.02, z: 1}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -702,9 +702,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 26.804691
+    m_Target: 41.144066
     speed: 2
-    m_Value: 26.804691
+    m_Value: 41.144066
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -714,7 +714,7 @@ MonoBehaviour:
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
   m_LastLockedObject: {fileID: 0}
-  m_ViewIsLockedToObject: 0
+  m_ViewIsLockedToObject: 1
 --- !u!114 &21
 MonoBehaviour:
   m_ObjectHideFlags: 52
