@@ -78,6 +78,7 @@
     <Compile Include="Assets\Scripts\Ball\Ball.cs" />
     <Compile Include="Assets\Scripts\Ball\BallMove.cs" />
     <Compile Include="Assets\Scripts\CameraSetDefault.cs" />
+    <Compile Include="Assets\Scripts\DeathParticle.cs" />
     <Compile Include="Assets\Scripts\DestroyPrefab.cs" />
     <Compile Include="Assets\Scripts\GameLogic\GameController.cs" />
     <Compile Include="Assets\Scripts\GameLogic\Preload.cs" />
@@ -124,6 +125,7 @@
     <Compile Include="Assets\Scripts\System\SaveLoad\GlobalScore.cs" />
     <Compile Include="Assets\Scripts\System\SaveLoad\LvlData.cs" />
     <Compile Include="Assets\Scripts\System\SaveLoad\SkinData.cs" />
+    <Compile Include="Assets\Scripts\UI\AnimationStatus.cs" />
     <Compile Include="Assets\Scripts\UI\Button_SkinMenu.cs" />
     <Compile Include="Assets\Scripts\UI\Button_Sound.cs" />
     <Compile Include="Assets\Scripts\UI\Button_Start.cs" />

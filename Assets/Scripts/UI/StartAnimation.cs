@@ -6,6 +6,7 @@ public class StartAnimation : MonoBehaviour
 {
 
     Animator anim;
+    
 
     void Awake()
     {

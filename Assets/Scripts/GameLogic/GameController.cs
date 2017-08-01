@@ -18,8 +18,10 @@ public class GameController : MonoBehaviour
     public GameObject pools_obj;
     Pool[] pools;
     public bool prepared = false;
+    [SerializeField]
+    ParticleReload particle;
 
-
+    bool reload_part = false;
     int lines_passed;
 
     public GameState GetState()
@@ -49,9 +51,17 @@ public class GameController : MonoBehaviour
         if ((game_state==GameState.MainMenu)||(game_state == GameState.GameOver))
         {
             lvl_number = 0;
-            
-            
+            if (game_state == GameState.GameOver)
+            {
+                reload_part = true;
+            }
+            else
+            {
+                reload_part = false;
+            }
+
             StartCoroutine(BeginGameCoroutine());
+            
             //InitLvl();
             //StartCoroutine(InitLvlCor());
         }
@@ -61,8 +71,10 @@ public class GameController : MonoBehaviour
     {
         //prepare = false;
         // StartCoroutine(InitLines());
-        // float t1 = Time.time;
-
+         float t1 = Time.time;
+        SoundManager.sound_manager.GameTheme();
+        if (reload_part)
+            particle.TurnOff();
         ChangeState(GameState.Prepare);
         UIController.ui.UpdateUI();
         //if (game_state == GameState.MainMenu)
@@ -72,15 +84,19 @@ public class GameController : MonoBehaviour
         }
         yield return StartCoroutine(InitLvlCor());
         
-        SoundManager.sound_manager.GameTheme();
+        
 
-        //float t2 = Time.time;
-        //if (t2-t1<3.0f)
-        //{
-        //    yield return new WaitForSeconds(3.0f - (t2 - t1));
-        //}
+        float t2 = Time.time;
+        if (t2 - t1 < 3.0f)
+        {
+            yield return new WaitForSeconds(3.0f - (t2 - t1));
+        }
+
+
+        //print("begin");
+        if (reload_part)
+            particle.TurnOn();
         ChangeState(GameState.Game);
-
         UIController.ui.UpdateUI();
         EventManager.TriggerEvent("BeginGame");
     }
@@ -196,6 +212,9 @@ public class GameController : MonoBehaviour
 
     public void Pause()
     {
+        if (game_state != GameState.Game)
+            return;
+
         saved_time_scale = Time.timeScale;
         Time.timeScale = 0.0f;
         ChangeState(GameState.Pause);
@@ -204,6 +223,9 @@ public class GameController : MonoBehaviour
 
     public void Continue()
     {
+        if (game_state != GameState.Pause)
+            return;
+
         ChangeState(GameState.Game);
         Time.timeScale = saved_time_scale;
         UIController.ui.UpdateUI();
@@ -211,11 +233,13 @@ public class GameController : MonoBehaviour
 
     public void ToMainMenu()
     {
+        SoundManager.sound_manager.MainMenuTheme();
+        particle.TurnOn();
         ChangeState(GameState.MainMenu);
         Time.timeScale = saved_time_scale;
         
         UIController.ui.UpdateUI();
-        SoundManager.sound_manager.MainMenuTheme();
+        
         EventManager.TriggerEvent("EndGame");
     }
 
@@ -227,6 +251,7 @@ public class GameController : MonoBehaviour
 
     public void GameOver()
     {
+        
         StartCoroutine(GameOverCoroutine());
     }
 
@@ -240,6 +265,7 @@ public class GameController : MonoBehaviour
             yield return new WaitForSeconds(2.0f);
 
             UIController.ui.UpdateUI();
+            particle.TurnOff();
             EventManager.TriggerEvent("EndGame");
         }
     }

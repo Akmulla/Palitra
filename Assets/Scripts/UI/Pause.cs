@@ -9,6 +9,7 @@ public class Pause : MonoBehaviour
     {
         //print("pause");
         //UIController.ui.Pause();
+
         GameController.game_controller.Pause();
         
     }

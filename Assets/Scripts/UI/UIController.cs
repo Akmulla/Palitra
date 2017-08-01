@@ -80,6 +80,7 @@ public class UIController : MonoBehaviour
                 break;
 
             case GameState.Prepare:
+                gameui_bg.SetActive(false);
                 raycaster.enabled = false;
                 break;
             case GameState.Pause:
