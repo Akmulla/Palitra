@@ -139,7 +139,6 @@ public class GameController : MonoBehaviour
 
     void Awake()
     {
-        Application.targetFrameRate = -1;
         //TextureHandler.InitSize();
         Resources.UnloadUnusedAssets();
         pools = pools_obj.GetComponents<Pool>();

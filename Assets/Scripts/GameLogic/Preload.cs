@@ -13,7 +13,7 @@ public class Preload : MonoBehaviour
 
     IEnumerator Start ()
     {
-        
+        Application.targetFrameRate = 60;
         sceneLoadTask =SceneManager.LoadSceneAsync("New Main");
         sceneLoadTask.allowSceneActivation = false;
         loadingProgress = 0.0f;

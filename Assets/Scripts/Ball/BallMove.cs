@@ -67,15 +67,20 @@ public class BallMove : MonoBehaviour
     }
     void Update()
     {
+        /*
         if ((!stop) && (GameController.game_controller.GetState() == GameState.Game))
             //rb.velocity = Vector2.up * speed;
             movement = Vector3.up;
         else
             movement = Vector3.zero;
             //rb.velocity = Vector2.zero;
+            */
         //print(rb.velocity);
-        //if ((!stop) && (GameController.game_controller.GetState() == GameState.Game))
-        //    tran.Translate(Vector2.up * speed * Time.deltaTime);
+        if ((!stop) && (GameController.game_controller.GetState() == GameState.Game))
+        {
+            tran.position = tran.position +  Vector3.up * speed * Time.deltaTime;
+        }
+            //tran.Translate(Vector2.up * speed * Time.deltaTime);
 
         //tran.position = next_pos;
     }
@@ -91,16 +96,17 @@ public class BallMove : MonoBehaviour
             yield return new WaitForSeconds(0.002f);
         }
     }
-
+    /*
     void FixedUpdate()
     {
         //print(tran.position.y);
-        rb.velocity = movement*speed;
+    //    rb.velocity = movement*speed;
         //tran.position = next_pos;
         //if ((!stop) && (GameController.game_controller.GetState() == GameState.Game))
         //    next_pos += Vector3.up * (pixel_size * speed);
 
     }
+    */
     public void IncreaseSpeed(float acceleration)
     {
         if (current_state != State.normal)
