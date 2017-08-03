@@ -1,65 +1,102 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Line : MonoBehaviour
+public abstract class Line : MonoBehaviour
 {
-    SpriteRenderer sprite_rend;
-    protected Color line_color;
     protected float height;
     protected Transform tran;
-    protected bool active;
+    protected bool active=false;
+    public GameObject left;
+    public GameObject right;
+    protected AnimationComponent anim;
+    MeshRenderer[] mesh_rend;
+    public TextureHandler texture_handler;
+    MeshResize[] mesh_resize;
 
-    void Awake()
+    protected virtual void Update()
     {
-        sprite_rend = GetComponent<SpriteRenderer>();
+        CheckIfCrossed();
     }
-
-    protected virtual void Start()
+    public Transform GetTransform()
     {
-        tran = GetComponent<Transform>();
-        height = sprite_rend.sprite.bounds.extents.y;
+        return tran;
     }
-
-    void OnEnable()
+    public float GetHeight()
     {
-        active = true;
-        Color[] colors = GameController.game_controller.GetLvlData().colors;
-        ChangeColor(colors[Random.Range(0, colors.Length)]);
-        
+        return height;
     }
-
-    public void ChangeColor(Color new_color)
+    protected virtual void CheckIfCrossed()
     {
-        line_color = new_color;
-        sprite_rend.color = new_color;
-    }
-
-    void Update()
-    {
-        CheckIfPassed();
-    }
-
-    protected virtual void CheckIfPassed()
-    {
-        if ((active) && (tran.position.y - height < Ball.ball.tran.position.y))
+        if ((active) && (tran.position.y - height <= Ball.ball.GetCollisionPosition().y))
         {
-            Ball.ball.LinePassed(line_color);
             active = false;
+            CheckIfPassed();
+           
         }
     }
 
+    protected virtual void Awake()
+    {
+        mesh_rend = GetComponentsInChildren<MeshRenderer>();
+        anim = GetComponent<AnimationComponent>();
+        tran = GetComponent<Transform>();
+        height = left.GetComponent<Renderer>().bounds.extents.y;
+        texture_handler=GetComponent<TextureHandler>();
+        mesh_resize = GetComponentsInChildren<MeshResize>();
+    }
+
+    public virtual void InitLine()
+    {
+        //active = true;
+        for (int i=0;i<mesh_resize.Length;i++)
+        {
+            mesh_resize[i].scale();
+        }
+       ChangeColor();
+    }
 
 
-    //void OnTriggerEnter2D(Collider2D other)
-    //{
-    //    if (other.CompareTag("Ball"))
-    //    {
-    //        //if ((sprite_rend.color != other.GetComponent<SpriteRenderer>().color)&&(active))
-    //        if (sprite_rend.color != other.GetComponent<SpriteRenderer>().color)
-    //        {
-    //            //active = false;
-    //            GameController.game_controller.GameOver();
-    //        }
-    //    }
-    //}
+    public void SetTexture(Texture2D[] texture)
+    {
+        left.GetComponent<MeshRenderer>().materials[1].mainTexture = texture[0];
+        right.GetComponent<MeshRenderer>().materials[1].mainTexture = texture[1];
+        left.GetComponent<MeshRenderer>().materials[0].mainTexture = texture[0];
+        right.GetComponent<MeshRenderer>().materials[0].mainTexture = texture[1];
+    }
+
+    public void SetTexture(Texture2D texture)
+    {
+        //left.GetComponent<MeshRenderer>().materials[1].mainTexture = texture;
+        //right.GetComponent<MeshRenderer>().materials[1].mainTexture = texture;
+        //left.GetComponent<MeshRenderer>().materials[0].mainTexture = texture;
+        //right.GetComponent<MeshRenderer>().materials[0].mainTexture = texture;
+        mesh_rend[0].materials[0].mainTexture = texture;
+        mesh_rend[0].materials[1].mainTexture = texture;
+        mesh_rend[1].materials[0].mainTexture = texture;
+        mesh_rend[1].materials[1].mainTexture = texture;
+    }
+
+    protected virtual void OnEnable()
+    {
+        
+    }
+
+    public abstract void ChangeColor();
+    protected abstract void CheckIfPassed();
+
+    public void Disable()
+    {
+        active = false;
+    }
+
+    public virtual void Enable()
+    {
+        active = true;
+    }
+
+
+    public bool CheckIfActive()
+    {
+        return active;
+    }
 }

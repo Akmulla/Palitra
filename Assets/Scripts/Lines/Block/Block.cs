@@ -3,20 +3,24 @@ using System.Collections;
 
 public class Block : MonoBehaviour
 {
-    //Line line;
-
     public bool collides;
-
-    static float collision_dist = 0.75f;
+    BlockManager block_manager;
+    static float collision_dist = 0.01f;
 
     void Start()
     {
-
+        block_manager = GetComponentInParent<BlockManager>();
     }
-	public void SetRandomColor()
+
+    public void SetRandomColor()
     {
-        GetComponent<SpriteRenderer>().color = GameController.game_controller.GetLvlData().colors
-            [Random.Range(0, GameController.game_controller.GetLvlData().colors.Length)];
+        GetComponent<SpriteRenderer>().color = SkinManager.skin_manager.GetCurrentSkin().colors
+            [Random.Range(0, SkinManager.skin_manager.GetCurrentSkin().colors.Length)];
+    }
+
+    public void SetColor(Color color)
+    {
+        GetComponent<SpriteRenderer>().color = color;
     }
 
     void Update()
@@ -31,12 +35,10 @@ public class Block : MonoBehaviour
 
     public bool CheckIfCollides()
     {
-        float dist;
-        dist = Mathf.Abs(Mathf.Abs(transform.position.x) - transform.localScale.x);
-        if (dist < collision_dist)
+        if ((transform.position.x + block_manager.block_size / 2.0f+collision_dist>=0.0f) &&
+                (transform.position.x - block_manager.block_size / 2.0f - collision_dist <= 0.0f))
             return true;
         else
-            return false;
-        
+            return false;    
     }
 }

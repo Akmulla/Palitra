@@ -11,7 +11,7 @@ public class DestroyOnExit : MonoBehaviour
     {
         pool = GetComponent < PoolRef>().GetPool();
         tran = GetComponent<Transform>();
-        size_y=GetComponent<SpriteRenderer>().sprite.bounds.extents.y;
+        size_y = GetComponent<Line>().GetHeight();
     }
 
     void Update()

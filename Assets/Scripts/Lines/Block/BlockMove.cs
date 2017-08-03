@@ -3,13 +3,12 @@ using System.Collections;
 
 public class BlockMove : MonoBehaviour
 {
-    public float speed;
+    float speed;
     float half_window_size;
 
 	void Start ()
     {
         half_window_size = (Edges.rightEdge - Edges.leftEdge)/2.0f;
-        //print(half_window_size);
     }
 
 	void Update ()
@@ -23,4 +22,9 @@ public class BlockMove : MonoBehaviour
             transform.position = new_position;
         }
 	}
+
+    public void SetSpeed(float new_speed)
+    {
+        speed = new_speed;
+    }
 }
