@@ -21,6 +21,8 @@ public class GameController : MonoBehaviour
     [SerializeField]
     ParticleReload particle;
 
+    [SerializeField]
+    AnimationStatus anim_status;
     bool reload_part = false;
     int lines_passed;
 
@@ -71,7 +73,7 @@ public class GameController : MonoBehaviour
     {
         //prepare = false;
         // StartCoroutine(InitLines());
-         float t1 = Time.time;
+        // float t1 = Time.time;
         SoundManager.sound_manager.GameTheme();
         if (reload_part)
             particle.TurnOff();
@@ -85,12 +87,15 @@ public class GameController : MonoBehaviour
         yield return StartCoroutine(InitLvlCor());
         
         
-
-        float t2 = Time.time;
-        if (t2 - t1 < 3.0f)
+        while (!anim_status.finished)
         {
-            yield return new WaitForSeconds(3.0f - (t2 - t1));
+            yield return new WaitForEndOfFrame();
         }
+        //float t2 = Time.time;
+        //if (t2 - t1 < 3.0f)
+        //{
+        //    yield return new WaitForSeconds(3.0f - (t2 - t1));
+        //}
 
 
         //print("begin");

@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class AnimationStatus : MonoBehaviour
 {
-    bool finished=true;
+   public bool finished { get; set; }
 	
+
+    void Awake()
+    {
+        finished = false;
+    }
+
     public void Finish()
     {
         finished = true;
@@ -16,8 +22,4 @@ public class AnimationStatus : MonoBehaviour
         finished = false;
     }
 
-    public bool GetStatus()
-    {
-        return finished;
-    }
 }
