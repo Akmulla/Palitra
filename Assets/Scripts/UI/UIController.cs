@@ -77,6 +77,7 @@ public class UIController : MonoBehaviour
                 round.SetActive(true);
                 triangle.SetActive(true);
                 triangle_fon.SetActive(false);
+                Ball.ball.EnableImage();
                 break;
 
             case GameState.Prepare:
@@ -90,9 +91,9 @@ public class UIController : MonoBehaviour
                 skin_menu.SetActive(false);
                 start_menu.SetActive(false);
                 pause_menu.SetActive(true);
-                round.SetActive(false);
-                triangle.SetActive(false);
-                triangle_fon.SetActive(false);
+                //round.SetActive(false);
+                //triangle.SetActive(false);
+                //triangle_fon.SetActive(false);
                 pause_text.SetActive(true);
                 gameover_text.SetActive(false);
                 pause_pic.SetActive(true);
@@ -107,9 +108,9 @@ public class UIController : MonoBehaviour
                 skin_menu.SetActive(false);
                 start_menu.SetActive(false);
                 pause_menu.SetActive(true);
-                round.SetActive(false);
-                triangle.SetActive(false);
-                triangle_fon.SetActive(false);
+               // round.SetActive(false);
+               // triangle.SetActive(false);
+               // triangle_fon.SetActive(false);
                 pause_text.SetActive(false);
                 gameover_text.SetActive(true);
                 pause_pic.SetActive(false);

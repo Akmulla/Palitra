@@ -79,10 +79,15 @@ public class Ball : MonoBehaviour
     void OnEnable()
     {
         EventManager.StartListening("ChangeLvl", ChangeLvl);
-        if (GameController.game_controller.GetState()!=GameState.GameOver)
-        {
-            image.enabled = true;
-        }
+        //if (GameController.game_controller.GetState()!=GameState.GameOver)
+        //{
+        //    image.enabled = true;
+        //}
+    }
+
+    public void EnableImage()
+    {
+        image.enabled = true;
     }
     void OnDisable()
     {

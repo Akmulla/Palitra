@@ -74,12 +74,16 @@ public class GameController : MonoBehaviour
         //prepare = false;
         // StartCoroutine(InitLines());
         // float t1 = Time.time;
+        bool animate=false;
+        if (game_state == GameState.MainMenu)
+            animate = true;
+
         SoundManager.sound_manager.GameTheme();
         if (reload_part)
             particle.TurnOff();
         ChangeState(GameState.Prepare);
         UIController.ui.UpdateUI();
-        //if (game_state == GameState.MainMenu)
+        if (animate)
         {
             EventManager.TriggerEvent("BeginGameAnimation");
             //yield return new WaitForSeconds(3.0f);
@@ -244,7 +248,7 @@ public class GameController : MonoBehaviour
         
         UIController.ui.UpdateUI();
         
-        EventManager.TriggerEvent("EndGame");
+        EventManager.TriggerEvent("ResetGameAnimation");
     }
 
     public void ToSkinMenu()
