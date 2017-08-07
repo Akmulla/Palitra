@@ -83,6 +83,7 @@ public class Ball : MonoBehaviour
         //{
         //    image.enabled = true;
         //}
+        image.enabled = true;
     }
 
     public void EnableImage()

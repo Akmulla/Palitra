@@ -37,7 +37,6 @@ public class GameController : MonoBehaviour
         //UIController.ui.UpdateUI();
     }
 
-
     public int GetCurrentLvl()
     {
         return lvl_number;
@@ -217,7 +216,6 @@ public class GameController : MonoBehaviour
 
     }
 
-
     public void Pause()
     {
         if (game_state != GameState.Game)
@@ -248,7 +246,7 @@ public class GameController : MonoBehaviour
         
         UIController.ui.UpdateUI();
         
-        EventManager.TriggerEvent("ResetGameAnimation");
+        EventManager.TriggerEvent("EndGame");
     }
 
     public void ToSkinMenu()

@@ -68,7 +68,6 @@ public class SkinChange : MonoBehaviour
             {
                 SoundManager.sound_manager.SingleSound(SoundSample.Error);
                 money_anim.SetTrigger("animate");
-                
             }
         }
         

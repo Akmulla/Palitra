@@ -4,7 +4,7 @@ using System;
 
 public class Line_Block : Line
 {
-    public Color col;
+    //public Color col;
     int block_count = 5;
     float scrollSpeed = 0.5f;
     private Vector2 savedOffset;
@@ -13,7 +13,6 @@ public class Line_Block : Line
     bool left_dir = true;
     float x;
     Texture2D main_texture;
-
 
     public override void InitLine()
     {
@@ -33,8 +32,9 @@ public class Line_Block : Line
         {
             colors.Add(main_texture.GetPixel(coord_x+i, (int)(main_texture.height / 2.0f)));
         }
-        anim.BeginAnimation();
+        
         Ball.ball.LinePassed(colors,false);
+        anim.BeginAnimation();
     }
 
     protected override void Awake()
@@ -45,6 +45,7 @@ public class Line_Block : Line
         right_rend=right.GetComponent<Renderer>();
         savedOffset = left_rend.sharedMaterial.GetTextureOffset("_MainTex");
     }
+
     public override void ChangeColor()
     {
         Color[] colors = SkinManager.skin_manager.GetCurrentSkin().colors;
@@ -52,6 +53,12 @@ public class Line_Block : Line
         Color[] col;
         main_texture= texture_handler.CreateTexture(colors, block_count,0.0f,out col);
         SetTexture(main_texture);
+    }
+
+    public override void Enable()
+    {
+        base.Enable();
+        //x = UnityEngine.Random.Range(0.0f, 0.9f);
     }
 
     protected override void Update()
@@ -77,7 +84,7 @@ public class Line_Block : Line
         {
             colors.Add(main_texture.GetPixel(coord_x + i, (int)(main_texture.height / 2.0f)));
         }
-        col=(main_texture.GetPixel(coord_x , (int)(main_texture.height / 2.0f)));
+        //col=(main_texture.GetPixel(coord_x , (int)(main_texture.height / 2.0f)));
         ///////////
     }
 }

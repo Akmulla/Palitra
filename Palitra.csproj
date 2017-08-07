@@ -136,6 +136,7 @@
     <Compile Include="Assets\Scripts\UI\ChangeToSkinColor.cs" />
     <Compile Include="Assets\Scripts\UI\Continue.cs" />
     <Compile Include="Assets\Scripts\UI\Pause.cs" />
+    <Compile Include="Assets\Scripts\UI\SaveAnimState.cs" />
     <Compile Include="Assets\Scripts\UI\Score.cs" />
     <Compile Include="Assets\Scripts\UI\Sector.cs" />
     <Compile Include="Assets\Scripts\UI\SkinChange.cs" />

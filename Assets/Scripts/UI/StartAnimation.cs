@@ -17,7 +17,6 @@ public class StartAnimation : MonoBehaviour
     {
         EventManager.StartListening("BeginGameAnimation", Animate);
         EventManager.StartListening("ResetGameAnimation", Reset);
-
     }
 
     void OnDisable()

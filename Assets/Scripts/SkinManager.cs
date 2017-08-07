@@ -18,18 +18,25 @@ public class SkinManager : MonoBehaviour
 
     public void SetActiveSkin(int new_skin_number)
     {
-        active_skin = Mathf.Clamp(new_skin_number, 0, totalSkinCount);
-       // PlayerPrefs.SetInt("ActiveSkin", new_skin_number);
-        EventManager.TriggerEvent("SkinChanged");
+        if (new_skin_number!=active_skin)
+        {
+            active_skin = Mathf.Clamp(new_skin_number, 0, totalSkinCount);
+            // PlayerPrefs.SetInt("ActiveSkin", new_skin_number);
+            EventManager.TriggerEvent("SkinChanged");
+        }
+        
     }
+
     public void SaveActiveSkin()
     {
         PlayerPrefs.SetInt("SavedSkin", active_skin);
     }
+
     public int GetTotalSkinCount()
     {
         return totalSkinCount;
     }
+
     public void LoadSavedSkin()
     {
         if (PlayerPrefs.HasKey("SavedSkin"))
@@ -38,6 +45,7 @@ public class SkinManager : MonoBehaviour
         }
         
     }
+
     void Awake()
     {
         active_skin = 0;
@@ -60,8 +68,6 @@ public class SkinManager : MonoBehaviour
         //    SetActiveSkin(PlayerPrefs.GetInt("ActiveSkin"));
         //}
     }
-
- 
 
     public SkinData GetCurrentSkin()
     {
