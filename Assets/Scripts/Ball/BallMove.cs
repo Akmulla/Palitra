@@ -49,7 +49,7 @@ public class BallMove : MonoBehaviour
     {
         EventManager.StopListening("BeginGame", BeginGame);
     }
-    float Speed
+    public float Speed
     {
         get
         {
@@ -154,8 +154,10 @@ public class BallMove : MonoBehaviour
     public void ResumeSpeed()
     {
         current_state = State.resuming;
-        coroutine = SlowDownCoroutine(x);
-        StartCoroutine(coroutine);
+        //coroutine = SlowDownCoroutine(x);
+        //StartCoroutine(coroutine);
+        Speed = saved_speed;
+        current_state = State.normal;
     }
 
 
