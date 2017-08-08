@@ -10,6 +10,7 @@ public abstract class Line : MonoBehaviour
     public GameObject right;
     protected AnimationComponent anim;
     MeshRenderer[] mesh_rend;
+    [HideInInspector]
     public TextureHandler texture_handler;
     MeshResize[] mesh_resize;
 

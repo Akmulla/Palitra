@@ -27,6 +27,14 @@ public class Line_Switch : Line
         SetTexture(texture);
 
     }
+
+    protected override void CheckIfPassed()
+    {
+        Ball.ball.LinePassed(line_color);
+        anim.BeginAnimation();
+        //active = false;
+    }
+
     public override void InitLine()
     {
         active = true;
@@ -35,17 +43,19 @@ public class Line_Switch : Line
         ChangeColor();
        // StartCoroutine(SwitchColor());
     }
-    protected override void CheckIfPassed()
-    {
 
-        if ((active) && (tran.position.y - height <= Ball.ball.GetCollisionPosition().y))
-        {
-            // Debug.DrawLine(new Vector3(1.0f, tran.position.y - height, 0.0f),
-            //new Vector3(1.0f, tran.position.y + height, 0.0f), Color.black, 10.0f);
-            anim.BeginAnimation();
-            Ball.ball.LinePassed(line_color);
-        }
-    }
+    //protected override void CheckIfCrossed()
+    //{
+
+    //    //if ((active) && (tran.position.y - height <= Ball.ball.GetCollisionPosition().y))
+    //    //{
+            
+    //    //    // Debug.DrawLine(new Vector3(1.0f, tran.position.y - height, 0.0f),
+    //    //    //new Vector3(1.0f, tran.position.y + height, 0.0f), Color.black, 10.0f);
+    //    //    //anim.BeginAnimation();
+    //    //   // Ball.ball.LinePassed(line_color);
+    //    //}
+    //}
     protected override void OnEnable()
     {
         StartCoroutine(SwitchColor());
