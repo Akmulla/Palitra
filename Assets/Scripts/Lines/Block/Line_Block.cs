@@ -22,11 +22,12 @@ public class Line_Block : Line
         block_count = GameController.game_controller.GetLvlData().block_prop.block_count;
         //anim.ResetAnimation();
         base.InitLine();
-        height = left.GetComponent<Renderer>().bounds.extents.y;
+        //height = left.GetComponent<Renderer>().bounds.extents.y;
     }
 
     protected override void CheckIfPassed()
     {
+        Debug.Break();
         int coord_x = (int)(main_texture.width / 2.0f + main_texture.width * x);
         List <Color> colors = new List<Color>();
         for (int i=-1;i<=1;i++)
@@ -62,6 +63,11 @@ public class Line_Block : Line
         //x = UnityEngine.Random.Range(0.0f, 0.9f);
     }
 
+    protected override void CheckIfCrossed()
+    {
+        base.CheckIfCrossed();
+        
+    }
     protected override void Update()
     {
         base.Update();
