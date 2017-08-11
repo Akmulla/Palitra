@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System.Linq;
+
 [System.Serializable]
 public struct LvlParams
 {
@@ -33,18 +35,48 @@ public class GenerateLvls : MonoBehaviour
 
         int lvl_count = (int)((start_params.dist_min - end_params.dist_min) / 0.1f);
 
-        for (int lvl_number = 0; lvl_number <= lvl_count; lvl_number++)
-        {
-            // LvlData lvl = new LvlData();
-            LvlData lvl = ScriptableObject.CreateInstance<LvlData>();
-            float t = (float)lvl_number / (float)lvl_count;
-            CalcLineParams(lvl, t);
-            
+        List<string> res=GetCombination(new List<int> { 1, 2, 3,4,5 });
 
-            AssetDatabase.CreateAsset(lvl, path + "/Lvl_" + lvl_number.ToString() + ".asset");
+        for (int i=0;i<res.Count;i++)
+        {
+            print(res[i]);
+        }
+        //for (int lvl_number = 0; lvl_number <= lvl_count; lvl_number++)
+        //{
+        //    // LvlData lvl = new LvlData();
+        //    LvlData lvl = ScriptableObject.CreateInstance<LvlData>();
+        //    float t = (float)lvl_number / (float)lvl_count;
+        //    CalcLineParams(lvl, t);
+
+
+        //    AssetDatabase.CreateAsset(lvl, path + "/Lvl_" + lvl_number.ToString() + ".asset");
+        //}
+
+        //AssetDatabase.SaveAssets();
+    }
+
+    List<string> GetCombination(List<int> list)
+    {
+        List<string> result = new List<string>();
+        double count = Mathf.Pow(2, list.Count);
+        for (int i = 1; i <= count - 1; i++)
+        {
+            string new_str = "";
+            result.Add(new_str);
+            string str = System.Convert.ToString(i, 2).PadLeft(list.Count, '0');
+            for (int j = 0; j < str.Length; j++)
+            {
+                if (str[j] == '1')
+                {
+                   // print(list[j]);
+                    result[i-1] += list[j];
+                }
+            }
+            //print("next");
+           // Console.WriteLine();
         }
 
-        AssetDatabase.SaveAssets();
+        return result;
     }
 
     void CalcLineParams(LvlData lvl,float t)
