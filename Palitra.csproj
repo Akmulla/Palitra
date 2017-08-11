@@ -121,6 +121,7 @@
     <Compile Include="Assets\Scripts\System\Calc_Numbers.cs" />
     <Compile Include="Assets\Scripts\System\Edges.cs" />
     <Compile Include="Assets\Scripts\System\EventManager.cs" />
+    <Compile Include="Assets\Scripts\System\GenerateLvls.cs" />
     <Compile Include="Assets\Scripts\System\NumberPicData.cs" />
     <Compile Include="Assets\Scripts\System\Pool.cs" />
     <Compile Include="Assets\Scripts\System\PoolRef.cs" />
