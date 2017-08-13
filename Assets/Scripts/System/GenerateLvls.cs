@@ -36,7 +36,7 @@ public class GenerateLvls : MonoBehaviour
         int lvl_count = (int)((start_params.dist_min - end_params.dist_min) / 0.1f);
 
         // List<string> res=GetCombination(new List<int> { 1, 2, 3,4,5 });
-        List<string> res = CalcCombinations();
+        List<string> res = CalcCombinations(lvl_count);
         //for (int i=0;i<res.Count;i++)
         //{
         //    print(res[i]);
@@ -92,10 +92,10 @@ public class GenerateLvls : MonoBehaviour
         }
     }
 
-    List<string> CalcCombinations()
+    List<string> CalcCombinations(int lvl_count)
     {
         List<string> result = new List<string>();
-        List<string> base_comb= GetCombination(new List<int> { 1, 2, 3, 4, 5 });
+        List<string> base_comb = GetCombination(new List<int> { 1, 2, 3, 4, 5 });
 
 
         //туториальные уровни
@@ -125,8 +125,56 @@ public class GenerateLvls : MonoBehaviour
         result.Add("12345");
         ////////////////////////////
 
+        //print(result.Count);
+        //List<string> comb_pool = new List<string>(base_comb);
+        while (result.Count< lvl_count)
+        {
+            for (int i = 2; i <= 5; i++)
+            {
+                List<string> comb_pool = GenTempPool(base_comb, i);
 
+                for (int j = 0; j < 5; j++)
+                {
+                    if (comb_pool.Count != 0)
+                    {
+                        int k = Random.Range(0, comb_pool.Count);
+                        result.Add(comb_pool[k]);
+                        comb_pool.RemoveAt(k);
+                    }
+                    else
+                    {
+                        comb_pool = GenTempPool(base_comb, i);
+                    }
+                }
+                //if (comb_pool.Any(s => s.Length == i))
+                //{
+
+                //}
+            }
+        }
+        
+        
+        
+        //comb_pool[0] = "0";
+        //base_comb[0] = "1";
+
+        //print(comb_pool[0]);
+        //print(base_comb[0]);
         return result;
+    }
+
+    List<string> GenTempPool(List<string> base_comb, int length)
+    {
+        List<string> comb_pool = new List<string>();
+        for (int j = 0; j < base_comb.Count; j++)
+        {
+            if (base_comb[j].Length == length)
+            {
+                comb_pool.Add(base_comb[j]);
+            }
+        }
+
+        return comb_pool;
     }
 
     List<string> GetCombination(List<int> list)
