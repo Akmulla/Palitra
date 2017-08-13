@@ -30,6 +30,8 @@ public class GenerateLvls : MonoBehaviour
     public LvlParams start_params;
     public LvlParams end_params;
 
+    float avail_time = 30.0f;
+
     void Start()
     {
 
@@ -64,32 +66,49 @@ public class GenerateLvls : MonoBehaviour
         lvl.block_prop.count = 0;
         lvl.multiple_prop_1_part.count = 0;
         lvl.combo_prop_3_parts.count = 0;
-        for (int i=0;i<line_info.Length;i++)
+
+        float lvl_time = 0.0f;
+        float dist = Edges.topEdge - Edges.botEdge;
+
+        while (lvl_time<avail_time)
         {
-            switch (line_info[i])
+            for (int i = 0; i < line_info.Length; i++)
             {
-                case '1':
-                    lvl.line_prop.count = 1;
-                    break;
+                switch (line_info[i])
+                {
+                    case '1':
+                        lvl.line_prop.count +=1;
+                        lvl_time += dist / lvl.min_speed;
+                        break;
 
-                case '2':
-                    lvl.switch_prop.count = 1;
-                    break;
+                    case '2':
+                        lvl.switch_prop.count += 1;
+                        lvl_time += dist / lvl.min_speed;
+                        break;
 
-                case '3':
-                    lvl.block_prop.count = 1;
-                    break;
+                    case '3':
+                        lvl.block_prop.count += 1;
+                        lvl_time += dist / lvl.min_speed;
+                        break;
 
-                case '4':
-                    lvl.multiple_prop_1_part.count = 1;
-                    break;
+                    case '4':
+                        lvl.multiple_prop_1_part.count += 1;
+                        lvl_time += dist / lvl.multiple_prop_1_part.slowing;
+                        break;
 
-                case '5':
-                    lvl.combo_prop_3_parts.count = 1;
-                    break;
+                    case '5':
+                        lvl.combo_prop_3_parts.count += 1;
+                        lvl_time += dist / lvl.combo_prop_3_parts.slowing;
+                        break;
+
+                    default:
+                        print("error");
+                        break;
+                }
+
             }
-                
         }
+       
     }
 
     List<string> CalcCombinations(int lvl_count)
