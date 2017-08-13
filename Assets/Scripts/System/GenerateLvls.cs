@@ -35,24 +35,98 @@ public class GenerateLvls : MonoBehaviour
 
         int lvl_count = (int)((start_params.dist_min - end_params.dist_min) / 0.1f);
 
-        List<string> res=GetCombination(new List<int> { 1, 2, 3,4,5 });
-
-        for (int i=0;i<res.Count;i++)
-        {
-            print(res[i]);
-        }
-        //for (int lvl_number = 0; lvl_number <= lvl_count; lvl_number++)
+        // List<string> res=GetCombination(new List<int> { 1, 2, 3,4,5 });
+        List<string> res = CalcCombinations();
+        //for (int i=0;i<res.Count;i++)
         //{
-        //    // LvlData lvl = new LvlData();
-        //    LvlData lvl = ScriptableObject.CreateInstance<LvlData>();
-        //    float t = (float)lvl_number / (float)lvl_count;
-        //    CalcLineParams(lvl, t);
-
-
-        //    AssetDatabase.CreateAsset(lvl, path + "/Lvl_" + lvl_number.ToString() + ".asset");
+        //    print(res[i]);
         //}
 
-        //AssetDatabase.SaveAssets();
+        for (int lvl_number = 0; lvl_number <= lvl_count; lvl_number++)
+        {
+            // LvlData lvl = new LvlData();
+            LvlData lvl = ScriptableObject.CreateInstance<LvlData>();
+            float t = (float)lvl_number / (float)lvl_count;
+            CalcLineParams(lvl, t);
+            if (lvl_number<res.Count)
+                SetLineCount(lvl, res[lvl_number]);
+
+            AssetDatabase.CreateAsset(lvl, path + "/Lvl_" + lvl_number.ToString() + ".asset");
+        }
+
+        AssetDatabase.SaveAssets();
+    }
+
+    void SetLineCount(LvlData lvl, string line_info)
+    {
+        lvl.line_prop.count = 0;
+        lvl.switch_prop.count = 0;
+        lvl.block_prop.count = 0;
+        lvl.multiple_prop_1_part.count = 0;
+        lvl.combo_prop_3_parts.count = 0;
+        for (int i=0;i<line_info.Length;i++)
+        {
+            switch (line_info[i])
+            {
+                case '1':
+                    lvl.line_prop.count = 1;
+                    break;
+
+                case '2':
+                    lvl.switch_prop.count = 1;
+                    break;
+
+                case '3':
+                    lvl.block_prop.count = 1;
+                    break;
+
+                case '4':
+                    lvl.multiple_prop_1_part.count = 1;
+                    break;
+
+                case '5':
+                    lvl.combo_prop_3_parts.count = 1;
+                    break;
+            }
+                
+        }
+    }
+
+    List<string> CalcCombinations()
+    {
+        List<string> result = new List<string>();
+        List<string> base_comb= GetCombination(new List<int> { 1, 2, 3, 4, 5 });
+
+
+        //туториальные уровни
+        result.Add("1");
+        result.Add("12");
+        result.Add("13");
+        result.Add("14");
+        result.Add("15");
+
+
+
+        for (int i=3;i<=4;i++)
+        {
+            foreach (string comb in base_comb)
+            {
+                if ((comb.Length==i)&&(comb.Contains("1")))
+                {
+                    result.Add(comb);
+                }
+            }
+        }
+        
+        result.Add("12345");
+        result.Add("12345");
+        result.Add("12345");
+        result.Add("12345");
+        result.Add("12345");
+        ////////////////////////////
+
+
+        return result;
     }
 
     List<string> GetCombination(List<int> list)
@@ -81,6 +155,8 @@ public class GenerateLvls : MonoBehaviour
 
     void CalcLineParams(LvlData lvl,float t)
     {
+        lvl.line_prop = new LineProp();
+
         lvl.min_speed = Mathf.Lerp(start_params.speed.x, end_params.speed.x, t);
         lvl.max_speed = Mathf.Lerp(start_params.speed.y, end_params.speed.y, t);
 
