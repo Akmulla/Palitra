@@ -171,6 +171,7 @@ public class Ball : MonoBehaviour
 
     void ChangeLvl()
     {
+        BallMove.ball_move.Speed = GameController.game_controller.GetLvlData().speed;
         ball_color=image.color;
         shield = true;
     }

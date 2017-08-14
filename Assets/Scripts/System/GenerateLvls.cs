@@ -51,7 +51,11 @@ public class GenerateLvls : MonoBehaviour
             float t = (float)lvl_number / (float)lvl_count;
             CalcLineParams(lvl, t);
             if (lvl_number<res.Count)
+            {
                 SetLineCount(lvl, res[lvl_number]);
+                CalcSteps(lvl,t);
+            }
+                
 
             AssetDatabase.CreateAsset(lvl, path + "/Lvl_" + lvl_number.ToString() + ".asset");
         }
@@ -66,9 +70,16 @@ public class GenerateLvls : MonoBehaviour
         lvl.block_prop.count = 0;
         lvl.multiple_prop_1_part.count = 0;
         lvl.combo_prop_3_parts.count = 0;
-
+        lvl.total_line_count = 0;
         float lvl_time = 0.0f;
-        float dist = Edges.topEdge - Edges.botEdge;
+        //float dist = Edges.topEdge - Edges.botEdge;
+        float dist = lvl.dist;
+
+        if (dist < 0.01f)
+        {
+            dist = 0.01f;
+            print("too small dist");
+        }
 
         while (lvl_time<avail_time)
         {
@@ -105,7 +116,7 @@ public class GenerateLvls : MonoBehaviour
                         print("error");
                         break;
                 }
-
+                lvl.total_line_count++;
             }
         }
        
@@ -220,12 +231,23 @@ public class GenerateLvls : MonoBehaviour
         return result;
     }
 
+    void CalcSteps(LvlData lvl,float t)
+    {
+        float min_speed = lvl.speed;
+        float max_speed= Mathf.Lerp(start_params.speed.y, end_params.speed.y, t);
+
+       // print(max_speed - min_speed);
+       // print(lvl.total_line_count);
+        lvl.step_speed = Mathf.Abs(max_speed - min_speed) / lvl.total_line_count;
+    }
+
     void CalcLineParams(LvlData lvl,float t)
     {
+        lvl.dist= Mathf.Lerp(start_params.dist_min, end_params.dist_min, t);
         lvl.line_prop = new LineProp();
 
         lvl.speed = Mathf.Lerp(start_params.speed.x, end_params.speed.x, t);
-
+        
 
         lvl.switch_prop = new SwitchProp();
         lvl.switch_prop.dist = Mathf.Lerp(start_params.chng_clr_dist.x, end_params.chng_clr_dist.x, t);

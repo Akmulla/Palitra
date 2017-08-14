@@ -13,7 +13,6 @@ public class LvlData : ScriptableObject
     public float step_speed;
 
     [Header("Coins")]
-    public int lines_to_coin;
     public int coins_reward;
 
     [Header("Lines")]
@@ -41,8 +40,8 @@ public class LvlData : ScriptableObject
     [Tooltip("Комбо полоса из 5 частей")]
     public ComboProp combo_prop_5_parts;
 
-    [HideInInspector]
-    public int lines_to_chng_lvl;
+    //[HideInInspector]
+    public int total_line_count;
 
     //[Header("Sectors")]
     //public Color[] colors;

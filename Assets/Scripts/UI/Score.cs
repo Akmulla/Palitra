@@ -30,11 +30,11 @@ public class Score : MonoBehaviour
     void LinePassed()
     {
         lines_passed++;
-        if (lines_passed >= GameController.game_controller.GetLvlData().lines_to_coin)
-        {
-            lines_passed = 0;
-            GlobalScore.global_score.Score += GameController.game_controller.GetLvlData().coins_reward;
-            text.text = GlobalScore.global_score.Score.ToString();
-        }
+        //if (lines_passed >= GameController.game_controller.GetLvlData().lines_to_coin)
+        //{
+        //    lines_passed = 0;
+        //    GlobalScore.global_score.Score += GameController.game_controller.GetLvlData().coins_reward;
+        //    text.text = GlobalScore.global_score.Score.ToString();
+        //}
     }
 }

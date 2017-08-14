@@ -176,7 +176,7 @@ public class GameController : MonoBehaviour
     void LinePassed()
     {
         lines_passed++;
-        if (lines_passed >= GameController.game_controller.GetLvlData().lines_to_chng_lvl)
+        if (lines_passed >= GameController.game_controller.GetLvlData().total_line_count)
         {
             IncreaseLvl();
             //EventManager.TriggerEvent("ChangeLvl");

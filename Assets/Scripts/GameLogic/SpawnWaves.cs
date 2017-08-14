@@ -27,6 +27,7 @@ public class SpawnWaves : MonoBehaviour
     int lines_spawned;
 
     bool is_spawning=false;
+    LvlData lvl_data;
 
     float Dist
     {
@@ -45,10 +46,12 @@ public class SpawnWaves : MonoBehaviour
     void Awake()
     {
         spawn = this;
+
     }
 
     void Start()
     {
+        lvl_data = GameController.game_controller.GetLvlData();
         Pool[] pool;
         pool = GetComponentsInChildren<Pool>();
 
@@ -119,11 +122,11 @@ public class SpawnWaves : MonoBehaviour
         GetLineCountData();
 
         //вычисляем общее количество линий на уровне
-        GameController.game_controller.GetLvlData().lines_to_chng_lvl=0;
-        for (int i = 0; i < (int)PoolType.Count; i++)
-        {
-            GameController.game_controller.GetLvlData().lines_to_chng_lvl += line_handler[i].count;
-        }
+        //GameController.game_controller.GetLvlData().lines_to_chng_lvl=0;
+        //for (int i = 0; i < (int)PoolType.Count; i++)
+        //{
+        //    GameController.game_controller.GetLvlData().lines_to_chng_lvl += line_handler[i].count;
+        //}
 
         //заполняем массив линий
         for (int i=0;i<(int)PoolType.Count;i++)
@@ -143,11 +146,13 @@ public class SpawnWaves : MonoBehaviour
         //    lines_passed = 0;
         //    Dist -= GameController.game_controller.GetLvlData().chng_dist_val;
         //}
-        Dist -= GameController.game_controller.GetLvlData().step_dist;
+        Dist -= lvl_data.step_dist;
     }
 
     void ChangeLvl()
     {
+        lvl_data = GameController.game_controller.GetLvlData();
+        is_spawning = false;
         lines_passed = 0;
         lines_spawned = 0;
         prev_edge = Ball.ball.GetPosition().y;
@@ -167,15 +172,19 @@ public class SpawnWaves : MonoBehaviour
         yield return new WaitForSeconds(2.0f);
 
         // Dist = GameController.game_controller.GetLvlData().max_dist;
-        Dist = GameController.game_controller.GetLvlData().speed;
+        Dist = lvl_data.dist;
         edge = Edges.topEdge + offset;
         is_spawning = true;
     }
 
     void Update()
     {
-        if ((is_spawning)&&(Edges.topEdge >= edge-offset)&&
-            (lines_spawned < GameController.game_controller.GetLvlData().lines_to_chng_lvl))
+        if (lines_spawned >= lvl_data.total_line_count)
+        {
+            is_spawning = false;
+        }
+
+        if ((is_spawning)&&(Edges.topEdge >= edge-offset))
         {
             SpawnWave();
         }
