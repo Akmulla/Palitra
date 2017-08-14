@@ -37,7 +37,8 @@ public class SpawnWaves : MonoBehaviour
 
         set
         {
-            dist = Mathf.Clamp(value, GameController.game_controller.GetLvlData().min_dist, GameController.game_controller.GetLvlData().max_dist);
+            //dist = Mathf.Clamp(value, GameController.game_controller.GetLvlData().min_dist, GameController.game_controller.GetLvlData().max_dist);
+            dist = value;
         }
     }
 
@@ -137,11 +138,12 @@ public class SpawnWaves : MonoBehaviour
     void LinePassed()
     {
         lines_passed++;
-        if (lines_passed >= GameController.game_controller.GetLvlData().lines_to_chng_dist)
-        {
-            lines_passed = 0;
-            Dist -= GameController.game_controller.GetLvlData().chng_dist_val;
-        }
+        //if (lines_passed >= GameController.game_controller.GetLvlData().lines_to_chng_dist)
+        //{
+        //    lines_passed = 0;
+        //    Dist -= GameController.game_controller.GetLvlData().chng_dist_val;
+        //}
+        Dist -= GameController.game_controller.GetLvlData().step_dist;
     }
 
     void ChangeLvl()
@@ -164,7 +166,8 @@ public class SpawnWaves : MonoBehaviour
             yield return null;
         yield return new WaitForSeconds(2.0f);
 
-        Dist = GameController.game_controller.GetLvlData().max_dist;
+        // Dist = GameController.game_controller.GetLvlData().max_dist;
+        Dist = GameController.game_controller.GetLvlData().speed;
         edge = Edges.topEdge + offset;
         is_spawning = true;
     }

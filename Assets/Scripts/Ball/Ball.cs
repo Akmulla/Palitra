@@ -102,11 +102,12 @@ public class Ball : MonoBehaviour
         //if (((Vector4)line_color - (Vector4)sprite_rend.color).magnitude<0.01f)
         if (line_color==ball_color)
         {
-            if (lines_checked >= GameController.game_controller.GetLvlData().lines_to_accel)
-            {
-                BallMove.ball_move.IncreaseSpeed(GameController.game_controller.GetLvlData().accel);
-                lines_checked = 0;
-            }
+            //if (lines_checked >= GameController.game_controller.GetLvlData().lines_to_accel)
+            //{
+            //    BallMove.ball_move.IncreaseSpeed(GameController.game_controller.GetLvlData().accel);
+            //    lines_checked = 0;
+            //}
+            BallMove.ball_move.IncreaseSpeed(GameController.game_controller.GetLvlData().step_speed);
         }
         else
         {
@@ -145,11 +146,12 @@ public class Ball : MonoBehaviour
 
         if (passed)
         {
-            if (lines_checked >= GameController.game_controller.GetLvlData().lines_to_accel)
-            {
-                BallMove.ball_move.IncreaseSpeed(GameController.game_controller.GetLvlData().accel);
-                lines_checked = 0;
-            }
+            //if (lines_checked >= GameController.game_controller.GetLvlData().lines_to_accel)
+            //{
+            //    BallMove.ball_move.IncreaseSpeed(GameController.game_controller.GetLvlData().accel);
+            //    lines_checked = 0;
+            //}
+            BallMove.ball_move.IncreaseSpeed(GameController.game_controller.GetLvlData().step_speed);
             EventManager.TriggerEvent("LinePassed");
             lines_checked++;
         }

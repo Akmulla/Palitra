@@ -5,16 +5,12 @@ using System.Collections;
 public class LvlData : ScriptableObject
 {
     [Header("Dist")]
-    public float max_dist;
-    public float min_dist;
-    public float chng_dist_val;
-    public int lines_to_chng_dist;
+    public float dist;
+    public float step_dist;
 
     [Header("Ball")]
-    public float min_speed;
-    public float max_speed;
-    public int lines_to_accel;
-    public float accel;
+    public float speed;
+    public float step_speed;
 
     [Header("Coins")]
     public int lines_to_coin;

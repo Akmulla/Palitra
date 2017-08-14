@@ -78,17 +78,17 @@ public class GenerateLvls : MonoBehaviour
                 {
                     case '1':
                         lvl.line_prop.count +=1;
-                        lvl_time += dist / lvl.min_speed;
+                        lvl_time += dist / lvl.speed;
                         break;
 
                     case '2':
                         lvl.switch_prop.count += 1;
-                        lvl_time += dist / lvl.min_speed;
+                        lvl_time += dist / lvl.speed;
                         break;
 
                     case '3':
                         lvl.block_prop.count += 1;
-                        lvl_time += dist / lvl.min_speed;
+                        lvl_time += dist / lvl.speed;
                         break;
 
                     case '4':
@@ -224,8 +224,8 @@ public class GenerateLvls : MonoBehaviour
     {
         lvl.line_prop = new LineProp();
 
-        lvl.min_speed = Mathf.Lerp(start_params.speed.x, end_params.speed.x, t);
-        lvl.max_speed = Mathf.Lerp(start_params.speed.y, end_params.speed.y, t);
+        lvl.speed = Mathf.Lerp(start_params.speed.x, end_params.speed.x, t);
+
 
         lvl.switch_prop = new SwitchProp();
         lvl.switch_prop.dist = Mathf.Lerp(start_params.chng_clr_dist.x, end_params.chng_clr_dist.x, t);

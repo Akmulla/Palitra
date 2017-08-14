@@ -37,7 +37,7 @@ public class BallMove : MonoBehaviour
     }
     void BeginGame()
     {
-        speed = GameController.game_controller.GetLvlData().min_speed;
+        speed = GameController.game_controller.GetLvlData().speed;
         current_state = State.normal;
         stop = false;
     }
@@ -58,11 +58,12 @@ public class BallMove : MonoBehaviour
         set
         {
             //print(value);
-           // Debug.Break();
-            if (current_state==State.normal)
-                speed = Mathf.Clamp (value, GameController.game_controller.GetLvlData ().min_speed, GameController.game_controller.GetLvlData ().max_speed);
-            else
-                speed = Mathf.Clamp(value, 0.1f, GameController.game_controller.GetLvlData().max_speed);
+            // Debug.Break();
+            //if (current_state==State.normal)
+            //    speed = Mathf.Clamp (value, GameController.game_controller.GetLvlData ().min_speed, GameController.game_controller.GetLvlData ().max_speed);
+            //else
+            //    speed = Mathf.Clamp(value, 0.1f, GameController.game_controller.GetLvlData().max_speed);
+            speed = value;
         }
     }
     void Update()
