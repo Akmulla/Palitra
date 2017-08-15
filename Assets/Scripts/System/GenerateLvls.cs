@@ -8,7 +8,7 @@ public enum LvlType { Speed_incr,Dist_decr,Count}
 [System.Serializable]
 public struct LvlParams
 {
-    public float dist_min;
+    public Vector2 dist;
     public Vector2 speed;
     public Vector2 chng_clr_dist;
     public Vector2 chng_clr_time;
@@ -36,7 +36,7 @@ public class GenerateLvls : MonoBehaviour
     void Start()
     {
 
-        int lvl_count = (int)((start_params.dist_min - end_params.dist_min) / 0.1f);
+        int lvl_count = (int)((start_params.dist.x - end_params.dist.x) / 0.1f);
 
         // List<string> res=GetCombination(new List<int> { 1, 2, 3,4,5 });
         List<string> res = CalcCombinations(lvl_count);
@@ -248,7 +248,7 @@ public class GenerateLvls : MonoBehaviour
                 lvl.step_speed = Mathf.Abs(max_speed - min_speed) / lvl.total_line_count;
                 break;
             case LvlType.Dist_decr:
-                float min_dist = Mathf.Lerp(start_params.dist_min, end_params.dist_min, t);
+                float min_dist = Mathf.Lerp(start_params.dist.y, end_params.dist.y, t);
                 float max_dist = lvl.dist;
                 lvl.step_dist = Mathf.Abs(min_dist - max_dist) / lvl.total_line_count;
                 break;
@@ -258,7 +258,7 @@ public class GenerateLvls : MonoBehaviour
 
     void CalcLineParams(LvlData lvl,float t)
     {
-        lvl.dist= Mathf.Lerp(start_params.dist_min, end_params.dist_min, t);
+        lvl.dist= Mathf.Lerp(start_params.dist.x, end_params.dist.x, t);
         lvl.line_prop = new LineProp();
 
         lvl.speed = Mathf.Lerp(start_params.speed.x, end_params.speed.x, t);
