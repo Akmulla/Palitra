@@ -146,7 +146,15 @@ public class SpawnWaves : MonoBehaviour
         //    lines_passed = 0;
         //    Dist -= GameController.game_controller.GetLvlData().chng_dist_val;
         //}
-        Dist += lvl_data.step_dist;
+        LvlType lvl_type = GameController.game_controller.GetLvlData().lvl_type;
+        bool chng_aftr_half = ((lvl_type == LvlType.Speed_decr_dist_decr_half) ||
+            (lvl_type == LvlType.Speed_incr_dist_incr_half)) ? true : false;
+        bool passed_half = (SpawnWaves.spawn.GetLineSpawnedNumber() >=
+            GameController.game_controller.GetLvlData().total_line_count / 2);
+
+        float k = (chng_aftr_half && passed_half) ? -1.0f : 1.0f;
+
+        Dist += lvl_data.step_dist*k;
     }
 
     void ChangeLvl()

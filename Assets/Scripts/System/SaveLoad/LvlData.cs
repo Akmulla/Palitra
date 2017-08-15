@@ -43,6 +43,7 @@ public class LvlData : ScriptableObject
     //[HideInInspector]
     public int total_line_count;
 
+    public LvlType lvl_type;
     //[Header("Sectors")]
     //public Color[] colors;
 }

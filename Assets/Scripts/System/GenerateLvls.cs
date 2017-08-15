@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEditor;
 using System.Linq;
 
-public enum LvlType { Speed_incr,Dist_decr,Speed_incr_dist_incr, Speed_decr_dist_decr,Count }
+public enum LvlType { Speed_incr,Dist_decr,Speed_incr_dist_incr, Speed_decr_dist_decr,
+    Speed_incr_dist_incr_half, Speed_decr_dist_decr_half, Count }
 [System.Serializable]
 public struct LvlParams
 {
@@ -49,10 +50,11 @@ public class GenerateLvls : MonoBehaviour
         {
             // LvlData lvl = new LvlData();
             LvlData lvl = ScriptableObject.CreateInstance<LvlData>();
+            lvl.lvl_type = lvl_type;
             float t = (float)lvl_number / (float)lvl_count;
             CalcLineParams(lvl, t);
             
-            if (lvl_number<res.Count)
+            //if (lvl_number<res.Count)
             {
                 SetLineCount(lvl, res[lvl_number]);
                 CalcSteps(lvl,t,lvl_type);
@@ -247,6 +249,7 @@ public class GenerateLvls : MonoBehaviour
         float min_dist;
         float max_dist;
 
+
         switch (lvl_type)
         {
             case LvlType.Speed_incr:
@@ -277,6 +280,26 @@ public class GenerateLvls : MonoBehaviour
                 min_dist = Mathf.Lerp(start_params.dist.y, end_params.dist.y, t);
                 max_dist = lvl.dist;
                 lvl.step_dist = -Mathf.Abs(min_dist - max_dist) / lvl.total_line_count;
+                break;
+
+            case LvlType.Speed_incr_dist_incr_half:
+                min_speed = lvl.speed;
+                max_speed = Mathf.Lerp(start_params.speed.y, end_params.speed.y, t);
+                lvl.step_speed = Mathf.Abs(max_speed - min_speed) / (lvl.total_line_count/2);
+
+                min_dist = Mathf.Lerp(start_params.dist.y, end_params.dist.y, t);
+                max_dist = lvl.dist;
+                lvl.step_dist = Mathf.Abs(min_dist - max_dist) / (lvl.total_line_count/2);
+                break;
+
+            case LvlType.Speed_decr_dist_decr_half:
+                min_speed = lvl.speed;
+                max_speed = Mathf.Lerp(start_params.speed.y, end_params.speed.y, t);
+                lvl.step_speed = -Mathf.Abs(max_speed - min_speed) / (lvl.total_line_count / 2);
+
+                min_dist = Mathf.Lerp(start_params.dist.y, end_params.dist.y, t);
+                max_dist = lvl.dist;
+                lvl.step_dist = -Mathf.Abs(min_dist - max_dist) / (lvl.total_line_count / 2);
                 break;
 
         }
