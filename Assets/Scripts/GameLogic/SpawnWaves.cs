@@ -146,7 +146,7 @@ public class SpawnWaves : MonoBehaviour
         //    lines_passed = 0;
         //    Dist -= GameController.game_controller.GetLvlData().chng_dist_val;
         //}
-        Dist -= lvl_data.step_dist;
+        Dist += lvl_data.step_dist;
     }
 
     void ChangeLvl()
