@@ -32,7 +32,7 @@ public class PoolDefaultLines : Pool
         int i_col = ind[Random.Range(0, ind.Count)];
         col = i_col / 3;
 
-        if (i_col == prev_col)
+        if (col == prev_col)
             ban_col = i_col;
 
         prev_col = i_col;
