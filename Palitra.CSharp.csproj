@@ -124,6 +124,7 @@
     <Compile Include="Assets\Scripts\System\GenerateLvls.cs" />
     <Compile Include="Assets\Scripts\System\NumberPicData.cs" />
     <Compile Include="Assets\Scripts\System\Pool.cs" />
+    <Compile Include="Assets\Scripts\System\PoolDefaultLines.cs" />
     <Compile Include="Assets\Scripts\System\PoolRef.cs" />
     <Compile Include="Assets\Scripts\System\RandomizeMas.cs" />
     <Compile Include="Assets\Scripts\System\SaveLoad\GlobalScore.cs" />
