@@ -5,8 +5,10 @@ using System;
 public class Line_Default : Line
 {
     Color line_color;
-    static Color prev_color=Color.black;
-    static int same_colors = 1;
+    public static Color prev_color=Color.black;
+    public static int same_colors = 1;
+    
+    
     
     //Texture2D texture;
 
@@ -15,6 +17,7 @@ public class Line_Default : Line
         base.Awake();
         //texture = new Texture2D(2048, 128);
     }
+
     public override void ChangeColor()
     {
         Color[] colors = SkinManager.skin_manager.GetCurrentSkin().colors;
@@ -46,20 +49,42 @@ public class Line_Default : Line
         prev_color = line_color;
     }
 
+    public void InitLine(Color color)
+    {
+        active = true;
+        ChangeColor(color);
+    }
+
+    public void ChangeColor(Color new_color)
+    {
+        Texture2D texture = texture_handler.CreateTexture(new_color);
+        //TextureHandler.CreateTexture(new_color,texture);
+        SetTexture(texture);
+        line_color = new_color;
+    }
+
     public override void InitLine()
     {
         //print("init");
         active = true;
         ChangeColor();
-
     }
 
-    
+    public override void Enable()
+    {
+        base.Enable();
+        
+    }
 
     protected override void CheckIfPassed()
     {
         Ball.ball.LinePassed(line_color);
         anim.BeginAnimation();
         active = false;
+    }
+
+    public Color GetLineColor()
+    {
+        return line_color;
     }
 }

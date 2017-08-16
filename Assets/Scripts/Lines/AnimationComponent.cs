@@ -47,8 +47,9 @@ public class AnimationComponent : MonoBehaviour
         SetMesh(mesh_data.meshes[current_mesh]);
 
         //во время прохождения линии
-        // while (current_mesh < mesh_data.meshes.Length - start_mesh - 1)
-        while (current_mesh < end_mesh-2)
+         while ((current_mesh < mesh_data.meshes.Length - start_mesh - 1)&&
+            (BallMove.ball_move.Speed > 4.0f))
+       // while (current_mesh < end_mesh-2)
         {
             float position = Ball.ball.GetCollisionPosition().y - ball_start;
             current_mesh = (int)(position / cell);

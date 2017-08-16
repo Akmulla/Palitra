@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+#if UNITY_EDITOR
 using UnityEditor;
+
 using System.Linq;
 
-public enum LvlType { Speed_incr,Dist_decr,Speed_incr_dist_incr, Speed_decr_dist_decr,
-    Speed_incr_dist_incr_half, Speed_decr_dist_decr_half, Count }
+
 [System.Serializable]
 public struct LvlParams
 {
@@ -308,10 +310,45 @@ public class GenerateLvls : MonoBehaviour
 
     void CalcLineParams(LvlData lvl,float t)
     {
-        lvl.dist= Mathf.Lerp(start_params.dist.x, end_params.dist.x, t);
         lvl.line_prop = new LineProp();
+        switch (lvl.lvl_type)
+        {
+            case LvlType.Speed_incr:
+                lvl.speed = Mathf.Lerp(start_params.speed.x, end_params.speed.x, t);
+                lvl.dist = Mathf.Lerp(start_params.dist.x, end_params.dist.x, t);
+                break;
 
-        lvl.speed = Mathf.Lerp(start_params.speed.x, end_params.speed.x, t);
+            case LvlType.Dist_decr:
+                lvl.speed = Mathf.Lerp(start_params.speed.x, end_params.speed.x, t);
+                lvl.dist = Mathf.Lerp(start_params.dist.y, end_params.dist.y, t);
+                break;
+
+            case LvlType.Speed_incr_dist_incr:
+                lvl.speed = Mathf.Lerp(start_params.speed.x, end_params.speed.x, t);
+                lvl.dist = Mathf.Lerp(start_params.dist.x, end_params.dist.x, t);
+                break;
+
+            case LvlType.Speed_decr_dist_decr:
+                lvl.speed = Mathf.Lerp(start_params.speed.y, end_params.speed.y, t);
+                lvl.dist = Mathf.Lerp(start_params.dist.y, end_params.dist.y, t);
+                break;
+
+            case LvlType.Speed_incr_dist_incr_half:
+                lvl.speed = Mathf.Lerp(start_params.speed.x, end_params.speed.x, t);
+                lvl.dist = Mathf.Lerp(start_params.dist.x, end_params.dist.x, t);
+                break;
+
+            case LvlType.Speed_decr_dist_decr_half:
+                lvl.speed = Mathf.Lerp(start_params.speed.y, end_params.speed.y, t);
+                lvl.dist = Mathf.Lerp(start_params.dist.y, end_params.dist.y, t);
+                break;
+
+        }
+        //lvl.dist= Mathf.Lerp(start_params.dist.x, end_params.dist.x, t);
+
+        
+
+        //lvl.speed = Mathf.Lerp(start_params.speed.x, end_params.speed.x, t);
         
 
         lvl.switch_prop = new SwitchProp();
@@ -344,3 +381,5 @@ public class GenerateLvls : MonoBehaviour
         lvl.combo_prop_5_parts.slowing = Mathf.Lerp(start_params.combo_slow_5.x, end_params.combo_slow_5.x, t);
     }
 }
+
+#endif

@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+public enum LvlType
+{
+    Speed_incr, Dist_decr, Speed_incr_dist_incr, Speed_decr_dist_decr,
+    Speed_incr_dist_incr_half, Speed_decr_dist_decr_half, Count
+}
 [CreateAssetMenu()]
 public class LvlData : ScriptableObject
 {

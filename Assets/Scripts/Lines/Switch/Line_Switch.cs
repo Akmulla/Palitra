@@ -58,6 +58,7 @@ public class Line_Switch : Line
     //}
     protected override void OnEnable()
     {
+        StopAllCoroutines();
         StartCoroutine(SwitchColor());
     }
     IEnumerator SwitchColor()

@@ -7,6 +7,7 @@ public enum GameState { MainMenu, SkinMenu, Prepare, Game,Pause, GameOver };
 
 public class GameController : MonoBehaviour
 {
+    
     public static GameController game_controller;
     float saved_time_scale = 1.0f;
     GameState game_state;
@@ -26,6 +27,10 @@ public class GameController : MonoBehaviour
     bool reload_part = false;
     int lines_passed;
 
+    void Update()
+    {
+        
+    }
     public GameState GetState()
     {
         return game_state;
@@ -106,6 +111,7 @@ public class GameController : MonoBehaviour
             particle.TurnOn();
         ChangeState(GameState.Game);
         UIController.ui.UpdateUI();
+        Line_Default.same_colors = 0;
         EventManager.TriggerEvent("BeginGame");
     }
 
