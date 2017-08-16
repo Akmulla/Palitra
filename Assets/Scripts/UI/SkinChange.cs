@@ -81,12 +81,14 @@ public class SkinChange : MonoBehaviour
 
     void OnEnable()
     {
+        //print("fg");
         InitMenu();
     }
 
     public void InitMenu()
     {
         skin_number = SkinManager.skin_manager.GetSkinNumber();
+        SkinManager.skin_manager.SetActiveSkin(skin_number);
         for (int i = 0; i < SkinManager.skin_manager.GetTotalSkinCount(); i++)
         {
             if ((!CheckIfAvailable(i)) && (SkinManager.skin_manager.GetSkinByNumber(i).price == 0))
