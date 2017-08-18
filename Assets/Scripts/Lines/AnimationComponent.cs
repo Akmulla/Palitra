@@ -35,6 +35,10 @@ public class AnimationComponent : MonoBehaviour
         ResetAnimation();
     }
   
+    void OnDisable()
+    {
+        ResetAnimation();
+    }
     IEnumerator AnimationCoroutine()
     {
         float ball_start = Ball.ball.GetCollisionPosition().y;

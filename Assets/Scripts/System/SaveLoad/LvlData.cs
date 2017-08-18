@@ -16,8 +16,8 @@ public class LvlData : ScriptableObject
     public float speed;
     public float step_speed;
 
-    [Header("Coins")]
-    public int coins_reward;
+    //[Header("Coins")]
+    //public int coins_reward;
 
     [Header("Lines")]
 

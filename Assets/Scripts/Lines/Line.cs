@@ -51,7 +51,7 @@ public abstract class Line : MonoBehaviour
         //active = true;
         for (int i=0;i<mesh_resize.Length;i++)
         {
-            mesh_resize[i].scale();
+            //mesh_resize[i].scale();
         }
        ChangeColor();
     }

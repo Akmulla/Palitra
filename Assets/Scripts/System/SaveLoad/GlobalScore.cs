@@ -15,6 +15,10 @@ public class GlobalScore : MonoBehaviour
         {
             score = PlayerPrefs.GetInt("Score");
         }
+        else
+        {
+            PlayerPrefs.SetInt("Score", 0);
+        }
     }
 
     public int Score
