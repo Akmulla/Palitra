@@ -15,6 +15,8 @@ public class Line_Block : Line
     float x;
     Texture2D main_texture;
 
+    float rand_offset=0.0f;
+
     public override void InitLine()
     {
         left_dir = UnityEngine.Random.value > 0.5f ? true : false;
@@ -60,6 +62,7 @@ public class Line_Block : Line
     public override void Enable()
     {
         base.Enable();
+        rand_offset = UnityEngine.Random.Range(0.0f, 0.9f);
         //x = UnityEngine.Random.Range(0.0f, 0.9f);
     }
 
@@ -74,6 +77,7 @@ public class Line_Block : Line
         if (active)
         {
             x = left_dir ? Mathf.Repeat(Time.time * scrollSpeed, 1) : Mathf.Repeat(-Time.time * scrollSpeed, 1);
+            x += rand_offset;
             Vector2 offset = new Vector2(x, savedOffset.y);
             Vector2 offset_right = new Vector2(x + 0.5f, savedOffset.y);
 
