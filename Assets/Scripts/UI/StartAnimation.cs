@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class StartAnimation : MonoBehaviour
 {
-
     Animator anim;
     
-
     void Awake()
     {
         anim=GetComponent<Animator>();

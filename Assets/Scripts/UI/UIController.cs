@@ -9,7 +9,6 @@ public class UIController : MonoBehaviour
     public Text current_lvl;
     static bool is_paused;
     GraphicRaycaster raycaster;
-    //static float saved_time_scale=1.0f;
 
     public GameObject pause_menu;
     public GameObject skin_menu;
@@ -18,15 +17,10 @@ public class UIController : MonoBehaviour
     public GameObject round;
     public GameObject triangle_fon;
     public GameObject triangle;
-
-
-
     public GameObject gameover_text;
     public GameObject pause_text;
-
     public GameObject gameover_pic;
     public GameObject pause_pic;
-
     public GameObject gameui_bg;
 
     void Awake ()
@@ -36,11 +30,6 @@ public class UIController : MonoBehaviour
         raycaster = GetComponent<GraphicRaycaster>();
     }
 	
-    //public IEnumerator UpdateUICor()
-    //{
-    //    UpdateUI();
-    //    yield return new WaitForEndOfFrame();
-    //}
     public void UpdateUI()
     {
         switch(GameController.game_controller.GetState())
@@ -84,6 +73,7 @@ public class UIController : MonoBehaviour
                 gameui_bg.SetActive(false);
                 raycaster.enabled = false;
                 break;
+
             case GameState.Pause:
                 gameui_bg.SetActive(false);
                 raycaster.enabled = true;
@@ -118,32 +108,4 @@ public class UIController : MonoBehaviour
                 break;
         }
     }
-
-    //public void Game()
-    //{
-    //    SkinMenu.SetActive(false);
-    //    StartMenu.SetActive(false);
-    //    pause_menu.SetActive(false);
-    //    Game_UI.SetActive(true);
-
-    //    Time.timeScale = saved_time_scale;
-
-    //    is_paused = false;
-
-    //    if (GameController.game_controller.GetState()==GameState.GameOver)
-    //    {
-
-    //    }
-    //    //if (GameController.game_controller.gameIsOver)
-    //    //{
-    //    //   // SceneManager.LoadScene("New Main");
-    //    //}
-    //}
-
-    //public void OpenSkinMenu()
-    //{
-    //    //SceneManager.LoadScene("Main");
-    //    SkinMenu.SetActive(true);
-    //    StartMenu.SetActive(false);
-    //}
 }

@@ -17,5 +17,4 @@ public class DeathParticle : MonoBehaviour
         ParticleSystem.MainModule part2 = GetComponent<ParticleSystem>().main;
         part2.startColor = apply_color;
     }
-   
 }

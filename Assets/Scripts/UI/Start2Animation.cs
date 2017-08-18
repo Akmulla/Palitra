@@ -21,12 +21,10 @@ public class Start2Animation : MonoBehaviour
     void Reset()
     {
         anim.SetBool("animate", false);
-        //anim.
     }
 
     void OnEnable()
     {
-        
         StartCoroutine(Animate());
     }
 

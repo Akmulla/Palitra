@@ -11,7 +11,6 @@ public class Line_Order : Line
 
     public override void InitLine()
     {
-        
         block_manager = GetComponent<BlockManager_Order>();
         base.InitLine();
         line_spawn_number = SpawnWaves.spawn.GetLineSpawnedNumber();
@@ -27,11 +26,6 @@ public class Line_Order : Line
         finished = false;
         block_manager.SetDefault();
     }
-    void Start()
-    {
-        
-        
-    }
 
     protected override void CheckIfPassed()
     {
@@ -46,7 +40,6 @@ public class Line_Order : Line
             active = false;
             Ball.ball.LinePassed(Ball.ball.GetColor());
         }
-        
     }
 
     protected override void CheckIfCrossed()
@@ -67,11 +60,6 @@ public class Line_Order : Line
                 deceleration = GameController.game_controller.GetLvlData().combo_prop_5_parts.slowing;
                 break;
         }
-        //if ((active) && (GameController.game_controller.GetLinesPassedNumber() == line_spawn_number - 1) && (!crossed))
-        //{
-        //    BallMove.ball_move.SlowDown(deceleration);
-        //    crossed = true;
-        //}
         if ((active) && (Ball.ball.GetPosition().y > prev_edge) && (!crossed))
         {
             BallMove.ball_move.SlowDown(deceleration);
@@ -82,7 +70,6 @@ public class Line_Order : Line
 
     public override void ChangeColor()
     {
-        //StartCoroutine(block_manager.SetRandomColors());
         block_manager.InitBlocks();
     }
 }

@@ -17,7 +17,7 @@ public class Preload : MonoBehaviour
         sceneLoadTask = SceneManager.LoadSceneAsync("New Main");
         sceneLoadTask.allowSceneActivation = false;
         loadingProgress = 0.0f;
-        //progressBar.fillAmount = loadingProgress;
+        progressBar.fillAmount = loadingProgress;
         while (!start)
         {
             yield return null;
@@ -32,15 +32,8 @@ public class Preload : MonoBehaviour
         if ((!start)&&(sceneLoadTask.progress>0.89f))
         {
             start = true;
-            
-            //StartCoroutine(Cor());
         }
             
 
-    }
-    IEnumerator Cor()
-    {
-        yield return new WaitForSeconds(0.5f);
-        sceneLoadTask.allowSceneActivation = true;
     }
 }

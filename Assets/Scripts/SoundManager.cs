@@ -32,7 +32,6 @@ public class SoundManager : MonoBehaviour
 
     void Awake()
     {
-        
         sound_manager = this;
         source = GetComponent<AudioSource>();
         if (source.volume > 0.0f)
@@ -48,6 +47,7 @@ public class SoundManager : MonoBehaviour
     {
         source.volume = 0.0f;
     }
+
     public void SingleSound(SoundSample sound)
     {
         switch (sound)
@@ -75,6 +75,7 @@ public class SoundManager : MonoBehaviour
                 break;
         }
     }
+
     public void MainMenuTheme()
     {
         if (source.clip != main_menu)

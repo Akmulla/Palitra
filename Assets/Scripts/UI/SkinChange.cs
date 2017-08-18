@@ -74,11 +74,6 @@ public class SkinChange : MonoBehaviour
         UpdateText();
     }
 
-    void Start()
-    {
-        
-    }
-
     void OnEnable()
     {
         //print("fg");
@@ -98,8 +93,6 @@ public class SkinChange : MonoBehaviour
         }
         UpdateSkin();
         UpdateText();
-        //UpdateScore();
-
     }
 
     void UpdateSkin()
@@ -109,7 +102,6 @@ public class SkinChange : MonoBehaviour
             sectors[i].color = SkinManager.skin_manager.GetSkinByNumber(skin_number).colors[i];
         }
         BG.color = SkinManager.skin_manager.GetSkinByNumber(skin_number).bg_color;
-        //EventManager.TriggerEvent("SkinChanged");
     }
 
     void UpdateText()
@@ -119,23 +111,16 @@ public class SkinChange : MonoBehaviour
         score_text.text = GlobalScore.global_score.Score.ToString();
         if (CheckIfAvailable(skin_number))
         {
-            //set_skin_text.text = "Set";
             set_button.SetActive(true);
             buy_button.SetActive(false);
         }
         else
         {
-            //set_skin_text.text = "Buy";
             set_button.SetActive(false);
             buy_button.SetActive(true);
         }
     }
 
-    //void UpdateScore()
-    //{
-    //    score_text.text = GlobalScore.global_score.Score.ToString();
-    //}
-	
     bool CheckIfAvailable(int number)
     {
         if (PlayerPrefs.HasKey(SkinManager.skin_manager.GetSkinByNumber(number).name))

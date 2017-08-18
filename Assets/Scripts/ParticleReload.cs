@@ -37,30 +37,13 @@ public class ParticleReload : MonoBehaviour
         TurnOn();
     }
 
-
-    //void EndGame()
-    //{
-    //    TurnOff();
-    //}
-
-    //void BeginGame()
-    //{
-    //    if (!on)
-    //        TurnOn();
-    //}
-
     void OnEnable()
     {
         EventManager.StartListening("SkinChanged", SkinChanged);
-        //EventManager.StartListening("EndGame", EndGame);
-        //EventManager.StartListening("BeginGame", BeginGame);
     }
 
     void OnDisable()
     {
         EventManager.StopListening("SkinChanged", SkinChanged);
-        //EventManager.StopListening("BeginGame", BeginGame);
-        //EventManager.StopListening("EndGame", EndGame);
     }
-
 }

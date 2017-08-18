@@ -23,32 +23,37 @@ public class BallMove : MonoBehaviour
     {
         stop = true;
     }
+
     void Awake()
 	{
 		ball_move=this;
         rb = GetComponent<Rigidbody>();
 	}
+
     void Start()
     {
         tran = GetComponent<Transform>();
         pixel_size = (Edges.topEdge-Edges.botEdge)/Screen.height;
-        //StartCoroutine(MoveCor());
         next_pos = tran.position;
     }
+
     void BeginGame()
     {
         speed = GameController.game_controller.GetLvlData().speed;
         current_state = State.normal;
         stop = false;
     }
+
     void OnEnable()
     {
         EventManager.StartListening("BeginGame", BeginGame);
     }
+
     void OnDisable()
     {
         EventManager.StopListening("BeginGame", BeginGame);
     }
+
     public float Speed
     {
         get
@@ -57,57 +62,18 @@ public class BallMove : MonoBehaviour
         }
         set
         {
-            //print(value);
-            // Debug.Break();
-            //if (current_state==State.normal)
-            //    speed = Mathf.Clamp (value, GameController.game_controller.GetLvlData ().min_speed, GameController.game_controller.GetLvlData ().max_speed);
-            //else
-            //    speed = Mathf.Clamp(value, 0.1f, GameController.game_controller.GetLvlData().max_speed);
             speed = value;
         }
     }
+
     void Update()
     {
-        /*
-        if ((!stop) && (GameController.game_controller.GetState() == GameState.Game))
-            //rb.velocity = Vector2.up * speed;
-            movement = Vector3.up;
-        else
-            movement = Vector3.zero;
-            //rb.velocity = Vector2.zero;
-            */
-        //print(rb.velocity);
         if ((!stop) && (GameController.game_controller.GetState() == GameState.Game))
         {
             tran.position = tran.position +  Vector3.up * speed * Time.deltaTime;
         }
-            //tran.Translate(Vector2.up * speed * Time.deltaTime);
-
-        //tran.position = next_pos;
     }
 
-    IEnumerator MoveCor()
-    {
-        while(true)
-        {
-            //print(Time.time+" "+tran.position.y);
-            if ((!stop) && (GameController.game_controller.GetState() == GameState.Game))
-                //tran.position+=Vector3.up * pixel_size;
-                next_pos += Vector3.up * (pixel_size * 2);
-            yield return new WaitForSeconds(0.002f);
-        }
-    }
-    /*
-    void FixedUpdate()
-    {
-        //print(tran.position.y);
-    //    rb.velocity = movement*speed;
-        //tran.position = next_pos;
-        //if ((!stop) && (GameController.game_controller.GetState() == GameState.Game))
-        //    next_pos += Vector3.up * (pixel_size * speed);
-
-    }
-    */
     public void IncreaseSpeed(float acceleration)
     {
         if (current_state != State.normal)
@@ -155,11 +121,7 @@ public class BallMove : MonoBehaviour
     public void ResumeSpeed()
     {
         current_state = State.resuming;
-        //coroutine = SlowDownCoroutine(x);
-        //StartCoroutine(coroutine);
         Speed = saved_speed;
         current_state = State.normal;
     }
-
-
 }

@@ -9,7 +9,6 @@ public class GlobalScore : MonoBehaviour
 
     void Awake()
     {
-        //DontDestroyOnLoad(gameObject);
         global_score = this;
         if (PlayerPrefs.HasKey("Score"))
         {

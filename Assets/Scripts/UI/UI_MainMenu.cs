@@ -10,20 +10,9 @@ public class UI_MainMenu : MonoBehaviour
     public GameObject SkinMenu;
     public GameObject StartMenu;
 
-    //public Image BG;
-
     void Awake()
     {
         ui = this;
-    }
-
-    void OnEnable()
-    {
-
-    }
-    void OnDisable()
-    {
-
     }
 
     public void BeginGame()
@@ -37,9 +26,9 @@ public class UI_MainMenu : MonoBehaviour
         yield return new WaitForSeconds(3.0f);
         SceneManager.LoadScene("Main");
     }
+
     public void OpenSkinMenu()
     {
-        //SceneManager.LoadScene("Main");
         SkinMenu.SetActive(true);
         StartMenu.SetActive(false);
         
@@ -50,7 +39,6 @@ public class UI_MainMenu : MonoBehaviour
         SkinManager.skin_manager.LoadSavedSkin();
         SkinMenu.SetActive(false);
         StartMenu.SetActive(true);
-        //EventManager.TriggerEvent("SkinChanged");
     }
 
     void OnAwake()

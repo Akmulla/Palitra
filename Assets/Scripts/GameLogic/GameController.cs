@@ -27,10 +27,6 @@ public class GameController : MonoBehaviour
     bool reload_part = false;
     int lines_passed;
 
-    void Update()
-    {
-        
-    }
     public GameState GetState()
     {
         return game_state;
@@ -39,7 +35,6 @@ public class GameController : MonoBehaviour
     void ChangeState(GameState game_state)
     {
         this.game_state = game_state;
-        //UIController.ui.UpdateUI();
     }
 
     public int GetCurrentLvl()
@@ -65,19 +60,12 @@ public class GameController : MonoBehaviour
             {
                 reload_part = false;
             }
-
             StartCoroutine(BeginGameCoroutine());
-            
-            //InitLvl();
-            //StartCoroutine(InitLvlCor());
         }
     }
 
     IEnumerator BeginGameCoroutine()
     {
-        //prepare = false;
-        // StartCoroutine(InitLines());
-        // float t1 = Time.time;
         bool animate=false;
         if (game_state == GameState.MainMenu)
             animate = true;
@@ -90,23 +78,13 @@ public class GameController : MonoBehaviour
         if (animate)
         {
             EventManager.TriggerEvent("BeginGameAnimation");
-            //yield return new WaitForSeconds(3.0f);
         }
         yield return StartCoroutine(InitLvlCor());
-        
         
         while (!anim_status.finished)
         {
             yield return new WaitForEndOfFrame();
         }
-        //float t2 = Time.time;
-        //if (t2 - t1 < 3.0f)
-        //{
-        //    yield return new WaitForSeconds(3.0f - (t2 - t1));
-        //}
-
-
-        //print("begin");
         if (reload_part)
             particle.TurnOn();
         ChangeState(GameState.Game);
@@ -137,31 +115,21 @@ public class GameController : MonoBehaviour
         {
             for (int k=0;k<pools[i].size;k++)
             {
-                //pools[i].InitLine(k);
                 yield return StartCoroutine(pools[i].InitLineCor(k));
-                //print("pool="+i+" line="+k);
-                //yield return null;
             }
-            //pools[i].InitLines();
-            
-            
             yield return null;
         }
-        //prepare = false;
         yield return null;
     }
 
     void Awake()
     {
-        //TextureHandler.InitSize();
         Resources.UnloadUnusedAssets();
         pools = pools_obj.GetComponents<Pool>();
         game_state = GameState.MainMenu;
         
         game_controller = this;
         saved_time_scale = Time.timeScale;
-        
-        //EventManager.TriggerEvent("ChangeLvl");
     }
 
     void Start()
@@ -185,7 +153,6 @@ public class GameController : MonoBehaviour
         if (lines_passed >= GameController.game_controller.GetLvlData().total_line_count)
         {
             IncreaseLvl();
-            //EventManager.TriggerEvent("ChangeLvl");
         }
     }
 
@@ -195,7 +162,6 @@ public class GameController : MonoBehaviour
         if (lvl_number < lvl_data.Length)
         {
             print("текущий уровень" + lvl_number);
-            //InitLvl();
             StartCoroutine(InitLvlCor());
         }
         else
@@ -218,8 +184,6 @@ public class GameController : MonoBehaviour
         {
             sectors[i].InitSector(SkinManager.skin_manager.GetCurrentSkin().colors[i]);
         }
-
-
     }
 
     public void Pause()
@@ -263,7 +227,6 @@ public class GameController : MonoBehaviour
 
     public void GameOver()
     {
-        
         StartCoroutine(GameOverCoroutine());
     }
 
@@ -281,5 +244,4 @@ public class GameController : MonoBehaviour
             EventManager.TriggerEvent("EndGame");
         }
     }
-
 }

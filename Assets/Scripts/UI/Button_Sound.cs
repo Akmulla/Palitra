@@ -9,12 +9,6 @@ public class Button_Sound : MonoBehaviour
     public GameObject Off;
 
     bool on = true;
-
-    
-    void Start ()
-    {
-		
-	}
 	
     public void Click()
     {
@@ -23,6 +17,7 @@ public class Button_Sound : MonoBehaviour
         else
             TurnOn();
     }
+
 	void TurnOn()
     {
         on = true;

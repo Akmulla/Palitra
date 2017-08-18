@@ -9,7 +9,6 @@ public class SkinManager : MonoBehaviour
     SkinData[] skin_data;
     int totalSkinCount=1;
     int active_skin=0;
-    //int saved_skin=0;
 
     public int GetSkinNumber()
     {
@@ -21,10 +20,8 @@ public class SkinManager : MonoBehaviour
         if (new_skin_number!=active_skin)
         {
             active_skin = Mathf.Clamp(new_skin_number, 0, totalSkinCount);
-            // PlayerPrefs.SetInt("ActiveSkin", new_skin_number);
             EventManager.TriggerEvent("SkinChanged");
         }
-        
     }
 
     public void SaveActiveSkin()
@@ -43,14 +40,12 @@ public class SkinManager : MonoBehaviour
         {
             SetActiveSkin(PlayerPrefs.GetInt("SavedSkin"));
         }
-        
     }
 
     void Awake()
     {
         active_skin = 0;
         skin_manager = this;
-        //Object.DontDestroyOnLoad(gameObject);
         totalSkinCount = skin_data.Length;
         if (PlayerPrefs.HasKey("SavedSkin"))
         {
@@ -58,15 +53,8 @@ public class SkinManager : MonoBehaviour
         }
         else
         {
-            
             PlayerPrefs.SetInt("SavedSkin", active_skin);
         }
-        //PlayerPrefs.DeleteAll();
-
-        //if (PlayerPrefs.HasKey("ActiveSkin"))&&(PlayerPrefs.HasKey())
-        //{
-        //    SetActiveSkin(PlayerPrefs.GetInt("ActiveSkin"));
-        //}
     }
 
     public SkinData GetCurrentSkin()
@@ -78,7 +66,6 @@ public class SkinManager : MonoBehaviour
     {
         return skin_data[number];
     }
-
 }
 
 

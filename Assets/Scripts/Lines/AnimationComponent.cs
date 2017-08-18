@@ -53,7 +53,6 @@ public class AnimationComponent : MonoBehaviour
         //во время прохождения линии
          while ((current_mesh < mesh_data.meshes.Length - start_mesh - 1)&&
             (BallMove.ball_move.Speed > 4.0f))
-       // while (current_mesh < end_mesh-2)
         {
             float position = Ball.ball.GetCollisionPosition().y - ball_start;
             current_mesh = (int)(position / cell);
@@ -62,12 +61,10 @@ public class AnimationComponent : MonoBehaviour
         }
         current_mesh++;
         //после того как прошли линию
-        // while ((current_mesh < mesh_data.meshes.Length - start_mesh) && (current_mesh >= end_mesh))
         while (current_mesh < mesh_data.meshes.Length - start_mesh)
         {
             SetMesh(mesh_data.meshes[current_mesh + start_mesh]);
             current_mesh++;
-            //yield return new WaitForEndOfFrame();
             yield return new WaitForSeconds(0.05f);
         }
     }

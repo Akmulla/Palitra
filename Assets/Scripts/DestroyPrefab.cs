@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class DestroyPrefab : MonoBehaviour
 {
-
-	// Use this for initialization
 	void Start ()
     {
         StartCoroutine(Destroy());

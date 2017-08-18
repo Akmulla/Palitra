@@ -38,9 +38,4 @@ public class TextureCreator : MonoBehaviour
         //Texture2D new_tex = text.MemberwiseClone();
         return text;
     }
-
-    void Update ()
-    {
-		
-	}
 }

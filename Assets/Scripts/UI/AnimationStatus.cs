@@ -6,7 +6,6 @@ public class AnimationStatus : MonoBehaviour
 {
    public bool finished { get; set; }
 	
-
     void Awake()
     {
         finished = false;
@@ -21,5 +20,4 @@ public class AnimationStatus : MonoBehaviour
     {
         finished = false;
     }
-
 }

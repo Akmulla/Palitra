@@ -38,7 +38,6 @@ public class SpawnWaves : MonoBehaviour
 
         set
         {
-            //dist = Mathf.Clamp(value, GameController.game_controller.GetLvlData().min_dist, GameController.game_controller.GetLvlData().max_dist);
             dist = value;
         }
     }
@@ -90,7 +89,7 @@ public class SpawnWaves : MonoBehaviour
     {
         EventManager.StartListening("LinePassed", LinePassed);
         EventManager.StartListening("ChangeLvl", ChangeLvl);
-        EventManager.StartListening("BeginGame", BeginGame);
+        //EventManager.StartListening("BeginGame", BeginGame);
         EventManager.StartListening("EndGame", EndGame);
     }
 
@@ -98,7 +97,7 @@ public class SpawnWaves : MonoBehaviour
     { 
         EventManager.StopListening("LinePassed", LinePassed);
         EventManager.StopListening("ChangeLvl", ChangeLvl);
-        EventManager.StopListening("BeginGame", BeginGame);
+        //EventManager.StopListening("BeginGame", BeginGame);
         EventManager.StopListening("EndGame", EndGame);
     }
 
