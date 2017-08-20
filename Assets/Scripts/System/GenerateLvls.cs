@@ -30,11 +30,10 @@ public struct LvlParams
 
 public class GenerateLvls : MonoBehaviour
 {
+    public float avail_time = 30.0f;
     public string path = "Assets/LvlData/NewLvls";
     public LvlParams start_params;
     public LvlParams end_params;
-
-    float avail_time = 30.0f;
 
     void Start()
     {
