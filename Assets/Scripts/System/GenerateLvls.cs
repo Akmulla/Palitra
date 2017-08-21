@@ -31,48 +31,82 @@ public struct LvlParams
 
 public class GenerateLvls : MonoBehaviour
 {
+    public int cycles=1;
+    public float begin_calc_dist;
     public float avail_time = 30.0f;
     public string path = "Assets/LvlData/NewLvls";
-    public LvlParams start_params;
-    public LvlParams end_params;
+    public LvlParams top_params;
+    public LvlParams bot_params;
 
     void Start()
     {
 
         //int lvl_count = (int)((start_params.dist.x - end_params.dist.x) / 0.1f);
-        int lvl_count = (int)((start_params.default_dist - end_params.default_dist) / 0.1f);
+        //int lvl_count = (int)((start_params.default_dist - end_params.default_dist) / 0.1f);
+        //int lvl_count = (int)((start_params.default_dist - end_params.default_dist) / 0.1f);
 
-        // List<string> res=GetCombination(new List<int> { 1, 2, 3,4,5 });
+        
+        int cycles_passed=0;
+        bool down = true;
+        float cur_step = begin_calc_dist;
+        float t = Mathf.InverseLerp(top_params.default_dist, bot_params.default_dist,
+            begin_calc_dist);
+
+
+        int lvl_count = (int)((top_params.default_dist - bot_params.default_dist) / 0.1f)+
+            (int)((begin_calc_dist - bot_params.default_dist) / 0.1f)+
+            (int)((top_params.default_dist - bot_params.default_dist) / 0.1f)*2*(cycles-1);
+
         List<string> res = CalcCombinations(lvl_count);
-        //for (int i=0;i<res.Count;i++)
-        //{
-        //    print(res[i]);
-        //}
+        int lvl_numb = 0;
         LvlType lvl_type = LvlType.Speed_incr;
-        for (int lvl_number = 0; lvl_number <= lvl_count; lvl_number++)
+
+        while (cycles_passed<cycles)
         {
-            // LvlData lvl = new LvlData();
             LvlData lvl = ScriptableObject.CreateInstance<LvlData>();
             lvl.lvl_type = lvl_type;
-            float t = (float)lvl_number / (float)lvl_count;
-            CalcLineParams(lvl, t);
-            
-            //if (lvl_number<res.Count)
-            {
-                SetLineCount(lvl, res[lvl_number]);
-                CalcSteps(lvl,t,lvl_type);
-            }
-             
+            //float t = (float)lvl_count / (float)lvl_count;
 
-            AssetDatabase.CreateAsset(lvl, path + "/Lvl_" + lvl_number.ToString() + ".asset");
+            CalcLineParams(lvl, t);
+            SetLineCount(lvl, res[lvl_numb]);
+            CalcSteps(lvl, t, lvl_type);
+
+            AssetDatabase.CreateAsset(lvl, path + "/Lvl_" + lvl_numb.ToString() + ".asset");
 
             lvl_type++;
             if (lvl_type == LvlType.Count)
                 lvl_type = (LvlType)0;
-            
+
+            lvl_numb++;
+            AssetDatabase.SaveAssets();
+
+
+            if (down)
+            {
+                cur_step = -0.1f;
+            }
+            else
+            {
+                cur_step = 0.1f;
+            }
+
+            if (cur_step <= bot_params.default_dist)
+            {
+                down = false;
+            }
+
+            if (cur_step >= top_params.default_dist)
+            {
+                down = true;
+                cycles_passed++;
+            }
+
+            t += cur_step;
+            lvl_count++;
         }
 
-        AssetDatabase.SaveAssets();
+        
+        
     }
 
     void SetLineCount(LvlData lvl, string line_info)
@@ -257,50 +291,52 @@ public class GenerateLvls : MonoBehaviour
         {
             case LvlType.Speed_incr:
                 min_speed = lvl.speed;
-                max_speed = Mathf.Lerp(start_params.speed.y, end_params.speed.y, t);
+                max_speed = Mathf.Lerp(top_params.speed.y, bot_params.speed.y, t);
                 lvl.step_speed = Mathf.Abs(max_speed - min_speed) / lvl.total_line_count;
                 break;
+
             case LvlType.Dist_decr:
-                min_dist = Mathf.Lerp(start_params.dist.y, end_params.dist.y, t);
+                min_dist = Mathf.Lerp(top_params.dist.y, bot_params.dist.y, t);
                 max_dist = lvl.dist;
                 lvl.step_dist =  - Mathf.Abs(min_dist - max_dist) / lvl.total_line_count;
                 break;
+
             case LvlType.Speed_incr_dist_incr:
                 min_speed = lvl.speed;
-                max_speed = Mathf.Lerp(start_params.speed.y, end_params.speed.y, t);
+                max_speed = Mathf.Lerp(top_params.speed.y, bot_params.speed.y, t);
                 lvl.step_speed = Mathf.Abs(max_speed - min_speed) / lvl.total_line_count;
 
-                min_dist = Mathf.Lerp(start_params.dist.y, end_params.dist.y, t);
+                min_dist = Mathf.Lerp(top_params.dist.y, bot_params.dist.y, t);
                 max_dist = lvl.dist;
                 lvl.step_dist = Mathf.Abs(min_dist - max_dist) / lvl.total_line_count;
                 break;
 
             case LvlType.Speed_decr_dist_decr:
                 min_speed = lvl.speed;
-                max_speed = Mathf.Lerp(start_params.speed.y, end_params.speed.y, t);
+                max_speed = Mathf.Lerp(top_params.speed.y, bot_params.speed.y, t);
                 lvl.step_speed = -Mathf.Abs(max_speed - min_speed) / lvl.total_line_count;
 
-                min_dist = Mathf.Lerp(start_params.dist.y, end_params.dist.y, t);
+                min_dist = Mathf.Lerp(top_params.dist.y, bot_params.dist.y, t);
                 max_dist = lvl.dist;
                 lvl.step_dist = -Mathf.Abs(min_dist - max_dist) / lvl.total_line_count;
                 break;
 
             case LvlType.Speed_incr_dist_incr_half:
                 min_speed = lvl.speed;
-                max_speed = Mathf.Lerp(start_params.speed.y, end_params.speed.y, t);
+                max_speed = Mathf.Lerp(top_params.speed.y, bot_params.speed.y, t);
                 lvl.step_speed = Mathf.Abs(max_speed - min_speed) / (lvl.total_line_count/2);
 
-                min_dist = Mathf.Lerp(start_params.dist.y, end_params.dist.y, t);
+                min_dist = Mathf.Lerp(top_params.dist.y, bot_params.dist.y, t);
                 max_dist = lvl.dist;
                 lvl.step_dist = Mathf.Abs(min_dist - max_dist) / (lvl.total_line_count/2);
                 break;
 
             case LvlType.Speed_decr_dist_decr_half:
                 min_speed = lvl.speed;
-                max_speed = Mathf.Lerp(start_params.speed.y, end_params.speed.y, t);
+                max_speed = Mathf.Lerp(top_params.speed.y, bot_params.speed.y, t);
                 lvl.step_speed = -Mathf.Abs(max_speed - min_speed) / (lvl.total_line_count / 2);
 
-                min_dist = Mathf.Lerp(start_params.dist.y, end_params.dist.y, t);
+                min_dist = Mathf.Lerp(top_params.dist.y, bot_params.dist.y, t);
                 max_dist = lvl.dist;
                 lvl.step_dist = -Mathf.Abs(min_dist - max_dist) / (lvl.total_line_count / 2);
                 break;
@@ -315,34 +351,35 @@ public class GenerateLvls : MonoBehaviour
         switch (lvl.lvl_type)
         {
             case LvlType.Speed_incr:
-                lvl.speed = Mathf.Lerp(start_params.speed.x, end_params.speed.x, t);
+                lvl.speed = Mathf.Lerp(top_params.speed.x, bot_params.speed.x, t);
                 //lvl.dist = Mathf.Lerp(start_params.dist.x, end_params.dist.x, t);
-                lvl.dist = Mathf.Lerp(start_params.default_dist, end_params.default_dist, t);
+                lvl.dist = Mathf.Lerp(top_params.default_dist, 
+                    bot_params.default_dist, t);
                 break;
 
             case LvlType.Dist_decr:
-                lvl.speed = Mathf.Lerp(start_params.speed.x, end_params.speed.x, t);
-                lvl.dist = Mathf.Lerp(start_params.dist.y, end_params.dist.y, t);
+                lvl.speed = Mathf.Lerp(top_params.speed.x, bot_params.speed.x, t);
+                lvl.dist = Mathf.Lerp(top_params.dist.y, bot_params.dist.y, t);
                 break;
 
             case LvlType.Speed_incr_dist_incr:
-                lvl.speed = Mathf.Lerp(start_params.speed.x, end_params.speed.x, t);
-                lvl.dist = Mathf.Lerp(start_params.dist.x, end_params.dist.x, t);
+                lvl.speed = Mathf.Lerp(top_params.speed.x, bot_params.speed.x, t);
+                lvl.dist = Mathf.Lerp(top_params.dist.x, bot_params.dist.x, t);
                 break;
 
             case LvlType.Speed_decr_dist_decr:
-                lvl.speed = Mathf.Lerp(start_params.speed.y, end_params.speed.y, t);
-                lvl.dist = Mathf.Lerp(start_params.dist.y, end_params.dist.y, t);
+                lvl.speed = Mathf.Lerp(top_params.speed.y, bot_params.speed.y, t);
+                lvl.dist = Mathf.Lerp(top_params.dist.y, bot_params.dist.y, t);
                 break;
 
             case LvlType.Speed_incr_dist_incr_half:
-                lvl.speed = Mathf.Lerp(start_params.speed.x, end_params.speed.x, t);
-                lvl.dist = Mathf.Lerp(start_params.dist.x, end_params.dist.x, t);
+                lvl.speed = Mathf.Lerp(top_params.speed.x, bot_params.speed.x, t);
+                lvl.dist = Mathf.Lerp(top_params.dist.x, bot_params.dist.x, t);
                 break;
 
             case LvlType.Speed_decr_dist_decr_half:
-                lvl.speed = Mathf.Lerp(start_params.speed.y, end_params.speed.y, t);
-                lvl.dist = Mathf.Lerp(start_params.dist.y, end_params.dist.y, t);
+                lvl.speed = Mathf.Lerp(top_params.speed.y, bot_params.speed.y, t);
+                lvl.dist = Mathf.Lerp(top_params.dist.y, bot_params.dist.y, t);
                 break;
 
         }
@@ -354,33 +391,33 @@ public class GenerateLvls : MonoBehaviour
         
 
         lvl.switch_prop = new SwitchProp();
-        lvl.switch_prop.dist = Mathf.Lerp(start_params.chng_clr_dist.x, end_params.chng_clr_dist.x, t);
-        lvl.switch_prop.time_to_change = Mathf.Lerp(start_params.chng_clr_time.x, end_params.chng_clr_time.x, t);
+        lvl.switch_prop.dist = Mathf.Lerp(top_params.chng_clr_dist.x, bot_params.chng_clr_dist.x, t);
+        lvl.switch_prop.time_to_change = Mathf.Lerp(top_params.chng_clr_time.x, bot_params.chng_clr_time.x, t);
 
         lvl.block_prop = new BlockProp();
-        lvl.block_prop.speed = Mathf.Lerp(start_params.block_speed.x, end_params.block_speed.x, t);
-        lvl.block_prop.block_count = (int)Mathf.Lerp(start_params.block_count.x, end_params.block_count.x, t);
+        lvl.block_prop.speed = Mathf.Lerp(top_params.block_speed.x, bot_params.block_speed.x, t);
+        lvl.block_prop.block_count = (int)Mathf.Lerp(top_params.block_count.x, bot_params.block_count.x, t);
 
         lvl.multiple_prop_1_part = new MultipleProp();
-        lvl.multiple_prop_1_part.min_taps = (int)Mathf.Lerp(start_params.tap_amount_1.x, end_params.tap_amount_1.x, t);
-        lvl.multiple_prop_1_part.slowing = Mathf.Lerp(start_params.tap_slow_1.x, end_params.tap_slow_1.x, t);
+        lvl.multiple_prop_1_part.min_taps = (int)Mathf.Lerp(top_params.tap_amount_1.x, bot_params.tap_amount_1.x, t);
+        lvl.multiple_prop_1_part.slowing = Mathf.Lerp(top_params.tap_slow_1.x, bot_params.tap_slow_1.x, t);
 
         lvl.multiple_prop_2_parts = new MultipleProp();
-        lvl.multiple_prop_2_parts.min_taps = (int)Mathf.Lerp(start_params.tap_amount_2.x, end_params.tap_amount_2.x, t);
-        lvl.multiple_prop_2_parts.slowing = Mathf.Lerp(start_params.tap_slow_2.x, end_params.tap_slow_2.x, t);
+        lvl.multiple_prop_2_parts.min_taps = (int)Mathf.Lerp(top_params.tap_amount_2.x, bot_params.tap_amount_2.x, t);
+        lvl.multiple_prop_2_parts.slowing = Mathf.Lerp(top_params.tap_slow_2.x, bot_params.tap_slow_2.x, t);
 
         lvl.multiple_prop_3_parts = new MultipleProp();
-        lvl.multiple_prop_3_parts.min_taps = (int)Mathf.Lerp(start_params.tap_amount_3.x, end_params.tap_amount_3.x, t);
-        lvl.multiple_prop_3_parts.slowing = Mathf.Lerp(start_params.tap_slow_3.x, end_params.tap_slow_3.x, t);
+        lvl.multiple_prop_3_parts.min_taps = (int)Mathf.Lerp(top_params.tap_amount_3.x, bot_params.tap_amount_3.x, t);
+        lvl.multiple_prop_3_parts.slowing = Mathf.Lerp(top_params.tap_slow_3.x, bot_params.tap_slow_3.x, t);
 
         lvl.combo_prop_3_parts = new ComboProp();
-        lvl.combo_prop_3_parts.slowing= Mathf.Lerp(start_params.combo_slow_3.x, end_params.combo_slow_3.x, t);
+        lvl.combo_prop_3_parts.slowing= Mathf.Lerp(top_params.combo_slow_3.x, bot_params.combo_slow_3.x, t);
 
         lvl.combo_prop_4_parts = new ComboProp();
-        lvl.combo_prop_4_parts.slowing = Mathf.Lerp(start_params.combo_slow_4.x, end_params.combo_slow_4.x, t);
+        lvl.combo_prop_4_parts.slowing = Mathf.Lerp(top_params.combo_slow_4.x, bot_params.combo_slow_4.x, t);
 
         lvl.combo_prop_5_parts = new ComboProp();
-        lvl.combo_prop_5_parts.slowing = Mathf.Lerp(start_params.combo_slow_5.x, end_params.combo_slow_5.x, t);
+        lvl.combo_prop_5_parts.slowing = Mathf.Lerp(top_params.combo_slow_5.x, bot_params.combo_slow_5.x, t);
     }
 }
 
