@@ -57,7 +57,11 @@ public class GenerateLvls : MonoBehaviour
             (int)((begin_calc_dist - bot_params.default_dist) / 0.1f)+
             (int)((top_params.default_dist - bot_params.default_dist) / 0.1f)*2*(cycles-1);
 
+       
+
         List<string> res = CalcCombinations(lvl_count);
+        //print(lvl_count);
+        //print(lvl_count);
         int lvl_numb = 0;
         LvlType lvl_type = LvlType.Speed_incr;
 
@@ -77,32 +81,32 @@ public class GenerateLvls : MonoBehaviour
             if (lvl_type == LvlType.Count)
                 lvl_type = (LvlType)0;
 
-            lvl_numb++;
             AssetDatabase.SaveAssets();
 
 
             if (down)
             {
-                cur_step = -0.1f;
+                cur_step -= 0.1f;
             }
             else
             {
-                cur_step = 0.1f;
+                cur_step += 0.1f;
             }
 
-            if (cur_step <= bot_params.default_dist)
+            if (cur_step <= bot_params.default_dist+0.05f)
             {
                 down = false;
             }
 
-            if (cur_step >= top_params.default_dist)
+            if (cur_step >= top_params.default_dist-0.05f)
             {
                 down = true;
                 cycles_passed++;
             }
 
-            t += cur_step;
-            lvl_count++;
+            t=Mathf.InverseLerp(top_params.default_dist, bot_params.default_dist,
+             cur_step);
+            lvl_numb++;
         }
 
         
