@@ -11,6 +11,7 @@ using System.Linq;
 [System.Serializable]
 public struct LvlParams
 {
+    public float default_dist;
     public Vector2 dist;
     public Vector2 speed;
     public Vector2 chng_clr_dist;
@@ -38,7 +39,8 @@ public class GenerateLvls : MonoBehaviour
     void Start()
     {
 
-        int lvl_count = (int)((start_params.dist.x - end_params.dist.x) / 0.1f);
+        //int lvl_count = (int)((start_params.dist.x - end_params.dist.x) / 0.1f);
+        int lvl_count = (int)((start_params.default_dist - end_params.default_dist) / 0.1f);
 
         // List<string> res=GetCombination(new List<int> { 1, 2, 3,4,5 });
         List<string> res = CalcCombinations(lvl_count);
@@ -314,7 +316,8 @@ public class GenerateLvls : MonoBehaviour
         {
             case LvlType.Speed_incr:
                 lvl.speed = Mathf.Lerp(start_params.speed.x, end_params.speed.x, t);
-                lvl.dist = Mathf.Lerp(start_params.dist.x, end_params.dist.x, t);
+                //lvl.dist = Mathf.Lerp(start_params.dist.x, end_params.dist.x, t);
+                lvl.dist = Mathf.Lerp(start_params.default_dist, end_params.default_dist, t);
                 break;
 
             case LvlType.Dist_decr:
