@@ -42,6 +42,11 @@ public class GameController : MonoBehaviour
         return lvl_number;
     }
 
+    public void SetCurrentLvl(int lvl)
+    {
+        lvl_number=lvl;
+    }
+
     public int GetLinesPassedNumber()
     {
         return lines_passed;
@@ -51,7 +56,8 @@ public class GameController : MonoBehaviour
     {
         if ((game_state==GameState.MainMenu)||(game_state == GameState.GameOver))
         {
-            lvl_number = 0;
+            //lvl_number = 0;
+            SaveLoadGame.save_load.LoadProgress();
             if (game_state == GameState.GameOver)
             {
                 reload_part = true;
@@ -135,6 +141,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
         UIController.ui.UpdateUI();
+        SaveLoadGame.save_load.LoadProgress();
     }
 
     void OnEnable()
@@ -159,14 +166,15 @@ public class GameController : MonoBehaviour
     void IncreaseLvl()
     {
         lvl_number++;
+        SaveLoadGame.save_load.SaveProgress(lvl_number);
         if (lvl_number < lvl_data.Length)
         {
-            print("текущий уровень" + lvl_number);
+            //print("текущий уровень" + lvl_number);
             StartCoroutine(InitLvlCor());
         }
         else
         {
-            print("конец игры");
+            //print("конец игры");
         }
     }
 

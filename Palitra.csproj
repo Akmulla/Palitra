@@ -129,6 +129,7 @@
     <Compile Include="Assets\Scripts\System\RandomizeMas.cs" />
     <Compile Include="Assets\Scripts\System\SaveLoad\GlobalScore.cs" />
     <Compile Include="Assets\Scripts\System\SaveLoad\LvlData.cs" />
+    <Compile Include="Assets\Scripts\System\SaveLoad\SaveLoadGame.cs" />
     <Compile Include="Assets\Scripts\System\SaveLoad\SkinData.cs" />
     <Compile Include="Assets\Scripts\UI\AnimationStatus.cs" />
     <Compile Include="Assets\Scripts\UI\Button_SkinMenu.cs" />

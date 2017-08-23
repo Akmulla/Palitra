@@ -26,7 +26,7 @@ public class Score : MonoBehaviour
 
     void LvlChanged()
     {
-        print(GameController.game_controller.GetCurrentLvl());
+        //print(GameController.game_controller.GetCurrentLvl());
         if (GameController.game_controller.GetCurrentLvl()!=0)
         {
             GlobalScore.global_score.Score += 10;
