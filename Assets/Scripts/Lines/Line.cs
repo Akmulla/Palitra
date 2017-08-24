@@ -12,7 +12,7 @@ public abstract class Line : MonoBehaviour
     MeshRenderer[] mesh_rend;
     [HideInInspector]
     public TextureHandler texture_handler;
-    MeshResize[] mesh_resize;
+    protected MeshResize[] mesh_resize;
 
     protected virtual void Update()
     {
@@ -50,7 +50,7 @@ public abstract class Line : MonoBehaviour
 
     public virtual void InitLine()
     {
-        //active = true;
+        active = true;
         for (int i=0;i<mesh_resize.Length;i++)
         {
             mesh_resize[i].scale();

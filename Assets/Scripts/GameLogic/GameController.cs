@@ -72,6 +72,7 @@ public class GameController : MonoBehaviour
 
     IEnumerator BeginGameCoroutine()
     {
+        Line_Switch.InitText();
         bool animate=false;
         if (game_state == GameState.MainMenu)
             animate = true;

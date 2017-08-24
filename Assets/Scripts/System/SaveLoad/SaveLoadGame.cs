@@ -23,6 +23,9 @@ public class SaveLoadGame : MonoBehaviour
             PlayerPrefs.SetInt("Progress", 0);
             PlayerPrefs.Save();
         }
+        ////
+        //ResetProgress();
+        ////
     }
 
     public void LoadProgress()
@@ -38,6 +41,8 @@ public class SaveLoadGame : MonoBehaviour
 
     public void ResetProgress()
     {
-
+        PlayerPrefs.SetInt("Progress", 0);
+        PlayerPrefs.Save();
+        GameController.game_controller.SetCurrentLvl(PlayerPrefs.GetInt("Progress"));
     }
 }

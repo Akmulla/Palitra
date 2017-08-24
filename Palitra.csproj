@@ -149,6 +149,7 @@
     <Compile Include="Assets\Scripts\UI\Touchable.cs" />
     <Compile Include="Assets\Scripts\UI\UIController.cs" />
     <Compile Include="Assets\Scripts\UI\UI_MainMenu.cs" />
+    <Compile Include="Assets\SwitchTextHolder.cs" />
     <Compile Include="Assets\test\SetMeshes.cs" />
   </ItemGroup>
   <ItemGroup>
