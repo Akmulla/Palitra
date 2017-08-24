@@ -52,7 +52,7 @@ public class AnimationComponent : MonoBehaviour
 
         //во время прохождения линии
          while ((current_mesh < mesh_data.meshes.Length - start_mesh - 1)&&
-            (BallMove.ball_move.Speed > 4.0f))
+            (BallMove.ball_move.Speed > 3.5f))
         {
             float position = Ball.ball.GetCollisionPosition().y - ball_start;
             current_mesh = (int)(position / cell);
