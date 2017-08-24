@@ -7,7 +7,7 @@ public class BallMove : MonoBehaviour
     public enum State { normal,slowed,resuming};
     State current_state=State.normal;
     Transform tran;
-    float speed=1.0f;
+   public float speed=1.0f;
     float saved_speed=1.0f;
     float x = 0.2f;
     private IEnumerator coroutine;

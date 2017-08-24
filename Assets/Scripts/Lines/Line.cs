@@ -18,21 +18,23 @@ public abstract class Line : MonoBehaviour
     {
         CheckIfCrossed();
     }
+
     public Transform GetTransform()
     {
         return tran;
     }
+
     public float GetHeight()
     {
         return height;
     }
+
     protected virtual void CheckIfCrossed()
     {
         if ((active) && (tran.position.y - height <= Ball.ball.GetCollisionPosition().y))
         {
             active = false;
             CheckIfPassed();
-           
         }
     }
 
@@ -51,9 +53,9 @@ public abstract class Line : MonoBehaviour
         //active = true;
         for (int i=0;i<mesh_resize.Length;i++)
         {
-            //mesh_resize[i].scale();
+            mesh_resize[i].scale();
         }
-       ChangeColor();
+        ChangeColor();
     }
 
 

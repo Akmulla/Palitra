@@ -36,10 +36,11 @@ public class SkinManager : MonoBehaviour
 
     public void LoadSavedSkin()
     {
-        if (PlayerPrefs.HasKey("SavedSkin"))
+        if (!PlayerPrefs.HasKey("SavedSkin"))
         {
-            SetActiveSkin(PlayerPrefs.GetInt("SavedSkin"));
+            PlayerPrefs.SetInt("SavedSkin", active_skin);
         }
+        SetActiveSkin(PlayerPrefs.GetInt("SavedSkin"));
     }
 
     void Awake()

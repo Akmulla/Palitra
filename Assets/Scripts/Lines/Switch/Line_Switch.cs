@@ -37,10 +37,11 @@ public class Line_Switch : Line
 
     public override void InitLine()
     {
+        base.InitLine();
         active = true;
         //saved_dist = SpawnWaves.spawn.dist;
         dist = GameController.game_controller.GetLvlData().switch_prop.dist;
-        ChangeColor();
+        //ChangeColor();
        // StartCoroutine(SwitchColor());
     }
 
@@ -61,6 +62,7 @@ public class Line_Switch : Line
         StopAllCoroutines();
         StartCoroutine(SwitchColor());
     }
+
     IEnumerator SwitchColor()
     {
         //print("dfh");
@@ -77,7 +79,6 @@ public class Line_Switch : Line
             }
             yield return new WaitForSeconds(GameController.game_controller.GetLvlData().switch_prop.time_to_change);
         }
-        
     }
 
 }

@@ -4,6 +4,7 @@ using System;
 
 public class Line_Block : Line
 {
+    public Color col;
     int mistake = 2;
     int block_count = 5;
     float scrollSpeed = 0.5f;
@@ -82,13 +83,13 @@ public class Line_Block : Line
             right_rend.materials[1].SetTextureOffset("_MainTex", offset);
         }
         ////////
-        //int coord_x = (int)(main_texture.width / 2.0f + main_texture.width * x);
+        int coord_x = (int)(main_texture.width / 2.0f + main_texture.width * x);
         //List<Color> colors = new List<Color>();
         //for (int i = -mistake; i <= mistake; i++)
         //{
         //    colors.Add(main_texture.GetPixel(coord_x + i, (int)(main_texture.height / 2.0f)));
         //}
-        //col=(main_texture.GetPixel(coord_x , (int)(main_texture.height / 2.0f)));
+        col = (main_texture.GetPixel(coord_x, (int)(main_texture.height / 2.0f)));
         ///////////
     }
 }

@@ -51,6 +51,11 @@ public class Ball : MonoBehaviour
         SetColor(SkinManager.skin_manager.GetCurrentSkin().colors[0],true);
     }
 
+    void Update()
+    {
+        //print(Camera.main.ScreenToWorldPoint(transform.position));
+    }
+
 	public void SetColor(Color color,bool tap)
     {
         if ((color!= ball_color)||(tap))
@@ -103,7 +108,8 @@ public class Ball : MonoBehaviour
 
         foreach (Color item in line_color)
         {
-            if (item ==ball_color)
+            // if (item ==ball_color)
+            if (((Vector4)item - (Vector4)ball_color).magnitude<1.0f)
             {
                 passed = true;
                 break;
