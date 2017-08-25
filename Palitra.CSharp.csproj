@@ -16,7 +16,7 @@
     <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>Android:13</UnityBuildTarget>
-    <UnityVersion>5.6.2f1</UnityVersion>
+    <UnityVersion>5.6.2p4</UnityVersion>
     <RootNamespace></RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
@@ -76,8 +76,15 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Common">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\LvlInfo.cs" />
     <Compile Include="Assets\Scripts\Ball\Ball.cs" />
     <Compile Include="Assets\Scripts\Ball\BallMove.cs" />
     <Compile Include="Assets\Scripts\CameraSetDefault.cs" />
@@ -129,6 +136,7 @@
     <Compile Include="Assets\Scripts\System\RandomizeMas.cs" />
     <Compile Include="Assets\Scripts\System\SaveLoad\GlobalScore.cs" />
     <Compile Include="Assets\Scripts\System\SaveLoad\LvlData.cs" />
+    <Compile Include="Assets\Scripts\System\SaveLoad\SaveLoadGame.cs" />
     <Compile Include="Assets\Scripts\System\SaveLoad\SkinData.cs" />
     <Compile Include="Assets\Scripts\UI\AnimationStatus.cs" />
     <Compile Include="Assets\Scripts\UI\Button_SkinMenu.cs" />
@@ -148,6 +156,7 @@
     <Compile Include="Assets\Scripts\UI\Touchable.cs" />
     <Compile Include="Assets\Scripts\UI\UIController.cs" />
     <Compile Include="Assets\Scripts\UI\UI_MainMenu.cs" />
+    <Compile Include="Assets\SwitchTextHolder.cs" />
     <Compile Include="Assets\test\SetMeshes.cs" />
   </ItemGroup>
   <ItemGroup>
