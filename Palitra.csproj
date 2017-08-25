@@ -78,6 +78,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\LvlInfo.cs" />
     <Compile Include="Assets\Scripts\Ball\Ball.cs" />
     <Compile Include="Assets\Scripts\Ball\BallMove.cs" />
     <Compile Include="Assets\Scripts\CameraSetDefault.cs" />
