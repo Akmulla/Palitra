@@ -120,6 +120,7 @@ public class Line_Switch : Line
         //yield return new WaitForSeconds(0.2f);
         while (gameObject.activeSelf)
         {
+            yield return new WaitForSeconds(GameController.game_controller.GetLvlData().switch_prop.time_to_change);
             //print((active) && (tran.position.y - height - Ball.ball.GetPosition().y > dist));
             //if ((active) && (tran.position.y - height - Ball.ball.GetPosition().y > saved_dist))
             if ((active) && (tran.position.y - height - Ball.ball.GetPosition().y > dist))
@@ -131,7 +132,7 @@ public class Line_Switch : Line
                 //change = true;
             }
            // else change = false;
-            yield return new WaitForSeconds(GameController.game_controller.GetLvlData().switch_prop.time_to_change);
+            
         }
     }
 
