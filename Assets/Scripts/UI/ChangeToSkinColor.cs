@@ -59,7 +59,13 @@ public class ChangeToSkinColor : MonoBehaviour
             text.color = apply_color;
         }
 
-        
+        Camera cam = GetComponent<Camera>();
+        if (cam!=null)
+        {
+            cam.backgroundColor = apply_color;
+        }
+
+
         if (color == SkinColors.Particle)
         {
             ParticleSystem.ColorOverLifetimeModule part = GetComponent<ParticleSystem>().colorOverLifetime;
