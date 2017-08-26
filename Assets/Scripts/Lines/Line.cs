@@ -69,10 +69,6 @@ public abstract class Line : MonoBehaviour
 
     public void SetTexture(Texture2D texture)
     {
-        //left.GetComponent<MeshRenderer>().materials[1].mainTexture = texture;
-        //right.GetComponent<MeshRenderer>().materials[1].mainTexture = texture;
-        //left.GetComponent<MeshRenderer>().materials[0].mainTexture = texture;
-        //right.GetComponent<MeshRenderer>().materials[0].mainTexture = texture;
         mesh_rend[0].materials[0].mainTexture = texture;
         mesh_rend[0].materials[1].mainTexture = texture;
         mesh_rend[1].materials[0].mainTexture = texture;
@@ -96,8 +92,7 @@ public abstract class Line : MonoBehaviour
     {
         active = true;
     }
-
-
+    
     public bool CheckIfActive()
     {
         return active;

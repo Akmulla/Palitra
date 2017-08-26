@@ -10,31 +10,7 @@ public class Line_Default : Line
 
     public override void ChangeColor()
     {
-        //Color[] colors = SkinManager.skin_manager.GetCurrentSkin().colors;
-        // Color new_color=colors[UnityEngine.Random.Range(0, colors.Length)];
-        //if (new_color==prev_color)
-        //{
-        //    same_colors++;
-        //}
-        //if (same_colors>2)
-        //{
-        //    Color[] avail_col = new Color[colors.Length - 1];
-        //    int k = 0;
-        //    for (int i=0;i<colors.Length;i++)
-        //    {
-        //        if (colors[i]!= new_color)
-        //        {
-        //            avail_col[k] = colors[i];
-        //            k++;
-        //        }
-        //    }
-        //    new_color = avail_col[UnityEngine.Random.Range(0, avail_col.Length)];
-        //    same_colors = 1;
-        //}
-        //Texture2D texture = texture_handler.CreateTexture(new_color);
-        //SetTexture(texture);
-        //line_color = new_color;
-        //prev_color = line_color;
+
     }
 
     public void InitLine(Color color)
@@ -50,16 +26,9 @@ public class Line_Default : Line
         line_color = new_color;
     }
 
-    public override void InitLine()
-    {
-        //active = true;
-        //ChangeColor();
-    }
-
     public override void Enable()
     {
         base.Enable();
-        
     }
 
     protected override void CheckIfPassed()

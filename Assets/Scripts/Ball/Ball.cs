@@ -51,11 +51,6 @@ public class Ball : MonoBehaviour
         SetColor(SkinManager.skin_manager.GetCurrentSkin().colors[0],true);
     }
 
-    void Update()
-    {
-        //print(Camera.main.ScreenToWorldPoint(transform.position));
-    }
-
 	public void SetColor(Color color,bool tap)
     {
         if ((color!= ball_color)||(tap))
@@ -72,13 +67,14 @@ public class Ball : MonoBehaviour
         image.enabled = true;
     }
 
-    public void EnableImage()
-    {
-        image.enabled = true;
-    }
     void OnDisable()
     {
         EventManager.StopListening("ChangeLvl", ChangeLvl);
+    }
+
+    public void EnableImage()
+    {
+        image.enabled = true;
     }
 
     public void LinePassed(Color line_color)
@@ -90,12 +86,9 @@ public class Ball : MonoBehaviour
         }
         else
         {
-            {
-                GameController.game_controller.GameOver();
-            }
+           GameController.game_controller.GameOver();
         }
         EventManager.TriggerEvent("LinePassed");
-        
     }
 
     public int GetLinesCheckedNumber()
@@ -105,11 +98,10 @@ public class Ball : MonoBehaviour
 
     public void LinePassed(List<Color> line_color,bool invert)
     {
-        bool passed=false;
+        bool passed = false;
 
         foreach (Color item in line_color)
         {
-            // if (item ==ball_color)
             if (((Vector4)item - (Vector4)ball_color).magnitude<1.0f)
             {
                 passed = true;
@@ -136,11 +128,8 @@ public class Ball : MonoBehaviour
         }
         else
         {
-            {
-                GameController.game_controller.GameOver();
-            }
+            GameController.game_controller.GameOver();
         }
-        
     }
 
     void ChangeLvl()

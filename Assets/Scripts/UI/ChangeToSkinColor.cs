@@ -38,9 +38,7 @@ public class ChangeToSkinColor : MonoBehaviour
                 apply_color = SkinManager.skin_manager.GetCurrentSkin().colors[(int)color];
             }
         }
-         
-        
-        
+
         Image image = GetComponent<Image>();
         if (image!=null)
         {
@@ -64,8 +62,7 @@ public class ChangeToSkinColor : MonoBehaviour
         {
             cam.backgroundColor = apply_color;
         }
-
-
+        
         if (color == SkinColors.Particle)
         {
             ParticleSystem.ColorOverLifetimeModule part = GetComponent<ParticleSystem>().colorOverLifetime;
