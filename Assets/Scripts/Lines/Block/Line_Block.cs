@@ -4,7 +4,6 @@ using System;
 
 public class Line_Block : Line
 {
-   // public Color col;
     int mistake = 2;
     int block_count = 5;
     float scrollSpeed = 0.5f;
@@ -51,7 +50,7 @@ public class Line_Block : Line
     {
         Color[] colors = SkinManager.skin_manager.GetCurrentSkin().colors;
         Color[] col;
-        main_texture= texture_handler.CreateTexture(colors, block_count,0.0f,out col);
+        main_texture = texture_handler.CreateTexture(colors, block_count,0.0f,out col);
         SetTexture(main_texture);
     }
 
@@ -61,11 +60,6 @@ public class Line_Block : Line
         rand_offset = UnityEngine.Random.Range(0.0f, 0.9f);
     }
 
-    protected override void CheckIfCrossed()
-    {
-        base.CheckIfCrossed();
-        
-    }
     protected override void Update()
     {
         base.Update();
@@ -82,15 +76,6 @@ public class Line_Block : Line
             right_rend.materials[0].SetTextureOffset("_MainTex", offset);
             right_rend.materials[1].SetTextureOffset("_MainTex", offset);
         }
-        ////////
-        //int coord_x = (int)(main_texture.width / 2.0f + main_texture.width * x);
-        //List<Color> colors = new List<Color>();
-        //for (int i = -mistake; i <= mistake; i++)
-        //{
-        //    colors.Add(main_texture.GetPixel(coord_x + i, (int)(main_texture.height / 2.0f)));
-        //}
-        //col = (main_texture.GetPixel(coord_x, (int)(main_texture.height / 2.0f)));
-        ///////////
     }
 }
 

@@ -10,6 +10,7 @@ public class DestroyOnReload : MonoBehaviour
     {
         pool = GetComponent<PoolRef>().GetPool();
     }
+
     void ToPool()
     {
         pool.Deactivate(gameObject);

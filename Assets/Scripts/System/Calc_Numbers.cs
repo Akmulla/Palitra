@@ -8,12 +8,9 @@ public class Calc_Numbers : MonoBehaviour
     Line line;
     public Transform tran_0;
     public Transform tran_1;
-    //Sprite[] number_pic;
 
 	void Awake ()
     {
-        //sprite_rend = GetComponent<SpriteRenderer>();
-        //number = 0;
         line = transform.parent.GetComponentInParent<Line>();
         tran_0 = sprite_rend[0].transform;
         tran_1 = sprite_rend[1].transform;

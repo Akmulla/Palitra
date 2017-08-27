@@ -7,17 +7,11 @@ public class BallMove : MonoBehaviour
     public enum State { normal,slowed,resuming};
     State current_state=State.normal;
     Transform tran;
-   public float speed=1.0f;
+    float speed=1.0f;
     float saved_speed=1.0f;
     float x = 0.2f;
     private IEnumerator coroutine;
     bool stop = false;
-
-    Vector3 next_pos=Vector3.zero;
-    float pixel_size;
-
-    Rigidbody rb;
-    Vector3 movement = Vector3.zero;
 
     public void Stop()
     {
@@ -27,14 +21,8 @@ public class BallMove : MonoBehaviour
     void Awake()
 	{
 		ball_move=this;
-        rb = GetComponent<Rigidbody>();
-	}
-
-    void Start()
-    {
         tran = GetComponent<Transform>();
-        pixel_size = (Edges.topEdge-Edges.botEdge)/Screen.height;
-        next_pos = tran.position;
+        stop = false;
     }
 
     void BeginGame()

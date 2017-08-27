@@ -1,11 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System;
 
 public class Line_Default : Line
 {
     Color line_color;
-    public static Color prev_color=Color.black;
+    public static Color prev_color=Color.clear;
     public static int same_colors = 1;
 
     public override void ChangeColor()
@@ -24,11 +22,6 @@ public class Line_Default : Line
         Texture2D texture = texture_handler.CreateTexture(new_color);
         SetTexture(texture);
         line_color = new_color;
-    }
-
-    public override void Enable()
-    {
-        base.Enable();
     }
 
     protected override void CheckIfPassed()

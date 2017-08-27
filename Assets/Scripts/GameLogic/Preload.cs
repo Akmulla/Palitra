@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -8,7 +6,7 @@ public class Preload : MonoBehaviour
 {
     AsyncOperation sceneLoadTask;
     public Image progressBar;
-    float loadingProgress=0.0f;
+    float loadingProgress = 0.0f;
 
     void Start ()
     {

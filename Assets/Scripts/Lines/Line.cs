@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public abstract class Line : MonoBehaviour
 {
@@ -77,7 +76,7 @@ public abstract class Line : MonoBehaviour
 
     protected virtual void OnEnable()
     {
-        
+        //нужно для переопределения
     }
 
     public abstract void ChangeColor();

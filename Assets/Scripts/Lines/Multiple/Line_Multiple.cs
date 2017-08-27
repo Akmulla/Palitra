@@ -14,10 +14,8 @@ public class Line_Multiple : Line
         block_manager = GetComponent<Multiple_BlockManager>();
         line_spawn_number = SpawnWaves.spawn.GetLineSpawnedNumber();
         crossed = false;
-        //prev_edge = SpawnWaves.spawn.prev_edge;
         finished = false;
         base.InitLine();
-        //block_manager.InitBlocks();
     }
 
 	protected override void CheckIfCrossed ()
@@ -44,6 +42,7 @@ public class Line_Multiple : Line
             crossed = true;
         }
     }
+
     protected override void CheckIfPassed()
     {
         if (!finished)
