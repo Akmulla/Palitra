@@ -102,7 +102,7 @@ public class Ball : MonoBehaviour
 
         foreach (Color item in line_color)
         {
-            if (((Vector4)item - (Vector4)ball_color).magnitude<1.0f)
+            if (((Vector4)item - (Vector4)ball_color).magnitude<0.01f)
             {
                 passed = true;
                 break;

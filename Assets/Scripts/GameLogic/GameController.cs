@@ -160,6 +160,8 @@ public class GameController : MonoBehaviour
         lines_passed++;
         if (lines_passed >= GameController.game_controller.GetLvlData().total_line_count)
         {
+            EventManager.TriggerEvent("LvlFinished");
+            //Debug.Break();
             IncreaseLvl();
         }
     }

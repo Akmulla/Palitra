@@ -13,15 +13,15 @@ public class ChngLvlAnim : MonoBehaviour
 
     void OnEnable()
     {
-        EventManager.StartListening("ChangeLvl",ChangeLvl);
+        EventManager.StartListening("LvlFinished", LvlFinished);
     }
 
     void OnDisable()
     {
-        EventManager.StopListening("ChangeLvl", ChangeLvl);
+        EventManager.StopListening("LvlFinished", LvlFinished);
     }
 
-    void ChangeLvl()
+    void LvlFinished()
     {
         anim.SetTrigger("ChangeLvl");
     }

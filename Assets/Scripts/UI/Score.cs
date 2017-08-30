@@ -16,21 +16,20 @@ public class Score : MonoBehaviour
 	
 	void OnEnable()
     {
-        EventManager.StartListening("ChangeLvl", LvlChanged);
+        EventManager.StartListening("LvlFinished", LvlFinished);
     }
 
     void OnDisable()
     {
-        EventManager.StopListening("ChangeLvl", LvlChanged);
+        EventManager.StopListening("LvlFinished", LvlFinished);
     }
 
-    void LvlChanged()
+    void LvlFinished()
     {
-        //print(GameController.game_controller.GetCurrentLvl());
         if (GameController.game_controller.GetCurrentLvl()!=0)
         {
             GlobalScore.global_score.Score += 10;
-            if (GameController.game_controller.GetCurrentLvl()%5 == 0)
+            if ((GameController.game_controller.GetCurrentLvl()+1)%5 == 0)
             {
                 GlobalScore.global_score.Score += GameController.game_controller.GetCurrentLvl();
             }

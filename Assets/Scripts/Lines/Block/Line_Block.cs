@@ -27,10 +27,13 @@ public class Line_Block : Line
     protected override void CheckIfPassed()
     {
         int coord_x = (int)(main_texture.width / 2.0f + main_texture.width * x);
+        //float coord_x = x - Mathf.Floor(x);
+        float center = main_texture.width / 2.0f + coord_x;
         List <Color> colors = new List<Color>();
         for (int i=-mistake; i<= mistake; i++)
         {
-            colors.Add(main_texture.GetPixel(coord_x+i, (int)(main_texture.height / 2.0f)));
+            //colors.Add(main_texture.GetPixel((int)coord_x+i, (int)(main_texture.height / 2.0f)));
+            colors.Add(main_texture.GetPixel(coord_x + i, (int)(main_texture.height / 2.0f)));
         }
         
         Ball.ball.LinePassed(colors,false);

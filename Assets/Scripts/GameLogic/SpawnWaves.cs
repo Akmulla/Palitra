@@ -89,7 +89,6 @@ public class SpawnWaves : MonoBehaviour
     {
         EventManager.StartListening("LinePassed", LinePassed);
         EventManager.StartListening("ChangeLvl", ChangeLvl);
-        //EventManager.StartListening("BeginGame", BeginGame);
         EventManager.StartListening("EndGame", EndGame);
     }
 
@@ -97,7 +96,6 @@ public class SpawnWaves : MonoBehaviour
     { 
         EventManager.StopListening("LinePassed", LinePassed);
         EventManager.StopListening("ChangeLvl", ChangeLvl);
-        //EventManager.StopListening("BeginGame", BeginGame);
         EventManager.StopListening("EndGame", EndGame);
     }
 
@@ -117,15 +115,7 @@ public class SpawnWaves : MonoBehaviour
     void ReserveLines()
     {
         lines.Clear();
-
         GetLineCountData();
-
-        //вычисляем общее количество линий на уровне
-        //GameController.game_controller.GetLvlData().lines_to_chng_lvl=0;
-        //for (int i = 0; i < (int)PoolType.Count; i++)
-        //{
-        //    GameController.game_controller.GetLvlData().lines_to_chng_lvl += line_handler[i].count;
-        //}
 
         //заполняем массив линий
         for (int i=0;i<(int)PoolType.Count;i++)
