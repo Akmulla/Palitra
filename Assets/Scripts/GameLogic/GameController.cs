@@ -248,7 +248,7 @@ public class GameController : MonoBehaviour
             ChangeState(GameState.GameOver);
             
             Ball.ball.Stop();
-            yield return new WaitForSeconds(2.0f);
+            yield return new WaitForSeconds(1.0f);
 
             UIController.ui.UpdateUI();
             particle.TurnOff();
