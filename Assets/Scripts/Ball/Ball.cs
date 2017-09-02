@@ -12,6 +12,7 @@ public class Ball : MonoBehaviour
     public GameObject death;
 
     int lines_checked;
+    
 
     public Vector3 GetPosition()
     {
