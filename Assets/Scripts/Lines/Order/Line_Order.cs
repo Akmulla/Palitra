@@ -18,6 +18,7 @@ public class Line_Order : Line
         finished = false;
         //prev_edge = SpawnWaves.spawn.prev_edge;
     }
+
     public override void Enable()
     {
         base.Enable();

@@ -32,8 +32,8 @@ public abstract class Line : MonoBehaviour
     {
         if ((active) && (tran.position.y - height <= Ball.ball.GetCollisionPosition().y))
         {
-            active = false;
             CheckIfPassed();
+            active = false;
         }
     }
 
@@ -49,7 +49,7 @@ public abstract class Line : MonoBehaviour
 
     public virtual void InitLine()
     {
-        active = true;
+        active = false;
         for (int i=0;i<mesh_resize.Length;i++)
         {
             mesh_resize[i].scale();

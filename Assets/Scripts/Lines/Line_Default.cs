@@ -26,19 +26,18 @@ public class Line_Default : Line
 
     protected override void CheckIfPassed()
     {
-        if (Ball.ball.GetColor() != line_color)
-        {
-            print("default break");
-            print(this.GetInstanceID());
-            print(active);
-            Debug.Break();
+        //if (Ball.ball.GetColor() != line_color)
+        //{
+        //    print("default break");
+        //    print(this.GetInstanceID());
+        //    print(active);
+        //    Debug.Break();
             
-        }
+        //}
         
         
         Ball.ball.LinePassed(line_color);
         anim.BeginAnimation();
-        active = false;
     }
 
     public Color GetLineColor()
