@@ -14,7 +14,7 @@ public class SkinChange : MonoBehaviour
     public GameObject set_button;
     public Image BG;
     public Animator money_anim;
-    int skin_number;
+    int skin_number=0;
 
     public void NextSkin()
     {
@@ -89,7 +89,9 @@ public class SkinChange : MonoBehaviour
             if ((!CheckIfAvailable(i)) && (SkinManager.skin_manager.GetSkinByNumber(i).price == 0))
             {
                 PlayerPrefs.SetInt(SkinManager.skin_manager.GetSkinByNumber(i).name, 1);
+                PlayerPrefs.Save();
             }
+            
         }
         UpdateSkin();
         UpdateText();
