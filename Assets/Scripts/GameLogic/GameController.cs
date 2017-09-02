@@ -54,7 +54,7 @@ public class GameController : MonoBehaviour
 
     public void BeginGame()
     {
-        if ((game_state==GameState.MainMenu)||(game_state == GameState.GameOver))
+        if ((game_state == GameState.MainMenu)||(game_state == GameState.GameOver))
         {
             //lvl_number = 0;
             SaveLoadGame.save_load.LoadProgress();
@@ -243,6 +243,7 @@ public class GameController : MonoBehaviour
 
     IEnumerator GameOverCoroutine()
     {
+        //Debug.Break();
         if (game_state==GameState.Game)
         {
             ChangeState(GameState.GameOver);

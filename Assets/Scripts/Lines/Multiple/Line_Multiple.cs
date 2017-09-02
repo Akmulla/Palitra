@@ -22,7 +22,7 @@ public class Line_Multiple : Line
 	{
 		base.CheckIfCrossed ();
         PoolType pool_type = GetComponent<PoolRef>().GetPool().pool_type;
-        float deceleration=0.0f;
+        float deceleration = 0.0f;
         switch (pool_type)
         {
             case (PoolType.Multiple_1_part):
@@ -47,14 +47,17 @@ public class Line_Multiple : Line
     {
         if (!finished)
         {
+            print("Check");
+            Debug.Break();
             Ball.ball.LinePassed(Color.black);
+            //GameController.game_controller.GameOver();
         }
         else
         {
             anim.BeginAnimation();
-            active = false;
             Ball.ball.LinePassed(Ball.ball.GetColor());
         }
+        active = false;
     }
 
     public override void ChangeColor()

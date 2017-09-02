@@ -16,16 +16,16 @@ public class LvlInfo : MonoBehaviour
 
     void OnEnable()
     {
-        EventManager.StartListening("ChangeLvl", LvlChanged);
+        EventManager.StartListening("LvlFinished", LvlChanged);
     }
 
     void OnDisable()
     {
-        EventManager.StopListening("ChangeLvl", LvlChanged);
+        EventManager.StopListening("LvlFinished", LvlChanged);
     }
 
     void LvlChanged()
     {
-        text.text = GameController.game_controller.GetCurrentLvl().ToString();
+        text.text =( GameController.game_controller.GetCurrentLvl()+1).ToString();
     }
 }

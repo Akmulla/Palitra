@@ -27,6 +27,7 @@ public class SkinManager : MonoBehaviour
     public void SaveActiveSkin()
     {
         PlayerPrefs.SetInt("SavedSkin", active_skin);
+        PlayerPrefs.Save();
     }
 
     public int GetTotalSkinCount()
@@ -40,6 +41,7 @@ public class SkinManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("SavedSkin", active_skin);
         }
+        PlayerPrefs.Save();
         SetActiveSkin(PlayerPrefs.GetInt("SavedSkin"));
     }
 
@@ -56,6 +58,7 @@ public class SkinManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("SavedSkin", active_skin);
         }
+        PlayerPrefs.Save();
     }
 
     public SkinData GetCurrentSkin()
