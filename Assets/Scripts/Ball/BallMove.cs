@@ -95,13 +95,13 @@ public class BallMove : MonoBehaviour
     {
         for (int i=0;i<5;i++)
         {
-            if (Speed+x>=saved_speed)
-            {
-                Speed = saved_speed;
-                break;
-            }
+            //if (Speed+x>=saved_speed)
+            //{
+            //    Speed = saved_speed;
+            //    break;
+            //}
             Speed += x;
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(0.2f);
         }
         current_state = State.normal;
     }
@@ -109,7 +109,9 @@ public class BallMove : MonoBehaviour
     public void ResumeSpeed()
     {
         current_state = State.resuming;
-        Speed = saved_speed;
-        current_state = State.normal;
+        coroutine = SlowDownCoroutine(x);
+        StartCoroutine(coroutine);
+        //Speed = saved_speed;
+       // current_state = State.normal;
     }
 }
