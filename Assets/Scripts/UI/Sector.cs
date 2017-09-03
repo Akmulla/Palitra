@@ -15,8 +15,10 @@ public class Sector : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if ((GameController.game_controller.GetState() == GameState.Game) &&
-            (Time.time - prev_touch > 0.15f))
+        if (
+            (GameController.game_controller.GetState() == GameState.Game)
+            //&& (Time.time - prev_touch > 0.15f)
+            )
         {
             prev_touch = Time.time;
             Ball.ball.SetColor(sect_color, true);
@@ -26,8 +28,9 @@ public class Sector : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if ((GameController.game_controller.GetState() == GameState.Game) && 
-            (Time.time - prev_touch > 0.15f))
+        if ((GameController.game_controller.GetState() == GameState.Game) 
+            //&& (Time.time - prev_touch > 0.15f)
+            )
         {
             prev_touch = Time.time;
             Ball.ball.SetColor(sect_color, false);
