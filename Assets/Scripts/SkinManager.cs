@@ -7,8 +7,8 @@ public class SkinManager : MonoBehaviour
     public static SkinManager skin_manager;
     [SerializeField]
     SkinData[] skin_data;
-    int totalSkinCount=1;
-    int active_skin=0;
+    int totalSkinCount = 1;
+    int active_skin = 0;
 
     public int GetSkinNumber()
     {
@@ -52,7 +52,7 @@ public class SkinManager : MonoBehaviour
         totalSkinCount = skin_data.Length;
         if (PlayerPrefs.HasKey("SavedSkin"))
         {
-            active_skin=PlayerPrefs.GetInt("SavedSkin");
+            active_skin = PlayerPrefs.GetInt("SavedSkin");
         }
         else
         {

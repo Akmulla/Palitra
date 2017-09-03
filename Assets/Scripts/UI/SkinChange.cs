@@ -14,6 +14,8 @@ public class SkinChange : MonoBehaviour
     public GameObject set_button;
     public Image BG;
     public Animator money_anim;
+
+    public Button buy_set_button;
     int skin_number=0;
 
     public void NextSkin()
@@ -55,6 +57,7 @@ public class SkinChange : MonoBehaviour
             SoundManager.sound_manager.SingleSound(SoundSample.SetSkin);
             SkinManager.skin_manager.SetActiveSkin(skin_number);
             SkinManager.skin_manager.SaveActiveSkin();
+            //buy_set_button.interactable = false;
         }
         else
         {
@@ -63,6 +66,10 @@ public class SkinChange : MonoBehaviour
                 SoundManager.sound_manager.SingleSound(SoundSample.Buy);
                 GlobalScore.global_score.Score -= SkinManager.skin_manager.GetSkinByNumber(skin_number).price;
                 PlayerPrefs.SetInt(SkinManager.skin_manager.GetSkinByNumber(skin_number).name, 1);
+
+                //сразу активируем
+                SkinManager.skin_manager.SetActiveSkin(skin_number);
+                SkinManager.skin_manager.SaveActiveSkin();
             }
             else
             {
@@ -70,7 +77,7 @@ public class SkinChange : MonoBehaviour
                 money_anim.SetTrigger("animate");
             }
         }
-        
+        SetEquipButtonStatus();
         UpdateText();
     }
 
@@ -99,6 +106,7 @@ public class SkinChange : MonoBehaviour
 
     void UpdateSkin()
     {
+        SetEquipButtonStatus();
         for (int i = 0; i < sectors.Length;i++)
         {
             sectors[i].color = SkinManager.skin_manager.GetSkinByNumber(skin_number).colors[i];
@@ -131,5 +139,17 @@ public class SkinChange : MonoBehaviour
         }
         
         return false;
+    }
+
+    void SetEquipButtonStatus()
+    {
+        if (skin_number == PlayerPrefs.GetInt("SavedSkin"))
+        {
+            buy_set_button.interactable = false;
+        }
+        else
+        {
+            buy_set_button.interactable = true;
+        }
     }
 }
