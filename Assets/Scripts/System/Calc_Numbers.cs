@@ -20,11 +20,13 @@ public class Calc_Numbers : MonoBehaviour
 
     void Resize(Transform pic_tran)
     {
+        float coeff = 0.9f;
+
         float pic_height = sprite_rend[0].sprite.bounds.extents.y * pic_tran.lossyScale.y;
         float k = line.GetHeight() / pic_height;
         float new_scale=pic_tran.localScale.y*k;
 
-        pic_tran.localScale = new Vector3(new_scale, new_scale, 1.0f);
+        pic_tran.localScale = new Vector3(new_scale*coeff, new_scale*coeff, 1.0f);
     }
 
     void SetPositionForOne()

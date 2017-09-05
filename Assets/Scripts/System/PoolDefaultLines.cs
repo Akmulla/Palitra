@@ -41,6 +41,9 @@ public class PoolDefaultLines : Pool
 
     public override IEnumerator InitLineCor(int k)
     {
+        while (stck[k].activeSelf)
+            yield return new WaitForEndOfFrame();
+
         stck[k].GetComponent<Line_Default>().
             InitLine(SkinManager.skin_manager.GetCurrentSkin().colors[create_col / 3] );
         create_col++;

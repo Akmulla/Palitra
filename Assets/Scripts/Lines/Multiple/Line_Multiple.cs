@@ -47,8 +47,8 @@ public class Line_Multiple : Line
     {
         if (!finished)
         {
-            print("Check");
-            Debug.Break();
+            //print("Check");
+            //Debug.Break();
             Ball.ball.LinePassed(Color.black);
             //GameController.game_controller.GameOver();
         }
