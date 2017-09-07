@@ -80,10 +80,11 @@ public class Ball : MonoBehaviour
 
     public void LinePassed(Color line_color)
     {
-        lines_checked++;
+        //lines_checked++;
         if (line_color==ball_color)
         {
             BallMove.ball_move.IncreaseSpeed(GameController.game_controller.GetLvlData().step_speed);
+            lines_checked++;
         }
         else
         {
@@ -138,4 +139,10 @@ public class Ball : MonoBehaviour
         BallMove.ball_move.Speed = GameController.game_controller.GetLvlData().speed;
         ball_color = image.color;
     }
+
+    void Update()
+    {
+        ball_color = image.color;
+    }
 }
+

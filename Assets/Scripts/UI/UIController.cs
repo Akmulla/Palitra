@@ -75,20 +75,7 @@ public class UIController : MonoBehaviour
                 break;
 
             case GameState.Pause:
-                gameui_bg.SetActive(false);
-                raycaster.enabled = true;
-                Game_UI.SetActive(true);
-                skin_menu.SetActive(false);
-                start_menu.SetActive(false);
-                pause_menu.SetActive(true);
-                round.SetActive(false);
-                triangle.SetActive(false);
-                triangle_fon.SetActive(false);
-                pause_text.SetActive(true);
-                gameover_text.SetActive(false);
-                pause_pic.SetActive(true);
-                gameover_pic.SetActive(false);
-                current_lvl.text = GameController.game_controller.GetCurrentLvl().ToString();
+                raycaster.enabled = false;
                 break;
 
             case GameState.GameOver:

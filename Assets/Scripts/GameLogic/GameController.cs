@@ -26,6 +26,7 @@ public class GameController : MonoBehaviour
     AnimationStatus anim_status;
     bool reload_part = false;
     int lines_passed;
+    GameState saved_state;
 
     public GameState GetState()
     {
@@ -199,9 +200,7 @@ public class GameController : MonoBehaviour
 
     public void Pause()
     {
-        if (game_state != GameState.Game)
-            return;
-
+        saved_state = game_state;
         saved_time_scale = Time.timeScale;
         Time.timeScale = 0.0f;
         ChangeState(GameState.Pause);
@@ -213,7 +212,7 @@ public class GameController : MonoBehaviour
         if (game_state != GameState.Pause)
             return;
 
-        ChangeState(GameState.Game);
+        ChangeState(saved_state);
         Time.timeScale = saved_time_scale;
         UIController.ui.UpdateUI();
     }
