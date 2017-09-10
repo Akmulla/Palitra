@@ -16,6 +16,9 @@ public class SkinChange : MonoBehaviour
     public Animator money_anim;
 
     public Button buy_set_button;
+
+    public ColorBuyAnim color_buy;
+
     int skin_number=0;
 
     public void NextSkin()
@@ -58,6 +61,7 @@ public class SkinChange : MonoBehaviour
             SkinManager.skin_manager.SetActiveSkin(skin_number);
             SkinManager.skin_manager.SaveActiveSkin();
             //buy_set_button.interactable = false;
+            color_buy.Animate();
         }
         else
         {
@@ -70,6 +74,8 @@ public class SkinChange : MonoBehaviour
                 //сразу активируем
                 SkinManager.skin_manager.SetActiveSkin(skin_number);
                 SkinManager.skin_manager.SaveActiveSkin();
+
+                color_buy.Animate();
             }
             else
             {
