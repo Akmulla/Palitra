@@ -61,7 +61,7 @@ public class GenerateLvls : MonoBehaviour
         //    (int)((begin_calc_dist - bot_params.default_dist) / 0.1f)+
         //    (int)((top_params.default_dist - bot_params.default_dist) / 0.1f)*2*(cycles-1);
 
-        int lvl_count = 300;
+        int lvl_count = 1000;
 
         List <string> res = CalcCombinations(lvl_count);
         //print(lvl_count);
@@ -72,7 +72,8 @@ public class GenerateLvls : MonoBehaviour
         float difficulty = 0;
         LvlParams new_bot = bot_params;
         LvlParams new_top = top_params;
-        while ((cycles_passed < cycles)&& (lvl_numb <lvl_count))
+        //while ((cycles_passed < cycles)&& (lvl_numb <lvl_count))
+        while (lvl_numb < lvl_count)
         {
             
             LvlData lvl = ScriptableObject.CreateInstance<LvlData>();
@@ -534,6 +535,12 @@ public class GenerateLvls : MonoBehaviour
 
         result.tap_amount_2.x = Mathf.Lerp(def.tap_amount_2.x, max.tap_amount_2.x, t);
         result.tap_amount_2.y = Mathf.Lerp(def.tap_amount_2.y, max.tap_amount_2.y, t);
+
+        result.tap_slow_2.x = Mathf.Lerp(def.tap_slow_2.x, max.tap_slow_2.x, t);
+        result.tap_slow_2.y = Mathf.Lerp(def.tap_slow_2.y, max.tap_slow_2.y, t);
+
+        result.tap_amount_3.x = Mathf.Lerp(def.tap_amount_2.x, max.tap_amount_2.x, t);
+        result.tap_amount_3.y = Mathf.Lerp(def.tap_amount_2.y, max.tap_amount_2.y, t);
 
         result.tap_slow_3.x = Mathf.Lerp(def.tap_slow_3.x, max.tap_slow_3.x, t);
         result.tap_slow_3.y = Mathf.Lerp(def.tap_slow_3.y, max.tap_slow_3.y, t);
