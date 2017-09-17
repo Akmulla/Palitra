@@ -149,6 +149,7 @@
     <Compile Include="Assets\Scripts\UI\Button_Start.cs" />
     <Compile Include="Assets\Scripts\UI\Button_ToMainMenu.cs" />
     <Compile Include="Assets\Scripts\UI\ChangeToSkinColor.cs" />
+    <Compile Include="Assets\Scripts\UI\ColorBuyAnim.cs" />
     <Compile Include="Assets\Scripts\UI\Continue.cs" />
     <Compile Include="Assets\Scripts\UI\Pause.cs" />
     <Compile Include="Assets\Scripts\UI\SaveAnimState.cs" />
