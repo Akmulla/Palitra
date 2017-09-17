@@ -28,16 +28,19 @@ public class Multiple_Block : MonoBehaviour
         switch (block_count)
         {
             case 1:
-                hp = Random.Range(GameController.game_controller.GetLvlData().multiple_prop_1_part.min_taps,
-                GameController.game_controller.GetLvlData().multiple_prop_1_part.max_taps+1);
+                //hp = Random.Range(GameController.game_controller.GetLvlData().multiple_prop_1_part.min_taps,
+                //GameController.game_controller.GetLvlData().multiple_prop_1_part.max_taps+1);
+                hp=GameController.game_controller.GetLvlData().multiple_prop_1_part.min_taps;
                 break;
             case 2:
-                hp = Random.Range(GameController.game_controller.GetLvlData().multiple_prop_2_parts.min_taps,
-                GameController.game_controller.GetLvlData().multiple_prop_2_parts.max_taps+1);
+                //hp = Random.Range(GameController.game_controller.GetLvlData().multiple_prop_2_parts.min_taps,
+                //GameController.game_controller.GetLvlData().multiple_prop_2_parts.max_taps+1);
+                hp = GameController.game_controller.GetLvlData().multiple_prop_2_parts.min_taps;
                 break;
             case 3:
-                hp = Random.Range(GameController.game_controller.GetLvlData().multiple_prop_3_parts.min_taps,
-                GameController.game_controller.GetLvlData().multiple_prop_3_parts.max_taps+1);
+                //hp = Random.Range(GameController.game_controller.GetLvlData().multiple_prop_3_parts.min_taps,
+                //GameController.game_controller.GetLvlData().multiple_prop_3_parts.max_taps+1);
+                hp = GameController.game_controller.GetLvlData().multiple_prop_3_parts.min_taps;
                 break;
         }
         calc_numb.SetNumber(hp);

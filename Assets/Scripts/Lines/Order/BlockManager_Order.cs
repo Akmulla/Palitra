@@ -9,7 +9,7 @@ public class BlockManager_Order : MonoBehaviour
     public Transform arrow;
 
     [SerializeField]
-    float offset_y=0.0f;
+    float offset_y = 0.0f;
     [SerializeField]
     Block_Order[] block_mas;
     Line_Order line;
@@ -18,7 +18,11 @@ public class BlockManager_Order : MonoBehaviour
     //int active_block_count;
     int current_block;
     SpriteRenderer arrow_rend;
-    
+
+
+    Color saved_color = Color.clear;
+    float saved_time = 0.0f;
+
     void Awake()
     {
         line = GetComponent<Line_Order>();
@@ -38,7 +42,8 @@ public class BlockManager_Order : MonoBehaviour
 
     void ColorChanged()
     {
-        if (!line.finished)
+        if ((!line.finished) && 
+            ((saved_color != Ball.ball.GetColor())||(saved_time+0.25f<Time.time)))
         {
             if ( (Ball.ball.GetPosition().y > line.prev_edge) &&
                     (Ball.ball.GetColor() == block_mas[current_block].GetColor()) )
@@ -56,6 +61,9 @@ public class BlockManager_Order : MonoBehaviour
 
                 arrow.position = block_mas[current_block].GetPosition() + 
                     new Vector3(0.0f, line.GetHeight()+ offset_y, 0.0f);
+
+                saved_color = Ball.ball.GetColor();
+                saved_time = Time.time;
             }
             else
             {
@@ -70,8 +78,11 @@ public class BlockManager_Order : MonoBehaviour
             }
 
             arrow_rend.color = block_mas[current_block].GetColor();
+            
         }
+        
     }
+
     public void InitBlocks()
     {
         current_block = 0;
