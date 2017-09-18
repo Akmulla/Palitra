@@ -92,6 +92,9 @@ public class TextureHandler : MonoBehaviour
             if (new_colors.Length % 2 == 0)
             {
                 col[half_size - 1] = new_colors[new_colors.Length / 2 - 1];
+                col[half_size - 2] = new_colors[new_colors.Length / 2 - 1];
+                col[half_size] = new_colors[new_colors.Length / 2];
+                col[half_size + 1] = new_colors[new_colors.Length / 2];
             }
         }
         texture.SetPixels(col);

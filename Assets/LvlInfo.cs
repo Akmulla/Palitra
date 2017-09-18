@@ -11,7 +11,8 @@ public class LvlInfo : MonoBehaviour
     void Start()
     {
         text = GetComponent<Text>();
-        text.text = GameController.game_controller.GetCurrentLvl().ToString();
+        // text.text = GameController.game_controller.GetCurrentLvl().ToString();
+        text.text = GameController.game_controller.CurrentLvl.ToString();
     }
 
     void OnEnable()
@@ -26,6 +27,6 @@ public class LvlInfo : MonoBehaviour
 
     void LvlChanged()
     {
-        text.text =( GameController.game_controller.GetCurrentLvl()+1).ToString();
+        text.text =( GameController.game_controller.CurrentLvl+1).ToString();
     }
 }

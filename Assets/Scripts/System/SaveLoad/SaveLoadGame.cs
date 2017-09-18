@@ -48,13 +48,15 @@ public class SaveLoadGame : MonoBehaviour
             PlayerPrefs.Save();
         }
 
-        GameController.game_controller.SetCurrentLvl(PlayerPrefs.GetInt("Progress"));
+        // GameController.game_controller.SetCurrentLvl(PlayerPrefs.GetInt("Progress"));
+        GameController.game_controller.CurrentLvl=PlayerPrefs.GetInt("Progress");
     }
 
     public void ResetProgress()
     {
         PlayerPrefs.SetInt("Progress", 0);
         PlayerPrefs.Save();
-        GameController.game_controller.SetCurrentLvl(PlayerPrefs.GetInt("Progress"));
+        //GameController.game_controller.SetCurrentLvl(PlayerPrefs.GetInt("Progress"));
+        GameController.game_controller.CurrentLvl=PlayerPrefs.GetInt("Progress");
     }
 }

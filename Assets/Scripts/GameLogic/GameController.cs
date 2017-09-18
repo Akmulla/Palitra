@@ -11,10 +11,11 @@ public class GameController : MonoBehaviour
     public static GameController game_controller;
     float saved_time_scale = 1.0f;
     GameState game_state;
-    [SerializeField]
-    LvlData[] lvl_data;
+    //[SerializeField]
+   // LvlData[] lvl_data;
     [SerializeField]
     Sector[] sectors;
+    [SerializeField]
     int lvl_number;
     public GameObject pools_obj;
     Pool[] pools;
@@ -28,6 +29,11 @@ public class GameController : MonoBehaviour
     int lines_passed;
     GameState saved_state;
 
+    //int loaded_lvl;
+    [SerializeField]
+    LvlData loaded_lvl_data;
+
+
     public GameState GetState()
     {
         return game_state;
@@ -38,15 +44,28 @@ public class GameController : MonoBehaviour
         this.game_state = game_state;
     }
 
-    public int GetCurrentLvl()
-    {
-        return lvl_number;
-    }
 
-    public void SetCurrentLvl(int lvl)
+    public int CurrentLvl
     {
-        lvl_number=lvl;
+        get
+        {
+            return lvl_number;
+        }
+        set
+        {
+            lvl_number = value;
+            loaded_lvl_data = Resources.Load<LvlData>("Lvl_" + lvl_number.ToString());
+        }
     }
+    //public int GetCurrentLvl()
+    //{
+    //    return lvl_number;
+    //}
+
+    //public void SetCurrentLvl(int lvl)
+    //{
+    //    lvl_number=lvl;
+    //}
 
     public int GetLinesPassedNumber()
     {
@@ -171,20 +190,21 @@ public class GameController : MonoBehaviour
     {
         lvl_number++;
         SaveLoadGame.save_load.SaveProgress(lvl_number);
-        if (lvl_number < lvl_data.Length)
+        //if (lvl_number < lvl_data.Length)
         {
             //print("текущий уровень" + lvl_number);
             StartCoroutine(InitLvlCor());
         }
-        else
-        {
-            //print("конец игры");
-        }
+        //else
+        //{
+        //    //print("конец игры");
+        //}
     }
 
     public LvlData GetLvlData()
     {
-        return lvl_data[lvl_number];
+        return loaded_lvl_data;
+        //return lvl_data[lvl_number];
     }
 
     void InitLvl()

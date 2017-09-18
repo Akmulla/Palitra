@@ -27,12 +27,12 @@ public class Score : MonoBehaviour
     void LvlFinished()
     {
         //int coeff = (GameController.game_controller.GetCurrentLvl() + 1) / 5;
-        if (GameController.game_controller.GetCurrentLvl()!=0)
+        if (GameController.game_controller.CurrentLvl!=0)
         {
             GlobalScore.global_score.Score += 10;
-            if ((GameController.game_controller.GetCurrentLvl()+1)%5 == 0)
+            if ((GameController.game_controller.CurrentLvl+1)%5 == 0)
             {
-                GlobalScore.global_score.Score += GameController.game_controller.GetCurrentLvl()+1;
+                GlobalScore.global_score.Score += GameController.game_controller.CurrentLvl+1;
             }
             text.text = GlobalScore.global_score.Score.ToString();
         }

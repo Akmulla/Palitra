@@ -16,17 +16,17 @@ public class Sector : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (
-            (GameController.game_controller.GetState() == GameState.Game)
-            //&& (Time.time - prev_touch > 0.15f)
-           // &&(!clicked)
-            )
-        {
-           // prev_touch = Time.time;
-           // clicked = true;
-            Ball.ball.SetColor(sect_color, true);
-            //print("click");
-        }
+        //if (
+        //    (GameController.game_controller.GetState() == GameState.Game)
+        //    //&& (Time.time - prev_touch > 0.15f)
+        //   // &&(!clicked)
+        //    )
+        //{
+        //   // prev_touch = Time.time;
+        //   // clicked = true;
+        //    Ball.ball.SetColor(sect_color, true);
+        //    //print("click");
+        //}
            
     }
 
@@ -37,11 +37,11 @@ public class Sector : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler
             //&& (!clicked)
             )
         {
-          //  prev_touch = Time.time;
-           // clicked = true;
+            //  prev_touch = Time.time;
+            // clicked = true;
             Ball.ball.SetColor(sect_color, false);
         }
-           
+
     }
 
     public void InitSector(Color color)
