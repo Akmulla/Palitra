@@ -21,6 +21,7 @@ public class Multiple_Block : MonoBehaviour
         calc_numb = GetComponentInChildren<Calc_Numbers>();
         //block_manager = transform.parent.GetComponentInParent<Multiple_BlockManager>();
     }
+
 	public void InitBlock(int block_count, Color color)
     {
         active = true;

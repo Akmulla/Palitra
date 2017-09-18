@@ -5,8 +5,8 @@ using UnityEngine.UI;
 public class Sector : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler
 {
     Color sect_color;
-    static float prev_touch = 0.0f;
-    bool clicked = false;
+    //static float prev_touch = 0.0f;
+   // bool clicked = false;
     
     void Start()
     {
@@ -22,8 +22,8 @@ public class Sector : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler
            // &&(!clicked)
             )
         {
-            prev_touch = Time.time;
-            clicked = true;
+           // prev_touch = Time.time;
+           // clicked = true;
             Ball.ball.SetColor(sect_color, true);
             //print("click");
         }
@@ -37,8 +37,8 @@ public class Sector : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler
             //&& (!clicked)
             )
         {
-            prev_touch = Time.time;
-            clicked = true;
+          //  prev_touch = Time.time;
+           // clicked = true;
             Ball.ball.SetColor(sect_color, false);
         }
            
@@ -52,8 +52,8 @@ public class Sector : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler
     #endregion
 
 
-    void LateUpdate()
-    {
-        clicked = false;
-    }
+    //void LateUpdate()
+    //{
+    //    clicked = false;
+    //}
 }

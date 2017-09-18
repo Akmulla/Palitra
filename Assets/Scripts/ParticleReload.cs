@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ParticleReload : MonoBehaviour
 {
-    bool on = true;
+    //bool on = true;
     public GameObject[] particles;
 
     public void Reload()
@@ -19,7 +19,7 @@ public class ParticleReload : MonoBehaviour
         {
             particles[i].SetActive(true);
         }
-        on = true;
+        //on = true;
     }
 
     public void TurnOff()
@@ -28,7 +28,7 @@ public class ParticleReload : MonoBehaviour
         {
             particles[i].SetActive(false);
         }
-        on = false;
+        //on = false;
     }
 
     public void SkinChanged()

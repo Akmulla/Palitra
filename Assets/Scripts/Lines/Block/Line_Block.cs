@@ -28,7 +28,7 @@ public class Line_Block : Line
     {
         int coord_x = (int)(main_texture.width / 2.0f + main_texture.width * x);
         //float coord_x = x - Mathf.Floor(x);
-        float center = main_texture.width / 2.0f + coord_x;
+        //float center = main_texture.width / 2.0f + coord_x;
         List <Color> colors = new List<Color>();
         for (int i=-mistake; i<= mistake; i++)
         {
@@ -71,7 +71,7 @@ public class Line_Block : Line
             x = left_dir ? Mathf.Repeat(Time.time * scrollSpeed, 1) : Mathf.Repeat(-Time.time * scrollSpeed, 1);
             x += rand_offset;
             Vector2 offset = new Vector2(x, savedOffset.y);
-            Vector2 offset_right = new Vector2(x + 0.5f, savedOffset.y);
+            //Vector2 offset_right = new Vector2(x + 0.5f, savedOffset.y);
 
             left_rend.materials[0].SetTextureOffset("_MainTex", offset);
             left_rend.materials[1].SetTextureOffset("_MainTex", offset);

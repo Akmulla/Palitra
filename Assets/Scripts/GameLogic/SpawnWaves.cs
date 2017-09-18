@@ -9,7 +9,7 @@ public class SpawnWaves : MonoBehaviour
 {
     public static SpawnWaves spawn;
     public float prev_edge = 0.0f;
-    float start_delay = 2.0f;
+    //float start_delay = 2.0f;
 
     LineHandler[] line_handler;
 

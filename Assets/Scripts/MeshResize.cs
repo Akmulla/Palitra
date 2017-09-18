@@ -37,7 +37,7 @@ public class MeshResize : MonoBehaviour
         float worldScreenWidth = worldScreenHeight / Screen.height * Screen.width;
         float ratioScale = worldScreenWidth / mesh.bounds.size.x;
         ratioScale /= 2.0f;
-        float h = worldScreenHeight / mesh.bounds.size.y;
+       // float h = worldScreenHeight / mesh.bounds.size.y;
 
         float leftEdge = Camera.main.ScreenToWorldPoint(new Vector2(0, 0)).x;
         float rightEdge = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, 0)).x;

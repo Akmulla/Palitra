@@ -5,12 +5,12 @@ using UnityEngine.UI;
 public class Score : MonoBehaviour 
 {
 	public Text text;
-    int lines_passed;
+    //int lines_passed;
 
 	void Start () 
 	{
 		text = GetComponent<Text> ();
-        lines_passed = 0;
+       // lines_passed = 0;
 		text.text = GlobalScore.global_score.Score.ToString ();
 	}
 	

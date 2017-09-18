@@ -2,7 +2,7 @@
 
 public class Block_Order : MonoBehaviour
 {
-    SpriteRenderer sprite_rend;
+    //SpriteRenderer sprite_rend;
     Transform tran;
     public bool active;
     public Color color;
@@ -14,7 +14,7 @@ public class Block_Order : MonoBehaviour
 
     void Awake()
     {
-        sprite_rend = GetComponent<SpriteRenderer>();
+       // sprite_rend = GetComponent<SpriteRenderer>();
         tran = GetComponent<Transform>();
     }
 

@@ -7,7 +7,7 @@ public class UIController : MonoBehaviour
 {
     public static UIController ui;
     public Text current_lvl;
-    static bool is_paused;
+    //static bool is_paused;
     GraphicRaycaster raycaster;
 
     public GameObject pause_menu;
@@ -25,7 +25,7 @@ public class UIController : MonoBehaviour
 
     void Awake ()
     {
-        is_paused = false;
+        //is_paused = false;
         ui = this;
         raycaster = GetComponent<GraphicRaycaster>();
     }
