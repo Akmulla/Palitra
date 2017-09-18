@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2015
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Palitra", "Palitra.csproj", "{82B279FF-126A-1F72-B757-5CCEEAF6A582}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Palitra.CSharp", "Palitra.CSharp.csproj", "{F67D6EB6-90BE-2BF3-8A80-4F95880928DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Palitra.Editor", "Palitra.Editor.csproj", "{B54548E9-F187-69EE-62C6-26EB2FA1D747}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Palitra.CSharp.Editor", "Palitra.CSharp.Editor.csproj", "{7C2F72A4-BF94-1BDD-C053-60D806B0FFFA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,14 +11,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{82B279FF-126A-1F72-B757-5CCEEAF6A582}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{82B279FF-126A-1F72-B757-5CCEEAF6A582}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{82B279FF-126A-1F72-B757-5CCEEAF6A582}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{82B279FF-126A-1F72-B757-5CCEEAF6A582}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B54548E9-F187-69EE-62C6-26EB2FA1D747}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B54548E9-F187-69EE-62C6-26EB2FA1D747}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B54548E9-F187-69EE-62C6-26EB2FA1D747}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B54548E9-F187-69EE-62C6-26EB2FA1D747}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F67D6EB6-90BE-2BF3-8A80-4F95880928DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F67D6EB6-90BE-2BF3-8A80-4F95880928DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F67D6EB6-90BE-2BF3-8A80-4F95880928DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F67D6EB6-90BE-2BF3-8A80-4F95880928DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C2F72A4-BF94-1BDD-C053-60D806B0FFFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C2F72A4-BF94-1BDD-C053-60D806B0FFFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C2F72A4-BF94-1BDD-C053-60D806B0FFFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C2F72A4-BF94-1BDD-C053-60D806B0FFFA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
