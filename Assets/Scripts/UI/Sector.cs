@@ -39,7 +39,7 @@ public class Sector : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler
         {
             //  prev_touch = Time.time;
             // clicked = true;
-            Ball.ball.SetColor(sect_color, false);
+            Ball.ball.SetColor(sect_color, true);
         }
 
     }

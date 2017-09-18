@@ -188,7 +188,8 @@ public class GameController : MonoBehaviour
 
     void IncreaseLvl()
     {
-        lvl_number++;
+        //lvl_number++;
+        CurrentLvl++;
         SaveLoadGame.save_load.SaveProgress(lvl_number);
         //if (lvl_number < lvl_data.Length)
         {
@@ -203,6 +204,11 @@ public class GameController : MonoBehaviour
 
     public LvlData GetLvlData()
     {
+        //if (loaded_lvl!= lvl_number)
+        //{
+        //    loaded_lvl_data = Resources.Load<LvlData>("Lvl_" + lvl_number.ToString());
+
+        //}
         return loaded_lvl_data;
         //return lvl_data[lvl_number];
     }
