@@ -83,21 +83,34 @@ public class Ball : MonoBehaviour
         //lines_checked++;
         if (line_color==ball_color)
         {
-            BallMove.ball_move.IncreaseSpeed(GameController.game_controller.GetLvlData().step_speed);
+            //BallMove.ball_move.IncreaseSpeed(GameController.game_controller.GetLvlData().step_speed);
+            ChngLvlStats();
             lines_checked++;
+            EventManager.TriggerEvent("LinePassed");
         }
         else
         {
            GameController.game_controller.GameOver();
         }
-        EventManager.TriggerEvent("LinePassed");
+        
     }
 
     public int GetLinesCheckedNumber()
     {
         return lines_checked;
     }
+    void ChngLvlStats()
+    {
+        LvlType lvl_type = GameController.game_controller.GetLvlData().lvl_type;
+        bool chng_aftr_half = ((lvl_type == LvlType.Speed_decr_dist_decr_half) ||
+            (lvl_type == LvlType.Speed_incr_dist_incr_half)) ? true : false;
+        bool passed_half = (SpawnWaves.spawn.GetLineSpawnedNumber() >=
+            GameController.game_controller.GetLvlData().total_line_count / 2);
 
+        float k = (chng_aftr_half && passed_half) ? -1.0f : 1.0f;
+
+        BallMove.ball_move.IncreaseSpeed(GameController.game_controller.GetLvlData().step_speed * k);
+    }
     public void LinePassed(List<Color> line_color,bool invert)
     {
         bool passed = false;
@@ -116,17 +129,9 @@ public class Ball : MonoBehaviour
 
         if (passed)
         {
-            LvlType lvl_type = GameController.game_controller.GetLvlData().lvl_type;
-            bool chng_aftr_half = ((lvl_type == LvlType.Speed_decr_dist_decr_half) ||
-                (lvl_type == LvlType.Speed_incr_dist_incr_half)) ? true : false;
-            bool passed_half = (SpawnWaves.spawn.GetLineSpawnedNumber() >=
-                GameController.game_controller.GetLvlData().total_line_count / 2);
-
-            float k = (chng_aftr_half && passed_half) ? -1.0f : 1.0f;
-
-            BallMove.ball_move.IncreaseSpeed(GameController.game_controller.GetLvlData().step_speed*k);
-            EventManager.TriggerEvent("LinePassed");
+            ChngLvlStats();
             lines_checked++;
+            EventManager.TriggerEvent("LinePassed");
         }
         else
         {
@@ -137,7 +142,7 @@ public class Ball : MonoBehaviour
     void ChangeLvl()
     {
         BallMove.ball_move.Speed = GameController.game_controller.GetLvlData().speed;
-        ball_color = image.color;
+        //ball_color = image.color;
     }
 
     void Update()

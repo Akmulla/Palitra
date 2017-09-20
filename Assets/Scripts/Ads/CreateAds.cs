@@ -62,6 +62,11 @@ public class CreateAds : MonoBehaviour
         {
             yield return new WaitForEndOfFrame();
         }
+
+        //while (Advertisement.isShowing)
+        //{
+        //    yield return new WaitForEndOfFrame();
+        //}
         GameController.game_controller.Continue();
     }
 

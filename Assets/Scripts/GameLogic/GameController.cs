@@ -33,6 +33,8 @@ public class GameController : MonoBehaviour
     [SerializeField]
     LvlData loaded_lvl_data;
 
+    int total_line_count;
+
 
     public GameState GetState()
     {
@@ -123,9 +125,9 @@ public class GameController : MonoBehaviour
     IEnumerator InitLvlCor()
     {
         System.GC.Collect();
-        lines_passed = 0;
-
-        if (lvl_number != 0)
+        //lines_passed = 0;
+        //total_line_count = GameController.game_controller.GetLvlData().total_line_count;
+        if (CurrentLvl != 0)
             yield return new WaitForSeconds(1.0f);
         for (int i = 0; i < sectors.Length; i++)
         {
@@ -178,7 +180,7 @@ public class GameController : MonoBehaviour
     void LinePassed()
     {
         lines_passed++;
-        if (lines_passed >= GameController.game_controller.GetLvlData().total_line_count)
+        if (lines_passed >= total_line_count)
         {
             EventManager.TriggerEvent("LvlFinished");
             //Debug.Break();
@@ -190,7 +192,9 @@ public class GameController : MonoBehaviour
     {
         //lvl_number++;
         CurrentLvl++;
-        SaveLoadGame.save_load.SaveProgress(lvl_number);
+        lines_passed = 0;
+        total_line_count = GameController.game_controller.GetLvlData().total_line_count;
+        SaveLoadGame.save_load.SaveProgress(CurrentLvl);
         //if (lvl_number < lvl_data.Length)
         {
             //print("текущий уровень" + lvl_number);
@@ -215,7 +219,7 @@ public class GameController : MonoBehaviour
 
     void InitLvl()
     {
-        System.GC.Collect();
+        //System.GC.Collect();
         lines_passed = 0;
 
         for (int i = 0; i < sectors.Length; i++)

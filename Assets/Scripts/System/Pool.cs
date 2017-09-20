@@ -32,7 +32,7 @@ public class Pool : MonoBehaviour
 
     public virtual IEnumerator InitLineCor(int k)
     {
-        while (stck[k].activeSelf)
+        while ((stck[k].activeSelf)&&(GameController.game_controller.GetState()==GameState.Game))
             yield return new WaitForEndOfFrame();
         stck[k].GetComponent<Line>().InitLine();
         yield return null;
