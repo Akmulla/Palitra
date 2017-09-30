@@ -80,6 +80,7 @@ public class GameController : MonoBehaviour
         {
             //lvl_number = 0;
             SaveLoadGame.save_load.LoadProgress();
+
             if (game_state == GameState.GameOver)
             {
                 reload_part = true;
@@ -94,6 +95,8 @@ public class GameController : MonoBehaviour
 
     IEnumerator BeginGameCoroutine()
     {
+        lines_passed = 0;
+        total_line_count = GameController.game_controller.GetLvlData().total_line_count;
         Line_Switch.InitText();
         bool animate=false;
         if (game_state == GameState.MainMenu)

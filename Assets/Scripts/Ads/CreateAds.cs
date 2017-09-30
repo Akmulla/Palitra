@@ -53,14 +53,16 @@ public class CreateAds : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.5f);
         while (!Advertisement.IsReady("rewardedVideo"))
         {
-            yield return new WaitForEndOfFrame();
+            // yield return new WaitForEndOfFrame();
+            yield return new WaitForSecondsRealtime(0.2f);
         }
         var options = new ShowOptions { resultCallback = HandleShowResult };
         Advertisement.Show("rewardedVideo", options);
 
         while (Advertisement.isShowing)
         {
-            yield return new WaitForEndOfFrame();
+            //yield return new WaitForEndOfFrame();
+            yield return new WaitForSecondsRealtime(0.2f);
         }
 
         //while (Advertisement.isShowing)
