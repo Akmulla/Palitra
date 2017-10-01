@@ -2,7 +2,9 @@
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Sector : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler
+//public class Sector : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, ISelectHandler,
+//IPointerDownHandler
+public class Sector : Selectable
 {
     Color sect_color;
     //static float prev_touch = 0.0f;
@@ -12,8 +14,17 @@ public class Sector : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler
     {
         sect_color = GetComponent<Image>().color;
     }
-    #region IPointerClickHandler implementation
+    //#region IPointerClickHandler implementation
 
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        //print("sdg");
+    }
+
+    public void OnSelect(BaseEventData eventData)
+    {
+        Debug.Log(this.gameObject.name + " was selected");
+    }
     public void OnPointerClick(PointerEventData eventData)
     {
         //if (
@@ -30,8 +41,10 @@ public class Sector : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler
            
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+
+    public override void OnPointerEnter(PointerEventData eventData)
     {
+        base.OnPointerEnter(eventData);
         if ((GameController.game_controller.GetState() == GameState.Game)
             //&& (Time.time - prev_touch > 0.15f)
             //&& (!clicked)
@@ -41,7 +54,8 @@ public class Sector : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler
             // clicked = true;
             Ball.ball.SetColor(sect_color, true);
         }
-
+        
+        
     }
 
     public void InitSector(Color color)
@@ -49,7 +63,7 @@ public class Sector : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler
         GetComponent<Image>().color = color;
         sect_color = color;
     }
-    #endregion
+   // #endregion
 
 
     //void LateUpdate()
