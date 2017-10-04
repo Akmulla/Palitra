@@ -12,7 +12,7 @@ public class SkinChange : MonoBehaviour
     //public Text set_skin_text;
     public GameObject buy_button;
     public GameObject set_button;
-    public Image BG;
+    //public Image BG;
     public Animator money_anim;
 
     public Button buy_set_button;
@@ -93,7 +93,7 @@ public class SkinChange : MonoBehaviour
         InitMenu();
     }
 
-    public void InitMenu()
+    void InitMenu()
     {
         skin_number = SkinManager.skin_manager.GetSkinNumber();
         SkinManager.skin_manager.SetActiveSkin(skin_number);
@@ -117,7 +117,7 @@ public class SkinChange : MonoBehaviour
         {
             sectors[i].color = SkinManager.skin_manager.GetSkinByNumber(skin_number).colors[i];
         }
-        BG.color = SkinManager.skin_manager.GetSkinByNumber(skin_number).bg_color;
+        //BG.color = SkinManager.skin_manager.GetSkinByNumber(skin_number).bg_color;
     }
 
     void UpdateText()
