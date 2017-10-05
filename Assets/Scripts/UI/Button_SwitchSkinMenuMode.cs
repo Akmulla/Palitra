@@ -12,8 +12,12 @@ public class Button_SwitchSkinMenuMode : MonoBehaviour
     public Button Button_Round;
     public Button Button_Trian;
 
-
     SkinState state=SkinState.Round;
+
+    public SkinState State
+    {
+        get { return state; }
+    }
 
     public void SwitchMode()
     {
