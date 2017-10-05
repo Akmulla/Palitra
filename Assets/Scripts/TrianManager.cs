@@ -30,7 +30,7 @@ public class TrianManager : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    public int GetTotalSkinCount()
+    public int GetTotalTrianCount()
     {
         return totalTrianCount;
     }
