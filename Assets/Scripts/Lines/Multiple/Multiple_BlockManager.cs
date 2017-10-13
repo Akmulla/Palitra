@@ -51,6 +51,7 @@ public class Multiple_BlockManager : MonoBehaviour
                 if (item.Hit())
                 {
                     active_block_count--;
+
                 }
                 if (active_block_count<=0)
                 {

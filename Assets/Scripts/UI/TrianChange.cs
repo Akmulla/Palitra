@@ -14,6 +14,7 @@ public class TrianChange : MonoBehaviour
     public Text trian_count_text;
     public Text price_text;
     public Text score_text;
+    public Text description;
 
     void UpdateTrian()
     {
@@ -32,6 +33,7 @@ public class TrianChange : MonoBehaviour
         trian_count_text.text = (trian_number + 1).ToString() + "/" + TrianManager.trian_manager.GetTotalTrianCount();
         price_text.text = TrianManager.trian_manager.GetTrianByNumber(trian_number).price.ToString();
         score_text.text = GlobalScore.global_score.Score.ToString();
+        description.text = TrianManager.trian_manager.GetTrianByNumber(trian_number).description.ToString();
         if (CheckIfAvailable(trian_number))
         {
             set_button.SetActive(true);

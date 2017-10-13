@@ -56,6 +56,9 @@ public class Multiple_Block : MonoBehaviour
     public bool Hit()
     {
         hp--;
+        if ((hp >= 1) && (Ball.ball.trian_type == TrianType.DoubleTap))
+            hp--;
+
         calc_numb.SetNumber(hp);
         if (hp<=0)
         {

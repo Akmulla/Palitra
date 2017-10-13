@@ -58,7 +58,19 @@ public class BallMove : MonoBehaviour
     {
         if ((!stop) && (GameController.game_controller.GetState() == GameState.Game))
         {
-            tran.position = tran.position +  Vector3.up * speed * Time.deltaTime;
+            switch (Ball.ball.trian_type)
+            {
+                case TrianType.DoublePoints:
+                    tran.position = tran.position + Vector3.up * speed * Time.deltaTime*1.15f;
+                    break;
+                case TrianType.HalfPoints:
+                    tran.position = tran.position + Vector3.up * speed * Time.deltaTime * 0.75f;
+                    break;
+                default:
+                    tran.position = tran.position + Vector3.up * speed * Time.deltaTime;
+                    break;
+            }
+            
         }
     }
 

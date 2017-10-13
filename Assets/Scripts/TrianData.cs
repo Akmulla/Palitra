@@ -10,4 +10,5 @@ public class TrianData : ScriptableObject
     public Sprite sprite;
     public TrianType trian_type;
     public int price;
+    public string description;
 }

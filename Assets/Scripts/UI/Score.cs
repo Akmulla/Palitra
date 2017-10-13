@@ -27,14 +27,38 @@ public class Score : MonoBehaviour
     void LvlFinished()
     {
         //int coeff = (GameController.game_controller.GetCurrentLvl() + 1) / 5;
-        GlobalScore.global_score.Score += 10;
-        if (GameController.game_controller.CurrentLvl!=0)
+        int add_score = 0;
+        add_score += 10;
+        if (GameController.game_controller.CurrentLvl != 0)
         {
-            if ((GameController.game_controller.CurrentLvl+1)%5 == 0)
+            if ((GameController.game_controller.CurrentLvl + 1) % 5 == 0)
             {
-                GlobalScore.global_score.Score += GameController.game_controller.CurrentLvl+1;
+                add_score += GameController.game_controller.CurrentLvl + 1;
             }
-            text.text = GlobalScore.global_score.Score.ToString();
+
         }
+
+        if (Ball.ball.trian_type == TrianType.DoublePoints)
+            add_score *= 2;
+
+        if (Ball.ball.trian_type == TrianType.HalfPoints)
+            add_score /= 2;
+
+
+
+        GlobalScore.global_score.Score += add_score;
+        text.text = GlobalScore.global_score.Score.ToString();
+
+        //GlobalScore.global_score.Score += 10;
+        //if (GameController.game_controller.CurrentLvl!=0)
+        //{
+        //    if ((GameController.game_controller.CurrentLvl+1)%5 == 0)
+        //    {
+        //        GlobalScore.global_score.Score += GameController.game_controller.CurrentLvl+1;
+        //    }
+        //text.text = GlobalScore.global_score.Score.ToString();
+        //}
+
+
     }
 }
