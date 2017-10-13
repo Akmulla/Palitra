@@ -136,10 +136,13 @@
     <Compile Include="Assets\Scripts\System\SaveLoad\LvlData.cs" />
     <Compile Include="Assets\Scripts\System\SaveLoad\SaveLoadGame.cs" />
     <Compile Include="Assets\Scripts\System\SaveLoad\SkinData.cs" />
+    <Compile Include="Assets\Scripts\TrianData.cs" />
+    <Compile Include="Assets\Scripts\TrianManager.cs" />
     <Compile Include="Assets\Scripts\UI\AnimationStatus.cs" />
     <Compile Include="Assets\Scripts\UI\Button_SkinMenu.cs" />
     <Compile Include="Assets\Scripts\UI\Button_Sound.cs" />
     <Compile Include="Assets\Scripts\UI\Button_Start.cs" />
+    <Compile Include="Assets\Scripts\UI\Button_SwitchSkinMenuMode.cs" />
     <Compile Include="Assets\Scripts\UI\Button_ToMainMenu.cs" />
     <Compile Include="Assets\Scripts\UI\ChangeToSkinColor.cs" />
     <Compile Include="Assets\Scripts\UI\ColorBuyAnim.cs" />
@@ -149,10 +152,12 @@
     <Compile Include="Assets\Scripts\UI\Score.cs" />
     <Compile Include="Assets\Scripts\UI\Sector.cs" />
     <Compile Include="Assets\Scripts\UI\SkinChange.cs" />
+    <Compile Include="Assets\Scripts\UI\SkinMenu_Change.cs" />
     <Compile Include="Assets\Scripts\UI\Start2Animation.cs" />
     <Compile Include="Assets\Scripts\UI\StartAnimation.cs" />
     <Compile Include="Assets\Scripts\UI\Start_panel.cs" />
     <Compile Include="Assets\Scripts\UI\Touchable.cs" />
+    <Compile Include="Assets\Scripts\UI\TrianChange.cs" />
     <Compile Include="Assets\Scripts\UI\UIController.cs" />
     <Compile Include="Assets\Scripts\UI\UI_MainMenu.cs" />
     <Compile Include="Assets\SwitchTextHolder.cs" />
