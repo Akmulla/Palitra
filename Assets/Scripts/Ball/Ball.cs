@@ -66,6 +66,7 @@ public class Ball : MonoBehaviour
     {
         EventManager.StartListening("ChangeLvl", ChangeLvl);
         image.enabled = true;
+        image.sprite = TrianManager.trian_manager.GetCurrentTrian().sprite;
     }
 
     void OnDisable()
@@ -92,13 +93,13 @@ public class Ball : MonoBehaviour
         {
            GameController.game_controller.GameOver();
         }
-        
     }
 
     public int GetLinesCheckedNumber()
     {
         return lines_checked;
     }
+
     void ChngLvlStats()
     {
         LvlType lvl_type = GameController.game_controller.GetLvlData().lvl_type;

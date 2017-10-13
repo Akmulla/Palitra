@@ -8,6 +8,18 @@ public class SkinMenu_Change : MonoBehaviour
     public TrianChange trian_change;
     public Button_SwitchSkinMenuMode mode;
 
+    public void SetItem()
+    {
+        if (mode.State == SkinState.Round)
+        {
+            skin_change.SetSkin();
+        }
+        else
+        {
+            trian_change.SetTrian();
+        }
+    }
+
 	public void NextItem()
     {
         if (mode.State==SkinState.Round)

@@ -35,7 +35,7 @@ public class TrianManager : MonoBehaviour
         return totalTrianCount;
     }
 
-    public void LoadSavedSkin()
+    public void LoadSavedTrian()
     {
         if (!PlayerPrefs.HasKey("SavedTrian"))
         {
@@ -47,8 +47,9 @@ public class TrianManager : MonoBehaviour
 
     void Awake()
     {
-        active_trian = 0;
         trian_manager = this;
+        active_trian = 0;
+        
         totalTrianCount = trian_data.Length;
         if (PlayerPrefs.HasKey("SavedTrian"))
         {
