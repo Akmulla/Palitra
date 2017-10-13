@@ -5,11 +5,13 @@ using UnityEngine.UI;
 public class Ball : MonoBehaviour
 {
     public static Ball ball;
+    public bool shield = false;
     [HideInInspector]
     RectTransform tran;
     Image image;
     Color ball_color;
     public GameObject death;
+    public TrianType trian_type=TrianType.Default;
 
     int lines_checked;
     
@@ -67,6 +69,7 @@ public class Ball : MonoBehaviour
         EventManager.StartListening("ChangeLvl", ChangeLvl);
         image.enabled = true;
         image.sprite = TrianManager.trian_manager.GetCurrentTrian().sprite;
+        trian_type = TrianManager.trian_manager.GetCurrentTrian().trian_type;
     }
 
     void OnDisable()
@@ -79,7 +82,7 @@ public class Ball : MonoBehaviour
         image.enabled = true;
     }
 
-    public void LinePassed(Color line_color)
+    public bool LinePassed(Color line_color)
     {
         //lines_checked++;
         if (line_color==ball_color)
@@ -88,10 +91,21 @@ public class Ball : MonoBehaviour
             ChngLvlStats();
             lines_checked++;
             EventManager.TriggerEvent("LinePassed");
+            return true;
         }
         else
         {
-           GameController.game_controller.GameOver();
+            if (shield)
+            {
+                shield = false;
+                StartCoroutine(BallMove.ball_move.ShieldSlowDown());
+                return true;
+            }
+            else
+            {
+                GameController.game_controller.GameOver();
+                return false;
+            }
         }
     }
 
@@ -112,7 +126,8 @@ public class Ball : MonoBehaviour
 
         BallMove.ball_move.IncreaseSpeed(GameController.game_controller.GetLvlData().step_speed * k);
     }
-    public void LinePassed(List<Color> line_color,bool invert)
+
+    public bool LinePassed(List<Color> line_color,bool invert)
     {
         bool passed = false;
 
@@ -133,16 +148,33 @@ public class Ball : MonoBehaviour
             ChngLvlStats();
             lines_checked++;
             EventManager.TriggerEvent("LinePassed");
+            return true;
         }
         else
         {
-            GameController.game_controller.GameOver();
+            if (shield)
+            {
+                shield = false;
+                StartCoroutine(BallMove.ball_move.ShieldSlowDown());
+                return true;
+            }
+            else
+            {
+                GameController.game_controller.GameOver();
+                return false;
+            }
+            
         }
+        
     }
 
     void ChangeLvl()
     {
         BallMove.ball_move.Speed = GameController.game_controller.GetLvlData().speed;
+        if (trian_type==TrianType.Shield)
+        {
+            shield = true;
+        }
         //ball_color = image.color;
     }
 

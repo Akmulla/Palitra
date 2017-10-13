@@ -30,17 +30,21 @@ public class Line_Order : Line
 
     protected override void CheckIfPassed()
     {
-        //событие LinePassed вызывается в BlockManager
+        bool passed;
         if (!finished)
         {
-            Ball.ball.LinePassed(Color.black);
+            passed=Ball.ball.LinePassed(Color.black);
         }
         else
         {
-            anim.BeginAnimation();
-            active = false;
-            Ball.ball.LinePassed(Ball.ball.GetColor());
+            passed=Ball.ball.LinePassed(Ball.ball.GetColor());
         }
+
+        if (passed)
+        {
+            anim.BeginAnimation();
+        }
+        //active = false;
     }
 
     protected override void CheckIfCrossed()

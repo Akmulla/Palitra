@@ -45,19 +45,25 @@ public class Line_Multiple : Line
 
     protected override void CheckIfPassed()
     {
+        bool passed;
         if (!finished)
         {
             //print("Check");
             //Debug.Break();
-            Ball.ball.LinePassed(Color.black);
+            passed=Ball.ball.LinePassed(Color.black);
             //GameController.game_controller.GameOver();
         }
         else
         {
-            anim.BeginAnimation();
-            Ball.ball.LinePassed(Ball.ball.GetColor());
+            passed=Ball.ball.LinePassed(Ball.ball.GetColor());
         }
-        active = false;
+
+        if (passed)
+        {
+            anim.BeginAnimation();
+            
+        }
+        //active = false;
     }
 
     public override void ChangeColor()

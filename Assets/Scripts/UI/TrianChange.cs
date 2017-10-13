@@ -68,7 +68,7 @@ public class TrianChange : MonoBehaviour
 
     void Awake()
     {
-        trian_number = TrianManager.trian_manager.GetTrianNumber();
+        //trian_number = TrianManager.trian_manager.GetTrianNumber();
         InitMenu();
         //skin_number = SkinManager.skin_manager.GetSkinNumber();
         //SkinManager.skin_manager.SetActiveSkin(skin_number);
@@ -81,8 +81,8 @@ public class TrianChange : MonoBehaviour
         //    }
 
         //}
-        UpdateTrian();
-        UpdateText();
+        //UpdateTrian();
+        //UpdateText();
     }
 
     bool CheckIfAvailable(int number)

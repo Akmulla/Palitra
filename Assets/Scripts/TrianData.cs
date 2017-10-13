@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum TrianType { DoubleTap,Shield,DoublePoints,Screamer,HalfPoints };
+public enum TrianType { Default,DoubleTap,Shield,DoublePoints,Screamer,HalfPoints };
 
 [CreateAssetMenu]
 public class TrianData : ScriptableObject

@@ -69,6 +69,14 @@ public class BallMove : MonoBehaviour
         Speed += acceleration;
     }
 
+    public IEnumerator ShieldSlowDown()
+    {
+        float saved = speed / 2.0f;
+        Speed -= saved;
+        yield return new WaitForSeconds(2.0f);
+        Speed += saved;
+    }
+
     public void SlowDown(float deceleration)
     {
         

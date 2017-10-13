@@ -41,8 +41,8 @@ public class Line_Switch : Line
 
     protected override void CheckIfPassed()
     {
-        Ball.ball.LinePassed(line_color);
-        anim.BeginAnimation();
+        if (Ball.ball.LinePassed(line_color))
+            anim.BeginAnimation();
     }
 
     public override void InitLine()

@@ -36,8 +36,8 @@ public class Line_Block : Line
             colors.Add(main_texture.GetPixel(coord_x + i, (int)(main_texture.height / 2.0f)));
         }
         
-        Ball.ball.LinePassed(colors,false);
-        anim.BeginAnimation();
+        if (Ball.ball.LinePassed(colors,false))
+            anim.BeginAnimation();
     }
 
     protected override void Awake()
