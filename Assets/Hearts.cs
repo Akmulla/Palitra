@@ -9,12 +9,14 @@ public class Hearts : MonoBehaviour
     [SerializeField]
     int hearts = 10;
     public Text text;
+    public Text heartMenuText;
    
 
     void Awake()
     {
         h = this;
         text.text = hearts.ToString();
+        heartMenuText.text = hearts.ToString();
     }
 
     public int Heart
@@ -27,6 +29,7 @@ public class Hearts : MonoBehaviour
         {
             hearts = value;
             text.text = hearts.ToString();
+            heartMenuText.text= hearts.ToString();
         }
     }
 

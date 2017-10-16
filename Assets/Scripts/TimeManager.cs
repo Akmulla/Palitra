@@ -39,7 +39,7 @@ public class TimeManager : MonoBehaviour
         //lastTime = time;
         lastTime = SaveLoadGame.save_load.LoadTime();
         CheckNewHearts();
-        print(lastTime+" " + lastTime.Second);
+        //print(lastTime+" " + lastTime.Second);
 	}
 
    

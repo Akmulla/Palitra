@@ -87,6 +87,7 @@
     <Compile Include="Assets\Scripts\Ads\CreateAds.cs" />
     <Compile Include="Assets\Scripts\Ball\Ball.cs" />
     <Compile Include="Assets\Scripts\Ball\BallMove.cs" />
+    <Compile Include="Assets\Scripts\BuyHeartMenu.cs" />
     <Compile Include="Assets\Scripts\CameraSetDefault.cs" />
     <Compile Include="Assets\Scripts\ChngLvlAnim.cs" />
     <Compile Include="Assets\Scripts\DateTimeClass.cs" />
