@@ -3,11 +3,11 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public enum GameState { MainMenu, SkinMenu, Prepare, Game,Pause, GameOver };
+public enum GameState { MainMenu, SkinMenu, Prepare, Game,Pause, GameOver,LifeMenu };
 
 public class GameController : MonoBehaviour
 {
-    
+    //Hearts hearts;
     public static GameController game_controller;
     float saved_time_scale = 1.0f;
     GameState game_state;
@@ -28,7 +28,7 @@ public class GameController : MonoBehaviour
     bool reload_part = false;
     int lines_passed;
     GameState saved_state;
-
+    
     //int loaded_lvl;
     [SerializeField]
     LvlData loaded_lvl_data;
@@ -46,6 +46,7 @@ public class GameController : MonoBehaviour
         this.game_state = game_state;
     }
 
+ 
 
     public int CurrentLvl
     {
@@ -76,6 +77,9 @@ public class GameController : MonoBehaviour
 
     public void BeginGame()
     {
+        if (!Hearts.h.CheckHearts())
+            return;
+
         if ((game_state == GameState.MainMenu)||(game_state == GameState.GameOver))
         {
             //lvl_number = 0;
@@ -265,6 +269,12 @@ public class GameController : MonoBehaviour
     public void ToSkinMenu()
     {
         ChangeState(GameState.SkinMenu);
+        UIController.ui.UpdateUI();
+    }
+
+    public void ToLifeMenu()
+    {
+        ChangeState(GameState.LifeMenu);
         UIController.ui.UpdateUI();
     }
 

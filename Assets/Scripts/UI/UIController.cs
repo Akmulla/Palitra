@@ -22,6 +22,8 @@ public class UIController : MonoBehaviour
     public GameObject gameover_pic;
     public GameObject pause_pic;
     public GameObject gameui_bg;
+    public GameObject life_timer;
+    public GameObject life_menu;
 
     void Awake ()
     {
@@ -44,6 +46,8 @@ public class UIController : MonoBehaviour
                 round.SetActive(true);
                 triangle.SetActive(true);
                 triangle_fon.SetActive(true);
+                life_timer.SetActive(true);
+                life_menu.SetActive(false);
                 break;
 
             case GameState.SkinMenu:
@@ -54,6 +58,8 @@ public class UIController : MonoBehaviour
                 round.SetActive(false);
                 triangle.SetActive(false);
                 triangle_fon.SetActive(false);
+                life_timer.SetActive(false);
+                life_menu.SetActive(false);
                 break;
 
             case GameState.Game:
@@ -67,6 +73,8 @@ public class UIController : MonoBehaviour
                 triangle.SetActive(true);
                 triangle_fon.SetActive(false);
                 Ball.ball.EnableImage();
+                life_timer.SetActive(false);
+                life_menu.SetActive(false);
                 break;
 
             case GameState.Prepare:
@@ -92,6 +100,22 @@ public class UIController : MonoBehaviour
                 gameover_text.SetActive(true);
                 pause_pic.SetActive(false);
                 gameover_pic.SetActive(true);
+                life_timer.SetActive(true);
+                life_menu.SetActive(false);
+                break;
+
+            case GameState.LifeMenu:
+                raycaster.enabled = true;
+                SkinManager.skin_manager.LoadSavedSkin();
+                Game_UI.SetActive(false);
+                skin_menu.SetActive(false);
+                start_menu.SetActive(true);
+                pause_menu.SetActive(false);
+                round.SetActive(true);
+                triangle.SetActive(true);
+                triangle_fon.SetActive(true);
+                life_timer.SetActive(true);
+                life_menu.SetActive(true);
                 break;
         }
     }

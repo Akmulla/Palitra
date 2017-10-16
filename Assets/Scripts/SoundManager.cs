@@ -28,6 +28,9 @@ public class SoundManager : MonoBehaviour
     [SerializeField]
     AudioClip setSkin_sound;
 
+    [SerializeField]
+    AudioClip[] screams;
+
     float saved_vol=1.0f;
 
     void Awake()
@@ -74,6 +77,11 @@ public class SoundManager : MonoBehaviour
                 source.PlayOneShot(setSkin_sound, 3.0f);
                 break;
         }
+    }
+
+    public void Screamer()
+    {
+        source.PlayOneShot(screams[Random.Range(0,screams.Length)], 6.0f);
     }
 
     public void MainMenuTheme()

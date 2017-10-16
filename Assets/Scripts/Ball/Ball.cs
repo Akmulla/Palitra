@@ -67,6 +67,7 @@ public class Ball : MonoBehaviour
     void OnEnable()
     {
         EventManager.StartListening("ChangeLvl", ChangeLvl);
+        EventManager.StartListening("BeginGame", BeginGame);
         image.enabled = true;
         image.sprite = TrianManager.trian_manager.GetCurrentTrian().sprite;
         trian_type = TrianManager.trian_manager.GetCurrentTrian().trian_type;
@@ -75,6 +76,7 @@ public class Ball : MonoBehaviour
     void OnDisable()
     {
         EventManager.StopListening("ChangeLvl", ChangeLvl);
+        EventManager.StopListening("BeginGame", BeginGame);
     }
 
     public void EnableImage()
@@ -99,6 +101,11 @@ public class Ball : MonoBehaviour
             {
                 shield = false;
                 StartCoroutine(BallMove.ball_move.ShieldSlowDown());
+
+                ChngLvlStats();
+                lines_checked++;
+                EventManager.TriggerEvent("LinePassed");
+
                 return true;
             }
             else
@@ -148,6 +155,7 @@ public class Ball : MonoBehaviour
             ChngLvlStats();
             lines_checked++;
             EventManager.TriggerEvent("LinePassed");
+
             return true;
         }
         else
@@ -156,6 +164,11 @@ public class Ball : MonoBehaviour
             {
                 shield = false;
                 StartCoroutine(BallMove.ball_move.ShieldSlowDown());
+
+                ChngLvlStats();
+                lines_checked++;
+                EventManager.TriggerEvent("LinePassed");
+
                 return true;
             }
             else
@@ -168,6 +181,13 @@ public class Ball : MonoBehaviour
         
     }
 
+    void BeginGame()
+    {
+        if (trian_type == TrianType.Shield)
+        {
+            shield = true;
+        }
+    }
     void ChangeLvl()
     {
         BallMove.ball_move.Speed = GameController.game_controller.GetLvlData().speed;

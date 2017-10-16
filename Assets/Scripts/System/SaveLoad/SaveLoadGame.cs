@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class SaveLoadGame : MonoBehaviour
 {
     //int lvl = 0;
+    public int hearts;
     public bool StartCustomLvl = false;
     public int start_lvl;
     public static SaveLoadGame save_load;
@@ -58,5 +60,24 @@ public class SaveLoadGame : MonoBehaviour
         PlayerPrefs.Save();
         //GameController.game_controller.SetCurrentLvl(PlayerPrefs.GetInt("Progress"));
         GameController.game_controller.CurrentLvl=PlayerPrefs.GetInt("Progress");
+    }
+
+    public void SaveTime(DateTime time)
+    {
+        PlayerPrefs.SetString("Time", time.ToString());
+        PlayerPrefs.Save();
+    }
+
+    public DateTime LoadTime()
+    {
+        DateTime time = new DateTime();
+        if (!PlayerPrefs.HasKey("Time"))
+        {
+            time = DateTime.Now;
+            SaveTime(time);
+        }
+        time = DateTime.Parse(PlayerPrefs.GetString("Time"));
+
+        return time;
     }
 }

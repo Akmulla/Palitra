@@ -72,6 +72,56 @@ public class CreateAds : MonoBehaviour
         GameController.game_controller.Continue();
     }
 
+    public void ShowLifeMenuVideo()
+    {
+        StartCoroutine(ShowMenuVideo());
+    }
+
+    IEnumerator ShowMenuVideo()
+    {
+        GameController.game_controller.Pause();
+        yield return new WaitForSecondsRealtime(0.5f);
+        while (!Advertisement.IsReady("rewardedVideo"))
+        {
+            // yield return new WaitForEndOfFrame();
+            yield return new WaitForSecondsRealtime(0.2f);
+        }
+        var options = new ShowOptions { resultCallback = LifeMenuResult };
+        Advertisement.Show("rewardedVideo", options);
+
+        while (Advertisement.isShowing)
+        {
+            //yield return new WaitForEndOfFrame();
+            yield return new WaitForSecondsRealtime(0.2f);
+        }
+
+        //while (Advertisement.isShowing)
+        //{
+        //    yield return new WaitForEndOfFrame();
+        //}
+        GameController.game_controller.Continue();
+    }
+
+    void LifeMenuResult(ShowResult result)
+    {
+        switch (result)
+        {
+            case ShowResult.Finished:
+                Debug.Log("The ad was successfully shown.");
+                //
+                // YOUR CODE TO REWARD THE GAMER
+                // Give coins etc.
+                Hearts.h.Heart += 2;
+                break;
+            case ShowResult.Skipped:
+                Debug.Log("The ad was skipped before reaching the end.");
+                break;
+            case ShowResult.Failed:
+                Debug.LogError("The ad failed to be shown.");
+                break;
+        }
+    }
+
     private void HandleShowResult(ShowResult result)
     {
         switch (result)

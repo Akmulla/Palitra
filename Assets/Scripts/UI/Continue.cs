@@ -13,10 +13,14 @@ public class Continue : MonoBehaviour
 
     public void ContinueGame()
     {
+        if (!Hearts.h.CheckHearts())
+            return;
+
         if (GameController.game_controller.GetState() == GameState.GameOver)
         {
-            button.interactable = false;
+            
             GameController.game_controller.BeginGame();
+            button.interactable = false;
         }
             
     }
