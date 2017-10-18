@@ -5,7 +5,7 @@ using System.Collections;
 
 public class Preload : MonoBehaviour
 {
-    AsyncOperation sceneLoadTask;
+    //AsyncOperation sceneLoadTask;
    // public Image progressBar;
     public RectTransform tran;
     //public Text text;

@@ -74,15 +74,9 @@ public class SpawnWaves : MonoBehaviour
         }  
     }
 
-    void BeginGame()
-    {
-        //ChangeLvl();
-        //StartCoroutine(Delay());
-    }
-
     void EndGame()
     {
-        is_spawning = false;
+        //is_spawning = false;
     }
 
     void OnEnable()

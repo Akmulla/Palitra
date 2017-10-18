@@ -85,14 +85,7 @@ public class GameController : MonoBehaviour
             //lvl_number = 0;
             SaveLoadGame.save_load.LoadProgress();
 
-            if (game_state == GameState.GameOver)
-            {
-                reload_part = true;
-            }
-            else
-            {
-                reload_part = false;
-            }
+            reload_part = game_state == GameState.GameOver;
             StartCoroutine(BeginGameCoroutine());
         }
     }
@@ -100,11 +93,9 @@ public class GameController : MonoBehaviour
     IEnumerator BeginGameCoroutine()
     {
         lines_passed = 0;
-        total_line_count = GameController.game_controller.GetLvlData().total_line_count;
+        total_line_count = game_controller.GetLvlData().total_line_count;
         Line_Switch.InitText();
-        bool animate=false;
-        if (game_state == GameState.MainMenu)
-            animate = true;
+        bool animate = game_state == GameState.MainMenu;
 
         SoundManager.sound_manager.GameTheme();
         if (reload_part)
@@ -200,7 +191,7 @@ public class GameController : MonoBehaviour
         //lvl_number++;
         CurrentLvl++;
         lines_passed = 0;
-        total_line_count = GameController.game_controller.GetLvlData().total_line_count;
+        total_line_count = game_controller.GetLvlData().total_line_count;
         SaveLoadGame.save_load.SaveProgress(CurrentLvl);
         //if (lvl_number < lvl_data.Length)
         {
@@ -224,17 +215,6 @@ public class GameController : MonoBehaviour
         //return lvl_data[lvl_number];
     }
 
-    void InitLvl()
-    {
-        //System.GC.Collect();
-        lines_passed = 0;
-
-        for (int i = 0; i < sectors.Length; i++)
-        {
-            sectors[i].InitSector(SkinManager.skin_manager.GetCurrentSkin().colors[i]);
-        }
-    }
-
     public void Pause()
     {
         saved_state = game_state;
@@ -252,6 +232,17 @@ public class GameController : MonoBehaviour
         ChangeState(saved_state);
         Time.timeScale = saved_time_scale;
         UIController.ui.UpdateUI();
+    }
+
+    public void ResumeForBanner()
+    {
+        //if (game_state != GameState.GameOver)
+        //    return;
+        print("resume");
+        ChangeState(GameState.Game);
+        Time.timeScale = saved_time_scale;
+        UIController.ui.UpdateUI();
+        EventManager.TriggerEvent("BeginGame");
     }
 
     public void ToMainMenu()
@@ -296,6 +287,7 @@ public class GameController : MonoBehaviour
             UIController.ui.UpdateUI();
             particle.TurnOff();
             EventManager.TriggerEvent("EndGame");
+            
         }
     }
 }

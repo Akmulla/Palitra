@@ -140,4 +140,61 @@ public class CreateAds : MonoBehaviour
                 break;
         }
     }
+
+    public void ShowContinueVideo()
+    {
+        StartCoroutine(ContinueVideo());
+    }
+
+    IEnumerator ContinueVideo()
+    {
+        GameController.game_controller.Pause();
+        yield return new WaitForSecondsRealtime(0.5f);
+        while (!Advertisement.IsReady("rewardedVideo"))
+        {
+            // yield return new WaitForEndOfFrame();
+            yield return new WaitForSecondsRealtime(0.2f);
+        }
+        var options = new ShowOptions { resultCallback = HandleContinueResult };
+        Advertisement.Show("rewardedVideo", options);
+
+        while (Advertisement.isShowing)
+        {
+            //print("showing");
+            //yield return new WaitForEndOfFrame();
+            yield return new WaitForSecondsRealtime(0.2f);
+        }
+
+        //while (Advertisement.isShowing)
+        //{
+        //    yield return new WaitForEndOfFrame();
+        //}
+
+        //GameController.game_controller.Continue();
+    }
+
+    void HandleContinueResult(ShowResult result)
+    {
+        switch (result)
+        {
+            case ShowResult.Finished:
+                Debug.Log("The ad was successfully shown.");
+                //
+                // YOUR CODE TO REWARD THE GAMER
+                // Give coins etc.
+                GameController.game_controller.ResumeForBanner();
+                break;
+            case ShowResult.Skipped:
+                Debug.Log("The ad was skipped before reaching the end.");
+                GameController.game_controller.Continue();
+                break;
+            case ShowResult.Failed:
+                Debug.LogError("The ad failed to be shown.");
+                GameController.game_controller.Continue();
+                break;
+            default:
+                GameController.game_controller.Continue();
+                break;
+        }
+    }
 }

@@ -35,14 +35,7 @@ public class Hearts : MonoBehaviour
 
     public bool CheckHearts()
     {
-        if (hearts>0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return hearts>0;
     }
 
     void OnEnable()
