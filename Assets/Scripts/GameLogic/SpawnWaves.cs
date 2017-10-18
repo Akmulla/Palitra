@@ -23,8 +23,8 @@ public class SpawnWaves : MonoBehaviour
     public float dist;
     public float edge;
     public float offset = 0.5f;
-    int lines_passed;
-    int lines_spawned;
+    public int lines_passed;
+    public int lines_spawned;
 
     bool is_spawning=false;
     LvlData lvl_data;
@@ -77,6 +77,7 @@ public class SpawnWaves : MonoBehaviour
     void EndGame()
     {
         //is_spawning = false;
+       // lines_spawned = lines_passed;
     }
 
     void OnEnable()

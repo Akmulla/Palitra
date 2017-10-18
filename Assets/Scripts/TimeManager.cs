@@ -46,7 +46,7 @@ public class TimeManager : MonoBehaviour
 	void CheckNewHearts()
     {
         TimeSpan delta = time - lastTime;
-        if (delta.TotalSeconds > 5)
+        if (delta.TotalSeconds > 500)
         {
             lastTime = time;
             Hearts.h.Heart += (int)delta.TotalSeconds / 5;

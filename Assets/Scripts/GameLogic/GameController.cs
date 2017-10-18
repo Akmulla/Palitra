@@ -80,14 +80,14 @@ public class GameController : MonoBehaviour
         if (!Hearts.h.CheckHearts())
             return;
 
-        if ((game_state == GameState.MainMenu)||(game_state == GameState.GameOver))
-        {
-            //lvl_number = 0;
-            SaveLoadGame.save_load.LoadProgress();
+        if ((game_state != GameState.MainMenu) && (game_state != GameState.GameOver))
+            return;
 
-            reload_part = game_state == GameState.GameOver;
-            StartCoroutine(BeginGameCoroutine());
-        }
+        //lvl_number = 0;
+        SaveLoadGame.save_load.LoadProgress();
+
+        reload_part = game_state == GameState.GameOver;
+        StartCoroutine(BeginGameCoroutine());
     }
 
     IEnumerator BeginGameCoroutine()
@@ -178,7 +178,7 @@ public class GameController : MonoBehaviour
     void LinePassed()
     {
         lines_passed++;
-        if (lines_passed >= total_line_count)
+        if ((lines_passed >= total_line_count)&&(game_state==GameState.Game))
         {
             EventManager.TriggerEvent("LvlFinished");
             //Debug.Break();
@@ -242,7 +242,10 @@ public class GameController : MonoBehaviour
         ChangeState(GameState.Game);
         Time.timeScale = saved_time_scale;
         UIController.ui.UpdateUI();
+        
         EventManager.TriggerEvent("BeginGame");
+        //засчитываем зафейленную линию как пройденную
+        EventManager.TriggerEvent("LinePassed");
     }
 
     public void ToMainMenu()
@@ -286,6 +289,7 @@ public class GameController : MonoBehaviour
 
             UIController.ui.UpdateUI();
             particle.TurnOff();
+            //lines_passed = SpawnWaves.spawn.lines_passed;
             EventManager.TriggerEvent("EndGame");
             
         }

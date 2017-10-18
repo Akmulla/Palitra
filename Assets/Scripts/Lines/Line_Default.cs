@@ -36,7 +36,7 @@ public class Line_Default : Line
         //}
         
         
-        if ( Ball.ball.LinePassed(line_color));
+        if ( Ball.ball.LinePassed(line_color))
             anim.BeginAnimation();
     }
 
