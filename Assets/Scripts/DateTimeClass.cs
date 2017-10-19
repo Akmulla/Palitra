@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System;
+﻿using System;
 using System.IO;
+using System.Net.Sockets;
 
 public class DateTimeClass
 {
@@ -10,7 +9,7 @@ public class DateTimeClass
         return new DateTime(1000, 1, 1); //to check if we have an online date or not.
     }
 
-    public static DateTime GetNISTDate()
+    public static DateTime GetNistDate()
     {
         Random ran = new Random(DateTime.Now.Millisecond);
         DateTime date = GetDummyDate();
@@ -24,8 +23,7 @@ public class DateTimeClass
         //    };
 
        // Represents the list of NIST servers
-        string[] servers = new string[]
-        {
+        string[] servers = {
         "nist1-la.ustiming.org",
         "nist1-ny.ustiming.org",
         "time-a.nist.gov",
@@ -42,7 +40,7 @@ public class DateTimeClass
                 
                 // Open a StreamReader to a random time server
                 //StreamReader reader = new StreamReader(new System.Net.Sockets.TcpClient(servers[ran.Next(0, servers.Length)], 13).GetStream());
-                StreamReader reader = new StreamReader(new System.Net.Sockets.TcpClient(servers[i], 13).GetStream());
+                StreamReader reader = new StreamReader(new TcpClient(servers[i], 13).GetStream());
                 serverResponse = reader.ReadToEnd();
                 reader.Close();
 

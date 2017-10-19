@@ -1,30 +1,29 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class BlockMove : MonoBehaviour
 {
-    float speed;
-    float half_window_size;
+    float _speed;
+    float _halfWindowSize;
 
 	void Start ()
     {
-        half_window_size = (Edges.rightEdge - Edges.leftEdge)/2.0f;
+        _halfWindowSize = (Edges.rightEdge - Edges.leftEdge)/2.0f;
     }
 
 	void Update ()
     {
-        transform.Translate(Vector2.right * speed * Time.deltaTime);
+        transform.Translate(Vector2.right * _speed * Time.deltaTime);
 
-        if (transform.position.x - half_window_size > Edges.rightEdge)
+        if (transform.position.x - _halfWindowSize > Edges.rightEdge)
         {
-            Vector3 new_position = transform.position;
-            new_position.x = Edges.leftEdge - half_window_size;
-            transform.position = new_position;
+            Vector3 newPosition = transform.position;
+            newPosition.x = Edges.leftEdge - _halfWindowSize;
+            transform.position = newPosition;
         }
 	}
 
-    public void SetSpeed(float new_speed)
+    public void SetSpeed(float newSpeed)
     {
-        speed = new_speed;
+        _speed = newSpeed;
     }
 }

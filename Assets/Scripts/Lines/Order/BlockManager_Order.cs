@@ -1,32 +1,31 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class BlockManager_Order : MonoBehaviour
+public class BlockManagerOrder : MonoBehaviour
 {
-    public int block_count;
+    public int blockCount;
     public GameObject block;
-    public Transform block_holder;
+    public Transform blockHolder;
     public Transform arrow;
 
     [SerializeField]
-    float offset_y = 0.0f;
+    float _offsetY;
     [SerializeField]
-    Block_Order[] block_mas;
-    Line_Order line;
-    float block_size;
-    float window_size;
+    BlockOrder[] _blockMas;
+    LineOrder _line;
+    float _blockSize;
+    float _windowSize;
     //int active_block_count;
-    int current_block;
-    SpriteRenderer arrow_rend;
+    int _currentBlock;
+    SpriteRenderer _arrowRend;
 
 
-    Color saved_color = Color.clear;
-    float saved_time = 0.0f;
+    Color _savedColor = Color.clear;
+    float _savedTime;
 
     void Awake()
     {
-        line = GetComponent<Line_Order>();
-        arrow_rend = arrow.gameObject.GetComponent<SpriteRenderer>();
+        _line = GetComponent<LineOrder>();
+        _arrowRend = arrow.gameObject.GetComponent<SpriteRenderer>();
     }
 
     void OnEnable()
@@ -42,42 +41,42 @@ public class BlockManager_Order : MonoBehaviour
 
     void ColorChanged()
     {
-        if ((!line.finished) && 
-            ((saved_color != Ball.ball.GetColor())||(saved_time+0.25f<Time.time)))
+        if ((!_line.finished) && 
+            ((_savedColor != Ball.ball.GetColor())||(_savedTime+0.25f<Time.time)))
         {
-            if ( (Ball.ball.GetPosition().y > line.prev_edge) &&
-                    (Ball.ball.GetColor() == block_mas[current_block].GetColor()) )
+            if ( (Ball.ball.GetPosition().y > _line.prevEdge) &&
+                    (Ball.ball.GetColor() == _blockMas[_currentBlock].GetColor()) )
             {
-                block_mas[current_block].Disable();
-                current_block++;
+                _blockMas[_currentBlock].Disable();
+                _currentBlock++;
 
-                if (current_block >= block_count)
+                if (_currentBlock >= blockCount)
                 {
-                    line.finished = true;
-                    BallMove.ball_move.ResumeSpeed();
+                    _line.finished = true;
+                    BallMove.ballMove.ResumeSpeed();
                     arrow.gameObject.SetActive(false);
                     return;
                 }
 
-                arrow.position = block_mas[current_block].GetPosition() + 
-                    new Vector3(0.0f, line.GetHeight()+ offset_y, 0.0f);
+                arrow.position = _blockMas[_currentBlock].GetPosition() + 
+                    new Vector3(0.0f, _line.GetHeight()+ _offsetY, 0.0f);
 
-                saved_color = Ball.ball.GetColor();
-                saved_time = Time.time;
+                _savedColor = Ball.ball.GetColor();
+                _savedTime = Time.time;
             }
             else
             {
-                foreach (Block_Order item in block_mas)
+                foreach (BlockOrder item in _blockMas)
                 {
                     item.Enable();
                 }
 
-                current_block = 0;
-                arrow.position = block_mas[0].GetPosition() + 
-                    new Vector3(0.0f, line.GetHeight() + offset_y, 0.0f);
+                _currentBlock = 0;
+                arrow.position = _blockMas[0].GetPosition() + 
+                    new Vector3(0.0f, _line.GetHeight() + _offsetY, 0.0f);
             }
 
-            arrow_rend.color = block_mas[current_block].GetColor();
+            _arrowRend.color = _blockMas[_currentBlock].GetColor();
             
         }
         
@@ -85,82 +84,82 @@ public class BlockManager_Order : MonoBehaviour
 
     public void InitBlocks()
     {
-        current_block = 0;
-        window_size = Edges.rightEdge - Edges.leftEdge;
-        block_size = window_size / (float)block_count;
-        Vector3 spawn_position;
+        _currentBlock = 0;
+        _windowSize = Edges.rightEdge - Edges.leftEdge;
+        _blockSize = _windowSize / blockCount;
+        Vector3 spawnPosition;
         GameObject obj;
 
-        for (int i = 0; i < block_count; i++)
+        for (int i = 0; i < blockCount; i++)
         {
-            spawn_position = new Vector3
-                (Edges.leftEdge + block_size / 2.0f + block_size * i, transform.position.y);
-            obj = block_mas[i].gameObject;
-            obj.transform.position = spawn_position;
-            obj.transform.localScale = new Vector3(block_size, obj.transform.localScale.y, 1.0f);
-            obj.transform.SetParent(block_holder);
+            spawnPosition = new Vector3
+                (Edges.leftEdge + _blockSize / 2.0f + _blockSize * i, transform.position.y);
+            obj = _blockMas[i].gameObject;
+            obj.transform.position = spawnPosition;
+            obj.transform.localScale = new Vector3(_blockSize, obj.transform.localScale.y, 1.0f);
+            obj.transform.SetParent(blockHolder);
             obj.SetActive(true);
         }
         
         SetColors();
         arrow.gameObject.SetActive(true);
-        if (block_mas != null)
-            arrow.position = block_mas[0].GetPosition() + 
-                new Vector3(0.0f, line.GetHeight(), 0.0f);
-        arrow_rend.color = block_mas[0].GetColor();
+        if (_blockMas != null)
+            arrow.position = _blockMas[0].GetPosition() + 
+                new Vector3(0.0f, _line.GetHeight(), 0.0f);
+        _arrowRend.color = _blockMas[0].GetColor();
     }
 
     public void SetDefault()
     {
-        current_block = 0;
+        _currentBlock = 0;
         arrow.gameObject.SetActive(true);
-        arrow.position = block_mas[0].GetPosition() +
-                new Vector3(0.0f, line.GetHeight() + offset_y, 0.0f);
-        arrow_rend.color = block_mas[0].GetColor();
+        arrow.position = _blockMas[0].GetPosition() +
+                new Vector3(0.0f, _line.GetHeight() + _offsetY, 0.0f);
+        _arrowRend.color = _blockMas[0].GetColor();
     }
 
     void SetColors()
     {
-        Color[] new_colors;
-        float full_length =Mathf.Abs( Edges.center_x - line.left.GetComponent<Renderer>().bounds.size.x);
-        float visible_lenght= Mathf.Abs(Edges.center_x - Edges.leftEdge);
+        Color[] newColors;
+        float fullLength =Mathf.Abs( Edges.centerX - _line.left.GetComponent<Renderer>().bounds.size.x);
+        float visibleLenght= Mathf.Abs(Edges.centerX - Edges.leftEdge);
         
-        float unused_part = ((full_length - visible_lenght) / full_length)/2.0f;
-        Texture2D texture = line.texture_handler.CreateTexture(SkinManager.skin_manager.GetCurrentSkin().colors
-            , block_count, unused_part, out new_colors);
+        float unusedPart = ((fullLength - visibleLenght) / fullLength)/2.0f;
+        Texture2D texture = _line.textureHandler.CreateTexture(SkinManager.skinManager.GetCurrentSkin().colors
+            , blockCount, unusedPart, out newColors);
 
-        for (int i = 0; i < block_count; i++)
+        for (int i = 0; i < blockCount; i++)
         {
-            block_mas[i].SetColor(new_colors[i]);
+            _blockMas[i].SetColor(newColors[i]);
         }
 
-        line.SetTexture(texture);
+        _line.SetTexture(texture);
     }
 
 
     void SetRandomColors()
     {
-        Color[] colors = new Color[block_count];
-        colors[0] = SkinManager.skin_manager.GetCurrentSkin().colors
-       [UnityEngine.Random.Range(0, SkinManager.skin_manager.GetCurrentSkin().colors.Length)];
-        for (int i = 1; i < block_count; i++)
+        Color[] colors = new Color[blockCount];
+        colors[0] = SkinManager.skinManager.GetCurrentSkin().colors
+       [Random.Range(0, SkinManager.skinManager.GetCurrentSkin().colors.Length)];
+        for (int i = 1; i < blockCount; i++)
         {
             Color color = Color.black;
-            for (int j = 0; j < SkinManager.skin_manager.GetCurrentSkin().colors.Length; j++)
+            for (int j = 0; j < SkinManager.skinManager.GetCurrentSkin().colors.Length; j++)
             {
-                bool cond1 = (SkinManager.skin_manager.GetCurrentSkin().colors[j] != colors[i - 1]);
+                bool cond1 = (SkinManager.skinManager.GetCurrentSkin().colors[j] != colors[i - 1]);
                 if (cond1)
                 {
-                    color = SkinManager.skin_manager.GetCurrentSkin().colors[j];
+                    color = SkinManager.skinManager.GetCurrentSkin().colors[j];
                     break;
                 }
             }
             colors[i] = color;
         }
 
-        for (int i = 0; i < block_count; i++)
+        for (int i = 0; i < blockCount; i++)
         {
-            block_mas[i].SetColor(colors[i]);
+            _blockMas[i].SetColor(colors[i]);
         }
     }
 }

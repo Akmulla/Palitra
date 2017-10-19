@@ -1,17 +1,16 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class PoolRef : MonoBehaviour
 {
-    Pool pool;
+    Pool _pool;
 
     public Pool GetPool()
     {
-        return pool;
+        return _pool;
     }
 
-    public void SetPool(Pool new_pool)
+    public void SetPool(Pool newPool)
     {
-        pool = new_pool;
+        _pool = newPool;
     }
 }

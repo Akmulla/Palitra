@@ -1,22 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ParticleMove : MonoBehaviour
 {
-    Transform cam;
-    float offset;
-    Transform tran;
+    Transform _cam;
+    float _offset;
+    Transform _tran;
 
 	void Awake ()
     {
-        cam = Camera.main.gameObject.transform;
-        tran = GetComponent<Transform>();
-        offset = tran.position.y - cam.position.y;
+        _cam = Camera.main.gameObject.transform;
+        _tran = GetComponent<Transform>();
+        _offset = _tran.position.y - _cam.position.y;
 	}
 	
 	void Update ()
     {
-        tran.position = new Vector3(cam.position.x, cam.position.y+offset,1.0f);
+        _tran.position = new Vector3(_cam.position.x, _cam.position.y+_offset,1.0f);
 	}
 }

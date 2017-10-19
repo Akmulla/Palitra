@@ -1,16 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Button_LifeMenu : MonoBehaviour
+public class ButtonLifeMenu : MonoBehaviour
 {
 	public void Open()
     {
-        GameController.game_controller.ToLifeMenu();
+        GameController.gameController.ToLifeMenu();
     }
 
     public void Close()
     {
-        GameController.game_controller.ToMainMenu();
+        GameController.gameController.ToMainMenu();
     }
 }

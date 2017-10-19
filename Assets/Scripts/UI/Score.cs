@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 
 public class Score : MonoBehaviour 
@@ -11,7 +10,7 @@ public class Score : MonoBehaviour
 	{
 		text = GetComponent<Text> ();
        // lines_passed = 0;
-		text.text = GlobalScore.global_score.Score.ToString ();
+		text.text = GlobalScore.globalScore.Score.ToString ();
 	}
 	
 	void OnEnable()
@@ -27,27 +26,27 @@ public class Score : MonoBehaviour
     void LvlFinished()
     {
         //int coeff = (GameController.game_controller.GetCurrentLvl() + 1) / 5;
-        int add_score = 0;
-        add_score += 10;
-        if (GameController.game_controller.CurrentLvl != 0)
+        int addScore = 0;
+        addScore += 10;
+        if (GameController.gameController.CurrentLvl != 0)
         {
-            if ((GameController.game_controller.CurrentLvl + 1) % 5 == 0)
+            if ((GameController.gameController.CurrentLvl + 1) % 5 == 0)
             {
-                add_score += GameController.game_controller.CurrentLvl + 1;
+                addScore += GameController.gameController.CurrentLvl + 1;
             }
 
         }
 
-        if (Ball.ball.trian_type == TrianType.DoublePoints)
-            add_score *= 2;
+        if (Ball.ball.trianType == TrianType.DoublePoints)
+            addScore *= 2;
 
-        if (Ball.ball.trian_type == TrianType.HalfPoints)
-            add_score /= 2;
+        if (Ball.ball.trianType == TrianType.HalfPoints)
+            addScore /= 2;
 
 
 
-        GlobalScore.global_score.Score += add_score;
-        text.text = GlobalScore.global_score.Score.ToString();
+        GlobalScore.globalScore.Score += addScore;
+        text.text = GlobalScore.globalScore.Score.ToString();
 
         //GlobalScore.global_score.Score += 10;
         //if (GameController.game_controller.CurrentLvl!=0)

@@ -1,22 +1,21 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class DestroyOnExit : MonoBehaviour
 {
-    Pool pool;
-    Transform tran;
-    float size_y;
+    Pool _pool;
+    Transform _tran;
+    float _sizeY;
 
     void Start()
     {
-        pool = GetComponent <PoolRef>().GetPool();
-        tran = GetComponent<Transform>();
-        size_y = GetComponent<Line>().GetHeight();
+        _pool = GetComponent <PoolRef>().GetPool();
+        _tran = GetComponent<Transform>();
+        _sizeY = GetComponent<Line>().GetHeight();
     }
 
     void Update()
     {
-        if (tran.position.y + size_y < Edges.botEdge)
-            pool.Deactivate(gameObject);
+        if (_tran.position.y + _sizeY < Edges.botEdge)
+            _pool.Deactivate(gameObject);
     }
 }

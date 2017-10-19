@@ -1,15 +1,15 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System;
+using UnityEngine;
 
-[System.Serializable]
+[Serializable]
 public class MultipleProp
 {
     [Tooltip("Количество линий")]
     public int count;
     [Tooltip("Минимально возможное кол-во нажатий, которое необходимо для прохождения")]
-    public int min_taps;
+    public int minTaps;
     [Tooltip("Максимально возможное кол-во нажатий, которое необходимо для прохождения")]
-    public int max_taps;
+    public int maxTaps;
     [Tooltip("Значение, до которого замедляется шар")]
     public float slowing;
 }

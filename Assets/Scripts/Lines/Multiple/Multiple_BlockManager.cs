@@ -1,20 +1,18 @@
 ﻿using UnityEngine;
 //using System;
-using System.Collections;
-using System.Collections.Generic;
 
-public class Multiple_BlockManager : MonoBehaviour
+public class MultipleBlockManager : MonoBehaviour
 {
-    public int block_count;
+    public int blockCount;
     public GameObject block;
-    public Transform block_holder;
+    public Transform blockHolder;
     [SerializeField]
-    Multiple_Block[] block_mas;
-    Line_Multiple line;
-    float block_size;
-    float window_size;
-    int active_block_count;
-    Color[] new_colors;
+    MultipleBlock[] _blockMas;
+    LineMultiple _line;
+    float _blockSize;
+    float _windowSize;
+    int _activeBlockCount;
+    Color[] _newColors;
     //int current_block;
 
     void Start()
@@ -25,15 +23,15 @@ public class Multiple_BlockManager : MonoBehaviour
 
     public void SetDefault()
     {
-        for (int i = 0; i < block_count; i++)
+        for (int i = 0; i < blockCount; i++)
         {
             //block_mas[i].SetColor(new_colors[i]);
-            block_mas[i].InitBlock(block_count, new_colors[i]);
+            _blockMas[i].InitBlock(blockCount, _newColors[i]);
         }
     }
     void OnEnable()
     {
-        active_block_count = block_count;
+        _activeBlockCount = blockCount;
         EventManager.StartListening("BallColorChanged", ColorChanged);
         //current_block = 0;
     }
@@ -43,38 +41,38 @@ public class Multiple_BlockManager : MonoBehaviour
     }
     void ColorChanged()
     {
-        foreach (Multiple_Block item in block_mas)
+        foreach (MultipleBlock item in _blockMas)
         {
-            if ((Ball.ball.GetPosition().y> line.prev_edge) &&
+            if ((Ball.ball.GetPosition().y> _line.prevEdge) &&
                 (Ball.ball.GetColor() == item.GetColor()) && (item.active))
             {
                 if (item.Hit())
                 {
-                    active_block_count--;
+                    _activeBlockCount--;
 
                 }
-                if (active_block_count<=0)
+                if (_activeBlockCount<=0)
                 {
-                    line.finished = true;
+                    _line.finished = true;
                     Ball.ball.LinePassed(Ball.ball.GetColor());
-                    BallMove.ball_move.ResumeSpeed();
+                    BallMove.ballMove.ResumeSpeed();
                 }
             }
         }
     }
     public void InitBlocks()
     {
-        line = GetComponent<Line_Multiple>();
-        Vector3 spawn_position;
+        _line = GetComponent<LineMultiple>();
+        Vector3 spawnPosition;
         GameObject obj;
-        window_size = Edges.rightEdge - Edges.leftEdge;
-        block_size = window_size / (float)block_count;
-        for (int i = 0; i < block_count; i++)
+        _windowSize = Edges.rightEdge - Edges.leftEdge;
+        _blockSize = _windowSize / blockCount;
+        for (int i = 0; i < blockCount; i++)
         {
-            spawn_position = new Vector3(Edges.leftEdge + block_size / 2.0f + block_size * i, transform.position.y);
+            spawnPosition = new Vector3(Edges.leftEdge + _blockSize / 2.0f + _blockSize * i, transform.position.y);
             //obj = (GameObject)Instantiate(block, spawn_position, Quaternion.identity);
-            obj = block_mas[i].gameObject;
-            obj.transform.position = spawn_position;
+            obj = _blockMas[i].gameObject;
+            obj.transform.position = spawnPosition;
             //obj.transform.localScale = new Vector3(block_size, obj.transform.localScale.y, 1.0f);
             //obj.transform.SetParent(block_holder);
             obj.SetActive(true);
@@ -85,25 +83,25 @@ public class Multiple_BlockManager : MonoBehaviour
 
     void SetColors()
     {
-        Color[] colors = SkinManager.skin_manager.GetCurrentSkin().colors;
+        Color[] colors = SkinManager.skinManager.GetCurrentSkin().colors;
         //Color[] new_colors=new Color[block_count];
         //Texture2D[] texture = TextureHandler.CreateTexture(colors, block_count, out new_colors);
-        float full_length = Mathf.Abs(Edges.center_x - 
-            line.left.GetComponent<Renderer>().bounds.size.x);
-        float visible_lenght = Mathf.Abs(Edges.center_x - Edges.leftEdge);
+        float fullLength = Mathf.Abs(Edges.centerX - 
+            _line.left.GetComponent<Renderer>().bounds.size.x);
+        float visibleLenght = Mathf.Abs(Edges.centerX - Edges.leftEdge);
 
         //float unused_part = 1.0f - (full_length - visible_lenght) / full_length;
-        float unused_part = (full_length - visible_lenght) / full_length;
-        unused_part /= 2.0f;
-        Texture2D texture = line.texture_handler.CreateTexture(colors, block_count, 
-            unused_part, out new_colors);
+        float unusedPart = (fullLength - visibleLenght) / fullLength;
+        unusedPart /= 2.0f;
+        Texture2D texture = _line.textureHandler.CreateTexture(colors, blockCount, 
+            unusedPart, out _newColors);
         //print(new_colors.Length);
-        for (int i = 0; i < block_count; i++)
+        for (int i = 0; i < blockCount; i++)
         {
             //block_mas[i].SetColor(new_colors[i]);
-            block_mas[i].InitBlock(block_count,new_colors[i]);
+            _blockMas[i].InitBlock(blockCount,_newColors[i]);
         }
-        line.SetTexture(texture);
+        _line.SetTexture(texture);
     }
 
     void SetHp()

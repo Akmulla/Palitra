@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Button_SkinMenu : MonoBehaviour
+public class ButtonSkinMenu : MonoBehaviour
 {
     public void ToSkinMenu()
     {
-        SoundManager.sound_manager.SingleSound(SoundSample.ToSkin);
-        GameController.game_controller.ToSkinMenu();
+        SoundManager.soundManager.SingleSound(SoundSample.ToSkin);
+        GameController.gameController.ToSkinMenu();
     }
 }

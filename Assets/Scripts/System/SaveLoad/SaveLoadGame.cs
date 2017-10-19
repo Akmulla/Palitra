@@ -1,15 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
-using System;
 
 public class SaveLoadGame : MonoBehaviour
 {
     //int lvl = 0;
     public int hearts;
-    public bool StartCustomLvl = false;
-    public int start_lvl;
-    public static SaveLoadGame save_load;
+    public bool startCustomLvl;
+    public int startLvl;
+    public static SaveLoadGame saveLoad;
 
     public void SaveProgress(int lvl)
     {
@@ -22,11 +20,11 @@ public class SaveLoadGame : MonoBehaviour
     public void Awake()
     {
         
-        save_load = this;
-        if (StartCustomLvl)
+        saveLoad = this;
+        if (startCustomLvl)
         {
             // PlayerPrefs.DeleteAll();
-            PlayerPrefs.SetInt("Progress", start_lvl);
+            PlayerPrefs.SetInt("Progress", startLvl);
             PlayerPrefs.Save();
         }
             
@@ -51,7 +49,7 @@ public class SaveLoadGame : MonoBehaviour
         }
 
         // GameController.game_controller.SetCurrentLvl(PlayerPrefs.GetInt("Progress"));
-        GameController.game_controller.CurrentLvl=PlayerPrefs.GetInt("Progress");
+        GameController.gameController.CurrentLvl=PlayerPrefs.GetInt("Progress");
     }
 
     public void ResetProgress()
@@ -59,7 +57,7 @@ public class SaveLoadGame : MonoBehaviour
         PlayerPrefs.SetInt("Progress", 0);
         PlayerPrefs.Save();
         //GameController.game_controller.SetCurrentLvl(PlayerPrefs.GetInt("Progress"));
-        GameController.game_controller.CurrentLvl=PlayerPrefs.GetInt("Progress");
+        GameController.gameController.CurrentLvl=PlayerPrefs.GetInt("Progress");
     }
 
     public void SaveTime(DateTime time)

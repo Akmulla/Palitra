@@ -1,21 +1,20 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class Block : MonoBehaviour
 {
     public bool collides;
-    BlockManager block_manager;
-    static float collision_dist = 0.01f;
+    BlockManager _blockManager;
+    static float _collisionDist = 0.01f;
 
     void Start()
     {
-        block_manager = GetComponentInParent<BlockManager>();
+        _blockManager = GetComponentInParent<BlockManager>();
     }
 
     public void SetRandomColor()
     {
-        GetComponent<SpriteRenderer>().color = SkinManager.skin_manager.GetCurrentSkin().colors
-            [Random.Range(0, SkinManager.skin_manager.GetCurrentSkin().colors.Length)];
+        GetComponent<SpriteRenderer>().color = SkinManager.skinManager.GetCurrentSkin().colors
+            [Random.Range(0, SkinManager.skinManager.GetCurrentSkin().colors.Length)];
     }
 
     public void SetColor(Color color)
@@ -35,10 +34,9 @@ public class Block : MonoBehaviour
 
     public bool CheckIfCollides()
     {
-        if ((transform.position.x + block_manager.block_size / 2.0f+collision_dist>=0.0f) &&
-                (transform.position.x - block_manager.block_size / 2.0f - collision_dist <= 0.0f))
+        if ((transform.position.x + _blockManager.blockSize / 2.0f+_collisionDist>=0.0f) &&
+                (transform.position.x - _blockManager.blockSize / 2.0f - _collisionDist <= 0.0f))
             return true;
-        else
-            return false;    
+        return false;
     }
 }

@@ -4,39 +4,39 @@ using UnityEngine;
 
 public class PoolDefaultLines : Pool
 {
-    int col = 0;
-    int prev_col = 0;
-    int ban_col=4;
+    int _col;
+    int _prevCol;
+    int _banCol=4;
 
-    int create_col=0;
+    int _createCol;
     //GameObject[,] lines = new GameObject[3, 3];
 
     public override void Awake()
     {
-        create_col = 0;
-        prev_col = 0;
-        col = 0;
+        _createCol = 0;
+        _prevCol = 0;
+        _col = 0;
         base.Awake();
     }
     public override GameObject Pop()
     {
-        ban_col = 4;
+        _banCol = 4;
         List<int> ind = new List<int>();
         for (int i = 0; i < stck.Length; i++)
         {
-            if ((!stck[i].activeSelf)&&(i/3!=ban_col))
+            if ((!stck[i].activeSelf)&&(i/3!=_banCol))
                 ind.Add(i);
         }
 
 
-        int i_col = ind[Random.Range(0, ind.Count)];
-        col = i_col / 3;
+        int iCol = ind[Random.Range(0, ind.Count)];
+        _col = iCol / 3;
 
-        if (col == prev_col)
-            ban_col = i_col;
+        if (_col == _prevCol)
+            _banCol = iCol;
 
-        prev_col = i_col;
-        return stck[i_col];
+        _prevCol = iCol;
+        return stck[iCol];
     }
 
     public override IEnumerator InitLineCor(int k)
@@ -44,11 +44,11 @@ public class PoolDefaultLines : Pool
         while (stck[k].activeSelf)
             yield return new WaitForEndOfFrame();
 
-        stck[k].GetComponent<Line_Default>().
-            InitLine(SkinManager.skin_manager.GetCurrentSkin().colors[create_col / 3] );
-        create_col++;
-        if (create_col >= 9)
-            create_col = 0;
+        stck[k].GetComponent<LineDefault>().
+            InitLine(SkinManager.skinManager.GetCurrentSkin().colors[_createCol / 3] );
+        _createCol++;
+        if (_createCol >= 9)
+            _createCol = 0;
         yield return null;
     }
 }

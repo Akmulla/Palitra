@@ -1,20 +1,20 @@
 ﻿using UnityEngine;
-using System.Collections;
+
 public enum LvlType
 {
-    Speed_incr, Dist_decr, Speed_incr_dist_incr, Speed_decr_dist_decr,
-    Speed_incr_dist_incr_half, Speed_decr_dist_decr_half, Count
+    SpeedIncr, DistDecr, SpeedIncrDistIncr, SpeedDecrDistDecr,
+    SpeedIncrDistIncrHalf, SpeedDecrDistDecrHalf, Count
 }
-[CreateAssetMenu()]
+[CreateAssetMenu]
 public class LvlData : ScriptableObject
 {
     [Header("Dist")]
     public float dist;
-    public float step_dist;
+    public float stepDist;
 
     [Header("Ball")]
     public float speed;
-    public float step_speed;
+    public float stepSpeed;
 
     //[Header("Coins")]
     //public int coins_reward;
@@ -22,32 +22,32 @@ public class LvlData : ScriptableObject
     [Header("Lines")]
 
     [Tooltip("Стандартная линия")]
-    public LineProp line_prop;
+    public LineProp lineProp;
 
     [Tooltip("Полоса, меняющая цвет")]
-    public SwitchProp switch_prop;
+    public SwitchProp switchProp;
 
     [Tooltip("Полосы, которые двигаются слева направо/справа налево")]
-    public BlockProp block_prop;
+    public BlockProp blockProp;
 
     [Tooltip("Полоса, на которой написаны цифры из 1 части")]
-    public MultipleProp multiple_prop_1_part;
+    public MultipleProp multipleProp1Part;
     [Tooltip("Полоса, на которой написаны цифры из 2 частей")]
-    public MultipleProp multiple_prop_2_parts;
+    public MultipleProp multipleProp2Parts;
     [Tooltip("Полоса, на которой написаны цифры из 3 частей")]
-    public MultipleProp multiple_prop_3_parts;
+    public MultipleProp multipleProp3Parts;
 
     [Tooltip("Комбо полоса из 3 частей")]
-    public ComboProp combo_prop_3_parts;
+    public ComboProp comboProp3Parts;
     [Tooltip("Комбо полоса из 4 частей")]
-    public ComboProp combo_prop_4_parts;
+    public ComboProp comboProp4Parts;
     [Tooltip("Комбо полоса из 5 частей")]
-    public ComboProp combo_prop_5_parts;
+    public ComboProp comboProp5Parts;
 
     //[HideInInspector]
-    public int total_line_count;
+    public int totalLineCount;
 
-    public LvlType lvl_type;
+    public LvlType lvlType;
     //[Header("Sectors")]
     //public Color[] colors;
 }

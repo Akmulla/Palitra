@@ -4,14 +4,14 @@ public abstract class Line : MonoBehaviour
 {
     protected float height;
     protected Transform tran;
-    protected bool active=false;
+    protected bool active;
     public GameObject left;
     public GameObject right;
     protected AnimationComponent anim;
-    MeshRenderer[] mesh_rend;
+    MeshRenderer[] _meshRend;
     [HideInInspector]
-    public TextureHandler texture_handler;
-    protected MeshResize[] mesh_resize;
+    public TextureHandler textureHandler;
+    protected MeshResize[] meshResize;
 
     protected virtual void Update()
     {
@@ -39,20 +39,20 @@ public abstract class Line : MonoBehaviour
 
     protected virtual void Awake()
     {
-        mesh_rend = GetComponentsInChildren<MeshRenderer>();
+        _meshRend = GetComponentsInChildren<MeshRenderer>();
         anim = GetComponent<AnimationComponent>();
         tran = GetComponent<Transform>();
         height = left.GetComponent<Renderer>().bounds.extents.y;
-        texture_handler=GetComponent<TextureHandler>();
-        mesh_resize = GetComponentsInChildren<MeshResize>();
+        textureHandler=GetComponent<TextureHandler>();
+        meshResize = GetComponentsInChildren<MeshResize>();
     }
 
     public virtual void InitLine()
     {
         active = false;
-        for (int i=0;i<mesh_resize.Length;i++)
+        for (int i=0;i<meshResize.Length;i++)
         {
-            mesh_resize[i].scale();
+            meshResize[i].Scale();
         }
         ChangeColor();
     }
@@ -68,10 +68,10 @@ public abstract class Line : MonoBehaviour
 
     public void SetTexture(Texture2D texture)
     {
-        mesh_rend[0].materials[0].mainTexture = texture;
-        mesh_rend[0].materials[1].mainTexture = texture;
-        mesh_rend[1].materials[0].mainTexture = texture;
-        mesh_rend[1].materials[1].mainTexture = texture;
+        _meshRend[0].materials[0].mainTexture = texture;
+        _meshRend[0].materials[1].mainTexture = texture;
+        _meshRend[1].materials[0].mainTexture = texture;
+        _meshRend[1].materials[1].mainTexture = texture;
     }
 
     protected virtual void OnEnable()

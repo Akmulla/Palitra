@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class ChangeToSkinColor : MonoBehaviour
 {
-    public enum SkinColors { Color_1,Color_2,Color_3,Background,Particle};
+    public enum SkinColors { Color1,Color2,Color3,Background,Particle}
     public SkinColors color;
 	
     void OnEnable()
@@ -19,54 +19,54 @@ public class ChangeToSkinColor : MonoBehaviour
 
     void ChangeColor()
     {
-        Color apply_color=Color.black;
+        Color applyColor=Color.black;
 
         if (color==SkinColors.Particle)
         {
-            apply_color = SkinManager.skin_manager.GetCurrentSkin().particle_color;
+            applyColor = SkinManager.skinManager.GetCurrentSkin().particleColor;
         }
         else
         {
             if (color == SkinColors.Background)
             {
-                apply_color = SkinManager.skin_manager.GetCurrentSkin().bg_color;
+                applyColor = SkinManager.skinManager.GetCurrentSkin().bgColor;
             }
             else
             {
-                apply_color = SkinManager.skin_manager.GetCurrentSkin().colors[(int)color];
+                applyColor = SkinManager.skinManager.GetCurrentSkin().colors[(int)color];
             }
         }
 
         Image image = GetComponent<Image>();
         if (image!=null)
         {
-            image.color = apply_color;
+            image.color = applyColor;
         }
         
-        SpriteRenderer sprite_rend = GetComponent<SpriteRenderer>();
-        if (sprite_rend != null)
+        SpriteRenderer spriteRend = GetComponent<SpriteRenderer>();
+        if (spriteRend != null)
         {
-            sprite_rend.color = apply_color;
+            spriteRend.color = applyColor;
         }
 
         Text text = GetComponent<Text>();
         if (text != null)
         {
-            text.color = apply_color;
+            text.color = applyColor;
         }
 
         Camera cam = GetComponent<Camera>();
         if (cam!=null)
         {
-            cam.backgroundColor = apply_color;
+            cam.backgroundColor = applyColor;
         }
         
         if (color == SkinColors.Particle)
         {
             ParticleSystem.ColorOverLifetimeModule part = GetComponent<ParticleSystem>().colorOverLifetime;
-            part.color = apply_color;
+            part.color = applyColor;
             ParticleSystem.MainModule part2 = GetComponent<ParticleSystem>().main;
-            part2.startColor = apply_color;
+            part2.startColor = applyColor;
         }
     }
 }

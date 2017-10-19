@@ -1,70 +1,70 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class BlockManager : MonoBehaviour
 {
-    public int block_count;
+    public int blockCount;
     public GameObject block;
-    public Transform block_holder;
+    public Transform blockHolder;
     public Transform man;
-    Block[] block_mas;
+    Block[] _blockMas;
     [HideInInspector]
-    public float block_size;
-    float window_size;
-    public static float spawn_point;
+    public float blockSize;
+    float _windowSize;
+    public static float spawnPoint;
 
     public void InitBlocks()
     {
-        window_size = Edges.rightEdge - Edges.leftEdge;
-        block_size = window_size / (float)block_count;
-        spawn_point = Edges.leftEdge - window_size;
+        _windowSize = Edges.rightEdge - Edges.leftEdge;
+        blockSize = _windowSize / blockCount;
+        spawnPoint = Edges.leftEdge - _windowSize;
         //float offset = -5.0f;
-        Vector3 spawn_position;
+        Vector3 spawnPosition;
         GameObject obj;
-        Color prev_color=Color.black;
-        for (int i=0;i<block_count;i++)
+        Color prevColor=Color.black;
+        for (int i=0;i<blockCount;i++)
         {
             //spawn_position = new Vector3(Edges.leftEdge + block_size/2.0f + block_size * i + offset, transform.position.y);
-            spawn_position = new Vector3(Edges.leftEdge + block_size / 2.0f + block_size * i, transform.position.y);
-            obj = (GameObject)Instantiate(block, spawn_position,Quaternion.identity);
-            obj.transform.localScale = new Vector3(block_size+0.1f, obj.transform.localScale.y, 1.0f);
+            spawnPosition = new Vector3(Edges.leftEdge + blockSize / 2.0f + blockSize * i, transform.position.y);
+            obj = Instantiate(block, spawnPosition,Quaternion.identity);
+            obj.transform.localScale = new Vector3(blockSize+0.1f, obj.transform.localScale.y, 1.0f);
 
             //obj.GetComponent<Block>().SetRandomColor();
-            Color color= SkinManager.skin_manager.GetCurrentSkin().colors
-            [Random.Range(0, SkinManager.skin_manager.GetCurrentSkin().colors.Length)];
+            Color color= SkinManager.skinManager.GetCurrentSkin().colors
+            [Random.Range(0, SkinManager.skinManager.GetCurrentSkin().colors.Length)];
             if (i!=0)
             {
-                if (color==prev_color)
+                if (color==prevColor)
                 {
-                    if(color== SkinManager.skin_manager.GetCurrentSkin().colors[0])
+                    if(color== SkinManager.skinManager.GetCurrentSkin().colors[0])
                     {
-                        color = SkinManager.skin_manager.GetCurrentSkin().colors[1];
+                        color = SkinManager.skinManager.GetCurrentSkin().colors[1];
                     }
                     else
                     {
-                        color = SkinManager.skin_manager.GetCurrentSkin().colors[0];
+                        color = SkinManager.skinManager.GetCurrentSkin().colors[0];
                     }
                 }
             }
             obj.GetComponent<Block>().SetColor(color);
-            prev_color = color;
-            obj.transform.SetParent(block_holder);
+            prevColor = color;
+            obj.transform.SetParent(blockHolder);
         }
 
-        spawn_position = new Vector3(Edges.leftEdge-window_size/ 2.0f, transform.position.y, 0.0f);
-        obj = (GameObject)Instantiate(block_holder.gameObject, spawn_position, Quaternion.identity,transform);
-        block_mas = GetComponentsInChildren<Block>();
+        spawnPosition = new Vector3(Edges.leftEdge-_windowSize/ 2.0f, transform.position.y, 0.0f);
+        obj = Instantiate(blockHolder.gameObject, spawnPosition, Quaternion.identity,transform);
+        _blockMas = GetComponentsInChildren<Block>();
 
-        block_holder.GetComponent<BlockMove>().SetSpeed(GameController.game_controller.GetLvlData().block_prop.speed);
-        obj.GetComponent<BlockMove>().SetSpeed(GameController.game_controller.GetLvlData().block_prop.speed);
+        blockHolder.GetComponent<BlockMove>().SetSpeed(GameController.gameController.GetLvlData().blockProp.speed);
+        obj.GetComponent<BlockMove>().SetSpeed(GameController.gameController.GetLvlData().blockProp.speed);
 
-        man.SetParent(block_holder);
+        man.SetParent(blockHolder);
     }
 
     public List<Color> CheckCollisions()
     {
         List<Color> colors=new List<Color>();
-        foreach (Block item in block_mas)
+        foreach (Block item in _blockMas)
         {
             if (item.CheckIfCollides())
             {
@@ -77,8 +77,8 @@ public class BlockManager : MonoBehaviour
 
     public void SetRandomColors()
     {
-        if (block_mas != null)
-            foreach (Block item in block_mas)
+        if (_blockMas != null)
+            foreach (Block item in _blockMas)
         {
             
             item.SetRandomColor();

@@ -164,8 +164,8 @@
     <Compile Include="Assets\Scripts\UI\Start_panel.cs" />
     <Compile Include="Assets\Scripts\UI\Touchable.cs" />
     <Compile Include="Assets\Scripts\UI\TrianChange.cs" />
-    <Compile Include="Assets\Scripts\UI\UIController.cs" />
     <Compile Include="Assets\Scripts\UI\UI_MainMenu.cs" />
+    <Compile Include="Assets\Scripts\UI\UiController.cs" />
     <Compile Include="Assets\SwitchTextHolder.cs" />
   </ItemGroup>
   <ItemGroup>

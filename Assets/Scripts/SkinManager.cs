@@ -1,45 +1,43 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SkinManager : MonoBehaviour
 {
-    public static SkinManager skin_manager;
+    public static SkinManager skinManager;
     [SerializeField]
-    SkinData[] skin_data;
-    int totalSkinCount = 1;
-    int active_skin = 0;
+    SkinData[] _skinData;
+    int _totalSkinCount = 1;
+    int _activeSkin;
 
     public int GetSkinNumber()
     {
-        return active_skin;
+        return _activeSkin;
     }
 
-    public void SetActiveSkin(int new_skin_number)
+    public void SetActiveSkin(int newSkinNumber)
     {
-        if (new_skin_number!=active_skin)
+        if (newSkinNumber!=_activeSkin)
         {
-            active_skin = Mathf.Clamp(new_skin_number, 0, totalSkinCount);
+            _activeSkin = Mathf.Clamp(newSkinNumber, 0, _totalSkinCount);
             EventManager.TriggerEvent("SkinChanged");
         }
     }
 
     public void SaveActiveSkin()
     {
-        PlayerPrefs.SetInt("SavedSkin", active_skin);
+        PlayerPrefs.SetInt("SavedSkin", _activeSkin);
         PlayerPrefs.Save();
     }
 
     public int GetTotalSkinCount()
     {
-        return totalSkinCount;
+        return _totalSkinCount;
     }
 
     public void LoadSavedSkin()
     {
         if (!PlayerPrefs.HasKey("SavedSkin"))
         {
-            PlayerPrefs.SetInt("SavedSkin", active_skin);
+            PlayerPrefs.SetInt("SavedSkin", _activeSkin);
         }
         PlayerPrefs.Save();
         SetActiveSkin(PlayerPrefs.GetInt("SavedSkin"));
@@ -47,28 +45,28 @@ public class SkinManager : MonoBehaviour
 
     void Awake()
     {
-        active_skin = 0;
-        skin_manager = this;
-        totalSkinCount = skin_data.Length;
+        _activeSkin = 0;
+        skinManager = this;
+        _totalSkinCount = _skinData.Length;
         if (PlayerPrefs.HasKey("SavedSkin"))
         {
-            active_skin = PlayerPrefs.GetInt("SavedSkin");
+            _activeSkin = PlayerPrefs.GetInt("SavedSkin");
         }
         else
         {
-            PlayerPrefs.SetInt("SavedSkin", active_skin);
+            PlayerPrefs.SetInt("SavedSkin", _activeSkin);
         }
         PlayerPrefs.Save();
     }
 
     public SkinData GetCurrentSkin()
     {
-        return skin_data[active_skin];
+        return _skinData[_activeSkin];
     }
 
     public SkinData GetSkinByNumber(int number)
     {
-        return skin_data[number];
+        return _skinData[number];
     }
 }
 

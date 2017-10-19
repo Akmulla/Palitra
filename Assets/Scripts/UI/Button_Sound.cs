@@ -1,18 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
-public class Button_Sound : MonoBehaviour
+public class ButtonSound : MonoBehaviour
 {
-    public GameObject On;
-    public GameObject Off;
+    public GameObject on;
+    public GameObject off;
 
-    bool on = true;
+    bool _on = true;
 	
     public void Click()
     {
-        if (on)
+        if (_on)
             TurnOff();
         else
             TurnOn();
@@ -20,17 +17,17 @@ public class Button_Sound : MonoBehaviour
 
 	void TurnOn()
     {
-        on = true;
-        SoundManager.sound_manager.On();
-        On.SetActive(true);
-        Off.SetActive(false);
+        _on = true;
+        SoundManager.soundManager.On();
+        on.SetActive(true);
+        off.SetActive(false);
     }
 
     void TurnOff()
     {
-        on = false;
-        SoundManager.sound_manager.Off();
-        On.SetActive(false);
-        Off.SetActive(true);
+        _on = false;
+        SoundManager.soundManager.Off();
+        on.SetActive(false);
+        off.SetActive(true);
     }
 }

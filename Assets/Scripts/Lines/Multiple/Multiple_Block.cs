@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class Multiple_Block : MonoBehaviour
+public class MultipleBlock : MonoBehaviour
 {
     //SpriteRenderer sprite_rend;
-    Color color;
-    Calc_Numbers calc_numb;
+    Color _color;
+    CalcNumbers _calcNumb;
     public bool active;
-    int hp = 3;
+    int _hp = 3;
 
     void OnEnable()
     {
@@ -18,49 +17,49 @@ public class Multiple_Block : MonoBehaviour
 	void Awake ()
     {
         //sprite_rend = GetComponent<SpriteRenderer>();
-        calc_numb = GetComponentInChildren<Calc_Numbers>();
+        _calcNumb = GetComponentInChildren<CalcNumbers>();
         //block_manager = transform.parent.GetComponentInParent<Multiple_BlockManager>();
     }
 
-	public void InitBlock(int block_count, Color color)
+	public void InitBlock(int blockCount, Color color)
     {
         active = true;
         gameObject.SetActive(true);
-        switch (block_count)
+        switch (blockCount)
         {
             case 1:
                 //hp = Random.Range(GameController.game_controller.GetLvlData().multiple_prop_1_part.min_taps,
                 //GameController.game_controller.GetLvlData().multiple_prop_1_part.max_taps+1);
-                hp=GameController.game_controller.GetLvlData().multiple_prop_1_part.min_taps;
+                _hp=GameController.gameController.GetLvlData().multipleProp1Part.minTaps;
                 break;
             case 2:
                 //hp = Random.Range(GameController.game_controller.GetLvlData().multiple_prop_2_parts.min_taps,
                 //GameController.game_controller.GetLvlData().multiple_prop_2_parts.max_taps+1);
-                hp = GameController.game_controller.GetLvlData().multiple_prop_2_parts.min_taps;
+                _hp = GameController.gameController.GetLvlData().multipleProp2Parts.minTaps;
                 break;
             case 3:
                 //hp = Random.Range(GameController.game_controller.GetLvlData().multiple_prop_3_parts.min_taps,
                 //GameController.game_controller.GetLvlData().multiple_prop_3_parts.max_taps+1);
-                hp = GameController.game_controller.GetLvlData().multiple_prop_3_parts.min_taps;
+                _hp = GameController.gameController.GetLvlData().multipleProp3Parts.minTaps;
                 break;
         }
-        calc_numb.SetNumber(hp);
+        _calcNumb.SetNumber(_hp);
         SetColor(color);
     }
-	public void SetColor(Color new_color)
+	public void SetColor(Color newColor)
     {
         //sprite_rend.color = color;
-        color = new_color;
+        _color = newColor;
     }
 
     public bool Hit()
     {
-        hp--;
-        if ((hp >= 1) && (Ball.ball.trian_type == TrianType.DoubleTap))
-            hp--;
+        _hp--;
+        if ((_hp >= 1) && (Ball.ball.trianType == TrianType.DoubleTap))
+            _hp--;
 
-        calc_numb.SetNumber(hp);
-        if (hp<=0)
+        _calcNumb.SetNumber(_hp);
+        if (_hp<=0)
         {
             Disable();
             return true;
@@ -81,6 +80,6 @@ public class Multiple_Block : MonoBehaviour
     public Color GetColor()
     {
         //return sprite_rend.color;
-        return color;
+        return _color;
     }
 }

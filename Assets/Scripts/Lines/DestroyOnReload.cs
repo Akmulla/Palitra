@@ -1,22 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DestroyOnReload : MonoBehaviour
 {
-    Pool pool;
-    Line line;
+    Pool _pool;
+    Line _line;
 
     void Start()
     {
-        pool = GetComponent<PoolRef>().GetPool();
-        line = GetComponent<Line>();
+        _pool = GetComponent<PoolRef>().GetPool();
+        _line = GetComponent<Line>();
     }
 
     void ToPool()
     {
-        pool.Deactivate(gameObject);
-        if ((GameController.game_controller.GetState() == GameState.GameOver)&&(line.CheckIfActive()))
+        _pool.Deactivate(gameObject);
+        if ((GameController.gameController.GetState() == GameState.GameOver)&&(_line.CheckIfActive()))
         {
             EventManager.TriggerEvent("LinePassed");
         }

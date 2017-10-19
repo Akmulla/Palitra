@@ -1,63 +1,62 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class Calc_Numbers : MonoBehaviour
+public class CalcNumbers : MonoBehaviour
 {
-    public SpriteRenderer[] sprite_rend;
-    int number=0;
-    Line line;
-    public Transform tran_0;
-    public Transform tran_1;
+    public SpriteRenderer[] spriteRend;
+    int _number;
+    Line _line;
+    public Transform tran0;
+    public Transform tran1;
 
 	void Awake ()
     {
-        line = transform.parent.GetComponentInParent<Line>();
-        tran_0 = sprite_rend[0].transform;
-        tran_1 = sprite_rend[1].transform;
-        Resize(tran_0);
-        Resize(tran_1);
+        _line = transform.parent.GetComponentInParent<Line>();
+        tran0 = spriteRend[0].transform;
+        tran1 = spriteRend[1].transform;
+        Resize(tran0);
+        Resize(tran1);
     }
 
-    void Resize(Transform pic_tran)
+    void Resize(Transform picTran)
     {
         float coeff = 0.9f;
 
-        float pic_height = sprite_rend[0].sprite.bounds.extents.y * pic_tran.lossyScale.y;
-        float k = line.GetHeight() / pic_height;
-        float new_scale=pic_tran.localScale.y*k;
+        float picHeight = spriteRend[0].sprite.bounds.extents.y * picTran.lossyScale.y;
+        float k = _line.GetHeight() / picHeight;
+        float newScale=picTran.localScale.y*k;
 
-        pic_tran.localScale = new Vector3(new_scale*coeff, new_scale*coeff, 1.0f);
+        picTran.localScale = new Vector3(newScale*coeff, newScale*coeff, 1.0f);
     }
 
     void SetPositionForOne()
     {
-        tran_0.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
+        tran0.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
     }
 
     void SetPositionForTwo()
     {
-        float pic_width = sprite_rend[0].sprite.bounds.extents.x * tran_0.lossyScale.x;
+        float picWidth = spriteRend[0].sprite.bounds.extents.x * tran0.lossyScale.x;
 
-        tran_0.localPosition = new Vector3(pic_width, 0.0f, 0.0f);
-        tran_1.localPosition = new Vector3(-pic_width, 0.0f, 0.0f);
+        tran0.localPosition = new Vector3(picWidth, 0.0f, 0.0f);
+        tran1.localPosition = new Vector3(-picWidth, 0.0f, 0.0f);
     }
 
     public void Increase()
     {
-        number++;
-        Calculate(number);
+        _number++;
+        Calculate(_number);
     }
 	
 	public void Decrease()
     {
-        number--;
-        Calculate(number);
+        _number--;
+        Calculate(_number);
     }
 
     public void SetNumber(int value)
     {
-        number = value;
-        Calculate(number);
+        _number = value;
+        Calculate(_number);
     }
 
     void Calculate(int number)
@@ -70,16 +69,16 @@ public class Calc_Numbers : MonoBehaviour
 
         if (number<10)
         {
-            sprite_rend[1].gameObject.SetActive(false);
-            sprite_rend[0].sprite = NumberPicData.Instance.number_pic[number];
+            spriteRend[1].gameObject.SetActive(false);
+            spriteRend[0].sprite = NumberPicData.instance.numberPic[number];
 
             SetPositionForOne();
         }
         else
         {
-            sprite_rend[1].gameObject.SetActive(true);
-            sprite_rend[0].sprite = NumberPicData.Instance.number_pic[number % 10];
-            sprite_rend[1].sprite = NumberPicData.Instance.number_pic[number / 10];
+            spriteRend[1].gameObject.SetActive(true);
+            spriteRend[0].sprite = NumberPicData.instance.numberPic[number % 10];
+            spriteRend[1].sprite = NumberPicData.instance.numberPic[number / 10];
 
             SetPositionForTwo();
         }

@@ -1,14 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ChngLvlAnim : MonoBehaviour
 {
-    Animator anim;
+    Animator _anim;
 
     void Start()
     {
-        anim = GetComponent<Animator>();
+        _anim = GetComponent<Animator>();
     }
 
     void OnEnable()
@@ -23,6 +21,6 @@ public class ChngLvlAnim : MonoBehaviour
 
     void LvlFinished()
     {
-        anim.SetTrigger("ChangeLvl");
+        _anim.SetTrigger("ChangeLvl");
     }
 }

@@ -1,54 +1,52 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public enum SoundSample { Error,Start,ToMain,ToSkin,ScrollSkin,Buy,SetSkin};
+public enum SoundSample { Error,Start,ToMain,ToSkin,ScrollSkin,Buy,SetSkin}
 
 public class SoundManager : MonoBehaviour
 {
-    public static SoundManager sound_manager;
-    AudioSource source;
+    public static SoundManager soundManager;
+    AudioSource _source;
     [SerializeField]
-    AudioClip main_menu;
+    AudioClip _mainMenu;
     [SerializeField]
-    AudioClip game;
+    AudioClip _game;
 
     [SerializeField]
-    AudioClip error_sound;
+    AudioClip _errorSound;
     [SerializeField]
-    AudioClip start_sound;
+    AudioClip _startSound;
     [SerializeField]
-    AudioClip toMain_sound;
+    AudioClip _toMainSound;
     [SerializeField]
-    AudioClip toSkin_sound;
+    AudioClip _toSkinSound;
     [SerializeField]
-    AudioClip scrollSkin_sound;
+    AudioClip _scrollSkinSound;
     [SerializeField]
-    AudioClip buy_sound;
+    AudioClip _buySound;
     [SerializeField]
-    AudioClip setSkin_sound;
+    AudioClip _setSkinSound;
 
     [SerializeField]
-    AudioClip[] screams;
+    AudioClip[] _screams;
 
-    float saved_vol=1.0f;
+    float _savedVol=1.0f;
 
     void Awake()
     {
-        sound_manager = this;
-        source = GetComponent<AudioSource>();
-        if (source.volume > 0.0f)
-            saved_vol = source.volume;
+        soundManager = this;
+        _source = GetComponent<AudioSource>();
+        if (_source.volume > 0.0f)
+            _savedVol = _source.volume;
     }
 
     public void On()
     {
-        source.volume = saved_vol;
+        _source.volume = _savedVol;
     }
 
     public void Off()
     {
-        source.volume = 0.0f;
+        _source.volume = 0.0f;
     }
 
     public void SingleSound(SoundSample sound)
@@ -56,49 +54,49 @@ public class SoundManager : MonoBehaviour
         switch (sound)
         {
             case SoundSample.Error:
-                source.PlayOneShot(error_sound, 3.0f);
+                _source.PlayOneShot(_errorSound, 3.0f);
                 break;
             case SoundSample.Start:
-                source.PlayOneShot(start_sound, 3.0f);
+                _source.PlayOneShot(_startSound, 3.0f);
                 break;
             case SoundSample.ToMain:
-                source.PlayOneShot(toMain_sound, 3.0f);
+                _source.PlayOneShot(_toMainSound, 3.0f);
                 break;
             case SoundSample.ToSkin:
-                source.PlayOneShot(toSkin_sound, 3.0f);
+                _source.PlayOneShot(_toSkinSound, 3.0f);
                 break;
             case SoundSample.ScrollSkin:
-                source.PlayOneShot(scrollSkin_sound, 3.0f);
+                _source.PlayOneShot(_scrollSkinSound, 3.0f);
                 break;
             case SoundSample.Buy:
-                source.PlayOneShot(buy_sound, 3.0f);
+                _source.PlayOneShot(_buySound, 3.0f);
                 break;
             case SoundSample.SetSkin:
-                source.PlayOneShot(setSkin_sound, 3.0f);
+                _source.PlayOneShot(_setSkinSound, 3.0f);
                 break;
         }
     }
 
     public void Screamer()
     {
-        source.PlayOneShot(screams[Random.Range(0,screams.Length)], 6.0f);
+        _source.PlayOneShot(_screams[Random.Range(0,_screams.Length)], 6.0f);
     }
 
     public void MainMenuTheme()
     {
-        if (source.clip != main_menu)
+        if (_source.clip != _mainMenu)
         {
-            source.clip = main_menu;
-            source.Play();
+            _source.clip = _mainMenu;
+            _source.Play();
         }
     }
 
     public void GameTheme()
     {
-        if (source.clip!=game)
+        if (_source.clip!=_game)
         {
-            source.clip = game;
-            source.Play();
+            _source.clip = _game;
+            _source.Play();
         }
     }
 }

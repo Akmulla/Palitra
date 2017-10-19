@@ -1,14 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class Start_panel : MonoBehaviour
+public class StartPanel : MonoBehaviour
 {
-    public Image BG;
+    public Image bg;
 
     void OnEnable()
     {
-        BG.color = SkinManager.skin_manager.GetCurrentSkin().bg_color;
+        bg.color = SkinManager.skinManager.GetCurrentSkin().bgColor;
     }
 }

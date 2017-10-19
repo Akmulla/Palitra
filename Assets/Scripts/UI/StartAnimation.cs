@@ -1,14 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class StartAnimation : MonoBehaviour
 {
-    Animator anim;
+    Animator _anim;
     
     void Awake()
     {
-        anim=GetComponent<Animator>();
+        _anim=GetComponent<Animator>();
     }
 
     void OnEnable()
@@ -25,11 +23,11 @@ public class StartAnimation : MonoBehaviour
 
     void Animate()
     {
-        anim.SetBool("animate", true);
+        _anim.SetBool("animate", true);
     }
 
     void Reset()
     {
-        anim.SetBool("animate", false);
+        _anim.SetBool("animate", false);
     }
 }

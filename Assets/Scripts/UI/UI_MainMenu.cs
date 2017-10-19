@@ -1,14 +1,12 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
-public class UI_MainMenu : MonoBehaviour
+public class UiMainMenu : MonoBehaviour
 {
-    public static UI_MainMenu ui;
-    public GameObject SkinMenu;
-    public GameObject StartMenu;
+    public static UiMainMenu ui;
+    public GameObject skinMenu;
+    public GameObject startMenu;
 
     void Awake()
     {
@@ -29,16 +27,16 @@ public class UI_MainMenu : MonoBehaviour
 
     public void OpenSkinMenu()
     {
-        SkinMenu.SetActive(true);
-        StartMenu.SetActive(false);
+        skinMenu.SetActive(true);
+        startMenu.SetActive(false);
         
     }
 
     public void OpenStartMenu()
     {
-        SkinManager.skin_manager.LoadSavedSkin();
-        SkinMenu.SetActive(false);
-        StartMenu.SetActive(true);
+        SkinManager.skinManager.LoadSavedSkin();
+        skinMenu.SetActive(false);
+        startMenu.SetActive(true);
     }
 
     void OnAwake()

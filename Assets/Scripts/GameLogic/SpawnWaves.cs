@@ -1,33 +1,33 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
-public enum PoolType { Normal, Switch, Blocks,Multiple_1_part, Multiple_2_parts, Multiple_3_parts,
-    Combo_3_parts,Combo_4_parts,Combo_5_parts, Count };
+public enum PoolType { Normal, Switch, Blocks,Multiple1Part, Multiple2Parts, Multiple3Parts,
+    Combo3Parts,Combo4Parts,Combo5Parts, Count }
 
 public class SpawnWaves : MonoBehaviour
 {
     public static SpawnWaves spawn;
-    public float prev_edge = 0.0f;
+    public float prevEdge;
     //float start_delay = 2.0f;
 
-    LineHandler[] line_handler;
+    LineHandler[] _lineHandler;
 
     [Space(20)]
     public float startWait;
 
-    List<PoolType> lines = new List<PoolType>();
-    int normal_lines_count;
+    List<PoolType> _lines = new List<PoolType>();
+    int _normalLinesCount;
 
     [HideInInspector]
     public float dist;
     public float edge;
     public float offset = 0.5f;
-    public int lines_passed;
-    public int lines_spawned;
+    public int linesPassed;
+    public int linesSpawned;
 
-    bool is_spawning=false;
-    LvlData lvl_data;
+    bool _isSpawning;
+    LvlData _lvlData;
 
     float Dist
     {
@@ -50,24 +50,24 @@ public class SpawnWaves : MonoBehaviour
 
     void Start()
     {
-        lvl_data = GameController.game_controller.GetLvlData();
+        _lvlData = GameController.gameController.GetLvlData();
         Pool[] pool;
         pool = GetComponentsInChildren<Pool>();
 
-        line_handler = new LineHandler[(int)PoolType.Count];
-        for (int i = 0; i < line_handler.Length; i++)
+        _lineHandler = new LineHandler[(int)PoolType.Count];
+        for (int i = 0; i < _lineHandler.Length; i++)
         {
-            line_handler[i] = ScriptableObject.CreateInstance<LineHandler>();
+            _lineHandler[i] = ScriptableObject.CreateInstance<LineHandler>();
         }
 
         for (int i = 0; i < (int)PoolType.Count; i++)
         {
-            line_handler[i].pool_type = (PoolType)i;
+            _lineHandler[i].poolType = (PoolType)i;
             for (int k = 0; k < (int)PoolType.Count; k++)
             {
-                if (pool[k].pool_type == (PoolType)i)
+                if (pool[k].poolType == (PoolType)i)
                 {
-                    line_handler[i].pool = pool[k];
+                    _lineHandler[i].pool = pool[k];
                     break;
                 }
             }
@@ -96,58 +96,58 @@ public class SpawnWaves : MonoBehaviour
 
     void GetLineCountData()
     {
-        line_handler[(int)PoolType.Normal].count = GameController.game_controller.GetLvlData().line_prop.count;
-        line_handler[(int)PoolType.Switch].count = GameController.game_controller.GetLvlData().switch_prop.count;
-        line_handler[(int)PoolType.Blocks].count = GameController.game_controller.GetLvlData().block_prop.count;
-        line_handler[(int)PoolType.Multiple_1_part].count = GameController.game_controller.GetLvlData().multiple_prop_1_part.count;
-        line_handler[(int)PoolType.Multiple_2_parts].count = GameController.game_controller.GetLvlData().multiple_prop_2_parts.count;
-        line_handler[(int)PoolType.Multiple_3_parts].count = GameController.game_controller.GetLvlData().multiple_prop_3_parts.count;
-        line_handler[(int)PoolType.Combo_3_parts].count = GameController.game_controller.GetLvlData().combo_prop_3_parts.count;
-        line_handler[(int)PoolType.Combo_4_parts].count = GameController.game_controller.GetLvlData().combo_prop_4_parts.count;
-        line_handler[(int)PoolType.Combo_5_parts].count = GameController.game_controller.GetLvlData().combo_prop_5_parts.count;
+        _lineHandler[(int)PoolType.Normal].count = GameController.gameController.GetLvlData().lineProp.count;
+        _lineHandler[(int)PoolType.Switch].count = GameController.gameController.GetLvlData().switchProp.count;
+        _lineHandler[(int)PoolType.Blocks].count = GameController.gameController.GetLvlData().blockProp.count;
+        _lineHandler[(int)PoolType.Multiple1Part].count = GameController.gameController.GetLvlData().multipleProp1Part.count;
+        _lineHandler[(int)PoolType.Multiple2Parts].count = GameController.gameController.GetLvlData().multipleProp2Parts.count;
+        _lineHandler[(int)PoolType.Multiple3Parts].count = GameController.gameController.GetLvlData().multipleProp3Parts.count;
+        _lineHandler[(int)PoolType.Combo3Parts].count = GameController.gameController.GetLvlData().comboProp3Parts.count;
+        _lineHandler[(int)PoolType.Combo4Parts].count = GameController.gameController.GetLvlData().comboProp4Parts.count;
+        _lineHandler[(int)PoolType.Combo5Parts].count = GameController.gameController.GetLvlData().comboProp5Parts.count;
     }
 
     void ReserveLines()
     {
-        lines.Clear();
+        _lines.Clear();
         GetLineCountData();
 
         //заполняем массив линий
         for (int i=0;i<(int)PoolType.Count;i++)
         {
-            for (int j=0;j<line_handler[i].count;j++)
+            for (int j=0;j<_lineHandler[i].count;j++)
             {
-                lines.Add(line_handler[i].pool_type);
+                _lines.Add(_lineHandler[i].poolType);
             }
         }
     }
 
     void LinePassed()
     {
-        lines_passed++;
+        linesPassed++;
         //if (lines_passed >= GameController.game_controller.GetLvlData().lines_to_chng_dist)
         //{
         //    lines_passed = 0;
         //    Dist -= GameController.game_controller.GetLvlData().chng_dist_val;
         //}
-        LvlType lvl_type = GameController.game_controller.GetLvlData().lvl_type;
-        bool chng_aftr_half = ((lvl_type == LvlType.Speed_decr_dist_decr_half) ||
-            (lvl_type == LvlType.Speed_incr_dist_incr_half)) ? true : false;
-        bool passed_half = (SpawnWaves.spawn.GetLineSpawnedNumber() >=
-            GameController.game_controller.GetLvlData().total_line_count / 2);
+        LvlType lvlType = GameController.gameController.GetLvlData().lvlType;
+        bool chngAftrHalf = ((lvlType == LvlType.SpeedDecrDistDecrHalf) ||
+            (lvlType == LvlType.SpeedIncrDistIncrHalf)) ? true : false;
+        bool passedHalf = (spawn.GetLineSpawnedNumber() >=
+            GameController.gameController.GetLvlData().totalLineCount / 2);
 
-        float k = (chng_aftr_half && passed_half) ? -1.0f : 1.0f;
+        float k = (chngAftrHalf && passedHalf) ? -1.0f : 1.0f;
 
-        Dist += lvl_data.step_dist*k;
+        Dist += _lvlData.stepDist*k;
     }
 
     void ChangeLvl()
     {
-        lvl_data = GameController.game_controller.GetLvlData();
-        is_spawning = false;
-        lines_passed = 0;
-        lines_spawned = 0;
-        prev_edge = Ball.ball.GetPosition().y;
+        _lvlData = GameController.gameController.GetLvlData();
+        _isSpawning = false;
+        linesPassed = 0;
+        linesSpawned = 0;
+        prevEdge = Ball.ball.GetPosition().y;
 
         ReserveLines();
         StartCoroutine(Delay());
@@ -156,27 +156,27 @@ public class SpawnWaves : MonoBehaviour
     IEnumerator Delay()
     {
         //print("sdg");
-        is_spawning = false;
+        _isSpawning = false;
         //if (GameController.game_controller.GetCurrentLvl()!=0)
         //    yield return new WaitForSeconds(start_delay);
-        while (GameController.game_controller.GetState() != GameState.Game)
+        while (GameController.gameController.GetState() != GameState.Game)
             yield return null;
         yield return new WaitForSeconds(2.0f);
 
         // Dist = GameController.game_controller.GetLvlData().max_dist;
-        Dist = lvl_data.dist;
+        Dist = _lvlData.dist;
         edge = Edges.topEdge + offset;
-        is_spawning = true;
+        _isSpawning = true;
     }
 
     void Update()
     {
-        if (lines_spawned >= lvl_data.total_line_count)
+        if (linesSpawned >= _lvlData.totalLineCount)
         {
-            is_spawning = false;
+            _isSpawning = false;
         }
 
-        if ((is_spawning)&&(Edges.topEdge >= edge-offset))
+        if ((_isSpawning)&&(Edges.topEdge >= edge-offset))
         {
             SpawnWave();
         }
@@ -184,27 +184,27 @@ public class SpawnWaves : MonoBehaviour
 
     void SpawnWave()
     {
-        PoolType current_line = lines[Random.Range(0,lines.Count)];
-        lines.Remove(current_line);
+        PoolType currentLine = _lines[Random.Range(0,_lines.Count)];
+        _lines.Remove(currentLine);
         
-        lines_spawned++;
+        linesSpawned++;
         
-        GameObject line=line_handler[(int)current_line].pool.Activate(new Vector2(0.0f, edge), Quaternion.identity);
+        GameObject line=_lineHandler[(int)currentLine].pool.Activate(new Vector2(0.0f, edge), Quaternion.identity);
 
         //line.GetComponent<Line>().InitLine();
         line.GetComponent<Line>().Enable();
-        prev_edge = edge;
+        prevEdge = edge;
         edge += Dist;
 
     }
 
     public int GetLinePassedNumber()
     {
-        return lines_passed;
+        return linesPassed;
     }
 
     public int GetLineSpawnedNumber()
     {
-        return lines_spawned;
+        return linesSpawned;
     }
 }

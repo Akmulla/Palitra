@@ -1,18 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
 
 public class TimeManager : MonoBehaviour
 {
     public Text timeText;
-    DateTime time;
-    public float param=0.0f;
+    DateTime _time;
+    public float param;
     public float second;
     public float minute;
     public float hour;
-    DateTime lastTime;
+    DateTime _lastTime;
 
     //public DateTime GameTime
     //{
@@ -31,13 +29,13 @@ public class TimeManager : MonoBehaviour
     void Start ()
     {
         //time = DateTimeClass.GetNISTDate();
-        time = DateTime.Now;
-        timeText.text = time.Hour + ":" + time.Minute + ":" + time.Second;
-        second = time.Second;
-        minute = time.Minute;
-        hour = time.Hour;
+        _time = DateTime.Now;
+        timeText.text = _time.Hour + ":" + _time.Minute + ":" + _time.Second;
+        second = _time.Second;
+        minute = _time.Minute;
+        hour = _time.Hour;
         //lastTime = time;
-        lastTime = SaveLoadGame.save_load.LoadTime();
+        _lastTime = SaveLoadGame.saveLoad.LoadTime();
         CheckNewHearts();
         //print(lastTime+" " + lastTime.Second);
 	}
@@ -45,10 +43,10 @@ public class TimeManager : MonoBehaviour
    
 	void CheckNewHearts()
     {
-        TimeSpan delta = time - lastTime;
+        TimeSpan delta = _time - _lastTime;
         if (delta.TotalSeconds > 500)
         {
-            lastTime = time;
+            _lastTime = _time;
             Hearts.h.Heart += (int)delta.TotalSeconds / 5;
         }
     }
@@ -57,10 +55,10 @@ public class TimeManager : MonoBehaviour
     {
        // param = 1;
         
-        time=time.AddSeconds(Time.deltaTime);
+        _time=_time.AddSeconds(Time.deltaTime);
 
         CheckNewHearts();
-        timeText.text = time.Hour + ":" + time.Minute + ":" + time.Second;
+        timeText.text = _time.Hour + ":" + _time.Minute + ":" + _time.Second;
 
         //param -= Time.deltaTime;
 

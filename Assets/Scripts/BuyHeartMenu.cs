@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BuyHeartMenu : MonoBehaviour
 {
@@ -9,9 +7,9 @@ public class BuyHeartMenu : MonoBehaviour
 
 	public void BuyHeart()
     {
-        if (GlobalScore.global_score.Score >= price)
+        if (GlobalScore.globalScore.Score >= price)
         {
-            GlobalScore.global_score.Score -= price;
+            GlobalScore.globalScore.Score -= price;
             Hearts.h.Heart += hearts;
         }
     }

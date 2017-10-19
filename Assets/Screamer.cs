@@ -1,13 +1,12 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Screamer : MonoBehaviour
 {
-    float chance=1.0f;
+    float _chance=1.0f;
     public Sprite[] pics;
-    public Image screamer_img;
+    public Image screamerImg;
 
     void OnEnable()
     {
@@ -21,29 +20,29 @@ public class Screamer : MonoBehaviour
 
     void LvlFinished()
     {
-        if (Ball.ball.trian_type != TrianType.Screamer)
+        if (Ball.ball.trianType != TrianType.Screamer)
             return;
 
         float roll = Random.value;
 
-        if (roll<=chance)
+        if (roll<=_chance)
         {
            StartCoroutine(ShowScreamer());
         }
         else
         {
-            chance += 0.1f;
+            _chance += 0.1f;
         }
     }
 
     IEnumerator ShowScreamer()
     {
-        SoundManager.sound_manager.Screamer();
-        screamer_img.sprite = pics[Random.Range(0, pics.Length)];
-        screamer_img.enabled = true;
+        SoundManager.soundManager.Screamer();
+        screamerImg.sprite = pics[Random.Range(0, pics.Length)];
+        screamerImg.enabled = true;
 
         //GameController.game_controller.Pause();
         yield return new WaitForSeconds(1.0f);
-        screamer_img.enabled = false;
+        screamerImg.enabled = false;
     }
 }

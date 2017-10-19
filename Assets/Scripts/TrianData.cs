@@ -1,14 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public enum TrianType { Default,DoubleTap,Shield,DoublePoints,Screamer,HalfPoints };
+public enum TrianType { Default,DoubleTap,Shield,DoublePoints,Screamer,HalfPoints }
 
 [CreateAssetMenu]
 public class TrianData : ScriptableObject
 {
     public Sprite sprite;
-    public TrianType trian_type;
+    public TrianType trianType;
     public int price;
     public string description;
 }

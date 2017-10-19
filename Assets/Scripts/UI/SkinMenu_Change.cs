@@ -1,22 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class SkinMenu_Change : MonoBehaviour
+public class SkinMenuChange : MonoBehaviour
 {
-    public SkinChange skin_change;
-    public TrianChange trian_change;
-    public Button_SwitchSkinMenuMode mode;
+    public SkinChange skinChange;
+    public TrianChange trianChange;
+    public ButtonSwitchSkinMenuMode mode;
 
     public void SetItem()
     {
         if (mode.State == SkinState.Round)
         {
-            skin_change.SetSkin();
+            skinChange.SetSkin();
         }
         else
         {
-            trian_change.SetTrian();
+            trianChange.SetTrian();
         }
     }
 
@@ -24,11 +22,11 @@ public class SkinMenu_Change : MonoBehaviour
     {
         if (mode.State==SkinState.Round)
         {
-            skin_change.NextSkin();
+            skinChange.NextSkin();
         }
         else
         {
-            trian_change.NextTrian();
+            trianChange.NextTrian();
         }
     }
 
@@ -36,11 +34,11 @@ public class SkinMenu_Change : MonoBehaviour
     {
         if (mode.State == SkinState.Round)
         {
-            skin_change.PrevSkin();
+            skinChange.PrevSkin();
         }
         else
         {
-            trian_change.PrevTrian();
+            trianChange.PrevTrian();
         }
     }
 }
