@@ -1,124 +1,122 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-public class UiController : MonoBehaviour
+public class UIController : MonoBehaviour
 {
-    public static UiController ui;
-    public Text currentLvl;
+    public static UIController ui;
+    public Text current_lvl;
     //static bool is_paused;
-    GraphicRaycaster _raycaster;
+    GraphicRaycaster raycaster;
 
-    public GameObject pauseMenu;
-    public GameObject skinMenu;
-    public GameObject startMenu;
-    public GameObject gameUi;
+    public GameObject pause_menu;
+    public GameObject skin_menu;
+    public GameObject start_menu;
+    public GameObject Game_UI;
     public GameObject round;
-    public GameObject triangleFon;
+    public GameObject triangle_fon;
     public GameObject triangle;
-    public GameObject gameoverPic;
-    public GameObject pausePic;
-    public GameObject gameuiBg;
-    public GameObject lifeTimer;
-    public GameObject lifeMenu;
-    public GameObject rubinMenu;
+    public GameObject gameover_text;
+    public GameObject pause_text;
+    public GameObject gameover_pic;
+    public GameObject pause_pic;
+    public GameObject gameui_bg;
+    public GameObject life_timer;
+    public GameObject life_menu;
 
     void Awake ()
     {
         //is_paused = false;
         ui = this;
-        _raycaster = GetComponent<GraphicRaycaster>();
+        raycaster = GetComponent<GraphicRaycaster>();
     }
-
-    public void OpenLifeMenu()
+	
+    public void UpdateUI()
     {
-        
-    }
-
-    public void CloseLifeMenu()
-    {
-        
-    }
-
-    public void OpenRubinMenu()
-    {
-
-    }
-
-    public void CloseRubinMenu()
-    {
-
-    }
-
-    public void UpdateUi()
-    {
-        switch(GameController.gameController.GetState())
+        switch(GameController.game_controller.GetState())
         {
             case GameState.MainMenu:
-                _raycaster.enabled = true;
-                SkinManager.skinManager.LoadSavedSkin();
-                gameUi.SetActive(false);
-                skinMenu.SetActive(false);
-                startMenu.SetActive(true);
-                pauseMenu.SetActive(false);
+                raycaster.enabled = true;
+                SkinManager.skin_manager.LoadSavedSkin();
+                Game_UI.SetActive(false);
+                skin_menu.SetActive(false);
+                start_menu.SetActive(true);
+                pause_menu.SetActive(false);
                 round.SetActive(true);
                 triangle.SetActive(true);
-                triangleFon.SetActive(true);
-                lifeTimer.SetActive(true);
-                lifeMenu.SetActive(false);
+                triangle_fon.SetActive(true);
+                life_timer.SetActive(true);
+                life_menu.SetActive(false);
                 break;
 
             case GameState.SkinMenu:
-                gameUi.SetActive(false);
-                skinMenu.SetActive(true);
-                startMenu.SetActive(false);
-                pauseMenu.SetActive(false);
+                Game_UI.SetActive(false);
+                skin_menu.SetActive(true);
+                start_menu.SetActive(false);
+                pause_menu.SetActive(false);
                 round.SetActive(false);
                 triangle.SetActive(false);
-                triangleFon.SetActive(false);
-                lifeTimer.SetActive(false);
+                triangle_fon.SetActive(false);
+                life_timer.SetActive(false);
+                life_menu.SetActive(false);
                 break;
 
             case GameState.Game:
-                gameuiBg.SetActive(true);
-                _raycaster.enabled = true;
-                gameUi.SetActive(true);
-                skinMenu.SetActive(false);
-                startMenu.SetActive(false);
-                pauseMenu.SetActive(false);
+                gameui_bg.SetActive(true);
+                raycaster.enabled = true;
+                Game_UI.SetActive(true);
+                skin_menu.SetActive(false);
+                start_menu.SetActive(false);
+                pause_menu.SetActive(false);
                 round.SetActive(true);
                 triangle.SetActive(true);
-                triangleFon.SetActive(false);
+                triangle_fon.SetActive(false);
                 Ball.ball.EnableImage();
-                lifeTimer.SetActive(false);
+                life_timer.SetActive(false);
+                life_menu.SetActive(false);
                 break;
 
             case GameState.Prepare:
-                gameuiBg.SetActive(false);
-                _raycaster.enabled = false;
+                gameui_bg.SetActive(false);
+                raycaster.enabled = false;
                 break;
 
             case GameState.Pause:
-                _raycaster.enabled = false;
+                raycaster.enabled = false;
                 break;
 
             case GameState.GameOver:
-                gameuiBg.SetActive(false);
-                _raycaster.enabled = true;
-                gameUi.SetActive(true);
-                skinMenu.SetActive(false);
-                startMenu.SetActive(false);
-                pauseMenu.SetActive(true);
+                gameui_bg.SetActive(false);
+                raycaster.enabled = true;
+                Game_UI.SetActive(true);
+                skin_menu.SetActive(false);
+                start_menu.SetActive(false);
+                pause_menu.SetActive(true);
                 round.SetActive(false);
                 triangle.SetActive(false);
-                triangleFon.SetActive(false);
-                pausePic.SetActive(false);
-                gameoverPic.SetActive(true);
-                lifeTimer.SetActive(true);
+                triangle_fon.SetActive(false);
+                pause_text.SetActive(false);
+                gameover_text.SetActive(true);
+                pause_pic.SetActive(false);
+                gameover_pic.SetActive(true);
+                life_timer.SetActive(true);
+                life_menu.SetActive(false);
                 break;
 
-            default:
-                throw new ArgumentOutOfRangeException();
+            case GameState.LifeMenu:
+                raycaster.enabled = true;
+                SkinManager.skin_manager.LoadSavedSkin();
+                Game_UI.SetActive(false);
+                skin_menu.SetActive(false);
+                start_menu.SetActive(true);
+                pause_menu.SetActive(false);
+                round.SetActive(true);
+                triangle.SetActive(true);
+                triangle_fon.SetActive(true);
+                life_timer.SetActive(true);
+                life_menu.SetActive(true);
+                break;
         }
     }
 }

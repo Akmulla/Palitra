@@ -1,11 +1,13 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class Hearts : MonoBehaviour
 {
     public static Hearts h;
     [SerializeField]
-    int _hearts = 10;
+    int hearts = 10;
     public Text text;
     public Text heartMenuText;
    
@@ -13,27 +15,27 @@ public class Hearts : MonoBehaviour
     void Awake()
     {
         h = this;
-        text.text = _hearts.ToString();
-        heartMenuText.text = _hearts.ToString();
+        text.text = hearts.ToString();
+        heartMenuText.text = hearts.ToString();
     }
 
     public int Heart
     {
         get
         {
-            return _hearts;
+            return hearts;
         }
         set
         {
-            _hearts = value;
-            text.text = _hearts.ToString();
-            heartMenuText.text= _hearts.ToString();
+            hearts = value;
+            text.text = hearts.ToString();
+            heartMenuText.text= hearts.ToString();
         }
     }
 
     public bool CheckHearts()
     {
-        return _hearts>0;
+        return hearts>0;
     }
 
     void OnEnable()

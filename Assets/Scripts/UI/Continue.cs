@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class Continue : MonoBehaviour
 {
@@ -15,10 +16,10 @@ public class Continue : MonoBehaviour
         if (!Hearts.h.CheckHearts())
             return;
 
-        if (GameController.gameController.GetState() != GameState.GameOver)
+        if (GameController.game_controller.GetState() != GameState.GameOver)
             return;
 
-        GameController.gameController.BeginGame();
+        GameController.game_controller.BeginGame();
         button.interactable = false;
     }
 

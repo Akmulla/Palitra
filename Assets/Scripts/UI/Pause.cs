@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
+using System.Collections;
+using UnityEngine.EventSystems;
 
 public class Pause : MonoBehaviour
 {
     public void PauseGame()
     {
-        GameController.gameController.Pause();
+        GameController.game_controller.Pause();
     }
 }

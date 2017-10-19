@@ -1,6 +1,7 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using System.Collections;
 
 public class Preload : MonoBehaviour
 {
@@ -31,18 +32,18 @@ public class Preload : MonoBehaviour
 
     IEnumerator Cor()
     {
-        AsyncOperation ao = SceneManager.LoadSceneAsync("New Main", LoadSceneMode.Single);
-        ao.allowSceneActivation = false;
-        while (ao.progress < 0.9f)
+        AsyncOperation AO = SceneManager.LoadSceneAsync("New Main", LoadSceneMode.Single);
+        AO.allowSceneActivation = false;
+        while (AO.progress < 0.9f)
         {
             // text.text = AO.progress.ToString();
             //progressBar.fillAmount = AO.progress;
-            tran.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, -ao.progress * 360.0f));
+            tran.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, -AO.progress * 360.0f));
             yield return null;
         }
 
         //Fade the loading screen out here
 
-        ao.allowSceneActivation = true;
+        AO.allowSceneActivation = true;
     }
 }

@@ -1,23 +1,25 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class TrianChange : MonoBehaviour
 {
     public Image trian;
-    int _trianNumber;
-    public Button buySetButton;
-    public Animator moneyAnim;
-    public GameObject buyButton;
-    public GameObject setButton;
-    public Text trianCountText;
-    public Text priceText;
-    public Text scoreText;
+    int trian_number = 0;
+    public Button buy_set_button;
+    public Animator money_anim;
+    public GameObject buy_button;
+    public GameObject set_button;
+    public Text trian_count_text;
+    public Text price_text;
+    public Text score_text;
     public Text description;
 
     void UpdateTrian()
     {
         SetEquipButtonStatus();
-        trian.sprite = TrianManager.trianManager.GetTrianByNumber(_trianNumber).sprite;
+        trian.sprite = TrianManager.trian_manager.GetTrianByNumber(trian_number).sprite;
 
         //for (int i = 0; i < sectors.Length; i++)
         //{
@@ -28,19 +30,19 @@ public class TrianChange : MonoBehaviour
 
     void UpdateText()
     {
-        trianCountText.text = (_trianNumber + 1) + "/" + TrianManager.trianManager.GetTotalTrianCount();
-        priceText.text = TrianManager.trianManager.GetTrianByNumber(_trianNumber).price.ToString();
-        scoreText.text = GlobalScore.globalScore.Score.ToString();
-        description.text = TrianManager.trianManager.GetTrianByNumber(_trianNumber).description;
-        if (CheckIfAvailable(_trianNumber))
+        trian_count_text.text = (trian_number + 1).ToString() + "/" + TrianManager.trian_manager.GetTotalTrianCount();
+        price_text.text = TrianManager.trian_manager.GetTrianByNumber(trian_number).price.ToString();
+        score_text.text = GlobalScore.global_score.Score.ToString();
+        description.text = TrianManager.trian_manager.GetTrianByNumber(trian_number).description.ToString();
+        if (CheckIfAvailable(trian_number))
         {
-            setButton.SetActive(true);
-            buyButton.SetActive(false);
+            set_button.SetActive(true);
+            buy_button.SetActive(false);
         }
         else
         {
-            setButton.SetActive(false);
-            buyButton.SetActive(true);
+            set_button.SetActive(false);
+            buy_button.SetActive(true);
         }
     }
 
@@ -51,13 +53,13 @@ public class TrianChange : MonoBehaviour
 
     void InitMenu()
     {
-        _trianNumber = TrianManager.trianManager.GetTrianNumber();
-        TrianManager.trianManager.SetActiveTrian(_trianNumber);
-        for (int i = 0; i < TrianManager.trianManager.GetTotalTrianCount(); i++)
+        trian_number = TrianManager.trian_manager.GetTrianNumber();
+        TrianManager.trian_manager.SetActiveTrian(trian_number);
+        for (int i = 0; i < TrianManager.trian_manager.GetTotalTrianCount(); i++)
         {
-            if ((!CheckIfAvailable(i)) && (TrianManager.trianManager.GetTrianByNumber(i).price == 0))
+            if ((!CheckIfAvailable(i)) && (TrianManager.trian_manager.GetTrianByNumber(i).price == 0))
             {
-                PlayerPrefs.SetInt(TrianManager.trianManager.GetTrianByNumber(i).name, 1);
+                PlayerPrefs.SetInt(TrianManager.trian_manager.GetTrianByNumber(i).name, 1);
                 PlayerPrefs.Save();
             }
 
@@ -87,7 +89,7 @@ public class TrianChange : MonoBehaviour
 
     bool CheckIfAvailable(int number)
     {
-        if (PlayerPrefs.HasKey(TrianManager.trianManager.GetTrianByNumber(number).name))
+        if (PlayerPrefs.HasKey(TrianManager.trian_manager.GetTrianByNumber(number).name))
         {
             return true;
         }
@@ -97,26 +99,26 @@ public class TrianChange : MonoBehaviour
 
     void SetEquipButtonStatus()
     {
-        if (_trianNumber == PlayerPrefs.GetInt("SavedTrian"))
+        if (trian_number == PlayerPrefs.GetInt("SavedTrian"))
         {
-            buySetButton.interactable = false;
+            buy_set_button.interactable = false;
         }
         else
         {
-            buySetButton.interactable = true;
+            buy_set_button.interactable = true;
         }
     }
 
     public void NextTrian()
     {
-        SoundManager.soundManager.SingleSound(SoundSample.ScrollSkin);
-        if (_trianNumber == TrianManager.trianManager.GetTotalTrianCount() - 1)
+        SoundManager.sound_manager.SingleSound(SoundSample.ScrollSkin);
+        if (trian_number == TrianManager.trian_manager.GetTotalTrianCount() - 1)
         {
-            _trianNumber = 0;
+            trian_number = 0;
         }
         else
         {
-            _trianNumber++;
+            trian_number++;
         }
         //SkinManager.skin_manager.SetActiveSkin(trian_number);
         UpdateTrian();
@@ -125,14 +127,14 @@ public class TrianChange : MonoBehaviour
 
     public void PrevTrian()
     {
-        SoundManager.soundManager.SingleSound(SoundSample.ScrollSkin);
-        if (_trianNumber == 0)
+        SoundManager.sound_manager.SingleSound(SoundSample.ScrollSkin);
+        if (trian_number == 0)
         {
-            _trianNumber = TrianManager.trianManager.GetTotalTrianCount() - 1;
+            trian_number = TrianManager.trian_manager.GetTotalTrianCount() - 1;
         }
         else
         {
-            _trianNumber--;
+            trian_number--;
         }
         //SkinManager.skin_manager.SetActiveSkin(trian_number);
         UpdateTrian();
@@ -141,32 +143,32 @@ public class TrianChange : MonoBehaviour
 
     public void SetTrian()
     {
-        if (CheckIfAvailable(_trianNumber))
+        if (CheckIfAvailable(trian_number))
         {
-            SoundManager.soundManager.SingleSound(SoundSample.SetSkin);
-            TrianManager.trianManager.SetActiveTrian(_trianNumber);
-            TrianManager.trianManager.SaveActiveTrian();
+            SoundManager.sound_manager.SingleSound(SoundSample.SetSkin);
+            TrianManager.trian_manager.SetActiveTrian(trian_number);
+            TrianManager.trian_manager.SaveActiveTrian();
             //buy_set_button.interactable = false;
             //color_buy.Animate();
         }
         else
         {
-            if (GlobalScore.globalScore.Score >= TrianManager.trianManager.GetTrianByNumber(_trianNumber).price)
+            if (GlobalScore.global_score.Score >= TrianManager.trian_manager.GetTrianByNumber(trian_number).price)
             {
-                SoundManager.soundManager.SingleSound(SoundSample.Buy);
-                GlobalScore.globalScore.Score -= TrianManager.trianManager.GetTrianByNumber(_trianNumber).price;
-                PlayerPrefs.SetInt(TrianManager.trianManager.GetTrianByNumber(_trianNumber).name, 1);
+                SoundManager.sound_manager.SingleSound(SoundSample.Buy);
+                GlobalScore.global_score.Score -= TrianManager.trian_manager.GetTrianByNumber(trian_number).price;
+                PlayerPrefs.SetInt(TrianManager.trian_manager.GetTrianByNumber(trian_number).name, 1);
 
                 //сразу активируем
-                TrianManager.trianManager.SetActiveTrian(_trianNumber);
-                TrianManager.trianManager.SaveActiveTrian();
+                TrianManager.trian_manager.SetActiveTrian(trian_number);
+                TrianManager.trian_manager.SaveActiveTrian();
 
                 //color_buy.Animate();
             }
             else
             {
-                SoundManager.soundManager.SingleSound(SoundSample.Error);
-                moneyAnim.SetTrigger("animate");
+                SoundManager.sound_manager.SingleSound(SoundSample.Error);
+                money_anim.SetTrigger("animate");
             }
         }
         SetEquipButtonStatus();

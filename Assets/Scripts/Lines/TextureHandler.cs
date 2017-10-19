@@ -1,83 +1,85 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class TextureHandler : MonoBehaviour
 {
-    int _textSize = 2048;
-    int _halfSize;
-    int _height = 1;
-    Texture2D _texture;
-    Color[] _col;
+    int text_size = 2048;
+    int half_size;
+    int height = 1;
+    Texture2D texture;
+    Color[] col;
 
     public void Awake()
     {
         //text_size = Screen.width;
         //half_size = text_size / 2;
-        _halfSize = _textSize / 2;
-        _texture = new Texture2D(_textSize, _height,TextureFormat.RGB24,false);
-        _texture.filterMode = FilterMode.Point;
-        _col = new Color[_textSize * _height];
+        half_size = text_size / 2;
+        texture = new Texture2D(text_size, height,TextureFormat.RGB24,false);
+        texture.filterMode = FilterMode.Point;
+        col = new Color[text_size * height];
     }
 
 
     public Texture2D CreateTexture(Color color)
     {
         
-        for (int i=0;i<_col.Length;i++)
+        for (int i=0;i<col.Length;i++)
         {
-            _col[i] = color;
+            col[i] = color;
         }
-        _texture.SetPixels(_col);
-        _texture.Apply();
+        texture.SetPixels(col);
+        texture.Apply();
                  
-        return _texture;
+        return texture;
     }
     ///
-    public Texture2D CreateTexture(Color[] colors, int blockCount, float unusedPart,
-        out Color[] newColors)
+    public Texture2D CreateTexture(Color[] colors, int block_count, float unused_part,
+        out Color[] new_colors)
     {
-        if (blockCount == 0)
-            blockCount = 5;
+        if (block_count == 0)
+            block_count = 5;
         //Color[] col = new Color[text_size * height];
-        newColors = CreateBlockColors(colors, blockCount);
+        new_colors = CreateBlockColors(colors, block_count);
         
         //Texture2D text = new Texture2D(text_size, height);
-        int greyLeft = (int)(_texture.width* unusedPart);
-        int greyRight = (int)(_texture.width * (1.0f-unusedPart));
-        int blockSize = (greyRight - greyLeft) / blockCount;
+        int grey_left = (int)((float)texture.width* unused_part);
+        int grey_right = (int)((float)texture.width * (1.0f-unused_part));
+        int block_size = (grey_right - grey_left) / block_count;
 
         int k = 0;
-        for (int y = 0; y < _texture.height; y++)
+        for (int y = 0; y < texture.height; y++)
         {
             int h = 0;
             int xx = 0;
-            for (int x = 0; x < _texture.width; x++)
+            for (int x = 0; x < texture.width; x++)
             {
-                if ((x < greyLeft) || (x > greyRight))
+                if ((x < grey_left) || (x > grey_right))
                 {
-                    if (x < greyLeft)
+                    if (x < grey_left)
                     {
-                        _col[k] = _col[k] = newColors[0];
+                        col[k] = col[k] = new_colors[0];
                     }
 
-                    if (x > greyRight)
+                    if (x > grey_right)
                     {
-                        _col[k] = _col[k] = newColors[newColors.Length-1];
+                        col[k] = col[k] = new_colors[new_colors.Length-1];
                     }
                 }
                 else
                 {
                     
-                    if (xx >= blockSize)
+                    if (xx >= block_size)
                     {
                         xx = 0;
                         h++;
                     }
 
-                    if (h < newColors.Length)
-                        _col[k] = newColors[h];
+                    if (h < new_colors.Length)
+                        col[k] = new_colors[h];
                     else
                     {
-                        _col[k] = newColors[newColors.Length - 1];
+                        col[k] = new_colors[new_colors.Length - 1];
                     }
                     xx++;
                 }
@@ -87,18 +89,18 @@ public class TextureHandler : MonoBehaviour
                 k++;
                 //text.SetPixel(x, y, new_colors[h]);
             }
-            if (newColors.Length % 2 == 0)
+            if (new_colors.Length % 2 == 0)
             {
-                _col[_halfSize - 1] = newColors[newColors.Length / 2 - 1];
-                _col[_halfSize - 2] = newColors[newColors.Length / 2 - 1];
-                _col[_halfSize] = newColors[newColors.Length / 2];
-                _col[_halfSize + 1] = newColors[newColors.Length / 2];
+                col[half_size - 1] = new_colors[new_colors.Length / 2 - 1];
+                col[half_size - 2] = new_colors[new_colors.Length / 2 - 1];
+                col[half_size] = new_colors[new_colors.Length / 2];
+                col[half_size + 1] = new_colors[new_colors.Length / 2];
             }
         }
-        _texture.SetPixels(_col);
-        _texture.Apply();
+        texture.SetPixels(col);
+        texture.Apply();
 
-        return _texture;
+        return texture;
     }
 
     //public Texture2D[] CreateTexture(Color[] colors, int block_count, out Texture2D main_text)
@@ -149,41 +151,41 @@ public class TextureHandler : MonoBehaviour
     //    return texture;
     //}
 
-    Color[] CreateBlockColors(Color[] colors, int blockCount)
+    Color[] CreateBlockColors(Color[] colors, int block_count)
     {
-        if (blockCount == 0)
-            blockCount = 5;
+        if (block_count == 0)
+            block_count = 5;
 
-        Color[] newColors = new Color[blockCount];
-        newColors[0] = SkinManager.skinManager.GetCurrentSkin().colors
-       [Random.Range(0, SkinManager.skinManager.GetCurrentSkin().colors.Length)];
-        if (blockCount == 1)
-            return newColors;
-        for (int i = 1; i < blockCount; i++)
+        Color[] new_colors = new Color[block_count];
+        new_colors[0] = SkinManager.skin_manager.GetCurrentSkin().colors
+       [UnityEngine.Random.Range(0, SkinManager.skin_manager.GetCurrentSkin().colors.Length)];
+        if (block_count == 1)
+            return new_colors;
+        for (int i = 1; i < block_count; i++)
         {
             //Color color = Color.black;
-            Color[] availCol = new Color[colors.Length - 1];
+            Color[] avail_col = new Color[colors.Length - 1];
             int n = 0;
             for (int j = 0; j < colors.Length; j++)
             {
-                if (newColors[i - 1] != colors[j])
+                if (new_colors[i - 1] != colors[j])
                 {
-                    availCol[n] = colors[j];
+                    avail_col[n] = colors[j];
                     n++;
                 }
             }
-            newColors[i] = availCol[Random.Range(0, availCol.Length)];
+            new_colors[i] = avail_col[UnityEngine.Random.Range(0, avail_col.Length)];
         }
-        if (blockCount == 2)
-            return newColors;
+        if (block_count == 2)
+            return new_colors;
         for (int i = 0; i < colors.Length; i++)
         {
-            if ((colors[i] != newColors[0]) && (colors[i] != newColors[newColors.Length - 2]))
+            if ((colors[i] != new_colors[0]) && (colors[i] != new_colors[new_colors.Length - 2]))
             {
-                newColors[newColors.Length - 1] = colors[i];
+                new_colors[new_colors.Length - 1] = colors[i];
                 break;
             }
         }
-        return newColors;
+        return new_colors;
     }
 }

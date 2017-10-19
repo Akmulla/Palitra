@@ -1,21 +1,23 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class AnimationStatus : MonoBehaviour
 {
-   public bool Finished { get; set; }
+   public bool finished { get; set; }
 	
     void Awake()
     {
-        Finished = false;
+        finished = false;
     }
 
     public void Finish()
     {
-        Finished = true;
+        finished = true;
     }
 
     public void Begin()
     {
-        Finished = false;
+        finished = false;
     }
 }

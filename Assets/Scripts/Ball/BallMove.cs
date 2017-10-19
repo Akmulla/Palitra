@@ -1,35 +1,35 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 
 public class BallMove : MonoBehaviour
 {
-	public static BallMove ballMove;
-    public enum State { Normal,Slowed,Resuming}
-    State _currentState=State.Normal;
-    Transform _tran;
-    float _speed=1.0f;
-    float _savedSpeed=1.0f;
-    float _x = 0.2f;
-    private IEnumerator _coroutine;
-    bool _stop;
+	public static BallMove ball_move;
+    public enum State { normal,slowed,resuming};
+    State current_state=State.normal;
+    Transform tran;
+    float speed=1.0f;
+    float saved_speed=1.0f;
+    float x = 0.2f;
+    private IEnumerator coroutine;
+    bool stop = false;
 
     public void Stop()
     {
-        _stop = true;
+        stop = true;
     }
 
     void Awake()
 	{
-		ballMove=this;
-        _tran = GetComponent<Transform>();
-        _stop = false;
+		ball_move=this;
+        tran = GetComponent<Transform>();
+        stop = false;
     }
 
     void BeginGame()
     {
-        _speed = GameController.gameController.GetLvlData().speed;
-        _currentState = State.Normal;
-        _stop = false;
+        speed = GameController.game_controller.GetLvlData().speed;
+        current_state = State.normal;
+        stop = false;
     }
 
     void OnEnable()
@@ -46,28 +46,28 @@ public class BallMove : MonoBehaviour
     {
         get
         {
-            return _speed;
+            return speed;
         }
         set
         {
-            _speed = value;
+            speed = value;
         }
     }
 
     void Update()
     {
-        if ((!_stop) && (GameController.gameController.GetState() == GameState.Game))
+        if ((!stop) && (GameController.game_controller.GetState() == GameState.Game))
         {
-            switch (Ball.ball.trianType)
+            switch (Ball.ball.trian_type)
             {
                 case TrianType.DoublePoints:
-                    _tran.position = _tran.position + Vector3.up * _speed * Time.deltaTime*1.15f;
+                    tran.position = tran.position + Vector3.up * speed * Time.deltaTime*1.15f;
                     break;
                 case TrianType.HalfPoints:
-                    _tran.position = _tran.position + Vector3.up * _speed * Time.deltaTime * 0.75f;
+                    tran.position = tran.position + Vector3.up * speed * Time.deltaTime * 0.75f;
                     break;
                 default:
-                    _tran.position = _tran.position + Vector3.up * _speed * Time.deltaTime;
+                    tran.position = tran.position + Vector3.up * speed * Time.deltaTime;
                     break;
             }
             
@@ -76,14 +76,14 @@ public class BallMove : MonoBehaviour
 
     public void IncreaseSpeed(float acceleration)
     {
-        if (_currentState != State.Normal)
+        if (current_state != State.normal)
             return;
         Speed += acceleration;
     }
 
     public IEnumerator ShieldSlowDown()
     {
-        float saved = _speed / 2.0f;
+        float saved = speed / 2.0f;
         Speed -= saved;
         yield return new WaitForSeconds(2.0f);
         Speed += saved;
@@ -92,23 +92,23 @@ public class BallMove : MonoBehaviour
     public void SlowDown(float deceleration)
     {
         
-        if (_currentState!=State.Normal)
+        if (current_state!=State.normal)
         {
             StopAllCoroutines();
-            Speed = _savedSpeed;
+            Speed = saved_speed;
         }
 
         {
-            _currentState = State.Slowed;
-            _x = (Speed - deceleration) / 5.0f;
-            _savedSpeed = Speed;
+            current_state = State.slowed;
+            x = (Speed - deceleration) / 5.0f;
+            saved_speed = Speed;
             Speed = deceleration;
         }
     }
 
 	public State CheckState()
 	{
-		return _currentState;
+		return current_state;
 	}
 
     IEnumerator SlowDownCoroutine(float x)
@@ -123,14 +123,14 @@ public class BallMove : MonoBehaviour
             Speed += x;
             yield return new WaitForSeconds(0.2f);
         }
-        _currentState = State.Normal;
+        current_state = State.normal;
     }
 
     public void ResumeSpeed()
     {
-        _currentState = State.Resuming;
-        _coroutine = SlowDownCoroutine(_x);
-        StartCoroutine(_coroutine);
+        current_state = State.resuming;
+        coroutine = SlowDownCoroutine(x);
+        StartCoroutine(coroutine);
         //Speed = saved_speed;
        // current_state = State.normal;
     }

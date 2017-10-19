@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-public class LineDefault : Line
+public class Line_Default : Line
 {
-    Color _lineColor;
-    public static Color prevColor=Color.clear;
-    public static int sameColors = 1;
+    Color line_color;
+    public static Color prev_color=Color.clear;
+    public static int same_colors = 1;
 
     public override void ChangeColor()
     {
@@ -17,11 +17,11 @@ public class LineDefault : Line
         ChangeColor(color);
     }
 
-    public void ChangeColor(Color newColor)
+    public void ChangeColor(Color new_color)
     {
-        Texture2D texture = textureHandler.CreateTexture(newColor);
+        Texture2D texture = texture_handler.CreateTexture(new_color);
         SetTexture(texture);
-        _lineColor = newColor;
+        line_color = new_color;
     }
 
     protected override void CheckIfPassed()
@@ -36,12 +36,12 @@ public class LineDefault : Line
         //}
         
         
-        if ( Ball.ball.LinePassed(_lineColor))
+        if ( Ball.ball.LinePassed(line_color))
             anim.BeginAnimation();
     }
 
     public Color GetLineColor()
     {
-        return _lineColor;
+        return line_color;
     }
 }

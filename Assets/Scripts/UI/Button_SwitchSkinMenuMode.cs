@@ -1,39 +1,41 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
-public enum SkinState { Round,Trian}
+public enum SkinState { Round,Trian};
 
-public class ButtonSwitchSkinMenuMode : MonoBehaviour
+public class Button_SwitchSkinMenuMode : MonoBehaviour
 {
-    public GameObject roundObj;
-    public GameObject trianObj;
-    public Button buttonRound;
-    public Button buttonTrian;
+    public GameObject RoundObj;
+    public GameObject TrianObj;
+    public Button Button_Round;
+    public Button Button_Trian;
 
-    SkinState _state=SkinState.Round;
+    SkinState state=SkinState.Round;
 
     public SkinState State
     {
-        get { return _state; }
+        get { return state; }
     }
 
     public void SwitchMode()
     {
-        if (_state==SkinState.Round)
+        if (state==SkinState.Round)
         {
-            roundObj.SetActive(false);
-            trianObj.SetActive(true);
-            buttonRound.interactable = true;
-            buttonTrian.interactable = false;
-            _state = SkinState.Trian;
+            RoundObj.SetActive(false);
+            TrianObj.SetActive(true);
+            Button_Round.interactable = true;
+            Button_Trian.interactable = false;
+            state = SkinState.Trian;
         }
         else
         {
-            roundObj.SetActive(true);
-            trianObj.SetActive(false);
-            buttonRound.interactable = false;
-            buttonTrian.interactable = true;
-            _state = SkinState.Round;
+            RoundObj.SetActive(true);
+            TrianObj.SetActive(false);
+            Button_Round.interactable = false;
+            Button_Trian.interactable = true;
+            state = SkinState.Round;
         }
     }
 

@@ -1,7 +1,7 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 
-[Serializable]
+[System.Serializable]
 public class LineProp 
 {
     [Tooltip("Количество линий")]

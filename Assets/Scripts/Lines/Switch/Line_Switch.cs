@@ -1,65 +1,65 @@
-﻿using System.Collections;
+﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class LineSwitch : Line
+public class Line_Switch : Line
 {
-    float _dist;
-    Color _lineColor;
+    float dist;
+    Color line_color;
     public static Texture2D[] text;
-    public static int textInd;
+    public static int text_ind;
 
     public static void InitText()
     {
-        textInd = 0;
+        text_ind = 0;
         text = new Texture2D[3];
     }
 
     public override void ChangeColor()
     {
         List<int> indexes = new List<int>();
-        for (int i = 0; i < SkinManager.skinManager.GetCurrentSkin().colors.Length; i++)
+        for (int i = 0; i < SkinManager.skin_manager.GetCurrentSkin().colors.Length; i++)
         {
-            if (SkinManager.skinManager.GetCurrentSkin().colors[i] != _lineColor)
+            if (SkinManager.skin_manager.GetCurrentSkin().colors[i] != line_color)
             {
                 indexes.Add(i);
             }
         }
         int ind = indexes[Random.Range(0, indexes.Count)];
-        Color newColor = SkinManager.skinManager.GetCurrentSkin().colors[ind];
-        _lineColor = newColor;
+        Color new_color = SkinManager.skin_manager.GetCurrentSkin().colors[ind];
+        line_color = new_color;
 
         SetTexture(text[ind]);
     }
 
     void ChangeColor(int ind)
     {
-        Color newColor = SkinManager.skinManager.GetCurrentSkin().colors[ind];
-        _lineColor = newColor;
+        Color new_color = SkinManager.skin_manager.GetCurrentSkin().colors[ind];
+        line_color = new_color;
         SetTexture(text[ind]);
     }
 
     protected override void CheckIfPassed()
     {
-        if (Ball.ball.LinePassed(_lineColor))
+        if (Ball.ball.LinePassed(line_color))
             anim.BeginAnimation();
     }
 
     public override void InitLine()
     {
-        for (int i = 0; i < meshResize.Length; i++)
+        for (int i = 0; i < mesh_resize.Length; i++)
         {
-            meshResize[i].Scale();
+            mesh_resize[i].scale();
         }
         active = true;
-        _dist = GameController.gameController.GetLvlData().switchProp.dist;
+        dist = GameController.game_controller.GetLvlData().switch_prop.dist;
         
-        if (textInd<3)
+        if (text_ind<3)
         {
-            text[textInd] = textureHandler.CreateTexture
-                (SkinManager.skinManager.GetCurrentSkin().colors[textInd]);
-            ChangeColor(textInd);
-            textInd++;
+            text[text_ind] = texture_handler.CreateTexture
+                (SkinManager.skin_manager.GetCurrentSkin().colors[text_ind]);
+            ChangeColor(text_ind);
+            text_ind++;
         }
         else
         {
@@ -78,9 +78,9 @@ public class LineSwitch : Line
         while (gameObject.activeSelf)
         {
             yield return new WaitForSeconds
-                (GameController.gameController.GetLvlData().switchProp.timeToChange);
+                (GameController.game_controller.GetLvlData().switch_prop.time_to_change);
 
-            if ((active) && (tran.position.y - height - Ball.ball.GetPosition().y > _dist))
+            if ((active) && (tran.position.y - height - Ball.ball.GetPosition().y > dist))
             {
                 ChangeColor();
             }

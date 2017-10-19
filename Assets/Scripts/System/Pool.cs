@@ -1,12 +1,12 @@
-﻿using System.Collections;
+﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-
+using System.Linq;
 //using System;
 
 public class Pool : MonoBehaviour
 {
-    public PoolType poolType;
+    public PoolType pool_type;
     protected GameObject[] stck;
    // private int tos;
     public GameObject obj;
@@ -23,7 +23,7 @@ public class Pool : MonoBehaviour
 
         for (int i = 0; i < size; i++)
         {
-            stck[i] = Instantiate(obj, Vector2.zero, Quaternion.identity);
+            stck[i] = ((GameObject)Instantiate(obj, Vector2.zero, Quaternion.identity));
             stck[i].GetComponent<PoolRef>().SetPool(this);
             stck[i].SetActive(false);
             yield return null;
@@ -32,7 +32,7 @@ public class Pool : MonoBehaviour
 
     public virtual IEnumerator InitLineCor(int k)
     {
-        while ((stck[k].activeSelf)&&(GameController.gameController.GetState()==GameState.Game))
+        while ((stck[k].activeSelf)&&(GameController.game_controller.GetState()==GameState.Game))
             yield return new WaitForEndOfFrame();
         stck[k].GetComponent<Line>().InitLine();
         yield return null;

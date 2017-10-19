@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
-public class BlockOrder : MonoBehaviour
+public class Block_Order : MonoBehaviour
 {
     //SpriteRenderer sprite_rend;
-    Transform _tran;
+    Transform tran;
     public bool active;
     public Color color;
 
@@ -15,17 +15,17 @@ public class BlockOrder : MonoBehaviour
     void Awake()
     {
        // sprite_rend = GetComponent<SpriteRenderer>();
-        _tran = GetComponent<Transform>();
+        tran = GetComponent<Transform>();
     }
 
-    public void SetColor(Color newColor)
+    public void SetColor(Color new_color)
     {
-        color = newColor;
+        color = new_color;
     }
 
     public Vector3 GetPosition()
     {
-        return _tran.position;
+        return tran.position;
     }
 
     public void Disable()

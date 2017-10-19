@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class DeathParticle : MonoBehaviour
 {
@@ -8,11 +10,11 @@ public class DeathParticle : MonoBehaviour
         Change(col);
     }
 
-    public void Change(Color applyColor)
+    public void Change(Color apply_color)
     {
         ParticleSystem.ColorOverLifetimeModule part = GetComponent<ParticleSystem>().colorOverLifetime;
-        part.color = applyColor;
+        part.color = apply_color;
         ParticleSystem.MainModule part2 = GetComponent<ParticleSystem>().main;
-        part2.startColor = applyColor;
+        part2.startColor = apply_color;
     }
 }

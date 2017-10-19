@@ -1,43 +1,45 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class TrianManager : MonoBehaviour
 {
-    public static TrianManager trianManager;
+    public static TrianManager trian_manager;
     [SerializeField]
-    TrianData[] _trianData;
-    int _totalTrianCount = 1;
-    int _activeTrian;
+    TrianData[] trian_data;
+    int totalTrianCount = 1;
+    int active_trian = 0;
 
     public int GetTrianNumber()
     {
-        return _activeTrian;
+        return active_trian;
     }
 
-    public void SetActiveTrian(int newTrianNumber)
+    public void SetActiveTrian(int new_trian_number)
     {
-        if (newTrianNumber != _activeTrian)
+        if (new_trian_number != active_trian)
         {
-            _activeTrian = Mathf.Clamp(newTrianNumber, 0, _totalTrianCount);
+            active_trian = Mathf.Clamp(new_trian_number, 0, totalTrianCount);
             //EventManager.TriggerEvent("SkinChanged");
         }
     }
 
     public void SaveActiveTrian()
     {
-        PlayerPrefs.SetInt("SavedTrian", _activeTrian);
+        PlayerPrefs.SetInt("SavedTrian", active_trian);
         PlayerPrefs.Save();
     }
 
     public int GetTotalTrianCount()
     {
-        return _totalTrianCount;
+        return totalTrianCount;
     }
 
     public void LoadSavedTrian()
     {
         if (!PlayerPrefs.HasKey("SavedTrian"))
         {
-            PlayerPrefs.SetInt("SavedTrian", _activeTrian);
+            PlayerPrefs.SetInt("SavedTrian", active_trian);
         }
         PlayerPrefs.Save();
         SetActiveTrian(PlayerPrefs.GetInt("SavedTrian"));
@@ -45,28 +47,28 @@ public class TrianManager : MonoBehaviour
 
     void Awake()
     {
-        trianManager = this;
-        _activeTrian = 0;
+        trian_manager = this;
+        active_trian = 0;
         
-        _totalTrianCount = _trianData.Length;
+        totalTrianCount = trian_data.Length;
         if (PlayerPrefs.HasKey("SavedTrian"))
         {
-            _activeTrian = PlayerPrefs.GetInt("SavedTrian");
+            active_trian = PlayerPrefs.GetInt("SavedTrian");
         }
         else
         {
-            PlayerPrefs.SetInt("SavedTrian", _activeTrian);
+            PlayerPrefs.SetInt("SavedTrian", active_trian);
         }
         PlayerPrefs.Save();
     }
 
     public TrianData GetCurrentTrian()
     {
-        return _trianData[_activeTrian];
+        return trian_data[active_trian];
     }
 
     public TrianData GetTrianByNumber(int number)
     {
-        return _trianData[number];
+        return trian_data[number];
     }
 }

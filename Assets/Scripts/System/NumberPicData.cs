@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
+using System.Collections;
+
 
 public class NumberPicData : MonoBehaviour
 {
-    public static NumberPicData instance;
-    public Sprite[] numberPic;
+    public static NumberPicData Instance;
+    public Sprite[] number_pic;
     [HideInInspector]
     public int min;
     [HideInInspector]
@@ -11,7 +13,7 @@ public class NumberPicData : MonoBehaviour
 
     void Awake()
     {
-        instance = this;
+        Instance = this;
         min = 0;
         //max = number_pic.Length-1;
         max = 55;

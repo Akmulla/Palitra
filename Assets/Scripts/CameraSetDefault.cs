@@ -1,18 +1,20 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class CameraSetDefault : MonoBehaviour
 {
-    Transform _tran;
-    Vector3 _defaultPosition = new Vector3(0.0f, 0.0f, -10.0f);
+    Transform tran;
+    Vector3 defaultPosition = new Vector3(0.0f, 0.0f, -10.0f);
 
     void Start()
     {
-        _tran = GetComponent<Transform>();
+        tran = GetComponent<Transform>();
     }
 
     void SetDefaultPosition()
     {
-        _tran.position = _defaultPosition;
+        tran.position = defaultPosition;
     }
 
     void OnEnable()

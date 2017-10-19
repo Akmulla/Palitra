@@ -3,7 +3,7 @@ using UnityEngine.UI;
 #if UNITY_EDITOR
 using UnityEditor;
 [CustomEditor(typeof(Touchable))]
-public class TouchableEditor : Editor
+public class Touchable_Editor : Editor
 { public override void OnInspectorGUI() { } }
 #endif
 public class Touchable : Text

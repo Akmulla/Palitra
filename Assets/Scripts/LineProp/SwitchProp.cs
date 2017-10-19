@@ -1,7 +1,7 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 
-[Serializable]
+[System.Serializable]
 public class SwitchProp
 {
     [Tooltip("Количество линий")]
@@ -9,5 +9,5 @@ public class SwitchProp
     [Tooltip("Расстояние, после которого полоса перестает менять цвет")]
     public float dist;
     [Tooltip("Задержка перед сменой линии")]
-    public float timeToChange;
+    public float time_to_change;
 }

@@ -1,10 +1,10 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 
-[Serializable]
+[System.Serializable]
 public class LineHandler:ScriptableObject
 {
-    public PoolType poolType;
+    public PoolType pool_type;
     public Pool pool;
     public int count;
 }

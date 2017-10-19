@@ -1,25 +1,26 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Start2Animation : MonoBehaviour
 {
-    Animator _anim;
+    Animator anim;
 
     void Awake()
     {
-        _anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
     }
 
     IEnumerator Animate()
     {
-        _anim.SetBool("animate", false);
+        anim.SetBool("animate", false);
         yield return new WaitForEndOfFrame();
-        _anim.SetBool("animate", true);
+        anim.SetBool("animate", true);
     }
 
     void Reset()
     {
-        _anim.SetBool("animate", false);
+        anim.SetBool("animate", false);
     }
 
     void OnEnable()

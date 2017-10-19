@@ -1,17 +1,18 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Advertisements;
 
 public class CreateAds : MonoBehaviour
 {
-    public int lvlInd;
-    public int tryInd;
+    public int lvl_ind = 0;
+    public int try_ind = 0;
 
 
     void ShowAd()
     {
-        lvlInd = 0;
-        tryInd = 0;
+        lvl_ind = 0;
+        try_ind = 0;
         
         StartCoroutine(ShowRewardVideo());
     }
@@ -30,8 +31,8 @@ public class CreateAds : MonoBehaviour
 
     void LvlPassed()
     {
-        lvlInd++;
-        if (lvlInd==10)
+        lvl_ind++;
+        if (lvl_ind==10)
         {
             ShowAd();
         }
@@ -39,8 +40,8 @@ public class CreateAds : MonoBehaviour
 
     void Reload()
     {
-        tryInd++;
-        if (tryInd == 10)
+        try_ind++;
+        if (try_ind == 10)
         {
             ShowAd();
         }
@@ -48,7 +49,7 @@ public class CreateAds : MonoBehaviour
 
     IEnumerator ShowRewardVideo()
     {
-        GameController.gameController.Pause();
+        GameController.game_controller.Pause();
         yield return new WaitForSecondsRealtime(0.5f);
         while (!Advertisement.IsReady("rewardedVideo"))
         {
@@ -68,7 +69,7 @@ public class CreateAds : MonoBehaviour
         //{
         //    yield return new WaitForEndOfFrame();
         //}
-        GameController.gameController.Continue();
+        GameController.game_controller.Continue();
     }
 
     public void ShowLifeMenuVideo()
@@ -78,7 +79,7 @@ public class CreateAds : MonoBehaviour
 
     IEnumerator ShowMenuVideo()
     {
-        GameController.gameController.Pause();
+        GameController.game_controller.Pause();
         yield return new WaitForSecondsRealtime(0.5f);
         while (!Advertisement.IsReady("rewardedVideo"))
         {
@@ -98,7 +99,7 @@ public class CreateAds : MonoBehaviour
         //{
         //    yield return new WaitForEndOfFrame();
         //}
-        GameController.gameController.Continue();
+        GameController.game_controller.Continue();
     }
 
     void LifeMenuResult(ShowResult result)
@@ -147,7 +148,7 @@ public class CreateAds : MonoBehaviour
 
     IEnumerator ContinueVideo()
     {
-        GameController.gameController.Pause();
+        GameController.game_controller.Pause();
         yield return new WaitForSecondsRealtime(0.5f);
         while (!Advertisement.IsReady("rewardedVideo"))
         {
@@ -181,18 +182,18 @@ public class CreateAds : MonoBehaviour
                 //
                 // YOUR CODE TO REWARD THE GAMER
                 // Give coins etc.
-                GameController.gameController.ResumeForBanner();
+                GameController.game_controller.ResumeForBanner();
                 break;
             case ShowResult.Skipped:
                 Debug.Log("The ad was skipped before reaching the end.");
-                GameController.gameController.Continue();
+                GameController.game_controller.Continue();
                 break;
             case ShowResult.Failed:
                 Debug.LogError("The ad failed to be shown.");
-                GameController.gameController.Continue();
+                GameController.game_controller.Continue();
                 break;
             default:
-                GameController.gameController.Continue();
+                GameController.game_controller.Continue();
                 break;
         }
     }

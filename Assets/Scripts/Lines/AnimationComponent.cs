@@ -1,27 +1,29 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class AnimationComponent : MonoBehaviour
 {
     [SerializeField]
-    MeshFilter _meshFilterRight;
+    MeshFilter mesh_filter_right;
     [SerializeField]
-    MeshFilter _meshFilterLeft;
-    Line _line;
-    public MeshData meshData;
-    int _currentMesh;
+    MeshFilter mesh_filter_left;
+    Line line;
+    public MeshData mesh_data;
+    int current_mesh = 0;
     
-    int _startMesh = 2;
-    int _endMesh = 11;
+    int start_mesh = 2;
+    int end_mesh = 11;
 
     void Awake()
     {
-        _line = GetComponent<Line>();
+        line = GetComponent<Line>();
     }
    
     public void BeginAnimation()
     {
-        if (GameController.gameController.GetState()==GameState.Game)
+        if (GameController.game_controller.GetState()==GameState.Game)
         {
             StartCoroutine(AnimationCoroutine());
         }
@@ -39,43 +41,43 @@ public class AnimationComponent : MonoBehaviour
     }
     IEnumerator AnimationCoroutine()
     {
-        float ballStart = Ball.ball.GetCollisionPosition().y;
-        float height = _line.GetHeight();
-        _currentMesh = _startMesh;
-        float meshDist = _endMesh - _startMesh;
+        float ball_start = Ball.ball.GetCollisionPosition().y;
+        float height = line.GetHeight();
+        current_mesh = start_mesh;
+        float mesh_dist = (float)(end_mesh - start_mesh);
         float dist = height * 2.0f;
-        float cell = dist / meshDist;
+        float cell = (float)dist / mesh_dist;
 
-        SetMesh(meshData.meshes[_currentMesh]);
+        SetMesh(mesh_data.meshes[current_mesh]);
 
         //если скорость выше определенного занчения
-         while ((_currentMesh < meshData.meshes.Length - _startMesh - 1)&&
-            (BallMove.ballMove.Speed > 4.5f))
+         while ((current_mesh < mesh_data.meshes.Length - start_mesh - 1)&&
+            (BallMove.ball_move.Speed > 4.5f))
         {
-            float position = Ball.ball.GetCollisionPosition().y - ballStart;
-            _currentMesh = (int)(position / cell);
-            SetMesh(meshData.meshes[_currentMesh + _startMesh]);
+            float position = Ball.ball.GetCollisionPosition().y - ball_start;
+            current_mesh = (int)(position / cell);
+            SetMesh(mesh_data.meshes[current_mesh + start_mesh]);
             yield return new WaitForEndOfFrame();
         }
-        _currentMesh++;
+        current_mesh++;
         //если нет
-        while (_currentMesh < meshData.meshes.Length - _startMesh)
+        while (current_mesh < mesh_data.meshes.Length - start_mesh)
         {
-            SetMesh(meshData.meshes[_currentMesh + _startMesh]);
-            _currentMesh++;
+            SetMesh(mesh_data.meshes[current_mesh + start_mesh]);
+            current_mesh++;
             yield return new WaitForSeconds(0.025f);
         }
     }
 
     void SetMesh(Mesh mesh)
     {
-        _meshFilterRight.mesh = mesh;
-        _meshFilterLeft.mesh = mesh;
+        mesh_filter_right.mesh = mesh;
+        mesh_filter_left.mesh = mesh;
     }
 
     public void ResetAnimation()
     {
-        _currentMesh = 0;
-        SetMesh(meshData.meshes[_currentMesh]);
+        current_mesh = 0;
+        SetMesh(mesh_data.meshes[current_mesh]);
     }
 }

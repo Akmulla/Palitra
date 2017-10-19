@@ -1,19 +1,20 @@
 ﻿using UnityEngine;
+using System.Collections;
 
-public class LineOrder : Line
+public class Line_Order : Line
 {
-    BlockManagerOrder _blockManager;
-    bool _crossed;
-    public int lineSpawnNumber;
-    public float prevEdge;
-    public bool finished;
+    BlockManager_Order block_manager;
+    bool crossed = false;
+    public int line_spawn_number;
+    public float prev_edge;
+    public bool finished = false;
 
     public override void InitLine()
     {
-        _blockManager = GetComponent<BlockManagerOrder>();
+        block_manager = GetComponent<BlockManager_Order>();
         base.InitLine();
-        lineSpawnNumber = SpawnWaves.spawn.GetLineSpawnedNumber();
-        _crossed = false;
+        line_spawn_number = SpawnWaves.spawn.GetLineSpawnedNumber();
+        crossed = false;
         finished = false;
         //prev_edge = SpawnWaves.spawn.prev_edge;
     }
@@ -21,10 +22,10 @@ public class LineOrder : Line
     public override void Enable()
     {
         base.Enable();
-        prevEdge = SpawnWaves.spawn.prevEdge;
-        _crossed = false;
+        prev_edge = SpawnWaves.spawn.prev_edge;
+        crossed = false;
         finished = false;
-        _blockManager.SetDefault();
+        block_manager.SetDefault();
     }
 
     protected override void CheckIfPassed()
@@ -51,29 +52,29 @@ public class LineOrder : Line
         base.CheckIfCrossed();
 
         float deceleration = 0.0f;
-        PoolType poolType = GetComponent<PoolRef>().GetPool().poolType;
-        switch (poolType)
+        PoolType pool_type = GetComponent<PoolRef>().GetPool().pool_type;
+        switch (pool_type)
         {
-            case (PoolType.Combo3Parts):
-                deceleration = GameController.gameController.GetLvlData().comboProp3Parts.slowing;
+            case (PoolType.Combo_3_parts):
+                deceleration = GameController.game_controller.GetLvlData().combo_prop_3_parts.slowing;
                 break;
-            case (PoolType.Combo4Parts):
-                deceleration = GameController.gameController.GetLvlData().comboProp4Parts.slowing;
+            case (PoolType.Combo_4_parts):
+                deceleration = GameController.game_controller.GetLvlData().combo_prop_4_parts.slowing;
                 break;
-            case (PoolType.Combo5Parts):
-                deceleration = GameController.gameController.GetLvlData().comboProp5Parts.slowing;
+            case (PoolType.Combo_5_parts):
+                deceleration = GameController.game_controller.GetLvlData().combo_prop_5_parts.slowing;
                 break;
         }
-        if ((active) && (Ball.ball.GetPosition().y > prevEdge) && (!_crossed))
+        if ((active) && (Ball.ball.GetPosition().y > prev_edge) && (!crossed))
         {
-            BallMove.ballMove.SlowDown(deceleration);
+            BallMove.ball_move.SlowDown(deceleration);
             EventManager.TriggerEvent("BallColorChanged");
-            _crossed = true;
+            crossed = true;
         }
     }
 
     public override void ChangeColor()
     {
-        _blockManager.InitBlocks();
+        block_manager.InitBlocks();
     }
 }

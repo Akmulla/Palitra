@@ -1,44 +1,44 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class Ball : MonoBehaviour
 {
     public static Ball ball;
-    public bool shield;
+    public bool shield = false;
     [HideInInspector]
-    RectTransform _tran;
-    Image _image;
-    Color _ballColor;
+    RectTransform tran;
+    Image image;
+    Color ball_color;
     public GameObject death;
-    public TrianType trianType=TrianType.Default;
+    public TrianType trian_type=TrianType.Default;
 
-    int _linesChecked;
+    int lines_checked;
     
 
     public Vector3 GetPosition()
     {
-        Vector3 pos = _tran.rect.center;
+        Vector3 pos = tran.rect.center;
         
-        return Camera.main.ScreenToWorldPoint(_tran.TransformPoint(pos));
+        return Camera.main.ScreenToWorldPoint(tran.TransformPoint(pos));
     }
 
     public Vector3 GetCollisionPosition()
     {
-        Vector3 pos = new Vector3(_tran.rect.center.x,_tran.rect.yMax,0.0f);
+        Vector3 pos = new Vector3(tran.rect.center.x,tran.rect.yMax,0.0f);
 
-        return Camera.main.ScreenToWorldPoint(_tran.TransformPoint(pos));
+        return Camera.main.ScreenToWorldPoint(tran.TransformPoint(pos));
     }
 
     public Color GetColor()
     {
-        return _ballColor;
+        return ball_color;
     }
 
     public void Stop()
     {
-        BallMove.ballMove.Stop();
-        _image.enabled=false;
+        BallMove.ball_move.Stop();
+        image.enabled=false;
         Vector3 pos = GetPosition();
         pos.z = 0.0f;
         Instantiate(death, pos, Quaternion.identity);
@@ -46,20 +46,20 @@ public class Ball : MonoBehaviour
 
 	void Awake()
     {
-        _linesChecked = 0;
+        lines_checked = 0;
         ball = this;
-        _image = GetComponent<Image>();
-        _tran = GetComponent<RectTransform>();
+        image = GetComponent<Image>();
+        tran = GetComponent<RectTransform>();
         
-        SetColor(SkinManager.skinManager.GetCurrentSkin().colors[0],true);
+        SetColor(SkinManager.skin_manager.GetCurrentSkin().colors[0],true);
     }
 
 	public void SetColor(Color color,bool tap)
     {
-        if ((color!= _ballColor)||(tap))
+        if ((color!= ball_color)||(tap))
         {
-            _ballColor = color;
-            _image.color = color;
+            ball_color = color;
+            image.color = color;
             EventManager.TriggerEvent("BallColorChanged");
         }
     }
@@ -68,9 +68,9 @@ public class Ball : MonoBehaviour
     {
         EventManager.StartListening("ChangeLvl", ChangeLvl);
         EventManager.StartListening("BeginGame", BeginGame);
-        _image.enabled = true;
-        _image.sprite = TrianManager.trianManager.GetCurrentTrian().sprite;
-        trianType = TrianManager.trianManager.GetCurrentTrian().trianType;
+        image.enabled = true;
+        image.sprite = TrianManager.trian_manager.GetCurrentTrian().sprite;
+        trian_type = TrianManager.trian_manager.GetCurrentTrian().trian_type;
     }
 
     void OnDisable()
@@ -81,60 +81,66 @@ public class Ball : MonoBehaviour
 
     public void EnableImage()
     {
-        _image.enabled = true;
+        image.enabled = true;
     }
 
-    public bool LinePassed(Color lineColor)
+    public bool LinePassed(Color line_color)
     {
         //lines_checked++;
-        if (lineColor==_ballColor)
+        if (line_color==ball_color)
         {
             //BallMove.ball_move.IncreaseSpeed(GameController.game_controller.GetLvlData().step_speed);
             ChngLvlStats();
-            _linesChecked++;
+            lines_checked++;
             EventManager.TriggerEvent("LinePassed");
             return true;
         }
-        if (shield)
+        else
         {
-            shield = false;
-            StartCoroutine(BallMove.ballMove.ShieldSlowDown());
+            if (shield)
+            {
+                shield = false;
+                StartCoroutine(BallMove.ball_move.ShieldSlowDown());
 
-            ChngLvlStats();
-            _linesChecked++;
-            EventManager.TriggerEvent("LinePassed");
+                ChngLvlStats();
+                lines_checked++;
+                EventManager.TriggerEvent("LinePassed");
 
-            return true;
+                return true;
+            }
+            else
+            {
+                GameController.game_controller.GameOver();
+                return false;
+            }
         }
-        GameController.gameController.GameOver();
-        return false;
     }
 
     public int GetLinesCheckedNumber()
     {
-        return _linesChecked;
+        return lines_checked;
     }
 
     void ChngLvlStats()
     {
-        LvlType lvlType = GameController.gameController.GetLvlData().lvlType;
-        bool chngAftrHalf = ((lvlType == LvlType.SpeedDecrDistDecrHalf) ||
-            (lvlType == LvlType.SpeedIncrDistIncrHalf)) ? true : false;
-        bool passedHalf = (SpawnWaves.spawn.GetLineSpawnedNumber() >=
-            GameController.gameController.GetLvlData().totalLineCount / 2);
+        LvlType lvl_type = GameController.game_controller.GetLvlData().lvl_type;
+        bool chng_aftr_half = ((lvl_type == LvlType.Speed_decr_dist_decr_half) ||
+            (lvl_type == LvlType.Speed_incr_dist_incr_half)) ? true : false;
+        bool passed_half = (SpawnWaves.spawn.GetLineSpawnedNumber() >=
+            GameController.game_controller.GetLvlData().total_line_count / 2);
 
-        float k = (chngAftrHalf && passedHalf) ? -1.0f : 1.0f;
+        float k = (chng_aftr_half && passed_half) ? -1.0f : 1.0f;
 
-        BallMove.ballMove.IncreaseSpeed(GameController.gameController.GetLvlData().stepSpeed * k);
+        BallMove.ball_move.IncreaseSpeed(GameController.game_controller.GetLvlData().step_speed * k);
     }
 
-    public bool LinePassed(List<Color> lineColor,bool invert)
+    public bool LinePassed(List<Color> line_color,bool invert)
     {
         bool passed = false;
 
-        foreach (Color item in lineColor)
+        foreach (Color item in line_color)
         {
-            if (((Vector4)item - (Vector4)_ballColor).magnitude<0.01f)
+            if (((Vector4)item - (Vector4)ball_color).magnitude<0.01f)
             {
                 passed = true;
                 break;
@@ -147,37 +153,45 @@ public class Ball : MonoBehaviour
         if (passed)
         {
             ChngLvlStats();
-            _linesChecked++;
+            lines_checked++;
             EventManager.TriggerEvent("LinePassed");
 
             return true;
         }
-        if (shield)
+        else
         {
-            shield = false;
-            StartCoroutine(BallMove.ballMove.ShieldSlowDown());
+            if (shield)
+            {
+                shield = false;
+                StartCoroutine(BallMove.ball_move.ShieldSlowDown());
 
-            ChngLvlStats();
-            _linesChecked++;
-            EventManager.TriggerEvent("LinePassed");
+                ChngLvlStats();
+                lines_checked++;
+                EventManager.TriggerEvent("LinePassed");
 
-            return true;
+                return true;
+            }
+            else
+            {
+                GameController.game_controller.GameOver();
+                return false;
+            }
+            
         }
-        GameController.gameController.GameOver();
-        return false;
+        
     }
 
     void BeginGame()
     {
-        if (trianType == TrianType.Shield)
+        if (trian_type == TrianType.Shield)
         {
             shield = true;
         }
     }
     void ChangeLvl()
     {
-        BallMove.ballMove.Speed = GameController.gameController.GetLvlData().speed;
-        if (trianType==TrianType.Shield)
+        BallMove.ball_move.Speed = GameController.game_controller.GetLvlData().speed;
+        if (trian_type==TrianType.Shield)
         {
             shield = true;
         }
@@ -186,7 +200,7 @@ public class Ball : MonoBehaviour
 
     void Update()
     {
-        _ballColor = _image.color;
+        ball_color = image.color;
     }
 }
 

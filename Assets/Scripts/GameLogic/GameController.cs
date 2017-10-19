@@ -1,48 +1,49 @@
-﻿using System;
+﻿using UnityEngine;
 using System.Collections;
-using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-public enum GameState { MainMenu, SkinMenu, Prepare, Game,Pause, GameOver }
+public enum GameState { MainMenu, SkinMenu, Prepare, Game,Pause, GameOver,LifeMenu };
 
 public class GameController : MonoBehaviour
 {
     //Hearts hearts;
-    public static GameController gameController;
-    float _savedTimeScale = 1.0f;
-    GameState _gameState;
+    public static GameController game_controller;
+    float saved_time_scale = 1.0f;
+    GameState game_state;
     //[SerializeField]
    // LvlData[] lvl_data;
     [SerializeField]
-    Sector[] _sectors;
+    Sector[] sectors;
     [SerializeField]
-    int _lvlNumber;
-    public GameObject poolsObj;
-    Pool[] _pools;
-    public bool prepared;
+    int lvl_number;
+    public GameObject pools_obj;
+    Pool[] pools;
+    public bool prepared = false;
     [SerializeField]
-    ParticleReload _particle;
+    ParticleReload particle;
 
     [SerializeField]
-    AnimationStatus _animStatus;
-    bool _reloadPart;
-    int _linesPassed;
-    GameState _savedState;
+    AnimationStatus anim_status;
+    bool reload_part = false;
+    int lines_passed;
+    GameState saved_state;
     
     //int loaded_lvl;
     [SerializeField]
-    LvlData _loadedLvlData;
+    LvlData loaded_lvl_data;
 
-    int _totalLineCount;
+    int total_line_count;
 
 
     public GameState GetState()
     {
-        return _gameState;
+        return game_state;
     }
 
-    void ChangeState(GameState gameState)
+    void ChangeState(GameState game_state)
     {
-        _gameState = gameState;
+        this.game_state = game_state;
     }
 
  
@@ -51,12 +52,12 @@ public class GameController : MonoBehaviour
     {
         get
         {
-            return _lvlNumber;
+            return lvl_number;
         }
         set
         {
-            _lvlNumber = value;
-            _loadedLvlData = Resources.Load<LvlData>("Lvl_" + _lvlNumber);
+            lvl_number = value;
+            loaded_lvl_data = Resources.Load<LvlData>("Lvl_" + lvl_number.ToString());
         }
     }
     //public int GetCurrentLvl()
@@ -71,7 +72,7 @@ public class GameController : MonoBehaviour
 
     public int GetLinesPassedNumber()
     {
-        return _linesPassed;
+        return lines_passed;
     }
 
     public void BeginGame()
@@ -79,56 +80,56 @@ public class GameController : MonoBehaviour
         if (!Hearts.h.CheckHearts())
             return;
 
-        if ((_gameState != GameState.MainMenu) && (_gameState != GameState.GameOver))
+        if ((game_state != GameState.MainMenu) && (game_state != GameState.GameOver))
             return;
 
         //lvl_number = 0;
-        SaveLoadGame.saveLoad.LoadProgress();
+        SaveLoadGame.save_load.LoadProgress();
 
-        _reloadPart = _gameState == GameState.GameOver;
+        reload_part = game_state == GameState.GameOver;
         StartCoroutine(BeginGameCoroutine());
     }
 
     IEnumerator BeginGameCoroutine()
     {
-        _linesPassed = 0;
-        _totalLineCount = gameController.GetLvlData().totalLineCount;
-        LineSwitch.InitText();
-        bool animate = _gameState == GameState.MainMenu;
+        lines_passed = 0;
+        total_line_count = game_controller.GetLvlData().total_line_count;
+        Line_Switch.InitText();
+        bool animate = game_state == GameState.MainMenu;
 
-        SoundManager.soundManager.GameTheme();
-        if (_reloadPart)
-            _particle.TurnOff();
+        SoundManager.sound_manager.GameTheme();
+        if (reload_part)
+            particle.TurnOff();
         ChangeState(GameState.Prepare);
-        UiController.ui.UpdateUi();
+        UIController.ui.UpdateUI();
         if (animate)
         {
             EventManager.TriggerEvent("BeginGameAnimation");
         }
         yield return StartCoroutine(InitLvlCor());
         
-        while (!_animStatus.Finished)
+        while (!anim_status.finished)
         {
             yield return new WaitForEndOfFrame();
         }
-        if (_reloadPart)
-            _particle.TurnOn();
+        if (reload_part)
+            particle.TurnOn();
         ChangeState(GameState.Game);
-        UiController.ui.UpdateUi();
-        LineDefault.sameColors = 0;
+        UIController.ui.UpdateUI();
+        Line_Default.same_colors = 0;
         EventManager.TriggerEvent("BeginGame");
     }
 
     IEnumerator InitLvlCor()
     {
-        GC.Collect();
+        System.GC.Collect();
         //lines_passed = 0;
         //total_line_count = GameController.game_controller.GetLvlData().total_line_count;
         if (CurrentLvl != 0)
             yield return new WaitForSeconds(1.0f);
-        for (int i = 0; i < _sectors.Length; i++)
+        for (int i = 0; i < sectors.Length; i++)
         {
-            _sectors[i].InitSector(SkinManager.skinManager.GetCurrentSkin().colors[i]);
+            sectors[i].InitSector(SkinManager.skin_manager.GetCurrentSkin().colors[i]);
         }
         yield return StartCoroutine(InitLines());
 
@@ -137,11 +138,11 @@ public class GameController : MonoBehaviour
 
     IEnumerator InitLines()
     {
-        for (int i=0;i<_pools.Length;i++)
+        for (int i=0;i<pools.Length;i++)
         {
-            for (int k=0;k<_pools[i].size;k++)
+            for (int k=0;k<pools[i].size;k++)
             {
-                yield return StartCoroutine(_pools[i].InitLineCor(k));
+                yield return StartCoroutine(pools[i].InitLineCor(k));
             }
             yield return null;
         }
@@ -151,17 +152,17 @@ public class GameController : MonoBehaviour
     void Awake()
     {
         Resources.UnloadUnusedAssets();
-        _pools = poolsObj.GetComponents<Pool>();
-        _gameState = GameState.MainMenu;
+        pools = pools_obj.GetComponents<Pool>();
+        game_state = GameState.MainMenu;
         
-        gameController = this;
-        _savedTimeScale = Time.timeScale;
+        game_controller = this;
+        saved_time_scale = Time.timeScale;
     }
 
     void Start()
     {
-        UiController.ui.UpdateUi();
-        SaveLoadGame.saveLoad.LoadProgress();
+        UIController.ui.UpdateUI();
+        SaveLoadGame.save_load.LoadProgress();
     }
 
     void OnEnable()
@@ -176,8 +177,8 @@ public class GameController : MonoBehaviour
 
     void LinePassed()
     {
-        _linesPassed++;
-        if ((_linesPassed >= _totalLineCount)&&(_gameState==GameState.Game))
+        lines_passed++;
+        if ((lines_passed >= total_line_count)&&(game_state==GameState.Game))
         {
             EventManager.TriggerEvent("LvlFinished");
             //Debug.Break();
@@ -189,9 +190,9 @@ public class GameController : MonoBehaviour
     {
         //lvl_number++;
         CurrentLvl++;
-        _linesPassed = 0;
-        _totalLineCount = gameController.GetLvlData().totalLineCount;
-        SaveLoadGame.saveLoad.SaveProgress(CurrentLvl);
+        lines_passed = 0;
+        total_line_count = game_controller.GetLvlData().total_line_count;
+        SaveLoadGame.save_load.SaveProgress(CurrentLvl);
         //if (lvl_number < lvl_data.Length)
         {
             //print("текущий уровень" + lvl_number);
@@ -210,27 +211,27 @@ public class GameController : MonoBehaviour
         //    loaded_lvl_data = Resources.Load<LvlData>("Lvl_" + lvl_number.ToString());
 
         //}
-        return _loadedLvlData;
+        return loaded_lvl_data;
         //return lvl_data[lvl_number];
     }
 
     public void Pause()
     {
-        _savedState = _gameState;
-        _savedTimeScale = Time.timeScale;
+        saved_state = game_state;
+        saved_time_scale = Time.timeScale;
         Time.timeScale = 0.0f;
         ChangeState(GameState.Pause);
-        UiController.ui.UpdateUi();
+        UIController.ui.UpdateUI();
     }
 
     public void Continue()
     {
-        if (_gameState != GameState.Pause)
+        if (game_state != GameState.Pause)
             return;
 
-        ChangeState(_savedState);
-        Time.timeScale = _savedTimeScale;
-        UiController.ui.UpdateUi();
+        ChangeState(saved_state);
+        Time.timeScale = saved_time_scale;
+        UIController.ui.UpdateUI();
     }
 
     public void ResumeForBanner()
@@ -239,8 +240,8 @@ public class GameController : MonoBehaviour
         //    return;
         print("resume");
         ChangeState(GameState.Game);
-        Time.timeScale = _savedTimeScale;
-        UiController.ui.UpdateUi();
+        Time.timeScale = saved_time_scale;
+        UIController.ui.UpdateUI();
         
         EventManager.TriggerEvent("BeginGame");
         //засчитываем зафейленную линию как пройденную
@@ -249,12 +250,12 @@ public class GameController : MonoBehaviour
 
     public void ToMainMenu()
     {
-        SoundManager.soundManager.MainMenuTheme();
-        _particle.TurnOn();
+        SoundManager.sound_manager.MainMenuTheme();
+        particle.TurnOn();
         ChangeState(GameState.MainMenu);
-        Time.timeScale = _savedTimeScale;
+        Time.timeScale = saved_time_scale;
         
-        UiController.ui.UpdateUi();
+        UIController.ui.UpdateUI();
         
         EventManager.TriggerEvent("EndGame");
     }
@@ -262,7 +263,13 @@ public class GameController : MonoBehaviour
     public void ToSkinMenu()
     {
         ChangeState(GameState.SkinMenu);
-        UiController.ui.UpdateUi();
+        UIController.ui.UpdateUI();
+    }
+
+    public void ToLifeMenu()
+    {
+        ChangeState(GameState.LifeMenu);
+        UIController.ui.UpdateUI();
     }
 
     public void GameOver()
@@ -273,15 +280,15 @@ public class GameController : MonoBehaviour
     IEnumerator GameOverCoroutine()
     {
         //Debug.Break();
-        if (_gameState==GameState.Game)
+        if (game_state==GameState.Game)
         {
             ChangeState(GameState.GameOver);
             
             Ball.ball.Stop();
             yield return new WaitForSeconds(1.0f);
 
-            UiController.ui.UpdateUi();
-            _particle.TurnOff();
+            UIController.ui.UpdateUI();
+            particle.TurnOff();
             //lines_passed = SpawnWaves.spawn.lines_passed;
             EventManager.TriggerEvent("EndGame");
             

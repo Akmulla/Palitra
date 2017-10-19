@@ -1,13 +1,15 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class SwitchTextHolder : MonoBehaviour {
     public static SwitchTextHolder holder;
     public Texture2D[] text;
-    public int textInd;
+    public int text_ind;
 
     public void InitText()
     {
-        textInd = 0;
+        text_ind = 0;
         text = new Texture2D[3];
     }
 

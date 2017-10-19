@@ -1,16 +1,18 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class GlobalScore : MonoBehaviour
 {
-    public static GlobalScore globalScore;
+    public static GlobalScore global_score;
     public 
-    int score;
+    int score = 0;
     public Text heartMenuScore;
 
     void Awake()
     {
-        globalScore = this;
+        global_score = this;
         if (!PlayerPrefs.HasKey("Score"))
         {
             PlayerPrefs.SetInt("Score", 0);

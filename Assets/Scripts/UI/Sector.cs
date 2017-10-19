@@ -6,13 +6,13 @@ using UnityEngine.UI;
 //IPointerDownHandler
 public class Sector : Selectable
 {
-    Color _sectColor;
+    Color sect_color;
     //static float prev_touch = 0.0f;
    // bool clicked = false;
     
     void Start()
     {
-        _sectColor = GetComponent<Image>().color;
+        sect_color = GetComponent<Image>().color;
     }
     //#region IPointerClickHandler implementation
 
@@ -23,7 +23,7 @@ public class Sector : Selectable
 
     public void OnSelect(BaseEventData eventData)
     {
-        Debug.Log(gameObject.name + " was selected");
+        Debug.Log(this.gameObject.name + " was selected");
     }
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -45,14 +45,14 @@ public class Sector : Selectable
     public override void OnPointerEnter(PointerEventData eventData)
     {
         base.OnPointerEnter(eventData);
-        if ((GameController.gameController.GetState() == GameState.Game)
+        if ((GameController.game_controller.GetState() == GameState.Game)
             //&& (Time.time - prev_touch > 0.15f)
             //&& (!clicked)
             )
         {
             //  prev_touch = Time.time;
             // clicked = true;
-            Ball.ball.SetColor(_sectColor, true);
+            Ball.ball.SetColor(sect_color, true);
         }
         
         
@@ -61,7 +61,7 @@ public class Sector : Selectable
     public void InitSector(Color color)
     {
         GetComponent<Image>().color = color;
-        _sectColor = color;
+        sect_color = color;
     }
    // #endregion
 

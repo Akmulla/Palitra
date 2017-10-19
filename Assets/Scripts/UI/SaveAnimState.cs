@@ -1,19 +1,21 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class SaveAnimState : MonoBehaviour
 {
     [SerializeField]
-    Animator _anim;
+    Animator anim;
 
 	void OnEnable()
     {
-        if (GameController.gameController.GetState()==GameState.Game)
+        if (GameController.game_controller.GetState()==GameState.Game)
         {
-            _anim.SetBool("finished", true);
+            anim.SetBool("finished", true);
         }
         else
         {
-            _anim.SetBool("finished", false);
+            anim.SetBool("finished", false);
         }
     }
 }

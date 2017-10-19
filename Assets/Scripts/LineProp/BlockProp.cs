@@ -1,7 +1,7 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 
-[Serializable]
+[System.Serializable]
 public class BlockProp
 {
     [Tooltip("Количество линий")]
@@ -9,5 +9,5 @@ public class BlockProp
     [Tooltip("Скорость горизонтального движения блоков")]
     public float speed;
     [Tooltip("Число блоков")]
-    public int blockCount;
+    public int block_count;
 }
