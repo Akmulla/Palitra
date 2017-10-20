@@ -19,8 +19,10 @@ public class Continue : MonoBehaviour
         if (GameController.game_controller.GetState() != GameState.GameOver)
             return;
 
+        
         GameController.game_controller.BeginGame();
         button.interactable = false;
+        
     }
 
    

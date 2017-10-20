@@ -17,13 +17,16 @@ public class UIController : MonoBehaviour
     public GameObject round;
     public GameObject triangle_fon;
     public GameObject triangle;
-    public GameObject gameover_text;
-    public GameObject pause_text;
-    public GameObject gameover_pic;
-    public GameObject pause_pic;
-    public GameObject gameui_bg;
+    //public GameObject gameover_text;
+    //public GameObject pause_text;
+    //public GameObject gameover_pic;
+   // public GameObject pause_pic;
+    //public GameObject gameui_bg;
+    public GameObject continue_replay;
+    public GameObject continue_video;
     public GameObject life_timer;
     public GameObject life_menu;
+    public GameObject rubin_menu;
 
     void Awake ()
     {
@@ -31,7 +34,28 @@ public class UIController : MonoBehaviour
         ui = this;
         raycaster = GetComponent<GraphicRaycaster>();
     }
-	
+
+    public void OpenLifeMenu()
+    {
+        life_menu.SetActive(true);
+    }
+
+    public void CloseLifeMenu()
+    {
+        life_menu.SetActive(false);
+    }
+
+    public void OpenRubinMenu()
+    {
+        rubin_menu.SetActive(true);
+    }
+
+    public void CloseRubinMenu()
+    {
+        rubin_menu.SetActive(false);
+    }
+
+
     public void UpdateUI()
     {
         switch(GameController.game_controller.GetState())
@@ -63,7 +87,7 @@ public class UIController : MonoBehaviour
                 break;
 
             case GameState.Game:
-                gameui_bg.SetActive(true);
+               // gameui_bg.SetActive(true);
                 raycaster.enabled = true;
                 Game_UI.SetActive(true);
                 skin_menu.SetActive(false);
@@ -78,7 +102,7 @@ public class UIController : MonoBehaviour
                 break;
 
             case GameState.Prepare:
-                gameui_bg.SetActive(false);
+               // gameui_bg.SetActive(false);
                 raycaster.enabled = false;
                 break;
 
@@ -87,7 +111,7 @@ public class UIController : MonoBehaviour
                 break;
 
             case GameState.GameOver:
-                gameui_bg.SetActive(false);
+               // gameui_bg.SetActive(false);
                 raycaster.enabled = true;
                 Game_UI.SetActive(true);
                 skin_menu.SetActive(false);
@@ -96,27 +120,26 @@ public class UIController : MonoBehaviour
                 round.SetActive(false);
                 triangle.SetActive(false);
                 triangle_fon.SetActive(false);
-                pause_text.SetActive(false);
-                gameover_text.SetActive(true);
-                pause_pic.SetActive(false);
-                gameover_pic.SetActive(true);
+
+                if (GameController.game_controller.continued)
+                {
+                    continue_replay.SetActive((true));
+                    continue_video.SetActive((false));
+                }
+                else
+                {
+                    continue_replay.SetActive((false));
+                    continue_video.SetActive((true));
+                }
+                    //pause_text.SetActive(false);
+                    //gameover_text.SetActive(true);
+                    // pause_pic.SetActive(false);
+                    //gameover_pic.SetActive(true);
                 life_timer.SetActive(true);
                 life_menu.SetActive(false);
                 break;
 
-            case GameState.LifeMenu:
-                raycaster.enabled = true;
-                SkinManager.skin_manager.LoadSavedSkin();
-                Game_UI.SetActive(false);
-                skin_menu.SetActive(false);
-                start_menu.SetActive(true);
-                pause_menu.SetActive(false);
-                round.SetActive(true);
-                triangle.SetActive(true);
-                triangle_fon.SetActive(true);
-                life_timer.SetActive(true);
-                life_menu.SetActive(true);
-                break;
+          
         }
     }
 }

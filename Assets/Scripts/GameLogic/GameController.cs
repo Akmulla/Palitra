@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public enum GameState { MainMenu, SkinMenu, Prepare, Game,Pause, GameOver,LifeMenu };
+public enum GameState { MainMenu, SkinMenu, Prepare, Game,Pause, GameOver };
 
 public class GameController : MonoBehaviour
 {
@@ -28,6 +28,8 @@ public class GameController : MonoBehaviour
     bool reload_part = false;
     int lines_passed;
     GameState saved_state;
+
+    public bool continued = false;
     
     //int loaded_lvl;
     [SerializeField]
@@ -189,6 +191,7 @@ public class GameController : MonoBehaviour
     void IncreaseLvl()
     {
         //lvl_number++;
+        continued = false;
         CurrentLvl++;
         lines_passed = 0;
         total_line_count = game_controller.GetLvlData().total_line_count;
@@ -263,12 +266,6 @@ public class GameController : MonoBehaviour
     public void ToSkinMenu()
     {
         ChangeState(GameState.SkinMenu);
-        UIController.ui.UpdateUI();
-    }
-
-    public void ToLifeMenu()
-    {
-        ChangeState(GameState.LifeMenu);
         UIController.ui.UpdateUI();
     }
 

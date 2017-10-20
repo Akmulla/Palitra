@@ -10,7 +10,6 @@ public class Hearts : MonoBehaviour
     int hearts = 10;
     public Text text;
     public Text heartMenuText;
-   
 
     void Awake()
     {

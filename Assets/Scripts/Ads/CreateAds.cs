@@ -148,6 +148,8 @@ public class CreateAds : MonoBehaviour
 
     IEnumerator ContinueVideo()
     {
+       
+        GameController.game_controller.continued = true;
         GameController.game_controller.Pause();
         yield return new WaitForSecondsRealtime(0.5f);
         while (!Advertisement.IsReady("rewardedVideo"))
