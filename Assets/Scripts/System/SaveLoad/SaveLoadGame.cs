@@ -19,6 +19,29 @@ public class SaveLoadGame : MonoBehaviour
        
     }
 
+    public void SaveHearts()
+    {
+        PlayerPrefs.SetInt("Hearts", Hearts.h.Heart);
+        PlayerPrefs.Save();
+
+        print(PlayerPrefs.GetInt("Hearts"));
+    }
+
+
+    public int LoadHearts()
+    {
+        print("load func");
+        if (!PlayerPrefs.HasKey("Hearts"))
+        {
+            PlayerPrefs.SetInt("Hearts", 10);
+            PlayerPrefs.Save();
+            print("created new");
+        }
+
+        // GameController.game_controller.SetCurrentLvl(PlayerPrefs.GetInt("Progress"));
+        return PlayerPrefs.GetInt("Hearts");
+    }
+
     public void Awake()
     {
         

@@ -6,19 +6,24 @@ using UnityEngine.UI;
 public class Hearts : MonoBehaviour
 {
     public static Hearts h;
-    [SerializeField]
-    int hearts = 10;
+    int hearts;
     public Text text;
     public Text heartMenuText;
 
     void Awake()
     {
         h = this;
+        
+    }
+
+    void Start()
+    {
+        hearts=SaveLoadGame.save_load.LoadHearts();
         text.text = hearts.ToString();
         heartMenuText.text = hearts.ToString();
     }
 
-    public int Heart
+public int Heart
     {
         get
         {
@@ -29,6 +34,7 @@ public class Hearts : MonoBehaviour
             hearts = value;
             text.text = hearts.ToString();
             heartMenuText.text= hearts.ToString();
+            SaveLoadGame.save_load.SaveHearts();
         }
     }
 
@@ -50,5 +56,6 @@ public class Hearts : MonoBehaviour
     void BeginLvl()
     {
         Heart--;
+        
     }
 }

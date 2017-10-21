@@ -165,6 +165,7 @@ public class GameController : MonoBehaviour
     {
         UIController.ui.UpdateUI();
         SaveLoadGame.save_load.LoadProgress();
+       
     }
 
     void OnEnable()
@@ -241,7 +242,7 @@ public class GameController : MonoBehaviour
     {
         //if (game_state != GameState.GameOver)
         //    return;
-        print("resume");
+        //print("resume");
         ChangeState(GameState.Game);
         Time.timeScale = saved_time_scale;
         UIController.ui.UpdateUI();

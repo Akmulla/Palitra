@@ -8,10 +8,10 @@ public class TimeManager : MonoBehaviour
 {
     public Text timeText;
     DateTime time;
-    public float param=0.0f;
-    public float second;
-    public float minute;
-    public float hour;
+    //public float param=0.0f;
+    //public float second;
+    //public float minute;
+    //public float hour;
     DateTime lastTime;
 
     //public DateTime GameTime
@@ -33,9 +33,9 @@ public class TimeManager : MonoBehaviour
         //time = DateTimeClass.GetNISTDate();
         time = DateTime.Now;
         timeText.text = time.Hour + ":" + time.Minute + ":" + time.Second;
-        second = time.Second;
-        minute = time.Minute;
-        hour = time.Hour;
+        //second = time.Second;
+        //minute = time.Minute;
+        //hour = time.Hour;
         //lastTime = time;
         lastTime = SaveLoadGame.save_load.LoadTime();
         CheckNewHearts();
@@ -46,10 +46,14 @@ public class TimeManager : MonoBehaviour
 	void CheckNewHearts()
     {
         TimeSpan delta = time - lastTime;
-        if (delta.TotalSeconds > 500)
+        if (delta.TotalMinutes >= 5)
         {
             lastTime = time;
-            Hearts.h.Heart += (int)delta.TotalSeconds / 5;
+            int add_hearts = (int)delta.TotalSeconds / 5;
+            int new_hearts = Hearts.h.Heart + add_hearts;
+            new_hearts = Mathf.Clamp(new_hearts, 0, 10);
+            SaveLoadGame.save_load.SaveTime(lastTime);
+            Hearts.h.Heart = new_hearts;
         }
     }
 	// Update is called once per frame
@@ -57,9 +61,11 @@ public class TimeManager : MonoBehaviour
     {
        // param = 1;
         
-        time=time.AddSeconds(Time.deltaTime);
+        time = time.AddSeconds(Time.deltaTime);
 
-        CheckNewHearts();
+        if (Hearts.h.Heart < 10)
+            CheckNewHearts();
+
         timeText.text = time.Hour + ":" + time.Minute + ":" + time.Second;
 
         //param -= Time.deltaTime;
