@@ -18,6 +18,11 @@ public class GlobalScore : MonoBehaviour
             PlayerPrefs.SetInt("Score", 0);
             PlayerPrefs.Save();
         }
+
+        //
+        PlayerPrefs.SetInt("Score", 10000);
+
+        //
         score = PlayerPrefs.GetInt("Score");
         heartMenuScore.text = score.ToString();
     }

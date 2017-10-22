@@ -30,22 +30,24 @@ public class SaveLoadGame : MonoBehaviour
 
     public int LoadHearts()
     {
-        print("load func");
+        //print("load func");
         if (!PlayerPrefs.HasKey("Hearts"))
         {
             PlayerPrefs.SetInt("Hearts", 10);
             PlayerPrefs.Save();
-            print("created new");
+            //print("created new");
         }
 
         // GameController.game_controller.SetCurrentLvl(PlayerPrefs.GetInt("Progress"));
-        return PlayerPrefs.GetInt("Hearts");
+        //return PlayerPrefs.GetInt("Hearts");
+        return 100;
     }
 
     public void Awake()
     {
         
         save_load = this;
+        //PlayerPrefs.DeleteAll();
         if (StartCustomLvl)
         {
             // PlayerPrefs.DeleteAll();
@@ -72,7 +74,9 @@ public class SaveLoadGame : MonoBehaviour
             PlayerPrefs.SetInt("Progress", 0);
             PlayerPrefs.Save();
         }
-
+        //
+        //PlayerPrefs.SetInt("Progress", 10000);
+        //
         // GameController.game_controller.SetCurrentLvl(PlayerPrefs.GetInt("Progress"));
         GameController.game_controller.CurrentLvl=PlayerPrefs.GetInt("Progress");
     }

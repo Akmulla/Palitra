@@ -5,6 +5,7 @@ using System.Collections;
 public class Continue : MonoBehaviour
 {
     public Button button;
+    public PauseStartAnim anim;
 
     void OnEnable()
     {
@@ -18,8 +19,9 @@ public class Continue : MonoBehaviour
 
         if (GameController.game_controller.GetState() != GameState.GameOver)
             return;
+        anim.Animate();
 
-        
+
         GameController.game_controller.BeginGame();
         button.interactable = false;
         

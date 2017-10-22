@@ -8,7 +8,10 @@ public class Hearts : MonoBehaviour
     public static Hearts h;
     int hearts;
     public Text text;
+    public Text text2;
     public Text heartMenuText;
+
+
 
     void Awake()
     {
@@ -20,6 +23,7 @@ public class Hearts : MonoBehaviour
     {
         hearts=SaveLoadGame.save_load.LoadHearts();
         text.text = hearts.ToString();
+        text2.text= hearts.ToString();
         heartMenuText.text = hearts.ToString();
     }
 
@@ -32,8 +36,10 @@ public int Heart
         set
         {
             hearts = value;
+
             text.text = hearts.ToString();
-            heartMenuText.text= hearts.ToString();
+            heartMenuText.text = hearts.ToString();
+            text2.text = hearts.ToString();
             SaveLoadGame.save_load.SaveHearts();
         }
     }
@@ -46,6 +52,9 @@ public int Heart
     void OnEnable()
     {
         EventManager.StartListening("BeginGame", BeginLvl);
+        text.text = hearts.ToString();
+        text2.text = hearts.ToString();
+        heartMenuText.text = hearts.ToString();
     }
 
     void OnDisable()

@@ -123,6 +123,7 @@
     <Compile Include="Assets\CloseMenu.cs" />
     <Compile Include="Assets\Hearts.cs" />
     <Compile Include="Assets\LvlInfo.cs" />
+    <Compile Include="Assets\PauseStartAnim.cs" />
     <Compile Include="Assets\Screamer.cs" />
     <Compile Include="Assets\Scripts\Ads\CreateAds.cs" />
     <Compile Include="Assets\Scripts\Ball\Ball.cs" />
