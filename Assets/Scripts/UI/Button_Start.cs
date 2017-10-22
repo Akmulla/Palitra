@@ -10,7 +10,9 @@ public class Button_Start : MonoBehaviour
         if (!Hearts.h.CheckHearts())
             return;
 
+        Hearts.h.Heart--;
         SoundManager.sound_manager.SingleSound(SoundSample.Start);
         GameController.game_controller.BeginGame();
+
     }
 }

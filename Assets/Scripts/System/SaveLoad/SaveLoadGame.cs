@@ -24,7 +24,7 @@ public class SaveLoadGame : MonoBehaviour
         PlayerPrefs.SetInt("Hearts", Hearts.h.Heart);
         PlayerPrefs.Save();
 
-        print(PlayerPrefs.GetInt("Hearts"));
+        //print(PlayerPrefs.GetInt("Hearts"));
     }
 
 
@@ -39,8 +39,8 @@ public class SaveLoadGame : MonoBehaviour
         }
 
         // GameController.game_controller.SetCurrentLvl(PlayerPrefs.GetInt("Progress"));
-        //return PlayerPrefs.GetInt("Hearts");
-        return 100;
+        return PlayerPrefs.GetInt("Hearts");
+        //return 50;
     }
 
     public void Awake()

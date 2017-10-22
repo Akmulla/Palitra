@@ -84,6 +84,7 @@ public class UIController : MonoBehaviour
                 triangle_fon.SetActive(false);
                 life_timer.SetActive(false);
                 life_menu.SetActive(false);
+                raycaster.enabled = true;
                 break;
 
             case GameState.Game:

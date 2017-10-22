@@ -14,5 +14,11 @@ public class BuyHeartMenu : MonoBehaviour
             GlobalScore.global_score.Score -= price;
             Hearts.h.Heart += hearts;
         }
+        else
+        {
+
+            UIController.ui.OpenRubinMenu();
+            UIController.ui.CloseLifeMenu();
+        }
     }
 }

@@ -6,9 +6,10 @@ using UnityEngine.UI;
 public class GlobalScore : MonoBehaviour
 {
     public static GlobalScore global_score;
-    public 
+    public Text rubinMenuScore;
     int score = 0;
     public Text heartMenuScore;
+    public Text skinMenuScore;
 
     void Awake()
     {
@@ -20,11 +21,13 @@ public class GlobalScore : MonoBehaviour
         }
 
         //
-        PlayerPrefs.SetInt("Score", 10000);
+        //PlayerPrefs.SetInt("Score", 1000);
 
         //
         score = PlayerPrefs.GetInt("Score");
         heartMenuScore.text = score.ToString();
+        rubinMenuScore.text = score.ToString();
+        skinMenuScore.text = score.ToString();
     }
 
     public int Score
@@ -39,6 +42,8 @@ public class GlobalScore : MonoBehaviour
             PlayerPrefs.SetInt("Score", score);
             PlayerPrefs.Save();
             heartMenuScore.text = score.ToString();
+            rubinMenuScore.text = score.ToString();
+            skinMenuScore.text = score.ToString();
         }
     }
 }

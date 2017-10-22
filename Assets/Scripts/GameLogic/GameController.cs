@@ -230,8 +230,8 @@ public class GameController : MonoBehaviour
 
     public void Continue()
     {
-        if (game_state != GameState.Pause)
-            return;
+        //if (game_state != GameState.Pause)
+        //    return;
 
         ChangeState(saved_state);
         Time.timeScale = saved_time_scale;

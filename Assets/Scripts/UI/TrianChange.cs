@@ -15,6 +15,7 @@ public class TrianChange : MonoBehaviour
     public Text price_text;
     public Text score_text;
     public Text description;
+    public Animator trian_anim;
 
     void UpdateTrian()
     {
@@ -150,6 +151,7 @@ public class TrianChange : MonoBehaviour
             TrianManager.trian_manager.SaveActiveTrian();
             //buy_set_button.interactable = false;
             //color_buy.Animate();
+            trian_anim.SetTrigger("animate");
         }
         else
         {
@@ -164,6 +166,7 @@ public class TrianChange : MonoBehaviour
                 TrianManager.trian_manager.SaveActiveTrian();
 
                 //color_buy.Animate();
+                trian_anim.SetTrigger("animate");
             }
             else
             {

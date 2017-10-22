@@ -32,7 +32,7 @@ public class TimeManager : MonoBehaviour
     {
         //time = DateTimeClass.GetNISTDate();
         time = DateTime.Now;
-        timeText.text = time.Hour + ":" + time.Minute + ":" + time.Second;
+        timeText.text = time.Hour + ":" + time.Minute;
         //second = time.Second;
         //minute = time.Minute;
         //hour = time.Hour;
@@ -66,7 +66,7 @@ public class TimeManager : MonoBehaviour
         if (Hearts.h.Heart < 10)
             CheckNewHearts();
 
-        timeText.text = time.Hour + ":" + time.Minute + ":" + time.Second;
+        timeText.text = time.Hour + ":" + time.Minute;
 
         //param -= Time.deltaTime;
 

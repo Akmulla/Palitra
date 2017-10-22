@@ -8,7 +8,8 @@ public class PauseStartAnim : MonoBehaviour
 
     public void Animate()
     {
-         anim.SetBool("animate",true);
+        Hearts.h.Heart--;
+        anim.SetBool("animate",true);
     }
 
     public void ResetAnim()

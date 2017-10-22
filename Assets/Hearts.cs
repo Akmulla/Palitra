@@ -64,7 +64,7 @@ public int Heart
 
     void BeginLvl()
     {
-        Heart--;
+        //Heart--;
         
     }
 }
