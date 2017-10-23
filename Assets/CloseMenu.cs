@@ -17,7 +17,26 @@ public class CloseMenu : MonoBehaviour, IPointerClickHandler
         if (lifeMenu)
             UIController.ui.CloseLifeMenu();
     }
-    
+
+    void Update()
+    {
+        if (Input.GetKeyDown((KeyCode.Escape)))
+        {
+            if (rubinMenu)
+                UIController.ui.CloseRubinMenu();
+
+            if (lifeMenu)
+                UIController.ui.CloseLifeMenu();
+        }
+        //if (Input.GetKeyDown((KeyCode.Home)))
+        //{
+        //    print("home");
+        //}
+        //if (Input.GetKeyDown((KeyCode.Menu)))
+        //{
+        //    print("menu");
+        //}
+    }
 }
 
 

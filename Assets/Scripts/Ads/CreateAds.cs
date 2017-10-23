@@ -49,7 +49,9 @@ public class CreateAds : MonoBehaviour
 
     IEnumerator ShowRewardVideo()
     {
+        
         GameController.game_controller.Pause();
+
         yield return new WaitForSecondsRealtime(0.5f);
         while (!Advertisement.IsReady("rewardedVideo"))
         {
@@ -81,19 +83,27 @@ public class CreateAds : MonoBehaviour
     {
         GameController.game_controller.Pause();
         yield return new WaitForSecondsRealtime(0.5f);
-        while (!Advertisement.IsReady("rewardedVideo"))
+        int t = 0;
+        while ((!Advertisement.IsReady("rewardedVideo")&&(t<20)))
         {
             // yield return new WaitForEndOfFrame();
+            t++;
             yield return new WaitForSecondsRealtime(0.2f);
         }
-        var options = new ShowOptions { resultCallback = LifeMenuResult };
-        Advertisement.Show("rewardedVideo", options);
 
-        while (Advertisement.isShowing)
+
+        if (Advertisement.IsReady("rewardedVideo"))
         {
-            //yield return new WaitForEndOfFrame();
-            yield return new WaitForSecondsRealtime(0.2f);
+            var options = new ShowOptions { resultCallback = LifeMenuResult };
+            Advertisement.Show("rewardedVideo", options);
+
+            while (Advertisement.isShowing)
+            {
+                //yield return new WaitForEndOfFrame();
+                yield return new WaitForSecondsRealtime(0.2f);
+            }
         }
+        
 
         //while (Advertisement.isShowing)
         //{
@@ -152,27 +162,27 @@ public class CreateAds : MonoBehaviour
         GameController.game_controller.continued = true;
         GameController.game_controller.Pause();
         yield return new WaitForSecondsRealtime(0.5f);
-        while (!Advertisement.IsReady("rewardedVideo"))
+        int t = 0;
+        while ((!Advertisement.IsReady("rewardedVideo") && (t < 20)))
         {
-            // yield return new WaitForEndOfFrame();
-            yield return new WaitForSecondsRealtime(0.2f);
-        }
-        var options = new ShowOptions { resultCallback = HandleContinueResult };
-        Advertisement.Show("rewardedVideo", options);
-
-        while (Advertisement.isShowing)
-        {
-            //print("showing");
-            //yield return new WaitForEndOfFrame();
+            t++;
             yield return new WaitForSecondsRealtime(0.2f);
         }
 
-        //while (Advertisement.isShowing)
-        //{
-        //    yield return new WaitForEndOfFrame();
-        //}
 
-        //GameController.game_controller.Continue();
+        if (Advertisement.IsReady("rewardedVideo"))
+        {
+            var options = new ShowOptions { resultCallback = HandleContinueResult };
+            Advertisement.Show("rewardedVideo", options);
+
+            while (Advertisement.isShowing)
+            {
+                //yield return new WaitForEndOfFrame();
+                yield return new WaitForSecondsRealtime(0.2f);
+            }
+        }
+
+        GameController.game_controller.Continue();
     }
 
     void HandleContinueResult(ShowResult result)
@@ -212,24 +222,26 @@ public class CreateAds : MonoBehaviour
     {
         GameController.game_controller.Pause();
         yield return new WaitForSecondsRealtime(0.5f);
-        while (!Advertisement.IsReady("rewardedVideo"))
+        int t = 0;
+        while ((!Advertisement.IsReady("rewardedVideo") && (t < 20)))
         {
-            // yield return new WaitForEndOfFrame();
-            yield return new WaitForSecondsRealtime(0.2f);
-        }
-        var options = new ShowOptions { resultCallback = RubinMenuResult };
-        Advertisement.Show("rewardedVideo", options);
-
-        while (Advertisement.isShowing)
-        {
-            //yield return new WaitForEndOfFrame();
+            t++;
             yield return new WaitForSecondsRealtime(0.2f);
         }
 
-        //while (Advertisement.isShowing)
-        //{
-        //    yield return new WaitForEndOfFrame();
-        //}
+
+        if (Advertisement.IsReady("rewardedVideo"))
+        {
+            var options = new ShowOptions { resultCallback = RubinMenuResult };
+            Advertisement.Show("rewardedVideo", options);
+
+            while (Advertisement.isShowing)
+            {
+                //yield return new WaitForEndOfFrame();
+                yield return new WaitForSecondsRealtime(0.2f);
+            }
+        }
+
         GameController.game_controller.Continue();
     }
 
