@@ -77,6 +77,12 @@ public class Line_Switch : Line
     {
         while (gameObject.activeSelf)
         {
+            while (GameController.game_controller.GetLvlData() == null)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+           
+
             yield return new WaitForSeconds
                 (GameController.game_controller.GetLvlData().switch_prop.time_to_change);
 

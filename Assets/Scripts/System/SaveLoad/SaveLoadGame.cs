@@ -37,7 +37,9 @@ public class SaveLoadGame : MonoBehaviour
             PlayerPrefs.Save();
             //print("created new");
         }
-
+#if UNITY_EDITOR
+        PlayerPrefs.SetInt("Hearts", 100);
+#endif
         // GameController.game_controller.SetCurrentLvl(PlayerPrefs.GetInt("Progress"));
         return PlayerPrefs.GetInt("Hearts");
         //return 50;
@@ -75,6 +77,9 @@ public class SaveLoadGame : MonoBehaviour
             PlayerPrefs.Save();
         }
         //
+#if UNITY_EDITOR
+        PlayerPrefs.SetInt("Progress", 10000);
+#endif
         //PlayerPrefs.SetInt("Progress", 10000);
         //
         // GameController.game_controller.SetCurrentLvl(PlayerPrefs.GetInt("Progress"));

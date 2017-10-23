@@ -171,6 +171,8 @@ public class SpawnWaves : MonoBehaviour
 
     void Update()
     {
+        if (lvl_data == null)
+            return;
         if (lines_spawned >= lvl_data.total_line_count)
         {
             is_spawning = false;
