@@ -8,26 +8,11 @@ public class TimeManager : MonoBehaviour
 {
     public Text timeText;
     DateTime time;
-    //public float param=0.0f;
-    //public float second;
-    //public float minute;
-    //public float hour;
     DateTime lastTime;
+    TimeSpan remainTime;
+    
 
-    //public DateTime GameTime
-    //{
-    //    get
-    //    {
-    //        return time;
-    //    }
-    //    set
-    //    {
-    //        time = value;
-    //        timeText.text = time.Hour + ":" + time.Minute + ":" + time.Second;
-    //    }
 
-    //}
-    // Use this for initialization
     void Start ()
     {
         //time = DateTimeClass.GetNISTDate();
@@ -46,6 +31,7 @@ public class TimeManager : MonoBehaviour
 	void CheckNewHearts()
     {
         TimeSpan delta = time - lastTime;
+        remainTime=new TimeSpan(0,5,0) - delta;
         if (delta.TotalMinutes >= 5)
         {
             lastTime = time;
@@ -56,47 +42,18 @@ public class TimeManager : MonoBehaviour
             Hearts.h.Heart = new_hearts;
         }
     }
-	// Update is called once per frame
+	
 	void Update ()
     {
        // param = 1;
         
         time = time.AddSeconds(Time.deltaTime);
 
-        if (Hearts.h.Heart < 10)
+       // if (Hearts.h.Heart < 10)
             CheckNewHearts();
 
-        timeText.text = time.Hour + ":" + time.Minute;
+        //timeText.text = time.Hour + ":" + time.Minute;
+        timeText.text = remainTime.Minutes + ":" + remainTime.Seconds;
 
-        //param -= Time.deltaTime;
-
-
-
-        //if (param <= 0)
-        //{
-        //    param = 1;
-        //    second = second + 1;
-        //}
-
-        //if (second >= 60)
-        //{
-        //    minuta = minuta + 1;
-        //    second = 0;
-        //}
-
-        //if (minuta >= 60)
-        //{
-        //    hours = hours + 1;
-        //    minuta = 0;
-        //}
-
-        //if (hours > 23)
-        //{
-        //    hours = 0;
-        //}
-
-        //timeText.text = hours + ":" + minuta + ":" + second;
-        //timeText.text = time.Hour + ":" + time.Minute + ":" + time.Second;
-        //timeText.text = time.ToString();
     }
 }
