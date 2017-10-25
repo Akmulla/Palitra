@@ -8,6 +8,7 @@ public class Line_Multiple : Line
     public float prev_edge;
     bool crossed=false;
     public bool finished = false;
+    public RollAway[] roll;
 
     public override void InitLine()
     {
@@ -61,6 +62,10 @@ public class Line_Multiple : Line
         if (passed)
         {
             anim.BeginAnimation();
+            foreach (var VARIABLE in roll)
+            {
+                VARIABLE.Roll();
+            }
         }
         //active = false;
     }

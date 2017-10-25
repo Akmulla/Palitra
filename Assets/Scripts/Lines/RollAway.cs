@@ -6,8 +6,8 @@ public class RollAway : MonoBehaviour
 {
     public bool right;
     bool rolling;
-    public float move_speed;
-    public float rotate_speed;
+    float move_speed=3.0f;
+    float rotate_speed=3.0f;
 
     public void Roll()
     {

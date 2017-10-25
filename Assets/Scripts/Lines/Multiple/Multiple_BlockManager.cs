@@ -15,13 +15,10 @@ public class Multiple_BlockManager : MonoBehaviour
     float window_size;
     int active_block_count;
     Color[] new_colors;
+
     //int current_block;
 
-    void Start()
-    {
-        //window_size = Edges.rightEdge - Edges.leftEdge;
-        //block_size = window_size / (float)block_count;  
-    }
+
 
     public void SetDefault()
     {
