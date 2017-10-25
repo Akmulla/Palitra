@@ -62,6 +62,8 @@ public class Multiple_BlockManager : MonoBehaviour
             }
         }
     }
+
+
     public void InitBlocks()
     {
         line = GetComponent<Line_Multiple>();

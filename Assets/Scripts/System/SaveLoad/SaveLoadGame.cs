@@ -77,9 +77,9 @@ public class SaveLoadGame : MonoBehaviour
             PlayerPrefs.Save();
         }
         //
-#if UNITY_EDITOR
-        PlayerPrefs.SetInt("Progress", 10000);
-#endif
+//#if UNITY_EDITOR
+//        PlayerPrefs.SetInt("Progress", 10000);
+//#endif
         //PlayerPrefs.SetInt("Progress", 10000);
         //
         // GameController.game_controller.SetCurrentLvl(PlayerPrefs.GetInt("Progress"));

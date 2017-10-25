@@ -158,6 +158,7 @@
     <Compile Include="Assets\Scripts\Lines\Order\BlockManager_Order.cs" />
     <Compile Include="Assets\Scripts\Lines\Order\Block_Order.cs" />
     <Compile Include="Assets\Scripts\Lines\Order\Line_Order.cs" />
+    <Compile Include="Assets\Scripts\Lines\RollAway.cs" />
     <Compile Include="Assets\Scripts\Lines\SpriteStretch.cs" />
     <Compile Include="Assets\Scripts\Lines\Switch\Line_Switch.cs" />
     <Compile Include="Assets\Scripts\Lines\TextureHandler.cs" />

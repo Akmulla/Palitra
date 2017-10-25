@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 //public class Sector : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, ISelectHandler,
 //IPointerDownHandler
-public class Sector : Selectable
+public class Sector : Selectable, IPointerClickHandler
 {
     Color sect_color;
     //static float prev_touch = 0.0f;
@@ -27,6 +27,7 @@ public class Sector : Selectable
     }
     public void OnPointerClick(PointerEventData eventData)
     {
+        
         //if (
         //    (GameController.game_controller.GetState() == GameState.Game)
         //    //&& (Time.time - prev_touch > 0.15f)
@@ -35,10 +36,12 @@ public class Sector : Selectable
         //{
         //   // prev_touch = Time.time;
         //   // clicked = true;
-        //    Ball.ball.SetColor(sect_color, true);
+#if UNITY_EDITOR
+        Ball.ball.SetColor(sect_color, true);
+#endif
         //    //print("click");
         //}
-           
+
     }
 
     void Update()

@@ -61,7 +61,6 @@ public class Line_Multiple : Line
         if (passed)
         {
             anim.BeginAnimation();
-            
         }
         //active = false;
     }

@@ -9,13 +9,9 @@ public class Multiple_Block : MonoBehaviour
     public bool active;
     int hp = 3;
 
-    void OnEnable()
-    {
-        //gameObject.SetActive(true);
-       
-    }
-	
-	void Awake ()
+
+
+    void Awake ()
     {
         //sprite_rend = GetComponent<SpriteRenderer>();
         calc_numb = GetComponentInChildren<Calc_Numbers>();
