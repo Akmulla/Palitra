@@ -11,9 +11,23 @@ public class Ball : MonoBehaviour
     Image image;
     Color ball_color;
     public GameObject death;
+    public GameObject stroke;
     public TrianType trian_type=TrianType.Default;
 
     int lines_checked;
+
+    public bool Shield
+    {
+        get
+        {
+            return shield;
+        }
+        set
+        {
+            shield = value;
+            stroke.SetActive(shield);
+        }
+    }
     
 
     public Vector3 GetPosition()
@@ -71,6 +85,9 @@ public class Ball : MonoBehaviour
         image.enabled = true;
         image.sprite = TrianManager.trian_manager.GetCurrentTrian().sprite;
         trian_type = TrianManager.trian_manager.GetCurrentTrian().trian_type;
+        Shield = trian_type == TrianType.Shield;
+
+
     }
 
     void OnDisable()
@@ -97,9 +114,9 @@ public class Ball : MonoBehaviour
         }
         else
         {
-            if (shield)
+            if (Shield)
             {
-                shield = false;
+                Shield = false;
                 StartCoroutine(BallMove.ball_move.ShieldSlowDown());
 
                 ChngLvlStats();
@@ -160,9 +177,9 @@ public class Ball : MonoBehaviour
         }
         else
         {
-            if (shield)
+            if (Shield)
             {
-                shield = false;
+                Shield = false;
                 StartCoroutine(BallMove.ball_move.ShieldSlowDown());
 
                 ChngLvlStats();
@@ -185,7 +202,7 @@ public class Ball : MonoBehaviour
     {
         if (trian_type == TrianType.Shield)
         {
-            shield = true;
+            Shield = true;
         }
     }
     void ChangeLvl()
@@ -193,7 +210,7 @@ public class Ball : MonoBehaviour
         BallMove.ball_move.Speed = GameController.game_controller.GetLvlData().speed;
         if (trian_type==TrianType.Shield)
         {
-            shield = true;
+            Shield = true;
         }
         //ball_color = image.color;
     }
