@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Hearts : MonoBehaviour
 {
     public static Hearts h;
+    public TimeManager time_manager;
     int hearts;
     public Text text;
     public Text text2;
@@ -22,6 +23,7 @@ public class Hearts : MonoBehaviour
     void Start()
     {
         hearts=SaveLoadGame.save_load.LoadHearts();
+
         text.text = hearts.ToString();
         text2.text= hearts.ToString();
         heartMenuText.text = hearts.ToString();
@@ -40,6 +42,16 @@ public int Heart
             text.text = hearts.ToString();
             heartMenuText.text = hearts.ToString();
             text2.text = hearts.ToString();
+            if (hearts <= 10)
+            {
+                //timeObj.SetActive();
+                time_manager.EnableTimer();
+            }
+            else
+            {
+                time_manager.DisableTimer();
+            }
+
             SaveLoadGame.save_load.SaveHearts();
         }
     }

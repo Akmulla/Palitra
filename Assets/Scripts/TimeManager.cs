@@ -11,9 +11,8 @@ public class TimeManager : MonoBehaviour
     DateTime time;
     DateTime lastTime;
     TimeSpan remainTime;
+    bool enabled;
     
-
-
     void Start ()
     {
         //time = DateTimeClass.GetNISTDate();
@@ -29,6 +28,17 @@ public class TimeManager : MonoBehaviour
         //print(lastTime+" " + lastTime.Second);
 	}
 
+    public void EnableTimer()
+    {
+        enabled = true;
+        timeObj.SetActive(true);
+    }
+
+    public void DisableTimer()
+    {
+        enabled = false;
+        timeObj.SetActive(false);
+    }
    
 	void CheckNewHearts()
     {
@@ -48,11 +58,11 @@ public class TimeManager : MonoBehaviour
 	void Update ()
     {
        // param = 1;
-        
-        time = time.AddSeconds(Time.deltaTime);
+        if (!enabled)
+            return;
 
-       // if (Hearts.h.Heart < 10)
-            CheckNewHearts();
+        time = time.AddSeconds(Time.deltaTime);
+        CheckNewHearts();
 
         //timeText.text = time.Hour + ":" + time.Minute;
         //timeText.text = remainTime.Minutes + ":" + remainTime.Seconds;
