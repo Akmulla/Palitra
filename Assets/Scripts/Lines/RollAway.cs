@@ -5,6 +5,7 @@ using UnityEngine;
 public class RollAway : MonoBehaviour
 {
     public bool right;
+    public bool by_position;
     bool rolling;
     float move_speed=10.0f;
     float rotate_speed=-120.0f;
@@ -13,6 +14,17 @@ public class RollAway : MonoBehaviour
 
     public void Roll()
     {
+        if (by_position)
+        {
+            if (transform.position.x >= 0.0f)
+            {
+                right = true;
+            }
+            else
+            {
+                right = false;
+            }
+        }
         rolling = true;
     }
 
@@ -38,5 +50,6 @@ public class RollAway : MonoBehaviour
     void OnEnable()
     {
         rolling = false;
+        
     }
 }

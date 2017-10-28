@@ -42,6 +42,10 @@ public class BlockManager_Order : MonoBehaviour
 
     void ColorChanged()
     {
+        if (!line.CheckIfActive())
+            return;
+
+
         if ((!line.finished) && 
             ((saved_color != Ball.ball.GetColor())||(saved_time+0.25f<Time.time)))
         {

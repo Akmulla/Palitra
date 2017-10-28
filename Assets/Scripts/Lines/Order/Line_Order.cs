@@ -8,6 +8,7 @@ public class Line_Order : Line
     public int line_spawn_number;
     public float prev_edge;
     public bool finished = false;
+    public RollAway[] roll;
 
     public override void InitLine()
     {
@@ -43,6 +44,10 @@ public class Line_Order : Line
         if (passed)
         {
             anim.BeginAnimation();
+            foreach (var VARIABLE in roll)
+            {
+                VARIABLE.Roll();
+            }
         }
         //active = false;
     }

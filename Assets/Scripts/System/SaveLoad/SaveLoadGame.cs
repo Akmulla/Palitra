@@ -38,7 +38,7 @@ public class SaveLoadGame : MonoBehaviour
             //print("created new");
         }
 #if UNITY_EDITOR
-        PlayerPrefs.SetInt("Hearts", 100);
+       // PlayerPrefs.SetInt("Hearts", 100);
 #endif
         // GameController.game_controller.SetCurrentLvl(PlayerPrefs.GetInt("Progress"));
         return PlayerPrefs.GetInt("Hearts");

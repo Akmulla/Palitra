@@ -7,6 +7,7 @@ using System;
 public class TimeManager : MonoBehaviour
 {
     public Text timeText;
+    public GameObject timeObj;
     DateTime time;
     DateTime lastTime;
     TimeSpan remainTime;
@@ -17,7 +18,8 @@ public class TimeManager : MonoBehaviour
     {
         //time = DateTimeClass.GetNISTDate();
         time = DateTime.Now;
-        timeText.text = time.Hour + ":" + time.Minute;
+        //timeText.text = time.Hour + ":" + time.Minute;
+        
         //second = time.Second;
         //minute = time.Minute;
         //hour = time.Hour;
@@ -53,7 +55,17 @@ public class TimeManager : MonoBehaviour
             CheckNewHearts();
 
         //timeText.text = time.Hour + ":" + time.Minute;
-        timeText.text = remainTime.Minutes + ":" + remainTime.Seconds;
+        //timeText.text = remainTime.Minutes + ":" + remainTime.Seconds;
+        //string new_string = remainTime.Minutes.ToString("mm")+ remainTime.Seconds.ToString("ss");
+        string sec = remainTime.Seconds.ToString();
+        if (sec.Length < 2)
+            sec = "0" + sec;
 
+        string min = remainTime.Minutes.ToString();
+        if (min.Length < 2)
+            min = "0" + min;
+
+        string new_string = min + ":" + sec;
+        timeText.text = new_string;
     }
 }
