@@ -124,6 +124,7 @@
     <Compile Include="Assets\Hearts.cs" />
     <Compile Include="Assets\LvlInfo.cs" />
     <Compile Include="Assets\PauseStartAnim.cs" />
+    <Compile Include="Assets\Rate.cs" />
     <Compile Include="Assets\Screamer.cs" />
     <Compile Include="Assets\Scripts\Ads\CreateAds.cs" />
     <Compile Include="Assets\Scripts\Ads\InAppManager.cs" />

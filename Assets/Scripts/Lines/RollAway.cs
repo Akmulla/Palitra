@@ -12,6 +12,9 @@ public class RollAway : MonoBehaviour
     Vector3 dir_right=new Vector3(1.0f,1.0f,0.0f);
     Vector3 dir_left = new Vector3(-1.0f, 1.0f, 0.0f);
 
+    Quaternion saved_rot;
+    bool saved = false;
+
     public void Roll()
     {
         if (by_position)
@@ -27,7 +30,7 @@ public class RollAway : MonoBehaviour
         }
         rolling = true;
     }
-
+    
     void Update()
     {
         if (!rolling)
@@ -49,7 +52,12 @@ public class RollAway : MonoBehaviour
 
     void OnEnable()
     {
+        if (!saved)
+        {
+            saved_rot = transform.rotation;
+            saved = true;
+        }
         rolling = false;
-        
+        transform.rotation=saved_rot;
     }
 }
