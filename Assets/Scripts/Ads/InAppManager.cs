@@ -10,14 +10,26 @@ namespace IAP
         private static IStoreController m_StoreController;
         private static IExtensionProvider m_StoreExtensionProvider;
 
-        public const string pMoney80 = "money_80";
-        public const string pNoAds = "no_ads";
+        //public const string pMoney80 = "money_80";
+        //public const string pNoAds = "no_ads";
 
-        public const string pMoney80AppStore = "app_money_80";
-        public const string pNoAdsAppStore = "app_no_ads";
+        //public const string pMoney80AppStore = "app_money_80";
+        //public const string pNoAdsAppStore = "app_no_ads";
 
-        public const string pMoney80GooglePlay = "gp_money_80";
-        public const string pNoAdsGooglePlay = "gp_no_ads";
+        //public const string pMoney80GooglePlay = "gp_money_80";
+        //public const string pNoAdsGooglePlay = "gp_no_ads";
+
+        public const string rubin_1000 = "rubin_1000";
+        public const string rubin_10000 = "rubin_10000";
+        public const string rubin_25000 = "rubin_25000";
+
+        public const string rubin_1000_GooglePlay = "gp_rubin_1000";
+        public const string rubin_10000_GooglePlay = "gp_rubin_10000";
+        public const string rubin_25000_GooglePlay = "gp_rubin_25000";
+
+        public const string rubin_1000_AppStore = "as_rubin_1000";
+        public const string rubin_10000_AppStore = "as_rubin_10000";
+        public const string rubin_25000_AppStore = "as_rubin_25000";
 
         void Start()
         {
@@ -35,8 +47,17 @@ namespace IAP
             }
 
             var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
-            builder.AddProduct(pMoney80, ProductType.Consumable, new IDs() { { pMoney80AppStore, AppleAppStore.Name }, { pMoney80GooglePlay, GooglePlay.Name } });
-            builder.AddProduct(pNoAds, ProductType.NonConsumable, new IDs() { { pNoAdsAppStore, AppleAppStore.Name }, { pNoAdsGooglePlay, GooglePlay.Name } });
+            //builder.AddProduct(pMoney80, ProductType.Consumable, new IDs() { { pMoney80AppStore, AppleAppStore.Name }, { pMoney80GooglePlay, GooglePlay.Name } });
+            //builder.AddProduct(pNoAds, ProductType.NonConsumable, new IDs() { { pNoAdsAppStore, AppleAppStore.Name }, { pNoAdsGooglePlay, GooglePlay.Name } });
+
+            builder.AddProduct(rubin_1000, ProductType.Consumable, new IDs()
+            { { rubin_1000_AppStore, AppleAppStore.Name }, { rubin_1000_GooglePlay, GooglePlay.Name }} );
+
+            builder.AddProduct(rubin_10000, ProductType.Consumable, new IDs()
+                { { rubin_10000_AppStore, AppleAppStore.Name }, { rubin_10000_GooglePlay, GooglePlay.Name }});
+
+            builder.AddProduct(rubin_25000, ProductType.Consumable, new IDs()
+                { { rubin_25000_AppStore, AppleAppStore.Name }, { rubin_25000_GooglePlay, GooglePlay.Name }});
 
             UnityPurchasing.Initialize(this, builder);
         }
@@ -115,13 +136,26 @@ namespace IAP
         public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args)
         {
             Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
-            if (String.Equals(args.purchasedProduct.definition.id, pMoney80, StringComparison.Ordinal))
+            //if (String.Equals(args.purchasedProduct.definition.id, pMoney80, StringComparison.Ordinal))
+            //{
+            //    //Action for money
+            //}
+            //else if (String.Equals(args.purchasedProduct.definition.id, pNoAds, StringComparison.Ordinal))
+            //{
+            //    //Action for no ads
+            //}
+
+            if (String.Equals(args.purchasedProduct.definition.id, rubin_1000, StringComparison.Ordinal))
             {
                 //Action for money
             }
-            else if (String.Equals(args.purchasedProduct.definition.id, pNoAds, StringComparison.Ordinal))
+            else if (String.Equals(args.purchasedProduct.definition.id, rubin_10000, StringComparison.Ordinal))
             {
                 //Action for no ads
+            }
+            else if (String.Equals(args.purchasedProduct.definition.id, rubin_25000, StringComparison.Ordinal))
+            {
+                
             }
 
             return PurchaseProcessingResult.Complete;

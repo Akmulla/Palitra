@@ -27,9 +27,19 @@ public class Hearts : MonoBehaviour
         text.text = hearts.ToString();
         text2.text= hearts.ToString();
         heartMenuText.text = hearts.ToString();
+        if (hearts < 10)
+        {
+            //timeObj.SetActive();
+            time_manager.EnableTimer();
+        }
+        else
+        {
+            time_manager.DisableTimer();
+        }
+
     }
 
-public int Heart
+    public int Heart
     {
         get
         {
