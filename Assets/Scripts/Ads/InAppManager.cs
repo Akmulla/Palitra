@@ -19,17 +19,17 @@ namespace IAP
         //public const string pMoney80GooglePlay = "gp_money_80";
         //public const string pNoAdsGooglePlay = "gp_no_ads";
 
-        public const string rubin_1000 = "rubin_1000";
-        public const string rubin_10000 = "rubin_10000";
-        public const string rubin_25000 = "rubin_25000";
+        public const string rubin_2000 = "rubin_2000";
+        public const string rubin_20000 = "rubin_20000";
+        public const string rubin_80000 = "rubin_80000";
 
-        public const string rubin_1000_GooglePlay = "gp_rubin_1000";
-        public const string rubin_10000_GooglePlay = "gp_rubin_10000";
-        public const string rubin_25000_GooglePlay = "gp_rubin_25000";
+        public const string rubin_2000_GooglePlay = "gp_rubin_2000";
+        public const string rubin_20000_GooglePlay = "gp_rubin_20000";
+        public const string rubin_80000_GooglePlay = "gp_rubin_80000";
 
-        public const string rubin_1000_AppStore = "as_rubin_1000";
-        public const string rubin_10000_AppStore = "as_rubin_10000";
-        public const string rubin_25000_AppStore = "as_rubin_25000";
+        public const string rubin_2000_AppStore = "as_rubin_2000";
+        public const string rubin_20000_AppStore = "as_rubin_20000";
+        public const string rubin_80000_AppStore = "as_rubin_80000";
 
         void Start()
         {
@@ -50,14 +50,14 @@ namespace IAP
             //builder.AddProduct(pMoney80, ProductType.Consumable, new IDs() { { pMoney80AppStore, AppleAppStore.Name }, { pMoney80GooglePlay, GooglePlay.Name } });
             //builder.AddProduct(pNoAds, ProductType.NonConsumable, new IDs() { { pNoAdsAppStore, AppleAppStore.Name }, { pNoAdsGooglePlay, GooglePlay.Name } });
 
-            builder.AddProduct(rubin_1000, ProductType.Consumable, new IDs()
-            { { rubin_1000_AppStore, AppleAppStore.Name }, { rubin_1000_GooglePlay, GooglePlay.Name }} );
+            builder.AddProduct(rubin_2000, ProductType.Consumable, new IDs()
+            { { rubin_2000_AppStore, AppleAppStore.Name }, { rubin_2000_GooglePlay, GooglePlay.Name }} );
 
-            builder.AddProduct(rubin_10000, ProductType.Consumable, new IDs()
-                { { rubin_10000_AppStore, AppleAppStore.Name }, { rubin_10000_GooglePlay, GooglePlay.Name }});
+            builder.AddProduct(rubin_20000, ProductType.Consumable, new IDs()
+                { { rubin_20000_AppStore, AppleAppStore.Name }, { rubin_20000_GooglePlay, GooglePlay.Name }});
 
-            builder.AddProduct(rubin_25000, ProductType.Consumable, new IDs()
-                { { rubin_25000_AppStore, AppleAppStore.Name }, { rubin_25000_GooglePlay, GooglePlay.Name }});
+            builder.AddProduct(rubin_80000, ProductType.Consumable, new IDs()
+                { { rubin_80000_AppStore, AppleAppStore.Name }, { rubin_80000_GooglePlay, GooglePlay.Name }});
 
             UnityPurchasing.Initialize(this, builder);
         }
@@ -145,17 +145,19 @@ namespace IAP
             //    //Action for no ads
             //}
 
-            if (String.Equals(args.purchasedProduct.definition.id, rubin_1000, StringComparison.Ordinal))
+            if (String.Equals(args.purchasedProduct.definition.id, rubin_2000, StringComparison.Ordinal))
             {
                 //Action for money
+                GlobalScore.global_score.Score += 2000;
             }
-            else if (String.Equals(args.purchasedProduct.definition.id, rubin_10000, StringComparison.Ordinal))
+            else if (String.Equals(args.purchasedProduct.definition.id, rubin_20000, StringComparison.Ordinal))
             {
                 //Action for no ads
+                GlobalScore.global_score.Score += 20000;
             }
-            else if (String.Equals(args.purchasedProduct.definition.id, rubin_25000, StringComparison.Ordinal))
+            else if (String.Equals(args.purchasedProduct.definition.id, rubin_80000, StringComparison.Ordinal))
             {
-                
+                GlobalScore.global_score.Score += 80000;
             }
 
             return PurchaseProcessingResult.Complete;

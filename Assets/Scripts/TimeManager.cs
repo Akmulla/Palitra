@@ -6,8 +6,12 @@ using System;
 
 public class TimeManager : MonoBehaviour
 {
-    public Text timeText;
-    public GameObject timeObj;
+    public Text[] timeText;
+    public GameObject[] timeObj;
+    //public Text timeText;
+    //public Text timeText2;
+    //public GameObject timeObj;
+    //public GameObject timeObj2;
     DateTime time;
     DateTime lastTime;
     TimeSpan remainTime;
@@ -30,14 +34,25 @@ public class TimeManager : MonoBehaviour
 
     public void EnableTimer()
     {
+        if (!enabled)
+            lastTime = time;
+
         enabled = true;
-        timeObj.SetActive(true);
+        
+        for (int i = 0; i < timeObj.Length;i++)
+        {
+            timeObj[i].SetActive(true);
+        }
+        
     }
 
     public void DisableTimer()
     {
         enabled = false;
-        timeObj.SetActive(false);
+        for (int i = 0; i < timeObj.Length; i++)
+        {
+            timeObj[i].SetActive(false);
+        }
     }
    
 	void CheckNewHearts()
@@ -76,6 +91,10 @@ public class TimeManager : MonoBehaviour
             min = "0" + min;
 
         string new_string = min + ":" + sec;
-        timeText.text = new_string;
+
+        for (int i = 0; i < timeText.Length; i++)
+        {
+            timeText[i].text = new_string;
+        }
     }
 }
