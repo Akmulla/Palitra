@@ -9,7 +9,7 @@ public class Rate : MonoBehaviour
     {
         // Application.OpenURL("market://details?id=" + Application.productName);
 #if UNITY_ANDROID
-     Application.OpenURL(market://details?id=" + Application.productName);
+     Application.OpenURL("market://details?id=" + Application.productName);
 #elif UNITY_IPHONE
      Application.OpenURL("itms-apps://itunes.apple.com/app/id1306735206");
 #endif
