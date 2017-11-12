@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2015
+# Visual Studio 2017
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Palitra.Plugins", "Palitra.Plugins.csproj", "{F0C3D08D-A576-E903-5F26-509EEA327C44}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Palitra", "Palitra.csproj", "{82B279FF-126A-1F72-B757-5CCEEAF6A582}"
