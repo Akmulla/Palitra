@@ -254,7 +254,7 @@ public class CreateAds : MonoBehaviour
                 //
                 // YOUR CODE TO REWARD THE GAMER
                 // Give coins etc.
-                GlobalScore.global_score.Score += 100;
+                GlobalScore.global_score.Score += 200;
                 break;
             case ShowResult.Skipped:
                 Debug.Log("The ad was skipped before reaching the end.");
