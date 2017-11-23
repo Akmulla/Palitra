@@ -50,7 +50,7 @@ namespace IAP
             //builder.AddProduct(pMoney80, ProductType.Consumable, new IDs() { { pMoney80AppStore, AppleAppStore.Name }, { pMoney80GooglePlay, GooglePlay.Name } });
             //builder.AddProduct(pNoAds, ProductType.NonConsumable, new IDs() { { pNoAdsAppStore, AppleAppStore.Name }, { pNoAdsGooglePlay, GooglePlay.Name } });
 
-            print("Builder=" + builder);
+            Debug.Log("DEBUG MESSGAGE Builder=" + builder);
             builder.AddProduct(rubin_2000, ProductType.Consumable, new IDs()
             { { rubin_2000_AppStore, AppleAppStore.Name }, { rubin_2000_GooglePlay, GooglePlay.Name }} );
 
@@ -60,13 +60,13 @@ namespace IAP
             builder.AddProduct(rubin_80000, ProductType.Consumable, new IDs()
                 { { rubin_80000_AppStore, AppleAppStore.Name }, { rubin_80000_GooglePlay, GooglePlay.Name }});
 
-            print("ProductCount=" + builder.products.Count);
+            Debug.Log("DEBUG MESSGAGE ProductCount=" + builder.products.Count);
             UnityPurchasing.Initialize(this, builder);
         }
 
         private bool IsInitialized()
         {
-            print("initialize status:" + m_StoreController + " " + m_StoreExtensionProvider);
+            Debug.Log("DEBUG MESSGAGE initialize status:" + m_StoreController + " " + m_StoreExtensionProvider);
             return m_StoreController != null && m_StoreExtensionProvider != null;
         }
 

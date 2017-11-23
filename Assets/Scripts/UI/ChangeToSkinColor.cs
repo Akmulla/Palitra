@@ -21,6 +21,9 @@ public class ChangeToSkinColor : MonoBehaviour
     {
         Color apply_color=Color.black;
 
+        if (SkinManager.skin_manager.GetCurrentSkin() == null)
+            return;
+
         if (color==SkinColors.Particle)
         {
             apply_color = SkinManager.skin_manager.GetCurrentSkin().particle_color;
