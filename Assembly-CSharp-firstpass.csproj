@@ -10,10 +10,10 @@
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>
     </RootNamespace>
-    <ProjectGuid>{2ABE9F45-F145-259A-11A3-66E1F1304E46}</ProjectGuid>
+    <ProjectGuid>{35EB17D8-0C9E-A407-49E4-6957E924865E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
+    <AssemblyName>Assembly-CSharp-firstpass</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -48,7 +48,7 @@
   <PropertyGroup>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <UnityProjectGenerator>Unity/VSTU</UnityProjectGenerator>
-    <UnityProjectType>Editor:5</UnityProjectType>
+    <UnityProjectType>GamePlugins:3</UnityProjectType>
     <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>2018.2.0f2</UnityVersion>
   </PropertyGroup>
@@ -61,8 +61,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Editor\LineEditor.cs" />
-    <Compile Include="Assets\Editor\LinePropDrawer.cs" />
+    <Compile Include="Assets\Plugins\UnityChannel\XiaomiSupport\AppStoreSettings.cs" />
+    <Compile Include="Assets\Plugins\UnityPurchasing\script\ComboBox.cs" />
+    <Compile Include="Assets\Plugins\UnityPurchasing\script\Demo\DemoInventory.cs" />
+    <Compile Include="Assets\Plugins\UnityPurchasing\script\IAPButton.cs" />
+    <Compile Include="Assets\Plugins\UnityPurchasing\script\IAPConfigurationHelper.cs" />
+    <Compile Include="Assets\Plugins\UnityPurchasing\script\IAPDemo.cs" />
+    <Compile Include="Assets\Plugins\UnityPurchasing\script\IAPListener.cs" />
+    <Compile Include="Assets\Plugins\UnityPurchasing\script\PurchasingCheck.cs" />
+    <None Include="Assets\Plugins\UnityPurchasing\script\link.xml" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>D:/UnityProjects/palitra saved/Palitra/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
@@ -101,12 +108,6 @@
     </Reference>
     <Reference Include="UnityEngine.CloudWebServicesModule">
       <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/Managed/UnityEngine/UnityEngine.CloudWebServicesModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.ClusterInputModule">
-      <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/Managed/UnityEngine/UnityEngine.ClusterInputModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.ClusterRendererModule">
-      <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/Managed/UnityEngine/UnityEngine.ClusterRendererModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/Managed/UnityEngine/UnityEngine.CoreModule.dll</HintPath>
@@ -149,9 +150,6 @@
     </Reference>
     <Reference Include="UnityEngine.ParticleSystemModule">
       <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/Managed/UnityEngine/UnityEngine.ParticleSystemModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.ParticlesLegacyModule">
-      <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/Managed/UnityEngine/UnityEngine.ParticlesLegacyModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.PerformanceReportingModule">
       <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/Managed/UnityEngine/UnityEngine.PerformanceReportingModule.dll</HintPath>
@@ -261,65 +259,20 @@
     <Reference Include="UnityEngine.UI">
       <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEditor.UI">
-      <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/UnityExtensions/Unity/GUISystem/Editor/UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.TestRunner">
-      <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/UnityExtensions/Unity/TestRunner/Editor/UnityEditor.TestRunner.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.TestRunner">
-      <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.Timeline">
       <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.Timeline">
-      <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/UnityExtensions/Unity/Timeline/Editor/UnityEditor.Timeline.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.TreeEditor">
-      <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/UnityExtensions/Unity/TreeEditor/Editor/UnityEditor.TreeEditor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Networking">
       <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEditor.Networking">
-      <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/UnityExtensions/Unity/Networking/Editor/UnityEditor.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.GoogleAudioSpatializer">
-      <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/UnityExtensions/Unity/UnityGoogleAudioSpatializer/Editor/UnityEditor.GoogleAudioSpatializer.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.GoogleAudioSpatializer">
       <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/UnityExtensions/Unity/UnityGoogleAudioSpatializer/RuntimeEditor/UnityEngine.GoogleAudioSpatializer.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.HoloLens">
-      <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/UnityExtensions/Unity/UnityHoloLens/Editor/UnityEditor.HoloLens.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.HoloLens">
       <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEditor.SpatialTracking">
-      <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/Editor/UnityEditor.SpatialTracking.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.VR">
-      <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/UnityExtensions/Unity/UnityVR/Editor/UnityEditor.VR.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.Graphs">
-      <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.Android.Extensions">
-      <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions">
-      <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.WindowsStandalone.Extensions">
-      <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="ChannelPurchase">
       <HintPath>D:/UnityProjects/palitra saved/Palitra/Assets/Plugins/UnityChannel/ChannelPurchase.dll</HintPath>
@@ -354,74 +307,42 @@
     <Reference Include="UnityEngine.Advertisements">
       <HintPath>C:/Users/Timur/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.8/UnityEngine.Advertisements.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEditor.Advertisements">
-      <HintPath>C:/Users/Timur/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.Analytics">
       <HintPath>C:/Users/Timur/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.Analytics">
-      <HintPath>C:/Users/Timur/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/Editor/UnityEditor.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Purchasing">
       <HintPath>C:/Users/Timur/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.purchasing@2.0.3/UnityEngine.Purchasing.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEditor.Purchasing">
-      <HintPath>C:/Users/Timur/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.purchasing@2.0.3/Editor/UnityEditor.Purchasing.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.StandardEvents">
       <HintPath>C:/Users/Timur/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.13/UnityEngine.StandardEvents.dll</HintPath>
     </Reference>
-    <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
-      <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/15.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
-      <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Common">
-      <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Common.dll</HintPath>
-    </Reference>
     <Reference Include="mscorlib">
-      <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/MonoBleedingEdge/lib/mono/2.0-api/mscorlib.dll</HintPath>
+      <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/MonoBleedingEdge/lib/mono/unity/mscorlib.dll</HintPath>
     </Reference>
     <Reference Include="System">
-      <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/MonoBleedingEdge/lib/mono/2.0-api/System.dll</HintPath>
+      <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/MonoBleedingEdge/lib/mono/unity/System.dll</HintPath>
     </Reference>
     <Reference Include="System.Core">
-      <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/MonoBleedingEdge/lib/mono/2.0-api/System.Core.dll</HintPath>
+      <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/MonoBleedingEdge/lib/mono/unity/System.Core.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization">
-      <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/MonoBleedingEdge/lib/mono/2.0-api/System.Runtime.Serialization.dll</HintPath>
+      <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/MonoBleedingEdge/lib/mono/unity/System.Runtime.Serialization.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml">
-      <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/MonoBleedingEdge/lib/mono/2.0-api/System.Xml.dll</HintPath>
+      <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/MonoBleedingEdge/lib/mono/unity/System.Xml.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq">
-      <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/MonoBleedingEdge/lib/mono/2.0-api/System.Xml.Linq.dll</HintPath>
+      <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/MonoBleedingEdge/lib/mono/unity/System.Xml.Linq.dll</HintPath>
     </Reference>
     <Reference Include="UnityScript">
-      <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/MonoBleedingEdge/lib/mono/2.0-api/UnityScript.dll</HintPath>
+      <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/MonoBleedingEdge/lib/mono/unity/UnityScript.dll</HintPath>
     </Reference>
     <Reference Include="UnityScript.Lang">
-      <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/MonoBleedingEdge/lib/mono/2.0-api/UnityScript.Lang.dll</HintPath>
+      <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/MonoBleedingEdge/lib/mono/unity/UnityScript.Lang.dll</HintPath>
     </Reference>
     <Reference Include="Boo.Lang">
-      <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/MonoBleedingEdge/lib/mono/2.0-api/Boo.Lang.dll</HintPath>
+      <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/MonoBleedingEdge/lib/mono/unity/Boo.Lang.dll</HintPath>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{35EB17D8-0C9E-A407-49E4-6957E924865E}</Project>
-      <Name>Assembly-CSharp-firstpass</Name>
-    </ProjectReference>
-    <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{FF17C13B-2138-816D-91B1-81CC7C5BFDDF}</Project>
-      <Name>Assembly-CSharp</Name>
-    </ProjectReference>
-    <ProjectReference Include="Assembly-CSharp-Editor-firstpass.csproj">
-      <Project>{56EFFD52-A05C-9A07-94B1-036FF6A5C31E}</Project>
-      <Name>Assembly-CSharp-Editor-firstpass</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

@@ -10,7 +10,7 @@ public class ScreenShot : MonoBehaviour {
     {
 		if (Input.GetKeyDown(KeyCode.S))
         {
-            Application.CaptureScreenshot("screen.png");
+            ScreenCapture.CaptureScreenshot("screen.png");
             print("scrrenshot");
         }
 	}

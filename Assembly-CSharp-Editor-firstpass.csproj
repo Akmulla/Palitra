@@ -10,10 +10,10 @@
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>
     </RootNamespace>
-    <ProjectGuid>{2ABE9F45-F145-259A-11A3-66E1F1304E46}</ProjectGuid>
+    <ProjectGuid>{56EFFD52-A05C-9A07-94B1-036FF6A5C31E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
+    <AssemblyName>Assembly-CSharp-Editor-firstpass</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -48,7 +48,7 @@
   <PropertyGroup>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <UnityProjectGenerator>Unity/VSTU</UnityProjectGenerator>
-    <UnityProjectType>Editor:5</UnityProjectType>
+    <UnityProjectType>EditorPlugins:7</UnityProjectType>
     <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>2018.2.0f2</UnityVersion>
   </PropertyGroup>
@@ -61,8 +61,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Editor\LineEditor.cs" />
-    <Compile Include="Assets\Editor\LinePropDrawer.cs" />
+    <Compile Include="Assets\Plugins\UnityChannel\XiaomiSupport\Editor\AppStoreModel.cs" />
+    <Compile Include="Assets\Plugins\UnityChannel\XiaomiSupport\Editor\AppStoreOnboardApi.cs" />
+    <Compile Include="Assets\Plugins\UnityChannel\XiaomiSupport\Editor\AppStoreSettingsEditor.cs" />
+    <Compile Include="Assets\Plugins\UnityChannel\XiaomiSupport\Editor\XiaomiPackageNameExtension.cs" />
+    <Compile Include="Assets\Plugins\UnityPurchasing\Editor\IAPButtonEditor.cs" />
+    <None Include="Assets\Plugins\UnityPurchasing\Editor\IAPGeneratedCredentials.cs.template" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>D:/UnityProjects/palitra saved/Palitra/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
@@ -375,12 +379,6 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/15.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
-      <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Common">
-      <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Common.dll</HintPath>
-    </Reference>
     <Reference Include="mscorlib">
       <HintPath>D:/Prog/Unity2018.2.0f2/Editor/Data/MonoBleedingEdge/lib/mono/2.0-api/mscorlib.dll</HintPath>
     </Reference>
@@ -413,14 +411,6 @@
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
       <Project>{35EB17D8-0C9E-A407-49E4-6957E924865E}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
-    </ProjectReference>
-    <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{FF17C13B-2138-816D-91B1-81CC7C5BFDDF}</Project>
-      <Name>Assembly-CSharp</Name>
-    </ProjectReference>
-    <ProjectReference Include="Assembly-CSharp-Editor-firstpass.csproj">
-      <Project>{56EFFD52-A05C-9A07-94B1-036FF6A5C31E}</Project>
-      <Name>Assembly-CSharp-Editor-firstpass</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
