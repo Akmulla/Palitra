@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class StartAnimation : MonoBehaviour
 {
-
     Animator anim;
-
+    
     void Awake()
     {
         anim=GetComponent<Animator>();
@@ -15,13 +14,13 @@ public class StartAnimation : MonoBehaviour
     void OnEnable()
     {
         EventManager.StartListening("BeginGameAnimation", Animate);
-        EventManager.StartListening("EndGame", Reset);
+        EventManager.StartListening("ResetGameAnimation", Reset);
     }
 
     void OnDisable()
     {
         EventManager.StopListening("BeginGameAnimation", Animate);
-        EventManager.StopListening("EndGame", Reset);
+        EventManager.StopListening("ResetGameAnimation", Reset);
     }
 
     void Animate()

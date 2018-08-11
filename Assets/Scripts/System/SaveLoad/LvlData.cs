@@ -1,24 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+public enum LvlType
+{
+    Speed_incr, Dist_decr, Speed_incr_dist_incr, Speed_decr_dist_decr,
+    Speed_incr_dist_incr_half, Speed_decr_dist_decr_half, Count
+}
 [CreateAssetMenu()]
 public class LvlData : ScriptableObject
 {
     [Header("Dist")]
-    public float max_dist;
-    public float min_dist;
-    public float chng_dist_val;
-    public int lines_to_chng_dist;
+    public float dist;
+    public float step_dist;
 
     [Header("Ball")]
-    public float min_speed;
-    public float max_speed;
-    public int lines_to_accel;
-    public float accel;
+    public float speed;
+    public float step_speed;
 
-    [Header("Coins")]
-    public int lines_to_coin;
-    public int coins_reward;
+    //[Header("Coins")]
+    //public int coins_reward;
 
     [Header("Lines")]
 
@@ -45,9 +44,10 @@ public class LvlData : ScriptableObject
     [Tooltip("Комбо полоса из 5 частей")]
     public ComboProp combo_prop_5_parts;
 
-    [HideInInspector]
-    public int lines_to_chng_lvl;
+    //[HideInInspector]
+    public int total_line_count;
 
+    public LvlType lvl_type;
     //[Header("Sectors")]
     //public Color[] colors;
 }

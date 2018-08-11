@@ -12,9 +12,14 @@ public class SkinChange : MonoBehaviour
     //public Text set_skin_text;
     public GameObject buy_button;
     public GameObject set_button;
-    public Image BG;
+    //public Image BG;
     public Animator money_anim;
-    int skin_number;
+
+    public Button buy_set_button;
+
+    public ColorBuyAnim color_buy;
+
+    int skin_number=0;
 
     public void NextSkin()
     {
@@ -55,6 +60,8 @@ public class SkinChange : MonoBehaviour
             SoundManager.sound_manager.SingleSound(SoundSample.SetSkin);
             SkinManager.skin_manager.SetActiveSkin(skin_number);
             SkinManager.skin_manager.SaveActiveSkin();
+            //buy_set_button.interactable = false;
+            color_buy.Animate();
         }
         else
         {
@@ -63,51 +70,54 @@ public class SkinChange : MonoBehaviour
                 SoundManager.sound_manager.SingleSound(SoundSample.Buy);
                 GlobalScore.global_score.Score -= SkinManager.skin_manager.GetSkinByNumber(skin_number).price;
                 PlayerPrefs.SetInt(SkinManager.skin_manager.GetSkinByNumber(skin_number).name, 1);
+
+                //сразу активируем
+                SkinManager.skin_manager.SetActiveSkin(skin_number);
+                SkinManager.skin_manager.SaveActiveSkin();
+
+                color_buy.Animate();
             }
             else
             {
-                money_anim.SetTrigger("animate");
                 SoundManager.sound_manager.SingleSound(SoundSample.Error);
+                money_anim.SetTrigger("animate");
             }
         }
-        
+        SetEquipButtonStatus();
         UpdateText();
-    }
-
-    void Start()
-    {
-        
     }
 
     void OnEnable()
     {
+        //print("fg");
         InitMenu();
     }
 
-    public void InitMenu()
+    void InitMenu()
     {
         skin_number = SkinManager.skin_manager.GetSkinNumber();
+        SkinManager.skin_manager.SetActiveSkin(skin_number);
         for (int i = 0; i < SkinManager.skin_manager.GetTotalSkinCount(); i++)
         {
             if ((!CheckIfAvailable(i)) && (SkinManager.skin_manager.GetSkinByNumber(i).price == 0))
             {
                 PlayerPrefs.SetInt(SkinManager.skin_manager.GetSkinByNumber(i).name, 1);
+                PlayerPrefs.Save();
             }
+            
         }
         UpdateSkin();
         UpdateText();
-        //UpdateScore();
-
     }
 
     void UpdateSkin()
     {
+        SetEquipButtonStatus();
         for (int i = 0; i < sectors.Length;i++)
         {
             sectors[i].color = SkinManager.skin_manager.GetSkinByNumber(skin_number).colors[i];
         }
-        BG.color = SkinManager.skin_manager.GetSkinByNumber(skin_number).bg_color;
-        //EventManager.TriggerEvent("SkinChanged");
+        //BG.color = SkinManager.skin_manager.GetSkinByNumber(skin_number).bg_color;
     }
 
     void UpdateText()
@@ -117,23 +127,16 @@ public class SkinChange : MonoBehaviour
         score_text.text = GlobalScore.global_score.Score.ToString();
         if (CheckIfAvailable(skin_number))
         {
-            //set_skin_text.text = "Set";
             set_button.SetActive(true);
             buy_button.SetActive(false);
         }
         else
         {
-            //set_skin_text.text = "Buy";
             set_button.SetActive(false);
             buy_button.SetActive(true);
         }
     }
 
-    //void UpdateScore()
-    //{
-    //    score_text.text = GlobalScore.global_score.Score.ToString();
-    //}
-	
     bool CheckIfAvailable(int number)
     {
         if (PlayerPrefs.HasKey(SkinManager.skin_manager.GetSkinByNumber(number).name))
@@ -142,5 +145,17 @@ public class SkinChange : MonoBehaviour
         }
         
         return false;
+    }
+
+    void SetEquipButtonStatus()
+    {
+        if (skin_number == PlayerPrefs.GetInt("SavedSkin"))
+        {
+            buy_set_button.interactable = false;
+        }
+        else
+        {
+            buy_set_button.interactable = true;
+        }
     }
 }

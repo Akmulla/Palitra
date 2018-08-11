@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public abstract class Line : MonoBehaviour
 {
@@ -10,28 +9,31 @@ public abstract class Line : MonoBehaviour
     public GameObject right;
     protected AnimationComponent anim;
     MeshRenderer[] mesh_rend;
+    [HideInInspector]
     public TextureHandler texture_handler;
-    MeshResize[] mesh_resize;
+    protected MeshResize[] mesh_resize;
 
     protected virtual void Update()
     {
         CheckIfCrossed();
     }
+
     public Transform GetTransform()
     {
         return tran;
     }
+
     public float GetHeight()
     {
         return height;
     }
+
     protected virtual void CheckIfCrossed()
     {
         if ((active) && (tran.position.y - height <= Ball.ball.GetCollisionPosition().y))
         {
-            active = false;
             CheckIfPassed();
-           
+            active = false;
         }
     }
 
@@ -47,12 +49,12 @@ public abstract class Line : MonoBehaviour
 
     public virtual void InitLine()
     {
-        //active = true;
+        active = false;
         for (int i=0;i<mesh_resize.Length;i++)
         {
             mesh_resize[i].scale();
         }
-       ChangeColor();
+        ChangeColor();
     }
 
 
@@ -66,10 +68,6 @@ public abstract class Line : MonoBehaviour
 
     public void SetTexture(Texture2D texture)
     {
-        //left.GetComponent<MeshRenderer>().materials[1].mainTexture = texture;
-        //right.GetComponent<MeshRenderer>().materials[1].mainTexture = texture;
-        //left.GetComponent<MeshRenderer>().materials[0].mainTexture = texture;
-        //right.GetComponent<MeshRenderer>().materials[0].mainTexture = texture;
         mesh_rend[0].materials[0].mainTexture = texture;
         mesh_rend[0].materials[1].mainTexture = texture;
         mesh_rend[1].materials[0].mainTexture = texture;
@@ -78,7 +76,7 @@ public abstract class Line : MonoBehaviour
 
     protected virtual void OnEnable()
     {
-        
+        //нужно для переопределения
     }
 
     public abstract void ChangeColor();
@@ -93,8 +91,7 @@ public abstract class Line : MonoBehaviour
     {
         active = true;
     }
-
-
+    
     public bool CheckIfActive()
     {
         return active;

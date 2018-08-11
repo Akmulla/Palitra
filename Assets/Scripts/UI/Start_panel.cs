@@ -11,5 +11,4 @@ public class Start_panel : MonoBehaviour
     {
         BG.color = SkinManager.skin_manager.GetCurrentSkin().bg_color;
     }
-
 }

@@ -15,7 +15,6 @@ public class ParticleMove : MonoBehaviour
         offset = tran.position.y - cam.position.y;
 	}
 	
-	
 	void Update ()
     {
         tran.position = new Vector3(cam.position.x, cam.position.y+offset,1.0f);

@@ -35,6 +35,10 @@ public class AnimationComponent : MonoBehaviour
         ResetAnimation();
     }
   
+    void OnDisable()
+    {
+        ResetAnimation();
+    }
     IEnumerator AnimationCoroutine()
     {
         float ball_start = Ball.ball.GetCollisionPosition().y;
@@ -46,21 +50,22 @@ public class AnimationComponent : MonoBehaviour
 
         SetMesh(mesh_data.meshes[current_mesh]);
 
-        //во время прохождения линии
-        while (current_mesh < mesh_data.meshes.Length - start_mesh - 1)
+        //если скорость выше определенного занчения
+         while ((current_mesh < mesh_data.meshes.Length - start_mesh - 1)&&
+            (BallMove.ball_move.Speed > 4.5f))
         {
             float position = Ball.ball.GetCollisionPosition().y - ball_start;
             current_mesh = (int)(position / cell);
             SetMesh(mesh_data.meshes[current_mesh + start_mesh]);
             yield return new WaitForEndOfFrame();
         }
-
-        //после того как прошли линию
-        while ((current_mesh < mesh_data.meshes.Length - start_mesh) && (current_mesh > end_mesh))
+        current_mesh++;
+        //если нет
+        while (current_mesh < mesh_data.meshes.Length - start_mesh)
         {
             SetMesh(mesh_data.meshes[current_mesh + start_mesh]);
             current_mesh++;
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForSeconds(0.025f);
         }
     }
 

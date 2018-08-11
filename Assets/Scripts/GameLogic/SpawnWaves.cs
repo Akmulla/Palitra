@@ -9,7 +9,7 @@ public class SpawnWaves : MonoBehaviour
 {
     public static SpawnWaves spawn;
     public float prev_edge = 0.0f;
-    float start_delay = 2.0f;
+    //float start_delay = 2.0f;
 
     LineHandler[] line_handler;
 
@@ -23,10 +23,11 @@ public class SpawnWaves : MonoBehaviour
     public float dist;
     public float edge;
     public float offset = 0.5f;
-    int lines_passed;
-    int lines_spawned;
+    public int lines_passed;
+    public int lines_spawned;
 
     bool is_spawning=false;
+    LvlData lvl_data;
 
     float Dist
     {
@@ -37,17 +38,19 @@ public class SpawnWaves : MonoBehaviour
 
         set
         {
-            dist = Mathf.Clamp(value, GameController.game_controller.GetLvlData().min_dist, GameController.game_controller.GetLvlData().max_dist);
+            dist = value;
         }
     }
 
     void Awake()
     {
         spawn = this;
+
     }
 
     void Start()
     {
+        lvl_data = GameController.game_controller.GetLvlData();
         Pool[] pool;
         pool = GetComponentsInChildren<Pool>();
 
@@ -71,22 +74,16 @@ public class SpawnWaves : MonoBehaviour
         }  
     }
 
-    void BeginGame()
-    {
-        //ChangeLvl();
-        //StartCoroutine(Delay());
-    }
-
     void EndGame()
     {
-        is_spawning = false;
+        //is_spawning = false;
+       // lines_spawned = lines_passed;
     }
 
     void OnEnable()
     {
         EventManager.StartListening("LinePassed", LinePassed);
         EventManager.StartListening("ChangeLvl", ChangeLvl);
-        EventManager.StartListening("BeginGame", BeginGame);
         EventManager.StartListening("EndGame", EndGame);
     }
 
@@ -94,7 +91,6 @@ public class SpawnWaves : MonoBehaviour
     { 
         EventManager.StopListening("LinePassed", LinePassed);
         EventManager.StopListening("ChangeLvl", ChangeLvl);
-        EventManager.StopListening("BeginGame", BeginGame);
         EventManager.StopListening("EndGame", EndGame);
     }
 
@@ -114,15 +110,7 @@ public class SpawnWaves : MonoBehaviour
     void ReserveLines()
     {
         lines.Clear();
-
         GetLineCountData();
-
-        //вычисляем общее количество линий на уровне
-        GameController.game_controller.GetLvlData().lines_to_chng_lvl=0;
-        for (int i = 0; i < (int)PoolType.Count; i++)
-        {
-            GameController.game_controller.GetLvlData().lines_to_chng_lvl += line_handler[i].count;
-        }
 
         //заполняем массив линий
         for (int i=0;i<(int)PoolType.Count;i++)
@@ -137,15 +125,26 @@ public class SpawnWaves : MonoBehaviour
     void LinePassed()
     {
         lines_passed++;
-        if (lines_passed >= GameController.game_controller.GetLvlData().lines_to_chng_dist)
-        {
-            lines_passed = 0;
-            Dist -= GameController.game_controller.GetLvlData().chng_dist_val;
-        }
+        //if (lines_passed >= GameController.game_controller.GetLvlData().lines_to_chng_dist)
+        //{
+        //    lines_passed = 0;
+        //    Dist -= GameController.game_controller.GetLvlData().chng_dist_val;
+        //}
+        LvlType lvl_type = GameController.game_controller.GetLvlData().lvl_type;
+        bool chng_aftr_half = ((lvl_type == LvlType.Speed_decr_dist_decr_half) ||
+            (lvl_type == LvlType.Speed_incr_dist_incr_half)) ? true : false;
+        bool passed_half = (SpawnWaves.spawn.GetLineSpawnedNumber() >=
+            GameController.game_controller.GetLvlData().total_line_count / 2);
+
+        float k = (chng_aftr_half && passed_half) ? -1.0f : 1.0f;
+
+        Dist += lvl_data.step_dist*k;
     }
 
     void ChangeLvl()
     {
+        lvl_data = GameController.game_controller.GetLvlData();
+        is_spawning = false;
         lines_passed = 0;
         lines_spawned = 0;
         prev_edge = Ball.ball.GetPosition().y;
@@ -164,15 +163,22 @@ public class SpawnWaves : MonoBehaviour
             yield return null;
         yield return new WaitForSeconds(2.0f);
 
-        Dist = GameController.game_controller.GetLvlData().max_dist;
+        // Dist = GameController.game_controller.GetLvlData().max_dist;
+        Dist = lvl_data.dist;
         edge = Edges.topEdge + offset;
         is_spawning = true;
     }
 
     void Update()
     {
-        if ((is_spawning)&&(Edges.topEdge >= edge-offset)&&
-            (lines_spawned < GameController.game_controller.GetLvlData().lines_to_chng_lvl))
+        if (lvl_data == null)
+            return;
+        if (lines_spawned >= lvl_data.total_line_count)
+        {
+            is_spawning = false;
+        }
+
+        if ((is_spawning)&&(Edges.topEdge >= edge-offset))
         {
             SpawnWave();
         }

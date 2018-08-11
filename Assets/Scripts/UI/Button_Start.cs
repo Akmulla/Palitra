@@ -7,17 +7,12 @@ public class Button_Start : MonoBehaviour
 {
 	public void BeginGame()
     {
-        //UIController.ui.BeginGame();
-        
-            
-            SoundManager.sound_manager.SingleSound(SoundSample.Start);
-            GameController.game_controller.BeginGame();
+        if (!Hearts.h.CheckHearts())
+            return;
 
-
-        //SceneManager.LoadScene("Main");
+        Hearts.h.Heart--;
+        SoundManager.sound_manager.SingleSound(SoundSample.Start);
+        GameController.game_controller.BeginGame();
 
     }
-
-   
-
 }

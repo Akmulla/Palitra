@@ -4,28 +4,46 @@ using UnityEngine;
 
 public class ParticleReload : MonoBehaviour
 {
-
+    //bool on = true;
     public GameObject[] particles;
 
-    void Reload()
+    public void Reload()
     {
-        for (int i=0;i<particles.Length;i++)
+        TurnOff();
+        TurnOn();
+    }
+
+    public void TurnOn()
+    {
+        for (int i = 0; i < particles.Length; i++)
         {
-            particles[i].SetActive(false);
             particles[i].SetActive(true);
         }
+        //on = true;
+    }
+
+    public void TurnOff()
+    {
+        for (int i = 0; i < particles.Length; i++)
+        {
+            particles[i].SetActive(false);
+        }
+        //on = false;
+    }
+
+    public void SkinChanged()
+    {
+        TurnOff();
+        TurnOn();
     }
 
     void OnEnable()
     {
-        EventManager.StartListening("SkinChanged", Reload);
-        EventManager.StartListening("BeginGame", Reload);
+        EventManager.StartListening("SkinChanged", SkinChanged);
     }
 
     void OnDisable()
     {
-        EventManager.StopListening("SkinChanged", Reload);
-        EventManager.StopListening("BeginGame", Reload);
+        EventManager.StopListening("SkinChanged", SkinChanged);
     }
-
 }

@@ -8,23 +8,22 @@ public class Line_Multiple : Line
     public float prev_edge;
     bool crossed=false;
     public bool finished = false;
+    public RollAway[] roll;
 
     public override void InitLine()
     {
         block_manager = GetComponent<Multiple_BlockManager>();
         line_spawn_number = SpawnWaves.spawn.GetLineSpawnedNumber();
         crossed = false;
-        //prev_edge = SpawnWaves.spawn.prev_edge;
         finished = false;
         base.InitLine();
-        //block_manager.InitBlocks();
     }
 
 	protected override void CheckIfCrossed ()
 	{
 		base.CheckIfCrossed ();
         PoolType pool_type = GetComponent<PoolRef>().GetPool().pool_type;
-        float deceleration=0.0f;
+        float deceleration = 0.0f;
         switch (pool_type)
         {
             case (PoolType.Multiple_1_part):
@@ -44,18 +43,31 @@ public class Line_Multiple : Line
             crossed = true;
         }
     }
+
     protected override void CheckIfPassed()
     {
+        bool passed;
         if (!finished)
         {
-            Ball.ball.LinePassed(Color.black);
+            //print("Check");
+            //Debug.Break();
+            passed=Ball.ball.LinePassed(Color.black);
+            //GameController.game_controller.GameOver();
         }
         else
         {
-            anim.BeginAnimation();
-            active = false;
-            Ball.ball.LinePassed(Ball.ball.GetColor());
+            passed=Ball.ball.LinePassed(Ball.ball.GetColor());
         }
+
+        if (passed)
+        {
+            anim.BeginAnimation();
+            foreach (var VARIABLE in roll)
+            {
+                VARIABLE.Roll();
+            }
+        }
+        //active = false;
     }
 
     public override void ChangeColor()

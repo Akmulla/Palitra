@@ -8,10 +8,10 @@ public class Line_Order : Line
     public int line_spawn_number;
     public float prev_edge;
     public bool finished = false;
+    public RollAway[] roll;
 
     public override void InitLine()
     {
-        
         block_manager = GetComponent<BlockManager_Order>();
         base.InitLine();
         line_spawn_number = SpawnWaves.spawn.GetLineSpawnedNumber();
@@ -19,6 +19,7 @@ public class Line_Order : Line
         finished = false;
         //prev_edge = SpawnWaves.spawn.prev_edge;
     }
+
     public override void Enable()
     {
         base.Enable();
@@ -27,26 +28,28 @@ public class Line_Order : Line
         finished = false;
         block_manager.SetDefault();
     }
-    void Start()
-    {
-        
-        
-    }
 
     protected override void CheckIfPassed()
     {
-        //событие LinePassed вызывается в BlockManager
+        bool passed;
         if (!finished)
         {
-            Ball.ball.LinePassed(Color.black);
+            passed=Ball.ball.LinePassed(Color.black);
         }
         else
         {
-            anim.BeginAnimation();
-            active = false;
-            Ball.ball.LinePassed(Ball.ball.GetColor());
+            passed=Ball.ball.LinePassed(Ball.ball.GetColor());
         }
-        
+
+        if (passed)
+        {
+            anim.BeginAnimation();
+            foreach (var VARIABLE in roll)
+            {
+                VARIABLE.Roll();
+            }
+        }
+        //active = false;
     }
 
     protected override void CheckIfCrossed()
@@ -67,11 +70,6 @@ public class Line_Order : Line
                 deceleration = GameController.game_controller.GetLvlData().combo_prop_5_parts.slowing;
                 break;
         }
-        //if ((active) && (GameController.game_controller.GetLinesPassedNumber() == line_spawn_number - 1) && (!crossed))
-        //{
-        //    BallMove.ball_move.SlowDown(deceleration);
-        //    crossed = true;
-        //}
         if ((active) && (Ball.ball.GetPosition().y > prev_edge) && (!crossed))
         {
             BallMove.ball_move.SlowDown(deceleration);
@@ -82,7 +80,6 @@ public class Line_Order : Line
 
     public override void ChangeColor()
     {
-        //StartCoroutine(block_manager.SetRandomColors());
         block_manager.InitBlocks();
     }
 }

@@ -13,43 +13,36 @@ public class BallMove : MonoBehaviour
     private IEnumerator coroutine;
     bool stop = false;
 
-    Vector3 next_pos=Vector3.zero;
-    float pixel_size;
-
-    Rigidbody rb;
-    Vector3 movement = Vector3.zero;
-
     public void Stop()
     {
         stop = true;
     }
+
     void Awake()
 	{
 		ball_move=this;
-        rb = GetComponent<Rigidbody>();
-	}
-    void Start()
-    {
         tran = GetComponent<Transform>();
-        pixel_size = (Edges.topEdge-Edges.botEdge)/Screen.height;
-        //StartCoroutine(MoveCor());
-        next_pos = tran.position;
+        stop = false;
     }
+
     void BeginGame()
     {
-        speed = GameController.game_controller.GetLvlData().min_speed;
+        speed = GameController.game_controller.GetLvlData().speed;
         current_state = State.normal;
         stop = false;
     }
+
     void OnEnable()
     {
         EventManager.StartListening("BeginGame", BeginGame);
     }
+
     void OnDisable()
     {
         EventManager.StopListening("BeginGame", BeginGame);
     }
-    float Speed
+
+    public float Speed
     {
         get
         {
@@ -57,61 +50,43 @@ public class BallMove : MonoBehaviour
         }
         set
         {
-            //print(value);
-           // Debug.Break();
-            if (current_state==State.normal)
-                speed = Mathf.Clamp (value, GameController.game_controller.GetLvlData ().min_speed, GameController.game_controller.GetLvlData ().max_speed);
-            else
-                speed = Mathf.Clamp(value, 0.1f, GameController.game_controller.GetLvlData().max_speed);
+            speed = value;
         }
     }
+
     void Update()
     {
-        /*
-        if ((!stop) && (GameController.game_controller.GetState() == GameState.Game))
-            //rb.velocity = Vector2.up * speed;
-            movement = Vector3.up;
-        else
-            movement = Vector3.zero;
-            //rb.velocity = Vector2.zero;
-            */
-        //print(rb.velocity);
         if ((!stop) && (GameController.game_controller.GetState() == GameState.Game))
         {
-            tran.position = tran.position +  Vector3.up * speed * Time.deltaTime;
-        }
-            //tran.Translate(Vector2.up * speed * Time.deltaTime);
-
-        //tran.position = next_pos;
-    }
-
-    IEnumerator MoveCor()
-    {
-        while(true)
-        {
-            //print(Time.time+" "+tran.position.y);
-            if ((!stop) && (GameController.game_controller.GetState() == GameState.Game))
-                //tran.position+=Vector3.up * pixel_size;
-                next_pos += Vector3.up * (pixel_size * 2);
-            yield return new WaitForSeconds(0.002f);
+            switch (Ball.ball.trian_type)
+            {
+                case TrianType.DoublePoints:
+                    tran.position = tran.position + Vector3.up * speed * Time.deltaTime*1.15f;
+                    break;
+                case TrianType.HalfPoints:
+                    tran.position = tran.position + Vector3.up * speed * Time.deltaTime * 0.75f;
+                    break;
+                default:
+                    tran.position = tran.position + Vector3.up * speed * Time.deltaTime;
+                    break;
+            }
+            
         }
     }
-    /*
-    void FixedUpdate()
-    {
-        //print(tran.position.y);
-    //    rb.velocity = movement*speed;
-        //tran.position = next_pos;
-        //if ((!stop) && (GameController.game_controller.GetState() == GameState.Game))
-        //    next_pos += Vector3.up * (pixel_size * speed);
 
-    }
-    */
     public void IncreaseSpeed(float acceleration)
     {
         if (current_state != State.normal)
             return;
         Speed += acceleration;
+    }
+
+    public IEnumerator ShieldSlowDown()
+    {
+        float saved = speed / 2.0f;
+        Speed -= saved;
+        yield return new WaitForSeconds(2.0f);
+        Speed += saved;
     }
 
     public void SlowDown(float deceleration)
@@ -140,13 +115,13 @@ public class BallMove : MonoBehaviour
     {
         for (int i=0;i<5;i++)
         {
-            if (Speed+x>=saved_speed)
-            {
-                Speed = saved_speed;
-                break;
-            }
+            //if (Speed+x>=saved_speed)
+            //{
+            //    Speed = saved_speed;
+            //    break;
+            //}
             Speed += x;
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(0.2f);
         }
         current_state = State.normal;
     }
@@ -156,7 +131,7 @@ public class BallMove : MonoBehaviour
         current_state = State.resuming;
         coroutine = SlowDownCoroutine(x);
         StartCoroutine(coroutine);
+        //Speed = saved_speed;
+       // current_state = State.normal;
     }
-
-
 }

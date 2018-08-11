@@ -7,20 +7,36 @@ public enum GameState { MainMenu, SkinMenu, Prepare, Game,Pause, GameOver };
 
 public class GameController : MonoBehaviour
 {
+    //Hearts hearts;
     public static GameController game_controller;
     float saved_time_scale = 1.0f;
     GameState game_state;
-    [SerializeField]
-    LvlData[] lvl_data;
+    //[SerializeField]
+   // LvlData[] lvl_data;
     [SerializeField]
     Sector[] sectors;
+    [SerializeField]
     int lvl_number;
     public GameObject pools_obj;
     Pool[] pools;
     public bool prepared = false;
+    [SerializeField]
+    ParticleReload particle;
 
-
+    [SerializeField]
+    AnimationStatus anim_status;
+    bool reload_part = false;
     int lines_passed;
+    GameState saved_state;
+
+    public bool continued = false;
+    
+    //int loaded_lvl;
+    [SerializeField]
+    LvlData loaded_lvl_data;
+
+    int total_line_count;
+
 
     public GameState GetState()
     {
@@ -30,14 +46,31 @@ public class GameController : MonoBehaviour
     void ChangeState(GameState game_state)
     {
         this.game_state = game_state;
-        //UIController.ui.UpdateUI();
     }
 
+ 
 
-    public int GetCurrentLvl()
+    public int CurrentLvl
     {
-        return lvl_number;
+        get
+        {
+            return lvl_number;
+        }
+        set
+        {
+            lvl_number = value;
+            loaded_lvl_data = Resources.Load<LvlData>("Lvl_" + lvl_number.ToString());
+        }
     }
+    //public int GetCurrentLvl()
+    //{
+    //    return lvl_number;
+    //}
+
+    //public void SetCurrentLvl(int lvl)
+    //{
+    //    lvl_number=lvl;
+    //}
 
     public int GetLinesPassedNumber()
     {
@@ -46,51 +79,55 @@ public class GameController : MonoBehaviour
 
     public void BeginGame()
     {
-        if ((game_state==GameState.MainMenu)||(game_state == GameState.GameOver))
-        {
-            lvl_number = 0;
-            
-            
-            StartCoroutine(BeginGameCoroutine());
-            //InitLvl();
-            //StartCoroutine(InitLvlCor());
-        }
+        if (!Hearts.h.CheckHearts())
+            return;
+
+        if ((game_state != GameState.MainMenu) && (game_state != GameState.GameOver))
+            return;
+
+        //lvl_number = 0;
+        SaveLoadGame.save_load.LoadProgress();
+
+        reload_part = game_state == GameState.GameOver;
+        StartCoroutine(BeginGameCoroutine());
     }
 
     IEnumerator BeginGameCoroutine()
     {
-        //prepare = false;
-        // StartCoroutine(InitLines());
-        // float t1 = Time.time;
+        lines_passed = 0;
+        total_line_count = game_controller.GetLvlData().total_line_count;
+        Line_Switch.InitText();
+        bool animate = game_state == GameState.MainMenu;
 
+        SoundManager.sound_manager.GameTheme();
+        if (reload_part)
+            particle.TurnOff();
         ChangeState(GameState.Prepare);
         UIController.ui.UpdateUI();
-        //if (game_state == GameState.MainMenu)
+        if (animate)
         {
             EventManager.TriggerEvent("BeginGameAnimation");
-            //yield return new WaitForSeconds(3.0f);
         }
         yield return StartCoroutine(InitLvlCor());
         
-        SoundManager.sound_manager.GameTheme();
-
-        //float t2 = Time.time;
-        //if (t2-t1<3.0f)
-        //{
-        //    yield return new WaitForSeconds(3.0f - (t2 - t1));
-        //}
+        while (!anim_status.finished)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        if (reload_part)
+            particle.TurnOn();
         ChangeState(GameState.Game);
-
         UIController.ui.UpdateUI();
+        Line_Default.same_colors = 0;
         EventManager.TriggerEvent("BeginGame");
     }
 
     IEnumerator InitLvlCor()
     {
         System.GC.Collect();
-        lines_passed = 0;
-
-        if (lvl_number != 0)
+        //lines_passed = 0;
+        //total_line_count = GameController.game_controller.GetLvlData().total_line_count;
+        if (CurrentLvl != 0)
             yield return new WaitForSeconds(1.0f);
         for (int i = 0; i < sectors.Length; i++)
         {
@@ -107,36 +144,28 @@ public class GameController : MonoBehaviour
         {
             for (int k=0;k<pools[i].size;k++)
             {
-                //pools[i].InitLine(k);
                 yield return StartCoroutine(pools[i].InitLineCor(k));
-                //print("pool="+i+" line="+k);
-                //yield return null;
             }
-            //pools[i].InitLines();
-            
-            
             yield return null;
         }
-        //prepare = false;
         yield return null;
     }
 
     void Awake()
     {
-        //TextureHandler.InitSize();
         Resources.UnloadUnusedAssets();
         pools = pools_obj.GetComponents<Pool>();
         game_state = GameState.MainMenu;
         
         game_controller = this;
         saved_time_scale = Time.timeScale;
-        
-        //EventManager.TriggerEvent("ChangeLvl");
     }
 
     void Start()
     {
         UIController.ui.UpdateUI();
+        SaveLoadGame.save_load.LoadProgress();
+       
     }
 
     void OnEnable()
@@ -152,49 +181,47 @@ public class GameController : MonoBehaviour
     void LinePassed()
     {
         lines_passed++;
-        if (lines_passed >= GameController.game_controller.GetLvlData().lines_to_chng_lvl)
+        if ((lines_passed >= total_line_count)&&(game_state==GameState.Game))
         {
+            EventManager.TriggerEvent("LvlFinished");
+            //Debug.Break();
             IncreaseLvl();
-            //EventManager.TriggerEvent("ChangeLvl");
         }
     }
 
     void IncreaseLvl()
     {
-        lvl_number++;
-        if (lvl_number < lvl_data.Length)
+        //lvl_number++;
+        continued = false;
+        CurrentLvl++;
+        lines_passed = 0;
+        total_line_count = game_controller.GetLvlData().total_line_count;
+        SaveLoadGame.save_load.SaveProgress(CurrentLvl);
+        //if (lvl_number < lvl_data.Length)
         {
-            print("текущий уровень" + lvl_number);
-            //InitLvl();
+            //print("текущий уровень" + lvl_number);
             StartCoroutine(InitLvlCor());
         }
-        else
-        {
-            print("конец игры");
-        }
+        //else
+        //{
+        //    //print("конец игры");
+        //}
     }
 
     public LvlData GetLvlData()
     {
-        return lvl_data[lvl_number];
+        //if (loaded_lvl!= lvl_number)
+        //{
+        //    loaded_lvl_data = Resources.Load<LvlData>("Lvl_" + lvl_number.ToString());
+
+        //}
+        return loaded_lvl_data;
+        //return lvl_data[lvl_number];
     }
-
-    void InitLvl()
-    {
-        System.GC.Collect();
-        lines_passed = 0;
-
-        for (int i = 0; i < sectors.Length; i++)
-        {
-            sectors[i].InitSector(SkinManager.skin_manager.GetCurrentSkin().colors[i]);
-        }
-
-
-    }
-
 
     public void Pause()
     {
+        saved_state = game_state;
         saved_time_scale = Time.timeScale;
         Time.timeScale = 0.0f;
         ChangeState(GameState.Pause);
@@ -203,18 +230,37 @@ public class GameController : MonoBehaviour
 
     public void Continue()
     {
-        ChangeState(GameState.Game);
+        //if (game_state != GameState.Pause)
+        //    return;
+
+        ChangeState(saved_state);
         Time.timeScale = saved_time_scale;
         UIController.ui.UpdateUI();
     }
 
+    public void ResumeForBanner()
+    {
+        //if (game_state != GameState.GameOver)
+        //    return;
+        //print("resume");
+        ChangeState(GameState.Game);
+        Time.timeScale = saved_time_scale;
+        UIController.ui.UpdateUI();
+        
+        EventManager.TriggerEvent("BeginGame");
+        //засчитываем зафейленную линию как пройденную
+        EventManager.TriggerEvent("LinePassed");
+    }
+
     public void ToMainMenu()
     {
+        SoundManager.sound_manager.MainMenuTheme();
+        particle.TurnOn();
         ChangeState(GameState.MainMenu);
         Time.timeScale = saved_time_scale;
         
         UIController.ui.UpdateUI();
-        SoundManager.sound_manager.MainMenuTheme();
+        
         EventManager.TriggerEvent("EndGame");
     }
 
@@ -231,15 +277,19 @@ public class GameController : MonoBehaviour
 
     IEnumerator GameOverCoroutine()
     {
+        //Debug.Break();
         if (game_state==GameState.Game)
         {
             ChangeState(GameState.GameOver);
             
             Ball.ball.Stop();
-            yield return new WaitForSeconds(2.0f);
+            yield return new WaitForSeconds(1.0f);
 
             UIController.ui.UpdateUI();
+            particle.TurnOff();
+            //lines_passed = SpawnWaves.spawn.lines_passed;
             EventManager.TriggerEvent("EndGame");
+            
         }
     }
 }

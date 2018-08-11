@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class ChangeToSkinColor : MonoBehaviour
@@ -23,6 +21,9 @@ public class ChangeToSkinColor : MonoBehaviour
     {
         Color apply_color=Color.black;
 
+        if (SkinManager.skin_manager.GetCurrentSkin() == null)
+            return;
+
         if (color==SkinColors.Particle)
         {
             apply_color = SkinManager.skin_manager.GetCurrentSkin().particle_color;
@@ -38,9 +39,7 @@ public class ChangeToSkinColor : MonoBehaviour
                 apply_color = SkinManager.skin_manager.GetCurrentSkin().colors[(int)color];
             }
         }
-         
-        
-        
+
         Image image = GetComponent<Image>();
         if (image!=null)
         {
@@ -59,13 +58,22 @@ public class ChangeToSkinColor : MonoBehaviour
             text.color = apply_color;
         }
 
+        Camera cam = GetComponent<Camera>();
+        if (cam!=null)
+        {
+            cam.backgroundColor = apply_color;
+        }
         
         if (color == SkinColors.Particle)
         {
-            ParticleSystem.ColorOverLifetimeModule part = GetComponent<ParticleSystem>().colorOverLifetime;
-            part.color = apply_color;
-            ParticleSystem.MainModule part2 = GetComponent<ParticleSystem>().main;
-            part2.startColor = apply_color;
+            if (GetComponent<ParticleSystem>()!=null)
+            {
+                ParticleSystem.ColorOverLifetimeModule part = GetComponent<ParticleSystem>().colorOverLifetime;
+                part.color = apply_color;
+                ParticleSystem.MainModule part2 = GetComponent<ParticleSystem>().main;
+                part2.startColor = apply_color;
+            }
+            
         }
     }
 }

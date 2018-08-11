@@ -1,65 +1,47 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System;
 
 public class Line_Default : Line
 {
     Color line_color;
-    static Color prev_color=Color.black;
-    static int same_colors = 1;
-    
-    //Texture2D texture;
+    public static Color prev_color=Color.clear;
+    public static int same_colors = 1;
 
-    protected override void Awake()
-    {
-        base.Awake();
-        //texture = new Texture2D(2048, 128);
-    }
     public override void ChangeColor()
     {
-        Color[] colors = SkinManager.skin_manager.GetCurrentSkin().colors;
-         Color new_color=colors[UnityEngine.Random.Range(0, colors.Length)];
-        if (new_color==prev_color)
-        {
-            same_colors++;
-        }
-        if (same_colors>2)
-        {
-            Color[] avail_col = new Color[colors.Length - 1];
-            int k = 0;
-            for (int i=0;i<colors.Length;i++)
-            {
-                if (colors[i]!= new_color)
-                {
-                    avail_col[k] = colors[i];
-                    k++;
-                }
-            }
-            new_color = avail_col[UnityEngine.Random.Range(0, avail_col.Length)];
-            same_colors = 1;
-        }
-        // Texture2D[] texture = TextureHandler.CreateTexture(new_color);
+
+    }
+
+    public void InitLine(Color color)
+    {
+        active = true;
+        ChangeColor(color);
+    }
+
+    public void ChangeColor(Color new_color)
+    {
         Texture2D texture = texture_handler.CreateTexture(new_color);
-        //TextureHandler.CreateTexture(new_color,texture);
         SetTexture(texture);
         line_color = new_color;
-        prev_color = line_color;
     }
-
-    public override void InitLine()
-    {
-        //print("init");
-        active = true;
-        ChangeColor();
-
-    }
-
-    
 
     protected override void CheckIfPassed()
     {
-        Ball.ball.LinePassed(line_color);
-        anim.BeginAnimation();
-        active = false;
+        //if (Ball.ball.GetColor() != line_color)
+        //{
+        //    print("default break");
+        //    print(this.GetInstanceID());
+        //    print(active);
+        //    Debug.Break();
+            
+        //}
+        
+        
+        if ( Ball.ball.LinePassed(line_color))
+            anim.BeginAnimation();
+    }
+
+    public Color GetLineColor()
+    {
+        return line_color;
     }
 }

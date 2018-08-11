@@ -9,7 +9,7 @@ public class DestroyOnExit : MonoBehaviour
 
     void Start()
     {
-        pool = GetComponent < PoolRef>().GetPool();
+        pool = GetComponent <PoolRef>().GetPool();
         tran = GetComponent<Transform>();
         size_y = GetComponent<Line>().GetHeight();
     }
