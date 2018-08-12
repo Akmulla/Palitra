@@ -210,9 +210,6 @@ public class CreateAds : MonoBehaviour
         }
     }
 
-
-
-
     public void ShowRubinMenuVideo()
     {
         StartCoroutine(RubinMenuVideo());

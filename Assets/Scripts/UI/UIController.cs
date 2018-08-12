@@ -88,7 +88,6 @@ public class UIController : MonoBehaviour
                 break;
 
             case GameState.Game:
-               // gameui_bg.SetActive(true);
                 raycaster.enabled = true;
                 Game_UI.SetActive(true);
                 skin_menu.SetActive(false);
@@ -103,7 +102,6 @@ public class UIController : MonoBehaviour
                 break;
 
             case GameState.Prepare:
-               // gameui_bg.SetActive(false);
                 raycaster.enabled = false;
                 break;
 
@@ -112,7 +110,6 @@ public class UIController : MonoBehaviour
                 break;
 
             case GameState.GameOver:
-               // gameui_bg.SetActive(false);
                 raycaster.enabled = true;
                 Game_UI.SetActive(true);
                 skin_menu.SetActive(false);
@@ -132,15 +129,9 @@ public class UIController : MonoBehaviour
                     continue_replay.SetActive((false));
                     continue_video.SetActive((true));
                 }
-                    //pause_text.SetActive(false);
-                    //gameover_text.SetActive(true);
-                    // pause_pic.SetActive(false);
-                    //gameover_pic.SetActive(true);
                 life_timer.SetActive(true);
                 life_menu.SetActive(false);
                 break;
-
-          
         }
     }
 }

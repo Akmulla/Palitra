@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScreenShot : MonoBehaviour {
-
-
+public class ScreenShot : MonoBehaviour
+{
 #if UNITY_EDITOR
     void Update ()
     {

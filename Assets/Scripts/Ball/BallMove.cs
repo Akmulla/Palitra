@@ -70,7 +70,6 @@ public class BallMove : MonoBehaviour
                     tran.position = tran.position + Vector3.up * speed * Time.deltaTime;
                     break;
             }
-            
         }
     }
 
@@ -115,11 +114,6 @@ public class BallMove : MonoBehaviour
     {
         for (int i=0;i<5;i++)
         {
-            //if (Speed+x>=saved_speed)
-            //{
-            //    Speed = saved_speed;
-            //    break;
-            //}
             Speed += x;
             yield return new WaitForSeconds(0.2f);
         }
@@ -131,7 +125,5 @@ public class BallMove : MonoBehaviour
         current_state = State.resuming;
         coroutine = SlowDownCoroutine(x);
         StartCoroutine(coroutine);
-        //Speed = saved_speed;
-       // current_state = State.normal;
     }
 }

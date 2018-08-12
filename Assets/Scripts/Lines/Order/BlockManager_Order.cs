@@ -15,7 +15,6 @@ public class BlockManager_Order : MonoBehaviour
     Line_Order line;
     float block_size;
     float window_size;
-    //int active_block_count;
     int current_block;
     SpriteRenderer arrow_rend;
 
@@ -31,7 +30,6 @@ public class BlockManager_Order : MonoBehaviour
 
     void OnEnable()
     {
-        //active_block_count = block_count;
         EventManager.StartListening("BallColorChanged", ColorChanged);
     }
 
@@ -44,7 +42,6 @@ public class BlockManager_Order : MonoBehaviour
     {
         if (!line.CheckIfActive())
             return;
-
 
         if ((!line.finished) && 
             ((saved_color != Ball.ball.GetColor())||(saved_time+0.25f<Time.time)))
@@ -82,9 +79,7 @@ public class BlockManager_Order : MonoBehaviour
             }
 
             arrow_rend.color = block_mas[current_block].GetColor();
-            
         }
-        
     }
 
     public void InitBlocks()
@@ -140,7 +135,6 @@ public class BlockManager_Order : MonoBehaviour
 
         line.SetTexture(texture);
     }
-
 
     void SetRandomColors()
     {

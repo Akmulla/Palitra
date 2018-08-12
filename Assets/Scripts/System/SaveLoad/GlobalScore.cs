@@ -20,10 +20,6 @@ public class GlobalScore : MonoBehaviour
             PlayerPrefs.Save();
         }
 
-        //
-        //PlayerPrefs.SetInt("Score", 1000);
-
-        //
         score = PlayerPrefs.GetInt("Score");
         heartMenuScore.text = score.ToString();
         rubinMenuScore.text = score.ToString();

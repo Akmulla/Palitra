@@ -9,7 +9,6 @@ public class PoolDefaultLines : Pool
     int ban_col=4;
 
     int create_col=0;
-    //GameObject[,] lines = new GameObject[3, 3];
 
     public override void Awake()
     {
@@ -24,10 +23,9 @@ public class PoolDefaultLines : Pool
         List<int> ind = new List<int>();
         for (int i = 0; i < stck.Length; i++)
         {
-            if ((!stck[i].activeSelf)&&(i/3!=ban_col))
+            if ((!stck[i].activeSelf) && (i/3!=ban_col))
                 ind.Add(i);
         }
-
 
         int i_col = ind[Random.Range(0, ind.Count)];
         col = i_col / 3;
