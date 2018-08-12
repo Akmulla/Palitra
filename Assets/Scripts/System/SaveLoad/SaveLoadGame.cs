@@ -49,8 +49,10 @@ public class SaveLoadGame : MonoBehaviour
     {
         
         save_load = this;
+        //PlayerPrefs.DeleteAll();
         if (StartCustomLvl)
         {
+            // PlayerPrefs.DeleteAll();
             PlayerPrefs.SetInt("Progress", start_lvl);
             PlayerPrefs.Save();
         }
@@ -58,8 +60,13 @@ public class SaveLoadGame : MonoBehaviour
         if (!PlayerPrefs.HasKey("Progress"))
         {
             PlayerPrefs.SetInt("Progress", 0);
+            //PlayerPrefs.SetInt("Progress", 3);
         }
         PlayerPrefs.Save();
+        //PlayerPrefs.DeleteAll();
+        ////
+        //ResetProgress();
+        ////
     }
 
     public void LoadProgress()

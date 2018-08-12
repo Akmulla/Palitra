@@ -17,6 +17,7 @@ public class Line_Order : Line
         line_spawn_number = SpawnWaves.spawn.GetLineSpawnedNumber();
         crossed = false;
         finished = false;
+        //prev_edge = SpawnWaves.spawn.prev_edge;
     }
 
     public override void Enable()
@@ -48,6 +49,7 @@ public class Line_Order : Line
                 VARIABLE.Roll();
             }
         }
+        //active = false;
     }
 
     protected override void CheckIfCrossed()

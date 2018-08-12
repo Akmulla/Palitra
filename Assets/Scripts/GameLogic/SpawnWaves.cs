@@ -125,6 +125,11 @@ public class SpawnWaves : MonoBehaviour
     void LinePassed()
     {
         lines_passed++;
+        //if (lines_passed >= GameController.game_controller.GetLvlData().lines_to_chng_dist)
+        //{
+        //    lines_passed = 0;
+        //    Dist -= GameController.game_controller.GetLvlData().chng_dist_val;
+        //}
         LvlType lvl_type = GameController.game_controller.GetLvlData().lvl_type;
         bool chng_aftr_half = ((lvl_type == LvlType.Speed_decr_dist_decr_half) ||
             (lvl_type == LvlType.Speed_incr_dist_incr_half)) ? true : false;
@@ -150,11 +155,15 @@ public class SpawnWaves : MonoBehaviour
 
     IEnumerator Delay()
     {
+        //print("sdg");
         is_spawning = false;
+        //if (GameController.game_controller.GetCurrentLvl()!=0)
+        //    yield return new WaitForSeconds(start_delay);
         while (GameController.game_controller.GetState() != GameState.Game)
             yield return null;
         yield return new WaitForSeconds(2.0f);
-        
+
+        // Dist = GameController.game_controller.GetLvlData().max_dist;
         Dist = lvl_data.dist;
         edge = Edges.topEdge + offset;
         is_spawning = true;
@@ -183,10 +192,12 @@ public class SpawnWaves : MonoBehaviour
         lines_spawned++;
         
         GameObject line=line_handler[(int)current_line].pool.Activate(new Vector2(0.0f, edge), Quaternion.identity);
-        
+
+        //line.GetComponent<Line>().InitLine();
         line.GetComponent<Line>().Enable();
         prev_edge = edge;
         edge += Dist;
+
     }
 
     public int GetLinePassedNumber()
