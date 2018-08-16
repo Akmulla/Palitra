@@ -5,7 +5,7 @@ using UnityEngine;
 public class AAT_Ads : MonoBehaviour
 {
 
-    const string bannerId = "BannerPlacement";
+    const string bannerId = "Color_Banner";
     const string interstitialId = "FullscreenPlacement";
     const string multiSizeId = "MultiSizePlacement";
 
@@ -25,6 +25,6 @@ public class AAT_Ads : MonoBehaviour
         AATKitBinding.CreatePlacement(multiSizeId, AATKitBinding.PlacementSize.MultiSizeBanner);
         AATKitBinding.StartPlacementAutoReload(multiSizeId);
 
-        AATKitBinding.ShowPlacement(interstitialId);
+        AATKitBinding.ShowPlacement(bannerId);
     }
 }
