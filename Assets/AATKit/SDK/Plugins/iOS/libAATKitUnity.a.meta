@@ -94,9 +94,9 @@ PluginImporter:
     second:
       enabled: 1
       settings:
-        AddToEmbeddedBinaries: false
+        AddToEmbeddedBinaries: true
         CompileFlags: 
-        FrameworkDependencies: 
+        FrameworkDependencies: AdSupport;GameKit;
   userData: 
   assetBundleName: 
   assetBundleVariant: 
