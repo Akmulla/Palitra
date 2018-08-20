@@ -25,6 +25,11 @@ public class AAT_Ads : MonoBehaviour
         AATKitBinding.CreatePlacement(multiSizeId, AATKitBinding.PlacementSize.MultiSizeBanner);
         AATKitBinding.StartPlacementAutoReload(multiSizeId);
 
+        ShowBanner();
+    }
+
+    public void ShowBanner()
+    {
         AATKitBinding.ShowPlacement(bannerId);
     }
 }
