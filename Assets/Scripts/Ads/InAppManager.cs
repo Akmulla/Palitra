@@ -46,22 +46,22 @@ namespace IAP
                 return;
             }
 
-            var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
-            //builder.AddProduct(pMoney80, ProductType.Consumable, new IDs() { { pMoney80AppStore, AppleAppStore.Name }, { pMoney80GooglePlay, GooglePlay.Name } });
-            //builder.AddProduct(pNoAds, ProductType.NonConsumable, new IDs() { { pNoAdsAppStore, AppleAppStore.Name }, { pNoAdsGooglePlay, GooglePlay.Name } });
+            //var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
+            ////builder.AddProduct(pMoney80, ProductType.Consumable, new IDs() { { pMoney80AppStore, AppleAppStore.Name }, { pMoney80GooglePlay, GooglePlay.Name } });
+            ////builder.AddProduct(pNoAds, ProductType.NonConsumable, new IDs() { { pNoAdsAppStore, AppleAppStore.Name }, { pNoAdsGooglePlay, GooglePlay.Name } });
 
-            Debug.Log("DEBUG MESSGAGE Builder=" + builder);
-            builder.AddProduct(rubin_2000, ProductType.Consumable, new IDs()
-            { { rubin_2000_AppStore, AppleAppStore.Name }, { rubin_2000_GooglePlay, GooglePlay.Name }} );
+            //Debug.Log("DEBUG MESSGAGE Builder=" + builder);
+            //builder.AddProduct(rubin_2000, ProductType.Consumable, new IDs()
+            //{ { rubin_2000_AppStore, AppleAppStore.Name }, { rubin_2000_GooglePlay, GooglePlay.Name }} );
 
-            builder.AddProduct(rubin_20000, ProductType.Consumable, new IDs()
-                { { rubin_20000_AppStore, AppleAppStore.Name }, { rubin_20000_GooglePlay, GooglePlay.Name }});
+            //builder.AddProduct(rubin_20000, ProductType.Consumable, new IDs()
+            //    { { rubin_20000_AppStore, AppleAppStore.Name }, { rubin_20000_GooglePlay, GooglePlay.Name }});
 
-            builder.AddProduct(rubin_80000, ProductType.Consumable, new IDs()
-                { { rubin_80000_AppStore, AppleAppStore.Name }, { rubin_80000_GooglePlay, GooglePlay.Name }});
+            //builder.AddProduct(rubin_80000, ProductType.Consumable, new IDs()
+            //    { { rubin_80000_AppStore, AppleAppStore.Name }, { rubin_80000_GooglePlay, GooglePlay.Name }});
 
-            Debug.Log("DEBUG MESSGAGE ProductCount=" + builder.products.Count);
-            UnityPurchasing.Initialize(this, builder);
+            //Debug.Log("DEBUG MESSGAGE ProductCount=" + builder.products.Count);
+            //UnityPurchasing.Initialize(this, builder);
         }
 
         private bool IsInitialized()
@@ -101,26 +101,26 @@ namespace IAP
 
         public void RestorePurchases()
         {
-            if (!IsInitialized())
-            {
-                Debug.Log("RestorePurchases FAIL. Not initialized.");
-                return;
-            }
+            //if (!IsInitialized())
+            //{
+            //    Debug.Log("RestorePurchases FAIL. Not initialized.");
+            //    return;
+            //}
 
-            if (Application.platform == RuntimePlatform.IPhonePlayer || Application.platform == RuntimePlatform.OSXPlayer)
-            {
-                Debug.Log("RestorePurchases started ...");
+            //if (Application.platform == RuntimePlatform.IPhonePlayer || Application.platform == RuntimePlatform.OSXPlayer)
+            //{
+            //    Debug.Log("RestorePurchases started ...");
 
-                var apple = m_StoreExtensionProvider.GetExtension<IAppleExtensions>();
-                apple.RestoreTransactions((result) =>
-                {
-                    Debug.Log("RestorePurchases continuing: " + result + ". If no further messages, no purchases available to restore.");
-                });
-            }
-            else
-            {
-                Debug.Log("RestorePurchases FAIL. Not supported on this platform. Current = " + Application.platform);
-            }
+            //    var apple = m_StoreExtensionProvider.GetExtension<IAppleExtensions>();
+            //    apple.RestoreTransactions((result) =>
+            //    {
+            //        Debug.Log("RestorePurchases continuing: " + result + ". If no further messages, no purchases available to restore.");
+            //    });
+            //}
+            //else
+            //{
+            //    Debug.Log("RestorePurchases FAIL. Not supported on this platform. Current = " + Application.platform);
+            //}
         }
 
         public void OnInitialized(IStoreController controller, IExtensionProvider extensions)

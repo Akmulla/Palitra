@@ -5,13 +5,14 @@ using UnityEngine;
 public class AAT_Ads : MonoBehaviour
 {
 
-    const string bannerId = "Color_Banner";
-    const string interstitialId = "FullscreenPlacement";
+    // const string bannerId = "ColorPalette_Banner";
+    const string bannerId = "ColorPalette_Banner";
+    const string interstitialId = "ColorPalette_Fullscreen";
     const string multiSizeId = "MultiSizePlacement";
 
     void Start()
     {
-        AATKitBinding.Init(this.gameObject.name);
+        AATKitBinding.InitWithTestMode(this.gameObject.name,49);
 
         // banner placement
         AATKitBinding.CreatePlacement(bannerId, AATKitBinding.PlacementSize.BannerAuto);
@@ -31,5 +32,6 @@ public class AAT_Ads : MonoBehaviour
     public void ShowBanner()
     {
         AATKitBinding.ShowPlacement(bannerId);
+        //AATKitBinding.ShowPlacement(interstitialId);
     }
 }

@@ -22,7 +22,7 @@ public class AATKitPostprocess : MonoBehaviour
 
 	private static string projPath;
 
-	[PostProcessBuildAttribute(9999)]
+	[PostProcessBuildAttribute(999)]
 	public static void OnPostprocessBuild(BuildTarget target, string pathToBuildProject)
 	{        
 		if (target == BuildTarget.iOS) 
