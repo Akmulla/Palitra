@@ -8,6 +8,8 @@ public class SkinMenuUI : MonoBehaviour
     [SerializeField] GameObject toSkinButton;
     [SerializeField] GameObject mainSkinMenu;
 
+
+
     public void OpenInfoMenu()
     {
         infoMenu.SetActive(true);

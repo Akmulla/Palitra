@@ -6,6 +6,7 @@ public class Continue : MonoBehaviour
 {
     public Button button;
     public PauseStartAnim anim;
+    [SerializeField] AAT_Ads aatAds;
 
     void OnEnable()
     {
@@ -21,11 +22,12 @@ public class Continue : MonoBehaviour
             return;
         anim.Animate();
 
-
+        aatAds.ShowFullscreen();
         GameController.game_controller.BeginGame();
         button.interactable = false;
         
     }
+
 
    
 }
