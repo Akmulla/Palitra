@@ -19,17 +19,9 @@ public class TimeManager : MonoBehaviour
     
     void Start ()
     {
-        //time = DateTimeClass.GetNISTDate();
         time = DateTime.Now;
-        //timeText.text = time.Hour + ":" + time.Minute;
-        
-        //second = time.Second;
-        //minute = time.Minute;
-        //hour = time.Hour;
-        //lastTime = time;
         lastTime = SaveLoadGame.save_load.LoadTime();
         CheckNewHearts();
-        //print(lastTime+" " + lastTime.Second);
 	}
 
     public void EnableTimer()
@@ -78,10 +70,7 @@ public class TimeManager : MonoBehaviour
 
         time = time.AddSeconds(Time.deltaTime);
         CheckNewHearts();
-
-        //timeText.text = time.Hour + ":" + time.Minute;
-        //timeText.text = remainTime.Minutes + ":" + remainTime.Seconds;
-        //string new_string = remainTime.Minutes.ToString("mm")+ remainTime.Seconds.ToString("ss");
+        
         string sec = remainTime.Seconds.ToString();
         if (sec.Length < 2)
             sec = "0" + sec;

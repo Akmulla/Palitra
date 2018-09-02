@@ -25,9 +25,11 @@ public class Continue : MonoBehaviour
         aatAds.ShowFullscreen();
         GameController.game_controller.BeginGame();
         button.interactable = false;
-        
     }
 
-
+    public void ContinueWithReward()
+    {
+        aatAds.ShowRewardVideo();
+    }
    
 }

@@ -13,7 +13,7 @@ public class AAT_Ads : MonoBehaviour
 
     void Start()
     {
-        AATKitBinding.InitWithTestMode(this.gameObject.name,49);
+       // AATKitBinding.InitWithTestMode(this.gameObject.name,49);
 
         // banner placement
         AATKitBinding.CreatePlacement(bannerId, AATKitBinding.PlacementSize.BannerAuto);
@@ -27,7 +27,7 @@ public class AAT_Ads : MonoBehaviour
         AATKitBinding.CreatePlacement(multiSizeId, AATKitBinding.PlacementSize.MultiSizeBanner);
         AATKitBinding.StartPlacementAutoReload(multiSizeId);
 
-        //ShowBanner();
+        ShowBanner();
     }
 
     public void ShowBanner()
@@ -47,15 +47,28 @@ public class AAT_Ads : MonoBehaviour
         AATKitBinding.CreatePlacement(rewardId, AATKitBinding.PlacementSize.Rewarded);
     }
 
-    public void OnUserEarnedIncentive(string rewardId)
+    public void OnUserEarnedIncentive(string placementName)
+    {
+        if (placementName==rewardId)
+        {
+            GameController.game_controller.ResumeForBanner();
+        }
+        else
+        {
+            GameController.game_controller.Continue();
+        }
+    }
+
+    public void OnResumeAfterAd(string placementName)
     {
         GameController.game_controller.Continue();
     }
 
     public void ShowPromo()
     {
-        AATKitBinding.PreparePromo();
-        AATKitBinding.ShowPromo();
+        //AATKitBinding.PreparePromo();
+        //AATKitBinding.ShowPromo();
+        //AATKitBinding.EnablePromo();
     }
     
 }

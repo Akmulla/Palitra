@@ -9,6 +9,10 @@ public class SkinMenuUI : MonoBehaviour
     [SerializeField] GameObject mainSkinMenu;
 
 
+    void OnEnable()
+    {
+        CloseInfoMenu();
+    }
 
     public void OpenInfoMenu()
     {
