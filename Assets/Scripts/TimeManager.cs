@@ -16,7 +16,7 @@ public class TimeManager : MonoBehaviour
     DateTime lastTime;
     TimeSpan remainTime;
     bool enabled;
-    
+
     void Start ()
     {
         time = DateTime.Now;
@@ -30,12 +30,12 @@ public class TimeManager : MonoBehaviour
             lastTime = time;
 
         enabled = true;
-        
+
         for (int i = 0; i < timeObj.Length;i++)
         {
             timeObj[i].SetActive(true);
         }
-        
+
     }
 
     public void DisableTimer()
@@ -46,7 +46,7 @@ public class TimeManager : MonoBehaviour
             timeObj[i].SetActive(false);
         }
     }
-   
+
 	void CheckNewHearts()
     {
         TimeSpan delta = time - lastTime;
@@ -61,7 +61,7 @@ public class TimeManager : MonoBehaviour
             Hearts.h.Heart = new_hearts;
         }
     }
-	
+
 	void Update ()
     {
        // param = 1;
@@ -70,7 +70,7 @@ public class TimeManager : MonoBehaviour
 
         time = time.AddSeconds(Time.deltaTime);
         CheckNewHearts();
-        
+
         string sec = remainTime.Seconds.ToString();
         if (sec.Length < 2)
             sec = "0" + sec;
@@ -83,7 +83,8 @@ public class TimeManager : MonoBehaviour
 
         for (int i = 0; i < timeText.Length; i++)
         {
-            timeText[i].text = new_string;
+            var text = timeText[i];
+            if (text != null) text.text = new_string;
         }
     }
 }

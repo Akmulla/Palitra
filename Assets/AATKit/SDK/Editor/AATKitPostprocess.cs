@@ -1,3 +1,4 @@
+#if UNITY_IOS
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.Callbacks;
@@ -24,8 +25,8 @@ public class AATKitPostprocess : MonoBehaviour
 
 	[PostProcessBuildAttribute(999)]
 	public static void OnPostprocessBuild(BuildTarget target, string pathToBuildProject)
-	{        
-		if (target == BuildTarget.iOS) 
+	{
+		if (target == BuildTarget.iOS)
 		{
 			ModifyPbxProject (pathToBuildProject);
 			ModifyPlistForTemporaryAppTransportSecurityFix (pathToBuildProject);
@@ -97,7 +98,7 @@ public class AATKitPostprocess : MonoBehaviour
 			Directory.CreateDirectory (directoryToCreate);
 			CopyFiles (buildAatDirectoryAbsolutePath, unityAatPath, directory);
 
-			if (directoryName.Contains (".bundle")) 
+			if (directoryName.Contains (".bundle"))
 			{
 				AddFileToBuild (buildAatDirectoryAbsolutePath, directoryToCreate);
 			}
@@ -120,7 +121,7 @@ public class AATKitPostprocess : MonoBehaviour
 				destination = destination.Replace (unityAatPath, buildAatDirectoryAbsolutePath);
 				File.Copy (file, destination);
 
-				if (!file.Contains (".bundle")) 
+				if (!file.Contains (".bundle"))
 				{
 					AddFileToBuild (buildAatDirectoryAbsolutePath, destination);
 				}
@@ -168,3 +169,4 @@ public class AATKitPostprocess : MonoBehaviour
 		atsDict.SetBoolean (aalKey, true);
 	}
 }
+#endif
