@@ -6,13 +6,13 @@ using System.Collections;
 public class Preload : MonoBehaviour
 {
     public RectTransform tran;
-    [SerializeField] AAT_Ads aatAds;
+    //[SerializeField] AAT_Ads aatAds;
     const string multiSizeId = "MultiSizePlacement";
 
     void Start ()
     {
 
-        //StartCoroutine(Cor());
+        StartCoroutine(Cor());
         
         
     }
@@ -29,8 +29,8 @@ public class Preload : MonoBehaviour
 
         //AATKitBinding.CreatePlacement(multiSizeId, AATKitBinding.PlacementSize.MultiSizeBanner);
         //AATKitBinding.StartPlacementAutoReload(multiSizeId);
+        AATKitBinding.ShowPromo(true);
 
-        
         bool a=false;
         float t = Time.time;
         while ((!a)&&(Time.time - t <5.0f))
@@ -49,7 +49,13 @@ public class Preload : MonoBehaviour
             tran.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, -progress * 360.0f));
             yield return null;
         }
+        while ((!a) && (Time.time - t < 5.0f))
+        {
+            //a = AATKitBinding.ShowPromo(true);
 
+            // print(a);
+            yield return null;
+        }
         AO.allowSceneActivation = true;
     }
 }

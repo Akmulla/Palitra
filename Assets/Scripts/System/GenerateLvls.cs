@@ -283,9 +283,8 @@ public class GenerateLvls : MonoBehaviour
         result.Add("12345");
         ////////////////////////////
 
-        //print(result.Count);
-        //List<string> comb_pool = new List<string>(base_comb);
-        while (result.Count< lvl_count)
+        
+        while (result.Count < lvl_count)
         {
             for (int i = 2; i <= 5; i++)
             {
@@ -304,15 +303,55 @@ public class GenerateLvls : MonoBehaviour
                         comb_pool = GenTempPool(base_comb, i);
                     }
                 }
-                //if (comb_pool.Any(s => s.Length == i))
-                //{
-
-                //}
             }
         }
-        
-        
-        
+
+
+        for (int i = 2; i < 200; i++)
+        {
+            string s = Random.Range(2, 6).ToString();
+            if (s == "5")
+                s = Random.value > 0.5f ? "2" : "3";
+
+            result[i*3] = s;
+        }
+
+        for (int i=1;i<50;i++)
+        {
+            int k = Random.Range(1, 4);
+
+            if (result[i*5+k].Contains("5"))
+            {
+                int ind = result[i * 5 + k].IndexOf("5");
+                result[i * 5 + k].Remove(ind);
+            }
+                
+        }
+
+        //while (result.Count< lvl_count)
+        //{
+        //    for (int i = 2; i <= 5; i++)
+        //    {
+        //        List<string> comb_pool = GenTempPool(base_comb, i);
+
+        //        for (int j = 0; j < 5; j++)
+        //        {
+        //            if (comb_pool.Count != 0)
+        //            {
+        //                int k = Random.Range(0, comb_pool.Count);
+        //                result.Add(comb_pool[k]);
+        //                comb_pool.RemoveAt(k);
+        //            }
+        //            else
+        //            {
+        //                comb_pool = GenTempPool(base_comb, i);
+        //            }
+        //        }
+        //    }
+        //}
+
+
+
         //comb_pool[0] = "0";
         //base_comb[0] = "1";
 
