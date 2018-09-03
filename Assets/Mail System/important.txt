@@ -1,2 +1,0 @@
-Mail Server and Mail Client folder is only for showing content of packages. 
-Create new project for client and import MailClient package and do the same for the server.  
