@@ -30,8 +30,8 @@ public class AAT_Ads : MonoBehaviour
         AATKitBinding.CreatePlacement(multiSizeId, AATKitBinding.PlacementSize.MultiSizeBanner);
         AATKitBinding.StartPlacementAutoReload(multiSizeId);
 
-        AATKitBinding.PreparePromo();
-        AATKitBinding.ShowPromo(true);
+        //AATKitBinding.PreparePromo();
+        //AATKitBinding.ShowPromo(true);
         ShowBanner();
     }
 

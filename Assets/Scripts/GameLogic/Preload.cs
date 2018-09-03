@@ -12,7 +12,7 @@ public class Preload : MonoBehaviour
     void Start ()
     {
 
-        StartCoroutine(Cor());
+        //StartCoroutine(Cor());
         
         
     }
