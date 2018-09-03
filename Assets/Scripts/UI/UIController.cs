@@ -11,7 +11,7 @@ public class UIController : MonoBehaviour
     GraphicRaycaster raycaster;
 
     public GameObject pause_menu;
-    public GameObject skin_menu;
+    //public GameObject skin_menu;
     public GameObject start_menu;
     public GameObject Game_UI;
     public GameObject round;
@@ -64,7 +64,7 @@ public class UIController : MonoBehaviour
                 raycaster.enabled = true;
                 SkinManager.skin_manager.LoadSavedSkin();
                 Game_UI.SetActive(false);
-                skin_menu.SetActive(false);
+                //skin_menu.SetActive(false);
                 start_menu.SetActive(true);
                 pause_menu.SetActive(false);
                 round.SetActive(true);
@@ -72,26 +72,28 @@ public class UIController : MonoBehaviour
                 triangle_fon.SetActive(true);
                 life_timer.SetActive(true);
                 life_menu.SetActive(false);
+                
                 break;
 
             case GameState.SkinMenu:
-                Game_UI.SetActive(false);
-                skin_menu.SetActive(true);
-                start_menu.SetActive(false);
-                pause_menu.SetActive(false);
-                round.SetActive(false);
-                triangle.SetActive(false);
-                triangle_fon.SetActive(false);
-                life_timer.SetActive(false);
-                life_menu.SetActive(false);
-                raycaster.enabled = true;
+                //Game_UI.SetActive(false);
+                ////skin_menu.SetActive(true);
+                //start_menu.SetActive(false);
+                //pause_menu.SetActive(false);
+                //round.SetActive(false);
+                //triangle.SetActive(false);
+                //triangle_fon.SetActive(false);
+                //life_timer.SetActive(false);
+                //life_menu.SetActive(false);
+                //raycaster.enabled = true;
+                SceneManager.LoadScene("SkinMenu");
                 break;
 
             case GameState.Game:
                // gameui_bg.SetActive(true);
                 raycaster.enabled = true;
                 Game_UI.SetActive(true);
-                skin_menu.SetActive(false);
+               // skin_menu.SetActive(false);
                 start_menu.SetActive(false);
                 pause_menu.SetActive(false);
                 round.SetActive(true);
@@ -115,7 +117,7 @@ public class UIController : MonoBehaviour
                // gameui_bg.SetActive(false);
                 raycaster.enabled = true;
                 Game_UI.SetActive(true);
-                skin_menu.SetActive(false);
+                //skin_menu.SetActive(false);
                 start_menu.SetActive(false);
                 pause_menu.SetActive(true);
                 round.SetActive(false);

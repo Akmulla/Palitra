@@ -47,6 +47,7 @@ public class SkinManager : MonoBehaviour
 
     void Awake()
     {
+        DontDestroyOnLoad(gameObject);
         active_skin = 0;
         skin_manager = this;
         totalSkinCount = skin_data.Length;

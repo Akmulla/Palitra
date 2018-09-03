@@ -10,6 +10,7 @@ public class Continue : MonoBehaviour
 
     void OnEnable()
     {
+        aatAds = GameObject.Find("Ads").GetComponent<AAT_Ads>();
         button.interactable = true;
     }
 

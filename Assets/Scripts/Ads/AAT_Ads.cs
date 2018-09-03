@@ -13,7 +13,10 @@ public class AAT_Ads : MonoBehaviour
 
     void Start()
     {
-       // AATKitBinding.InitWithTestMode(this.gameObject.name,49);
+        DontDestroyOnLoad(gameObject);
+
+        
+        // AATKitBinding.InitWithTestMode(this.gameObject.name,49);
 
         // banner placement
         AATKitBinding.CreatePlacement(bannerId, AATKitBinding.PlacementSize.BannerAuto);
@@ -27,6 +30,8 @@ public class AAT_Ads : MonoBehaviour
         AATKitBinding.CreatePlacement(multiSizeId, AATKitBinding.PlacementSize.MultiSizeBanner);
         AATKitBinding.StartPlacementAutoReload(multiSizeId);
 
+        AATKitBinding.PreparePromo();
+        AATKitBinding.ShowPromo(true);
         ShowBanner();
     }
 

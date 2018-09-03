@@ -9,7 +9,7 @@ public class GlobalScore : MonoBehaviour
     public Text rubinMenuScore;
     int score = 0;
     public Text heartMenuScore;
-    public Text skinMenuScore;
+    //public Text skinMenuScore;
 
     void Awake()
     {
@@ -27,7 +27,7 @@ public class GlobalScore : MonoBehaviour
         score = PlayerPrefs.GetInt("Score");
         heartMenuScore.text = score.ToString();
         rubinMenuScore.text = score.ToString();
-        skinMenuScore.text = score.ToString();
+        //skinMenuScore.text = score.ToString();
     }
 
     public int Score
@@ -43,7 +43,7 @@ public class GlobalScore : MonoBehaviour
             PlayerPrefs.Save();
             heartMenuScore.text = score.ToString();
             rubinMenuScore.text = score.ToString();
-            skinMenuScore.text = score.ToString();
+           // skinMenuScore.text = score.ToString();
         }
     }
 }

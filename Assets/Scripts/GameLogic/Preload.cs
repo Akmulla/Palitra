@@ -11,11 +11,10 @@ public class Preload : MonoBehaviour
 
     void Start ()
     {
-        
 
         StartCoroutine(Cor());
-
-       
+        
+        
     }
 
 
@@ -28,22 +27,22 @@ public class Preload : MonoBehaviour
         //aatAds.ShowPromo();
         //AATKitBinding.InitWithTestMode(this.gameObject.name, 49);
 
-        AATKitBinding.CreatePlacement(multiSizeId, AATKitBinding.PlacementSize.MultiSizeBanner);
-        AATKitBinding.StartPlacementAutoReload(multiSizeId);
+        //AATKitBinding.CreatePlacement(multiSizeId, AATKitBinding.PlacementSize.MultiSizeBanner);
+        //AATKitBinding.StartPlacementAutoReload(multiSizeId);
 
-        AATKitBinding.PreparePromo();
+        
         bool a=false;
         float t = Time.time;
         while ((!a)&&(Time.time - t <5.0f))
         {
-            a = AATKitBinding.ShowPromo(true);
+            //a = AATKitBinding.ShowPromo(true);
 
            // print(a);
             yield return null;
         }
 
         string s = a ?"success":"failed";
-        print(s);
+        //print(s);
         while (AO.progress < 0.9f)
         {
             progress = AO.progress > 0.2f ? AO.progress - 0.2f : AO.progress;

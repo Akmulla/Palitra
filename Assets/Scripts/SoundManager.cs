@@ -35,6 +35,7 @@ public class SoundManager : MonoBehaviour
 
     void Awake()
     {
+        DontDestroyOnLoad(gameObject);
         sound_manager = this;
         source = GetComponent<AudioSource>();
         if (source.volume > 0.0f)
