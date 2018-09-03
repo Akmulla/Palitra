@@ -7,9 +7,9 @@ public class MoreGamesButton : MonoBehaviour
     public void SeeMoreGames()
     {
 #if UNITY_ANDROID
-       // Application.OpenURL("https://play.google.com/store/apps/details?id=secret.com.secretbox.palette");
+        Application.OpenURL("https://play.google.com/store/apps/collection/cluster?clp=igM4ChkKEzg2MzMyNzY2MDA1NDYwNDc0MTgQCBgDEhkKEzg2MzMyNzY2MDA1NDYwNDc0MTgQCBgDGAA%3D:S:ANO1ljKITbU");
 #elif UNITY_IPHONE
-     //Application.OpenURL("itms-apps://itunes.apple.com/app/id1306735206");
+     Application.OpenURL("https://itunes.apple.com/us/developer/lite-games-gmbh/id943875563?mt=8");
 #endif
     }
 }
