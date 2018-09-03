@@ -1,6 +1,6 @@
 //
 //  AppsFlyerDelegate.h
-//  
+//
 //
 //  Created by Golan on 6/21/15.
 //
@@ -25,7 +25,13 @@ static const char * UNITY_SENDMESSAGE_CALLBACK_RETARGETTING_ERROR = "onAppOpenAt
 
 static const char * UNITY_SENDMESSAGE_OPEN_URL = "onAppOpenUrl";
 
+static const char * UNITY_SENDMESSAGE_GENERATE_LINK = "onInviteLinkGenerated";
+static const char * UNITY_SENDMESSAGE_GENERATE_LINK_ERROR = "onInviteLinkGeneratedError";
+
+static const char * UNITY_SENDMESSAGE_OPEN_STORE_LINK = "onOpenStoreLinkGenerated";
+
 
 @interface AppsFlyerDelegate : NSObject <AppsFlyerTrackerDelegate>
 
 @end
+

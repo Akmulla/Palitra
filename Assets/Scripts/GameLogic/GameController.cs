@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Ads;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -30,7 +31,7 @@ public class GameController : MonoBehaviour
     GameState saved_state;
 
     public bool continued = false;
-    
+
     //int loaded_lvl;
     [SerializeField]
     LvlData loaded_lvl_data;
@@ -48,7 +49,7 @@ public class GameController : MonoBehaviour
         this.game_state = game_state;
     }
 
- 
+
 
     public int CurrentLvl
     {
@@ -90,6 +91,8 @@ public class GameController : MonoBehaviour
 
         reload_part = game_state == GameState.GameOver;
         StartCoroutine(BeginGameCoroutine());
+
+        AppsFlyerCode.Instance.StartGame();
     }
 
     IEnumerator BeginGameCoroutine()
@@ -109,7 +112,7 @@ public class GameController : MonoBehaviour
             EventManager.TriggerEvent("BeginGameAnimation");
         }
         yield return StartCoroutine(InitLvlCor());
-        
+
         while (!anim_status.finished)
         {
             yield return new WaitForEndOfFrame();
@@ -156,7 +159,7 @@ public class GameController : MonoBehaviour
         Resources.UnloadUnusedAssets();
         pools = pools_obj.GetComponents<Pool>();
         game_state = GameState.MainMenu;
-        
+
         game_controller = this;
         saved_time_scale = Time.timeScale;
     }
@@ -165,7 +168,7 @@ public class GameController : MonoBehaviour
     {
         UIController.ui.UpdateUI();
         SaveLoadGame.save_load.LoadProgress();
-       
+
     }
 
     void OnEnable()
@@ -246,7 +249,7 @@ public class GameController : MonoBehaviour
         ChangeState(GameState.Game);
         Time.timeScale = saved_time_scale;
         UIController.ui.UpdateUI();
-        
+
         EventManager.TriggerEvent("BeginGame");
         //засчитываем зафейленную линию как пройденную
         EventManager.TriggerEvent("LinePassed");
@@ -258,9 +261,9 @@ public class GameController : MonoBehaviour
         particle.TurnOn();
         ChangeState(GameState.MainMenu);
         Time.timeScale = saved_time_scale;
-        
+
         UIController.ui.UpdateUI();
-        
+
         EventManager.TriggerEvent("EndGame");
     }
 
@@ -281,7 +284,7 @@ public class GameController : MonoBehaviour
         if (game_state==GameState.Game)
         {
             ChangeState(GameState.GameOver);
-            
+
             Ball.ball.Stop();
             yield return new WaitForSeconds(1.0f);
 
@@ -289,7 +292,7 @@ public class GameController : MonoBehaviour
             particle.TurnOff();
             //lines_passed = SpawnWaves.spawn.lines_passed;
             EventManager.TriggerEvent("EndGame");
-            
+
         }
     }
 }

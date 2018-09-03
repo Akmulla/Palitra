@@ -54,7 +54,15 @@ public class AppsFlyerTrackerCallbacks : MonoBehaviour {
 		
 	}
 
+	public void onInviteLinkGenerated (string link) {
+		printCallback("AppsFlyerTrackerCallbacks:: generated userInviteLink "+link);
+	}
+
+	public void onOpenStoreLinkGenerated (string link) {
+		Application.OpenURL(link);
+	}
+
 	void printCallback(string str) {
-		callbacks.text += str + "\n";
+		Debug.Log(str);
 	}
 }
