@@ -1,11 +1,12 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class ChangeToSkinColor : MonoBehaviour
 {
     public enum SkinColors { Color_1,Color_2,Color_3,Background,Particle};
     public SkinColors color;
-	
+
     void OnEnable()
     {
         EventManager.StartListening("SkinChanged", ChangeColor);
@@ -45,7 +46,7 @@ public class ChangeToSkinColor : MonoBehaviour
         {
             image.color = apply_color;
         }
-        
+
         SpriteRenderer sprite_rend = GetComponent<SpriteRenderer>();
         if (sprite_rend != null)
         {
@@ -63,7 +64,7 @@ public class ChangeToSkinColor : MonoBehaviour
         {
             cam.backgroundColor = apply_color;
         }
-        
+
         if (color == SkinColors.Particle)
         {
             if (GetComponent<ParticleSystem>()!=null)
@@ -73,7 +74,12 @@ public class ChangeToSkinColor : MonoBehaviour
                 ParticleSystem.MainModule part2 = GetComponent<ParticleSystem>().main;
                 part2.startColor = apply_color;
             }
-            
+        }
+
+        TextMeshProUGUI textMeshProLabel = GetComponent<TextMeshProUGUI>();
+        if (textMeshProLabel)
+        {
+            textMeshProLabel.color = apply_color;
         }
     }
 }
