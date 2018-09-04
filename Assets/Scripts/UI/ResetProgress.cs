@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ResetProgress : MonoBehaviour
 {
-    [SerializeField] SaveLoadGame saveLoad;
+    SaveLoadGame saveLoad => SaveLoadGame.save_load;
     [SerializeField] GameObject popUp;
 
 	public void OpenPopUp()
